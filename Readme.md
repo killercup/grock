@@ -21,6 +21,7 @@ Grock converts your nicely commented code into a gorgeous documentation where co
 - [x] Split code and comments
 - [x] Highlight code
 - [ ] Generate TOC as JSON file
+- [ ] Render doc tags (like jsdoc)
 - [ ] CLI docs, `.groc.json` config support
 - [ ] Tests. Test for everything.
 - [ ] Add another style.

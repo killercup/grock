@@ -1,5 +1,7 @@
 ###
 # # Render Templates
+#
+# Expects a Jade template file as `template.jade` in the style's directory.
 ###
 
 fs = require 'fs'
@@ -20,9 +22,11 @@ module.exports = ({style}) ->
   modifyFile = (file, cb) ->
     cb(null, file) unless file.segments?.length
 
+    # ## Variables accessable in template
     templateContext =
       pageTitle: path.basename file.path
       segments: file.segments
+      targetPath: file.relative
 
     pathChunks = path.dirname(file.relative).split(/[\/\\]/)
     if pathChunks.length == 1 && pathChunks[0] == '.'

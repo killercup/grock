@@ -53,8 +53,6 @@
 # index = [(File||Folder)];
 # ```
 ###
-globalFileTree = {}
-
 $ = Zepto or jQuery
 
 ###
@@ -67,7 +65,7 @@ $ = Zepto or jQuery
 buildFileTree = (tree, ul, metaInfo) ->
   ul = $(ul)
   unless tree?.length
-    console.warn 'no tree', tree
+    console.warn 'No File Tree!'
     return ul
 
   $.each tree, (index, node) ->
@@ -239,6 +237,7 @@ searchTree = ($tree, $search) ->
 @return {jQuery} The nav element
 ###
 buildNav = (fileTree, metaInfo) ->
+  return '' unless fileTree
   $nav = createNav(metaInfo)
 
   # Build file tree
@@ -266,9 +265,10 @@ $ ->
     documentPath: $('meta[name="groc-document-path"]').attr('content')
     projectPath:  $('meta[name="groc-project-path"]').attr('content')
 
-  $nav = buildNav globalFileTree, metaInfo
-  $nav.prependTo $('body')
+  $.getJSON "#{metaInfo.relativeRoot}toc.json", (fileTree) ->
+    $nav = buildNav fileTree, metaInfo
+    $nav.prependTo $('body')
 
-  createMenuToggle $('#meta'), $nav
+    createMenuToggle $('#meta'), $nav
 
 
