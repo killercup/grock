@@ -46,8 +46,10 @@ module.exports = DOC_TAGS =
     section:     'type'
   method:
     section:     'type'
+    markdown:    'method `{value}`'
   module:
     section:     'type'
+    markdown:    'module `{value}`'
   'package':
     section:     'type'
   property:
@@ -173,7 +175,7 @@ module.exports = DOC_TAGS =
       fragments.push "#{verb} be #{humanize.joinSentence types, 'or'}"
       fragments.push "has a default value of #{value.defaultValue}" if value.defaultValue?
 
-      "#{if value.isSubParam then "    *" else "*"} **#{value.varName} #{humanize.joinSentence fragments}.**#{if value.description.length then '<br/>(' else ''}#{value.description}#{if value.description.length then ')' else ''}"
+      "#{if value.isSubParam then "    *" else "*"} **`#{value.varName}` #{humanize.joinSentence fragments}.**#{if value.description.length then '<br/>(' else ''}#{value.description}#{if value.description.length then ')' else ''}"
   params:        'param'
   parameters:    'param'
 
