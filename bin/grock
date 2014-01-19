@@ -5,10 +5,24 @@ var START = process.hrtime();
 
 require('coffee-script');
 
-var argv = require('optimist')
+var optimist = require('optimist')
+  .usage('Usage: $0 --src [string]')
   .default('src', 'lib/*.coffee')
+  .describe('src', 'Set glob to match source files')
   .default('style', 'solarized')
-  .argv;
+  .describe('style', 'Set the output style/theme')
+  .boolean('verbose')
+  .default('verbose', false)
+  .alias('v', 'verbose')
+  .describe('verbose', 'Show more log output')
+  ;
+
+var argv = optimist.argv;
+
+if (argv.h) {
+  optimist.showHelp();
+  process.exit(2);
+}
 
 var generator = require('../lib/generator');
 

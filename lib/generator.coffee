@@ -28,7 +28,9 @@ copyStyleAssets = (style, dest) ->
 
 # ## The Glorious Generator
 module.exports = ({src, style, dest, verbose, start}) ->
+  verbose or= false
   start or= START
+
   log 'Beginning to process', src, duration(start)
 
   # Create output directory
@@ -50,10 +52,10 @@ module.exports = ({src, style, dest, verbose, start}) ->
   .pipe(t.markdownComments())
   .pipe(t.renderTemplates(style: style))
   .pipe(vfs.dest('docs/'))
-  .pipe(t.renderFileTree("docs/toc.js", verbose: verbose or true))
+  .pipe(t.renderFileTree("docs/toc.js", verbose: verbose))
   .pipe(map (file, cb) ->
     # #### Log process duration
-    log file.relative, duration(file.timingStart)
+    log file.relative, duration(file.timingStart) if verbose
     cb(null, file)
   )
   .on 'end', ->
@@ -61,8 +63,8 @@ module.exports = ({src, style, dest, verbose, start}) ->
     assetsTiming = process.hrtime()
     copyStyleAssets(style, 'docs/')
     .then ->
-      log "Style copied", duration(assetsTiming)
+      log "Style copied", duration(assetsTiming) if verbose
       log "Done.", gutil.colors.magenta("Generated in"), duration(start)
     .then null, ->
-      log gutil.colors.red("Shit exploded!")
+      log gutil.colors.red("It exploded!")
       process.exit(1)

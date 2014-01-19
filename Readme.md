@@ -22,7 +22,7 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [x] Be awesome with streams
 - [x] Split code and comments
 - [x] Highlight code
-- [ ] Generate TOC as JSON file
+- [x] Generate TOC as JSON file
 - [x] Render doc tags (like jsdoc)
 - [ ] CLI docs, `.groc.json` config support
 - [ ] Tests. Test for everything.
