@@ -191,6 +191,7 @@ body {
     width: $left-width - (2 * $side-padding);
     margin-left: -1 * $left-width;
     white-space: normal;
+    word-break: break-word;
     
     pre {
       @extend %code-font;
