@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Convert commented code to awesome side-by-side documentation.",
   "main": "index.js",
+  "bin": "./bin/grock",
   "scripts": {
-    "start": "node bin/grock",
     "test": "NODE_ENV=test mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee"
   },
