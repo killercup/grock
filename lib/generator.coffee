@@ -26,6 +26,7 @@ module.exports = ({src, style}) ->
   .pipe(t.getLanguage())
   .pipe(t.splitCodeAndComments())
   .pipe(t.highlight())
+  .pipe(t.renderDocTags())
   .pipe(t.markdownComments())
   .pipe(t.renderTemplates(style: style))
   .pipe(vfs.dest('docs/'))

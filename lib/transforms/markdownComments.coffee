@@ -41,10 +41,7 @@ setHeadingRenderer = (renderer, toc) ->
     slug = text.toLowerCase().replace(/[^\w]+/g, '-')
     toc.push level: level, slug: slug, title: text
 
-    return """<h#{level} id="#{slug}">
-      <a href="##{slug}" class="anchor"></a>
-      #{text}
-    </h#{level}>"""
+    return """<h#{level} id="#{slug}"><a href="##{slug}" class="anchor"></a>#{text}</h#{level}>"""
 
 module.exports = (options) ->
   # Annotate an array of segments by running their comments through

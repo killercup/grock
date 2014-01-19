@@ -15,6 +15,8 @@ Grock converts your nicely commented code into a gorgeous documentation where co
 - [marked](https://github.com/chjj/marked)
 - [highlight.js](http://highlightjs.org/)
 
+Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is actually code from [groc](http://nevir.github.com/groc/)!
+
 ## Roadmap
 
 - [x] Be awesome with streams
