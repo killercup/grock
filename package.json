@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "./bin/grock",
   "scripts": {
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test coffeelint lib/**/*.coffee && mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee"
   },
   "keywords": [
@@ -43,6 +43,8 @@
     "gulp-concat": "~2.1.7",
     "gulp-sass": "~0.4.1",
     "streamee": "~0.5.3",
-    "gulp-uglify": "~0.1.0"
+    "gulp-uglify": "~0.1.0",
+    "chai": "~1.8.1",
+    "mocha": "~1.17.0"
   }
 }
