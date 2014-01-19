@@ -265,10 +265,9 @@ $ ->
     documentPath: $('meta[name="groc-document-path"]').attr('content')
     projectPath:  $('meta[name="groc-project-path"]').attr('content')
 
-  $.getJSON "#{metaInfo.relativeRoot}toc.json", (fileTree) ->
-    $nav = buildNav fileTree, metaInfo
-    $nav.prependTo $('body')
+  $nav = buildNav files, metaInfo
+  $nav.prependTo $('body')
 
-    createMenuToggle $('#meta'), $nav
+  createMenuToggle $('#meta'), $nav
 
 

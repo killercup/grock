@@ -6,23 +6,31 @@ fs = require 'fs'
 path = require 'path'
 through = require 'through2'
 
-JSONStream = require 'JSONStream'
+log = require '../utils/log'
 
 module.exports = (fileName, opt={}) ->
   unless fileName
     throw new PluginError("Render File Tree", "Missing fileName option")
 
-  fileTree = JSONStream.stringify()
-  output = fileTree.pipe fs.createWriteStream(fileName)
+  output = fs.createWriteStream(fileName)
+  output.write "window.#{opts.varName or 'files'} = [\n"
+  first = true
 
-  bufferContents = (file) ->
-    fileTree.push
+  bufferContents = (file, enc, cb) ->
+    output.write (if first then '' else ',\n') + JSON.stringify({
       path: file.relative
       name: path.basename file.path
       title: file.extra?.toc?[0]?.title
       toc: file.extra?.toc
+    }, false, 2)
+    first = false
 
-  endStream = ->
-    fileTree.end()
+    cb null, file
 
-  through bufferContents, endStream
+  endStream = (cb) ->
+    output.write "\n];"
+    if opt.verbose
+      log "File tree written to #{path.basename fileName}"
+    cb()
+
+  through.obj bufferContents, endStream
