@@ -8,17 +8,19 @@ Grock converts your nicely commented code into a gorgeous documentation where co
 - [Jeremy Ashkenas](https://github.com/jashkenas)' [docco](http://jashkenas.github.com/docco/)
 - The [groc](http://nevir.github.com/groc/) project -- this implementation is heavily based on this, but uses node.js streams
 
-## Implementation
+## Uses
 
-Basically:
+- [vinyl-fs](https://github.com/wearefractal/vinyl-fs) for abstracting files
+- [Solarized](http://ethanschoonover.com/solarized)
+- [marked](https://github.com/chjj/marked)
+- [highlight.js](http://highlightjs.org/)
 
-```coffee
-bufferedFileStream(['*/**.{js,coffee}'])
-.pipe(highlight())
-.pipe(splitCodeAndComments())
-.pipe(markdownComments())
-.pipe(highlightCodeInComments())
-.pipe(buildFileTreeAndFileTOC())
-.pipe(renderTemplates(style: 'solarized'))
-.pipe(outputAsHTMLFile('docs/'))
-```
+## Roadmap
+
+- [x] Be awesome with streams
+- [x] Split code and comments
+- [x] Highlight code
+- [ ] Generate TOC as JSON file
+- [ ] CLI docs, `.groc.json` config support
+- [ ] Tests. Test for everything.
+- [ ] Add another style.
