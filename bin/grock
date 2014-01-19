@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+var START = process.hrtime();
+
 require('coffee-script');
 
 var argv = require('optimist')
@@ -9,5 +11,7 @@ var argv = require('optimist')
   .argv;
 
 var generator = require('../lib/generator');
+
+argv.start = START;
 
 generator(argv);
