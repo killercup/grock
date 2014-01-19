@@ -1,4 +1,5 @@
 # # Known Doc Tags
+# Code from <https://github.com/nevir/groc/blob/b626e45ebf/lib/doc_tags.coffee>
 
 humanize = require './utils/humanize'
 
@@ -46,10 +47,10 @@ module.exports = DOC_TAGS =
     section:     'type'
   method:
     section:     'type'
-    markdown:    'method `{value}`'
+    markdown:    'Method: `{value}`'
   module:
     section:     'type'
-    markdown:    'module `{value}`'
+    markdown:    'Module: `{value}`'
   'package':
     section:     'type'
   property:
