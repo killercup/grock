@@ -12,7 +12,7 @@ module.exports = (options) ->
     str = file.contents.toString('utf8')
 
     try
-      file.segments = seperator.splitSource str, file.extra.lang
+      file.segments = seperator str, file.extra.lang
     catch e
       return cb(new Error("seperator: Error seperating code and comments #{e}"))
 
