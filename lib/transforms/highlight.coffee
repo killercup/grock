@@ -1,3 +1,7 @@
+###
+# # Highlight Code
+###
+
 path = require 'path'
 hljs = require 'highlight.js'
 

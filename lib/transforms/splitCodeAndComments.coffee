@@ -1,3 +1,7 @@
+###
+# # Split Code and Comments
+###
+
 map = require 'map-stream'
 Buffer = require('buffer').Buffer
 
