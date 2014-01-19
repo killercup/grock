@@ -1,0 +1,318 @@
+@import "helpers";
+@import "flex-box";
+@import "highlight-solarized-dark";
+@import "highlight-solarized-light";
+@import "pygments-solarized-dark";
+@import "pygments-solarized-light";
+
+// ## Fonts
+@import url(http://fonts.googleapis.com/css?family=PT+Mono);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
+
+body, %font {
+  font-size: 16px;
+  font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.4;
+}
+
+code, pre, %code-font {
+  font-family: 'PT Sans Mono', monospace;
+  font-size: 14px;
+  line-height: 1.4 * 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.doc-section-header {
+  font-weight: bold;
+}
+
+// ## Vars
+$solarized-dark:  #002b36;
+$solarized-light: #fdf6e3;
+$solarized-light-color: #657b83;
+$solarized-light-green: #859900;
+$solarized-light-cyan: #2aa198;
+
+$body-background: $solarized-dark;
+$text-background: lighten($solarized-light, 4%);
+$text-color: darken($solarized-light-color, 10%);
+$text-link-color: $solarized-light-green;
+$color-selected: $solarized-light-cyan;
+
+$nav-width: 14em;
+$left-width: 30em;
+$side-padding: 1em;
+
+// ## Layout
+
+@mixin scroll-box {
+  box-sizing: border-box;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  clear: both;
+}
+
+ul, ol {
+  margin: 0 0.5em;
+  padding: 0 0 0 1em;
+}
+
+// ### flex
+body {
+  @include display(flex);
+
+  #side-menu nav {}
+  
+  #file-area {
+    @include display(flex);
+    
+    @include flex(1);
+    @include flex-direction(column);
+
+    #document {
+      @include flex-grow(1);
+    }
+  }
+}
+
+#side-menu nav {
+  width: $nav-width;
+  overflow-x: auto;
+  background: darken($body-background, 2%);
+  
+  + nav {
+    margin-top: 1em;
+  }
+  
+  ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tree {
+    padding-bottom: 0.5em;
+  }
+  
+  li {
+    padding: 0 0.5em;
+  }
+  
+  a {
+    display: block;
+    padding: 0.1em 0;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .tools {
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  .search {
+    input {
+      width: 100%;
+    }
+  }
+
+  summary {
+    text-align: center;
+    padding: 0.5em 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  
+  a.selected {
+    color: $color-selected;
+  }
+  
+  ol.searching {
+    a {
+      display: none;
+      
+      &.matched {
+        display: block;
+      }
+    }
+  }
+}
+
+#meta {
+  padding: 0.5em;
+
+  .toggle-menu {
+    @extend %font;
+    padding: 0.2em 1em;
+    border: 0;
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+}
+
+.segment {    
+  clear: both;
+  box-sizing: border-box;
+  padding: 0.5em 0 0.5em $left-width;
+  
+  white-space: nowrap;
+  
+  .comments,
+  .code {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .comments {
+    padding: 0 $side-padding;
+    width: $left-width - (2 * $side-padding);
+    margin-left: -1 * $left-width;
+    white-space: normal;
+    
+    pre {
+      @extend %code-font;
+      @include highlightjs-solarized-light('code');
+      @include pygments-solarized-light;
+
+      code {
+        @include scroll-box;
+      }
+    }
+  }
+  
+  .code {
+    white-space: pre;
+    padding-top: 0.5em;
+    margin-left: $side-padding;
+    
+    @extend %code-font;
+    @include highlightjs-solarized-dark();
+    @include pygments-solarized-dark;
+  }
+}
+
+// ## Responsive
+
+// ### One Column
+$col-2: 2 * $left-width; // in em
+
+@media screen and (max-width: $col-2) {
+  .segment {
+    padding: 0.5em;
+
+    .code, .comments {
+      display: block;
+      padding: 0.5em;
+      margin-left: 0;
+      width: auto;
+    }
+    
+    .wrapper {
+      @include scroll-box;
+    }
+  }
+
+  // #side-menu {
+  //   display: none;
+
+  //   + #file-area {
+  //     position: relative;
+  //     left: 0;
+  //   }
+
+  //   &.open {
+  //     display: block;
+
+  //     + #file-area {
+  //       left: $nav-width;
+  //     }
+  //   }
+  // }
+}
+
+// ### Two Columns
+$col-3: $nav-width + 2 * $left-width; // in em
+
+@media screen and (max-width: $col-3) {
+  #side-menu {
+    visibility: hidden;
+    width: 0;
+    overflow-x: hidden;
+    transition: width 0.3s ease-in-out; 
+
+    &.open {
+      visibility: visible;
+      width: $nav-width;
+      overflow-x: auto;
+    }
+  }
+}
+
+// ### Three Columns
+
+@media screen and (min-width: $col-3 + 0.1em) {
+  #meta .toggle-menu {
+    display: none;
+  }
+}
+
+// ## Color
+body {
+  background: $body-background;
+  color: white;
+}
+
+a {
+  color: $text-link-color;
+}
+
+#meta {
+  word-wrap: break-word;
+
+  .toggle-menu {
+    background: $text-background;
+    color: $body-background;
+  }
+}
+
+#document {
+  @include linear-gradient(
+    90deg,
+    $text-background 0%,
+    $text-background $left-width,
+    $body-background $left-width,
+    $body-background 100%,
+    $fallback: $body-background
+  );
+  
+  .comments {
+    color: $text-color;
+  }
+  
+  @media screen and (max-width: 2 * $left-width) {
+    background: $text-background;
+  }
+}

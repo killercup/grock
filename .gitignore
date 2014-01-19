@@ -1,0 +1,13 @@
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+
+.tmp
+log*
+*.log
+*.sw*
+*~
+
+node_modules/
+bower_components/
+docs/

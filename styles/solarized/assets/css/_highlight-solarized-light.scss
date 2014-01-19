@@ -1,0 +1,118 @@
+@mixin highlightjs-solarized-light($wrapper:'.wrapper') {
+  /*
+
+  Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
+
+  */
+  $prefix: "hljs-";
+
+  .#{$prefix},
+  #{$wrapper} {
+    display: block;
+    padding: 0.5em;
+    background: #fdf6e3;
+    color: #657b83;
+  }
+
+  /* Default */
+  .#{$prefix}params {
+    color: #657b83;
+  }
+
+  .#{$prefix}comment,
+  .#{$prefix}template_comment,
+  .diff .#{$prefix}header,
+  .#{$prefix}doctype,
+  .#{$prefix}pi,
+  .lisp .#{$prefix}string,
+  .#{$prefix}javadoc {
+    color: #93a1a1;
+  }
+
+  /* Solarized Green */
+  .#{$prefix}keyword,
+  .#{$prefix}function,
+  .#{$prefix}winutils,
+  .method,
+  .#{$prefix}addition,
+  .css .#{$prefix}tag,
+  .#{$prefix}request,
+  .#{$prefix}status,
+  .nginx .#{$prefix}title {
+    color: #859900;
+  }
+
+  /* Solarized Cyan */
+  .#{$prefix}number,
+  .#{$prefix}command,
+  .#{$prefix}string,
+  .#{$prefix}tag .#{$prefix}value,
+  .#{$prefix}rules .#{$prefix}value,
+  .#{$prefix}phpdoc,
+  .tex .#{$prefix}formula,
+  .#{$prefix}regexp,
+  .#{$prefix}hexcolor,
+  .#{$prefix}link_url {
+    color: #2aa198;
+  }
+
+  /* Solarized Blue */
+  .#{$prefix}title,
+  .#{$prefix}property,
+  .#{$prefix}localvars,
+  .#{$prefix}chunk,
+  .#{$prefix}decorator,
+  .#{$prefix}built_in,
+  .#{$prefix}identifier,
+  .vhdl .#{$prefix}literal,
+  .#{$prefix}id,
+  .css .#{$prefix}function {
+    color: #268bd2;
+  }
+
+  /* Solarized Yellow */
+  .#{$prefix}attribute,
+  .#{$prefix}variable,
+  .lisp .#{$prefix}body,
+  .smalltalk .#{$prefix}number,
+  .#{$prefix}constant,
+  .#{$prefix}class .#{$prefix}title,
+  .#{$prefix}parent,
+  .haskell .#{$prefix}type,
+  .#{$prefix}link_reference {
+    color: #b58900;
+  }
+
+  /* Solarized Orange */
+  .#{$prefix}preprocessor,
+  .#{$prefix}preprocessor .#{$prefix}keyword,
+  .#{$prefix}pragma,
+  .#{$prefix}shebang,
+  .#{$prefix}symbol,
+  .#{$prefix}symbol .#{$prefix}string,
+  .diff .#{$prefix}change,
+  .#{$prefix}special,
+  .#{$prefix}attr_selector,
+  .#{$prefix}subst,
+  .#{$prefix}cdata,
+  .clojure .#{$prefix}title,
+  .css .#{$prefix}pseudo,
+  .#{$prefix}header {
+    color: #cb4b16;
+  }
+
+  /* Solarized Red */
+  .#{$prefix}deletion,
+  .#{$prefix}important {
+    color: #dc322f;
+  }
+
+  /* Solarized Violet */
+  .#{$prefix}link_label {
+    color: #6c71c4;
+  }
+
+  .tex .#{$prefix}formula {
+    background: #eee8d5;
+  }
+}

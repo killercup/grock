@@ -1,0 +1,48 @@
+{
+  "name": "grock",
+  "version": "0.0.1",
+  "description": "Convert commented code to awesome side-by-side documentation.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bin/grock",
+    "test": "NODE_ENV=test mocha",
+    "compile-styles": "coffee ./styles/compileAll.coffee"
+  },
+  "keywords": [
+    "documentation"
+  ],
+  "author": {
+    "name": "Pascal Hertleif",
+    "url": "https://github.com/killercup"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/killercup/grock/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "vinyl-fs": "0.0.1",
+    "optimist": "~0.6.0",
+    "highlight.js": "~8.0.0",
+    "through2": "~0.4.0",
+    "event-stream": "~3.1.0",
+    "gulp-util": "~2.2.12",
+    "map-stream": "~0.1.0",
+    "lodash": "~2.4.1",
+    "marked": "~0.3.0",
+    "jade": "~1.1.5",
+    "pretty-hrtime": "~0.2.0",
+    "JSONStream": "~0.7.1",
+    "q": "~1.0.0"
+  },
+  "devDependencies": {
+    "coffeelint": "~1.0.4",
+    "gulp-coffee": "~1.2.5",
+    "gulp-concat": "~2.1.7",
+    "gulp-sass": "~0.4.1",
+    "streamee": "~0.5.3",
+    "gulp-uglify": "~0.1.0"
+  }
+}

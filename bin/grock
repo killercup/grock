@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+'use strict';
+
+require('coffee-script');
+
+var argv = require('optimist')
+  .default('src', 'lib/*.coffee')
+  .default('style', 'solarized')
+  .argv;
+
+var generator = require('../lib/generator');
+
+generator(argv);
