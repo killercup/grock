@@ -237,7 +237,7 @@ searchTree = ($tree, $search) ->
 @return {jQuery} The nav element
 ###
 buildNav = (fileTree, metaInfo) ->
-  return '' unless fileTree
+  return $('') unless fileTree
   $nav = createNav(metaInfo)
 
   # Build file tree
