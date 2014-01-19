@@ -11,7 +11,6 @@ module.exports = (options) ->
   # Annotate an array of segments by running their comments through
   # [marked](https://github.com/chjj/marked).
   modifyFile = (file, cb) ->
-    # No comment(s)
     cb(null, file) unless file.segments?.length
 
     render.parseDocTags(file.segments)

@@ -12,7 +12,7 @@ hljs = require 'highlight.js'
 marked = require 'marked'
 
 marked.setOptions
-  ## Highlight code in comments, e.g. examples
+  # Highlight code in comments, e.g. examples
   highlight: (code, lang) ->
     if lang
       try
@@ -54,7 +54,7 @@ module.exports = (options) ->
     cb(null, file) unless file.segments?.length
 
     for s in file.segments
-      break unless s.comments?.length
+      continue unless s.comments?.length
 
       setHeadingRenderer(renderer, toc)
       s.comments = marked s.comments.join('\n'), renderer: renderer
