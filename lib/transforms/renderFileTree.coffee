@@ -22,6 +22,7 @@ module.exports = (fileName, opt={}) ->
       originalName: path.basename file.originalPath
       originalPath: file.originalRelative
       name: path.basename file.path
+      lang: file.extra?.lang?.highlightJS or file.extra?.lang?.pygmentsLexer
       title: file.extra?.toc?[0]?.title
       toc: file.extra?.toc
     }, false, 2)

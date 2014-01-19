@@ -12,53 +12,27 @@
 # ```javascript
 # var File, Folder, Headline, index;
 # Headline = {
-#   type: "heading",
-#   depth: Number,
-#   data: {
-#     level: Number,
-#     title: String,
-#     slug: String,
-#     isFileHeader: Boolean
-#   },
-#   children: [Headline]
+#   level: Number,
+#   title: String,
+#   slug: String,
 # };
 # File = {
-#   type: "file",
-#   depth: Number,
-#   data: {
-#     title: String,
-#     pageTitle: String,
-#     sourcePath: String,
-#     projectPath: String,
-#     targetPath: String,
-#     language: {
-#       nameMatchers: [String],
-#       commentsOnly: Boolean,
-#       name: String
-#     },
-#     firstHeader: Headline
-#   },
-#   outline: [Headline],
-#   children: [(File||Folder)]
+#   path: String,
+#   originalName: String,
+#   originalPath: String,
+#   name: String,
+#   lang: String,
+#   toc: [Headline]
 # };
-# Folder = {
-#   type: "folder",
-#   data: {
-#     path: String,
-#     title: String
-#   },
-#   depth: Number,
-#   children: [(File||Folder)]
-# };
-# index = [(File||Folder)];
+# files = [File];
 # ```
 ###
 $ = Zepto or jQuery
 
 ###
-## Convert List of Files to File Tree
-@param {Array} list Files in flat list
-@return {Object} Files in tree (by folders)
+# ## Convert List of Files to File Tree
+# @param {Array} list Files in flat list
+# @return {Object} Files in tree (by folders)
 ###
 listToTree = (list) ->
   tree = {}
@@ -79,9 +53,9 @@ listToTree = (list) ->
   return tree
 
 ###
-## Convert TOC to Headline Tree
-@param {Array} toc List of Headlines
-@return {Array} Tree of Headlines
+# ## Convert TOC to Headline Tree
+# @param {Array} toc List of Headlines
+# @return {Array} Tree of Headlines
 ###
 tocToTree = (toc) ->
   headlines = []
@@ -100,11 +74,11 @@ tocToTree = (toc) ->
 
 
 ###
-## Build File Tree Recursively
-@param {Array} tree List of file or folder Objects
-@param {jQuery} ul DOM node of list to append this tree to
-@param {Object} metaInfo Project information
-@return {jQuery} The ul element
+# ## Build File Tree Recursively
+# @param {Array} tree List of file or folder Objects
+# @param {jQuery} ul DOM node of list to append this tree to
+# @param {Object} metaInfo Project information
+# @return {jQuery} The ul element
 ###
 buildFileTree = (tree, ul, metaInfo) ->
   ul = $(ul)
@@ -131,11 +105,11 @@ buildFileTree = (tree, ul, metaInfo) ->
 
 
 ###
-## Build Headlines Tree Recursively
-@param {Object} tree Tree of headlines
-@param {jQuery} ul DOM node of list to append this tree to
-@param {Object} metaInfo Project information
-@return {jQuery} The ul element
+# ## Build Headlines Tree Recursively
+# @param {Object} tree Tree of headlines
+# @param {jQuery} ul DOM node of list to append this tree to
+# @param {Object} metaInfo Project information
+# @return {jQuery} The ul element
 ###
 buildHeadlinesTree = (tree, ul, metaInfo) ->
   ul = $(ul)
@@ -157,9 +131,9 @@ buildHeadlinesTree = (tree, ul, metaInfo) ->
   return ul
 
 ###
-## Create Navigation Element
-@param {Object} metaInfo Project information
-@return {jQuery} Navigation element
+# ## Create Navigation Element
+# @param {Object} metaInfo Project information
+# @return {jQuery} Navigation element
 ###
 createNav = (metaInfo) ->
   $nav = $ """
@@ -192,10 +166,10 @@ createNav = (metaInfo) ->
   return $nav
 
 ###
-## Add Button to Toggle Side Menu Visibility
-@param {jQuery} $container The element the button should be prepended to
-@param {jQuery} $nav The navigation element; class 'open' will be toggled
-@return {jQuery} $container element
+# ## Add Button to Toggle Side Menu Visibility
+# @param {jQuery} $container The element the button should be prepended to
+# @param {jQuery} $nav The navigation element; class 'open' will be toggled
+# @return {jQuery} $container element
 ###
 createMenuToggle = ($container, $nav) ->
   $button = $ """<button type="button" class="toggle-menu">
@@ -211,9 +185,9 @@ createMenuToggle = ($container, $nav) ->
   return $container
 
 ###
-## Search Tree
-@param {jQuery} $tree The tree element to be searched
-@param {jQuery} $search The search input field
+# ## Search Tree
+# @param {jQuery} $tree The tree element to be searched
+# @param {jQuery} $search The search input field
 ###
 searchTree = ($tree, $search) ->
   ###
@@ -271,10 +245,10 @@ searchTree = ($tree, $search) ->
         $search.val ''
 
 ###
-## Build Navigation
-@param {Array} files List of Files
-@param {Object} metaInfo Project information
-@return {jQuery} The nav element
+# ## Build Navigation
+# @param {Array} files List of Files
+# @param {Object} metaInfo Project information
+# @return {jQuery} The nav element
 ###
 buildNav = (files, metaInfo) ->
   return $('') unless files
