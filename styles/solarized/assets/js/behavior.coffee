@@ -56,6 +56,50 @@
 $ = Zepto or jQuery
 
 ###
+## Convert List of Files to File Tree
+@param {Array} list Files in flat list
+@return {Object} Files in tree (by folders)
+###
+listToTree = (list) ->
+  tree = {}
+
+  for file in list
+    path = file.path.split('/')
+    fileDepth = path.length - 1
+    cur = tree
+
+    for pathSegment, depth in path
+      if depth is fileDepth
+        cur[pathSegment] = file
+        cur[pathSegment].type = 'file'
+      else
+        cur[pathSegment] or= name: pathSegment, type: 'folder'
+        cur = cur[pathSegment].children or= {}
+
+  return tree
+
+###
+## Convert TOC to Headline Tree
+@param {Array} toc List of Headlines
+@return {Array} Tree of Headlines
+###
+tocToTree = (toc) ->
+  headlines = []
+  last = {}
+
+  for headline in toc
+    level = headline.level or= 1
+    if last[level - 1]
+      last[level - 1].children or= []
+      last[level - 1].children.push headline
+    else
+      headlines.push headline
+    last[level] = headline
+
+  return headlines
+
+
+###
 ## Build File Tree Recursively
 @param {Array} tree List of file or folder Objects
 @param {jQuery} ul DOM node of list to append this tree to
@@ -64,23 +108,19 @@ $ = Zepto or jQuery
 ###
 buildFileTree = (tree, ul, metaInfo) ->
   ul = $(ul)
-  unless tree?.length
+  unless tree?
     console.warn 'No File Tree!'
     return ul
 
-  $.each tree, (index, node) ->
+  $.each tree, (fileName, node) ->
     $node = $("""<li class="#{node.type}"/>""")
     if node.type is 'file'
-      currentFile = metaInfo.documentPath is node.data.targetPath
-      if currentFile
-        console.warn 'duplicate currentFile' if metaInfo.currentFileNode
-        metaInfo.currentFileNode = node
-
-      $node.append """<a class="label#{if currentFile then ' selected' else ''}" href="#{metaInfo.relativeRoot}#{node.data.targetPath}.html" title="#{node.data.projectPath}"><span class="text">#{node.data.title}</span></a>"""
+      currentFile = node is metaInfo.currentFile
+      $node.append """<a class="label#{if currentFile then ' selected' else ''}" href="#{metaInfo.relativeRoot}#{node.path}" title="#{node.originalName or node.name}"><span class="text">#{node.title or node.originalName or node.name}</span></a>"""
     else
-      $node.append """<a class="label" data-path="#{node.data.path}" href="#"><span class="text">#{node.data.title}</span></a>"""
+      $node.append """<a class="label"><span class="text">#{node.name}</span></a>"""
 
-    if node.children?.length > 0
+    if node.children?
       $children = $('<ol class="children"/>')
       $node.append buildFileTree node.children, $children, metaInfo
 
@@ -105,7 +145,7 @@ buildHeadlinesTree = (tree, ul, metaInfo) ->
 
   $.each tree, (index, node) ->
     $node = $("""<li class="#{node.type}"/>""")
-    $node.append """<a class="label" href="##{node.data.slug}"><span class="text">#{node.data.title}</span></a>"""
+    $node.append """<a class="label" href="##{node.slug}"><span class="text">#{node.title}</span></a>"""
 
     if node.children?.length > 0
       $children = $('<ol class="children"/>')
@@ -232,30 +272,32 @@ searchTree = ($tree, $search) ->
 
 ###
 ## Build Navigation
-@param {Array} fileTree List of Files
+@param {Array} files List of Files
 @param {Object} metaInfo Project information
 @return {jQuery} The nav element
 ###
-buildNav = (fileTree, metaInfo) ->
-  return $('') unless fileTree
+buildNav = (files, metaInfo) ->
+  return $('') unless files
   $nav = createNav(metaInfo)
 
+  # Find current file
+  for file in files
+    if file.originalPath is metaInfo.documentPath
+      metaInfo.currentFile = file
+      break
+
   # Build file tree
-  #
-  # This also sets `metaInfo.currentFileNode`.
-  buildFileTree fileTree, $nav.find('#file-tree'), metaInfo
-  searchTree $nav.find('#file-tree'), $nav.find('#search-files')
+  fileTree = listToTree(files)
+  buildFileTree(fileTree, $nav.find('#file-tree'), metaInfo)
+  searchTree($nav.find('#file-tree'), $nav.find('#search-files'))
 
   # Build headlines tree
-  if file = metaInfo.currentFileNode
-    headlineTree = null
-    if file.data.firstHeader
-      headlineTree = [file.data.firstHeader]
-    else
-      headlineTree = file.outline
+  if metaInfo.currentFile
+    headlineTree = tocToTree(metaInfo.currentFile.toc or [])
 
-    buildHeadlinesTree headlineTree, $nav.find('#headline-tree'), metaInfo
-    searchTree $nav.find('#headline-tree'), $nav.find('#search-headlines')
+    buildHeadlinesTree(headlineTree, $nav.find('#headline-tree'), metaInfo)
+    searchTree($nav.find('#headline-tree'), $nav.find('#search-headlines'))
+
   return $nav
 
 $ ->
@@ -265,9 +307,12 @@ $ ->
     documentPath: $('meta[name="groc-document-path"]').attr('content')
     projectPath:  $('meta[name="groc-project-path"]').attr('content')
 
-  $nav = buildNav files, metaInfo
+  $nav = buildNav window.files, metaInfo
   $nav.prependTo $('body')
 
   createMenuToggle $('#meta'), $nav
+
+  window.listToTree = listToTree
+  window.tocToTree = tocToTree
 
 

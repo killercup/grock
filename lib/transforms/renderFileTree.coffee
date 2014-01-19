@@ -19,6 +19,8 @@ module.exports = (fileName, opt={}) ->
   bufferContents = (file, enc, cb) ->
     output.write (if first then '' else ',\n') + JSON.stringify({
       path: file.relative
+      originalName: path.basename file.originalPath
+      originalPath: file.originalRelative
       name: path.basename file.path
       title: file.extra?.toc?[0]?.title
       toc: file.extra?.toc

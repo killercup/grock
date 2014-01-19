@@ -22,11 +22,15 @@ module.exports = ({style}) ->
   modifyFile = (file, cb) ->
     cb(null, file) unless file.segments?.length
 
+    file.originalPath = file.path
+    file.originalRelative = file.relative
+    file.path = gutil.replaceExtension(file.path, ".html")
+
     # ## Variables accessable in template
     templateContext =
       pageTitle: path.basename file.path
       segments: file.segments
-      targetPath: file.relative
+      targetPath: file.originalRelative
 
     pathChunks = path.dirname(file.relative).split(/[\/\\]/)
     if pathChunks.length == 1 && pathChunks[0] == '.'
@@ -35,8 +39,6 @@ module.exports = ({style}) ->
       templateContext.relativeRoot = "#{pathChunks.map(-> '..').join '/'}/"
 
     file.contents = new Buffer render(templateContext)
-
-    file.path = gutil.replaceExtension(file.path, ".html")
 
     cb(null, file)
     return
