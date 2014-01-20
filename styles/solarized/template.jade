@@ -2,19 +2,22 @@ doctype html
 html(lang="en")
   head
     title= pageTitle
-  meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
-  meta(name="viewport", content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0")
-  meta(name="groc-relative-root", content=relativeRoot)
-  meta(name="groc-document-path", content=targetPath)
-  //- meta(name="groc-project-path", content=projectPath)
-  //- - if (project.githubURL)
-  //-   meta(name="groc-github-url", content=project.githubURL)
-  link(rel="stylesheet", type="text/css", media="all", href=relativeRoot + "assets/style.css")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0")
+    meta(name="groc-relative-root", content=relativeRoot)
+    meta(name="groc-document-path", content=targetPath)
+    - if (repositoryUrl)
+      meta(name="groc-repository-url", content=repositoryUrl)
+    link(rel="stylesheet", type="text/css", media="all", href=relativeRoot + "assets/style.css")
 
   body
     #file-area
       #meta
-        code.file-path= targetPath
+        - if (repositoryUrl)
+          code.file-path
+            a(href=repositoryUrl + '/blob/master/' + targetPath)= targetPath
+        - else
+          code.file-path= targetPath
       #document
         - for (var i in segments)
           .segment

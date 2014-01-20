@@ -22,7 +22,8 @@ duration = (start) ->
   gutil.colors.magenta(prettyTime(process.hrtime(start)))
 
 # ## The Glorious Generator
-module.exports = ({glob, style, out, verbose, start, index, root}) ->
+module.exports = (opts) ->
+  {glob, style, out, verbose, start, index, root} = opts
   verbose or= false
   start or= START
 
@@ -52,7 +53,7 @@ module.exports = ({glob, style, out, verbose, start, index, root}) ->
   .pipe(t.renderDocTags())
   .pipe(t.markdownComments())
   .pipe(t.indexFile(index))
-  .pipe(t.renderTemplates(style: style))
+  .pipe(t.renderTemplates(style: style, repositoryUrl: opts['repository-url']))
   .pipe(t.renderFileTree("#{dest}/toc.js", verbose: verbose))
   .pipe(vfs.dest(dest))
   .pipe(map (file, cb) ->

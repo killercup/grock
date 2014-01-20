@@ -12,7 +12,7 @@ Buffer = require('buffer').Buffer
 
 jade = require 'jade'
 
-module.exports = ({style}) ->
+module.exports = ({style, repositoryUrl}) ->
   templateFile = fs.readFileSync style.template
 
   render = jade.compile(templateFile)
@@ -29,6 +29,7 @@ module.exports = ({style}) ->
       pageTitle: path.basename file.path
       segments: file.segments
       targetPath: file.originalRelative
+      repositoryUrl: repositoryUrl
 
     pathChunks = path.dirname(file.relative).split(/[\/\\]/)
     if pathChunks.length == 1 && pathChunks[0] == '.'
