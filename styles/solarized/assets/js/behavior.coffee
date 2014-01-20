@@ -43,6 +43,12 @@ listToTree = (list) ->
     cur = tree
 
     for pathSegment, depth in path
+      if (depth is fileDepth-1) and file.originalName.match /index\.(js|coffee)/
+        cur[pathSegment] = file
+        cur[pathSegment].title = pathSegment
+        cur[pathSegment].type = 'file'
+        cur[pathSegment].children or= {}
+        break
       if depth is fileDepth
         cur[pathSegment] = file
         cur[pathSegment].type = 'file'
