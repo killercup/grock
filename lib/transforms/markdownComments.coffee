@@ -30,6 +30,12 @@ marked.setOptions
 # Instantiate custom renderer, will be used to collect headlines for TOC
 renderer = new marked.Renderer()
 
+# Add support for checkbox list items
+renderer.listitem = (text) ->
+  text = text.replace /^\[x\] /, '<input type="checkbox" checked disabled/> '
+  text = text.replace /^\[ \] /, '<input type="checkbox" disabled/> '
+  return "<li>#{text}</li>\n"
+
 ###
 # @method Set Heading Renderer
 # @param {marked.Renderer} renderer
