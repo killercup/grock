@@ -194,6 +194,7 @@ body {
     word-break: break-word;
     
     pre {
+      word-break: normal;
       @extend %code-font;
       @include highlightjs-solarized-light('code');
       @include pygments-solarized-light;

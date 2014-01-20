@@ -1,4 +1,3 @@
-debugger
 ###
 # # Documetation Generator
 ###

@@ -1,5 +1,5 @@
 ###
-# # Humanize Strings
+# # Process Doc Tags
 #
 # Code from <https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee>
 ###
