@@ -36,6 +36,7 @@ module.exports = ({src, style, dest, verbose, start, index}) ->
 
   # Create output directory
   dest or= 'docs/'
+  log 'Writing to', dest
   unless fs.existsSync dest
     fs.mkdirSync dest
 
@@ -53,8 +54,8 @@ module.exports = ({src, style, dest, verbose, start, index}) ->
   .pipe(t.markdownComments())
   .pipe(t.indexFile(index))
   .pipe(t.renderTemplates(style: style))
-  .pipe(t.renderFileTree("docs/toc.js", verbose: verbose))
-  .pipe(vfs.dest('docs/'))
+  .pipe(t.renderFileTree("#{dest}/toc.js", verbose: verbose))
+  .pipe(vfs.dest(dest))
   .pipe(map (file, cb) ->
     # #### Log process duration
     log file.relative, duration(file.timingStart) if verbose
@@ -63,7 +64,7 @@ module.exports = ({src, style, dest, verbose, start, index}) ->
   .on 'end', ->
     # ### Process Style
     assetsTiming = process.hrtime()
-    copyStyleAssets(style, 'docs/')
+    copyStyleAssets(style, dest)
     .then ->
       log "Style copied", duration(assetsTiming) if verbose
       log "Done.", gutil.colors.magenta("Generated in"), duration(start)
