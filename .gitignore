@@ -3,7 +3,6 @@
 .DS_Store
 
 .tmp
-log*
 *.log
 *.sw*
 *~
