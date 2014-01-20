@@ -192,6 +192,26 @@ body {
     margin-left: -1 * $left-width;
     white-space: normal;
     word-break: break-word;
+
+    :target {
+      a.anchor {
+        color: $color-selected;
+      }
+    }
+
+    a.anchor {
+      opacity: 0.2;
+
+      &:before {
+        content: "#";
+        display: inline-block;
+        padding-right: 0.2em;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
     
     pre {
       word-break: normal;
