@@ -9,23 +9,56 @@ var fs = require('fs');
 var  _ = require('lodash');
 
 var optimist = require('optimist')
-  .usage('Usage: $0 --src [string]')
-  .default('src', 'lib/*.coffee')
-  .describe('src', 'Set glob to match source files')
+  .usage(
+    "Usage: grock [options]\n\n"+
+    "You can also use a configuration file named .groc.json to specify"+
+    "these options."
+  )
+
+  .boolean('help')
+  .describe('help', 'Show this message')
+  .alias('h', 'help')
+  .alias('?', 'help')
+
+  .boolean('version')
+  .describe('version', 'Show grock version')
+
+  .string('glob')
+  .default('glob', 'lib/*.coffee')
+  .describe('glob', 'Set glob to match source files')
+
+  .string('out')
+  .default('out', 'docs/')
+  .describe('out', 'Render documentation into here')
+
+  .string('style')
   .default('style', 'solarized')
   .describe('style', 'Set the output style/theme')
+
   .boolean('verbose')
   .default('verbose', false)
   .alias('v', 'verbose')
   .describe('verbose', 'Show more log output')
+
+  .string('index')
   .default('index', 'Readme.md')
   .describe('index', 'File to be used as index')
   .alias('i', 'index')
+
+  .string('root')
+  .default('root', '.')
+  .describe('root', "The project's root directory")
   ;
 
-if (optimist.argv.h) {
+if (optimist.argv.help) {
   optimist.showHelp();
   process.exit(2);
+}
+
+if (optimist.argv.version) {
+  var pkg = JSON.parse(fs.readFileSync(__dirname+"/../package.json"));
+  console.log("Version", pkg.version);
+  process.exit(0);
 }
 
 var projectConfig;
@@ -37,9 +70,7 @@ try {
   projectConfig = {};
 }
 
-var argv = _.defaults({
-  src: projectConfig.glob || projectConfig.src
-}, optimist.argv);
+var argv = _.defaults(projectConfig, optimist.argv);
 
 var generator = require('../lib/generator');
 

@@ -23,7 +23,7 @@ duration = (start) ->
   gutil.colors.magenta(prettyTime(process.hrtime(start)))
 
 # ## The Glorious Generator
-module.exports = ({src, style, dest, verbose, start, index}) ->
+module.exports = ({glob, style, out, verbose, start, index, root}) ->
   verbose or= false
   start or= START
 
@@ -32,14 +32,16 @@ module.exports = ({src, style, dest, verbose, start, index}) ->
   # Load Style
   style = require "../styles/#{style}"
 
+  src = glob
+
   # Create output directory
-  dest or= 'docs/'
+  dest = out or 'docs/'
   log 'Writing to', dest
   unless fs.existsSync dest
     fs.mkdirSync dest
 
   # ### Processing Pipeline
-  vfs.src(src, base: '.')
+  vfs.src(src, base: root)
   .pipe(map (file, cb) ->
     # Save start time
     file.timingStart = process.hrtime()

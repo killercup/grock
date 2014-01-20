@@ -25,7 +25,7 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [x] Highlight code
 - [x] Generate TOC as JSON file
 - [x] Render doc tags (like jsdoc)
-- [ ] CLI docs, `.groc.json` config support
+- [x] CLI docs, `.groc.json` config support
 - [ ] Correctly parse relative roots
 - [ ] Tests. Test for everything.
 - [ ] Add another style.
