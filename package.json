@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Convert commented code to awesome side-by-side documentation.",
   "main": "index.js",
-  "bin": "./bin/grock",
+  "bin": {
+    "grock": "./bin/grock"
+  },
   "scripts": {
     "test": "NODE_ENV=test coffeelint lib/**/*.coffee && mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee"
@@ -14,6 +16,10 @@
   "author": {
     "name": "Pascal Hertleif",
     "url": "https://github.com/killercup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/killercup/grock"
   },
   "licenses": [
     {

@@ -29,3 +29,4 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [ ] Correctly parse relative roots
 - [ ] Tests. Test for everything.
 - [ ] Add another style.
+- [ ] Find a streaming code highlighter with hooks for comment segments
