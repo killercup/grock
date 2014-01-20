@@ -22,17 +22,15 @@ START = process.hrtime()
 duration = (start) ->
   gutil.colors.magenta(prettyTime(process.hrtime(start)))
 
-# ### Copy Style Files
-copyStyleAssets = (style, dest) ->
-  copy = require "../styles/#{style}/copy"
-  copy(dest: dest)
-
 # ## The Glorious Generator
 module.exports = ({src, style, dest, verbose, start, index}) ->
   verbose or= false
   start or= START
 
   log 'Beginning to process', (verbose and src or ''), duration(start)
+
+  # Load Style
+  style = require "../styles/#{style}"
 
   # Create output directory
   dest or= 'docs/'
@@ -64,7 +62,7 @@ module.exports = ({src, style, dest, verbose, start, index}) ->
   .on 'end', ->
     # ### Process Style
     assetsTiming = process.hrtime()
-    copyStyleAssets(style, dest)
+    style.copy(dest: dest)
     .then ->
       log "Style copied", duration(assetsTiming) if verbose
       log "Done.", gutil.colors.magenta("Generated in"), duration(start)

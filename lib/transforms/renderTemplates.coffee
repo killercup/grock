@@ -13,9 +13,7 @@ Buffer = require('buffer').Buffer
 jade = require 'jade'
 
 module.exports = ({style}) ->
-  templateFile = fs.readFileSync path.join(
-    __dirname, '..', '..', 'styles', style, 'template.jade'
-  ), 'utf-8'
+  templateFile = fs.readFileSync style.template
 
   render = jade.compile(templateFile)
 

@@ -1,3 +1,4 @@
+path = require 'path'
 vfs = require 'vinyl-fs'
 map = require 'map-stream'
 
@@ -8,26 +9,26 @@ log = require '../lib/utils/log'
 duration = (start) ->
   gutil.colors.magenta(prettyTime(process.hrtime(start)))
 
-callCompile = (file, cb) ->
-  compile = require "./#{file.relative}"
+indexToStyleName = (filePath) ->
+  path.dirname(filePath).split('/').pop()
 
-  compile()
-  .then(->
-    log "compiled promise", file.relative
-    cb(null, file)
-  )
-  .then null, -> cb("failed")
+callCompile = (file, cb) ->
+  style = require "./#{file.relative}"
+
+  style.compile()
+  .then -> cb(null, file)
+  .then null, cb
 
 compileAll = ->
-  vfs.src("#{__dirname}/*/compile.coffee")
+  vfs.src("#{__dirname}/*/index.{js,coffee}")
   .pipe(map (file, cb) ->
-    log 'compiling', file.relative
+    log 'compiling', indexToStyleName(file.relative)
     file.timingStart = process.hrtime()
     cb(null, file)
   )
   .pipe(map callCompile)
   .pipe(map (file, cb) ->
-    log "compiled", file.relative, duration(file.timingStart)
+    log "compiled", indexToStyleName(file.relative), duration(file.timingStart)
     cb(null, file)
   )
 
