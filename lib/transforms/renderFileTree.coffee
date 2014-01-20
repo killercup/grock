@@ -8,12 +8,15 @@ through = require 'through2'
 
 log = require '../utils/log'
 
-module.exports = (fileName, opt={}) ->
+module.exports = (fileName, opts={}) ->
   unless fileName
     throw new PluginError("Render File Tree", "Missing fileName option")
 
+  filePrefix = opts.filePrefix or "window.#{opts.varName or 'files'} = [\n"
+  fileSuffix = opts.fileSuffix or "\n];"
+
   output = fs.createWriteStream(fileName)
-  output.write "window.#{opts.varName or 'files'} = [\n"
+  output.write filePrefix
   first = true
 
   bufferContents = (file, enc, cb) ->
@@ -31,8 +34,8 @@ module.exports = (fileName, opt={}) ->
     cb null, file
 
   endStream = (cb) ->
-    output.write "\n];"
-    if opt.verbose
+    output.write fileSuffix
+    if opts.verbose
       log "File tree written to #{path.basename fileName}"
     cb()
 

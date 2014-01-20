@@ -27,12 +27,10 @@ module.exports = (opts) ->
   verbose or= false
   start or= START
 
-  log 'Beginning to process', (verbose and src or ''), duration(start)
+  log 'Beginning to process', (if verbose then glob else ''), duration(start)
 
   # Load Style
   style = require "../styles/#{style}"
-
-  src = glob
 
   # Create output directory
   dest = out or 'docs/'
@@ -41,7 +39,7 @@ module.exports = (opts) ->
     fs.mkdirSync dest
 
   # ### Processing Pipeline
-  vfs.src(src, base: root)
+  vfs.src(glob, base: root)
   .pipe(map (file, cb) ->
     # Save start time
     file.timingStart = process.hrtime()
@@ -54,8 +52,8 @@ module.exports = (opts) ->
   .pipe(t.markdownComments())
   .pipe(t.indexFile(index))
   .pipe(t.renderTemplates(style: style, repositoryUrl: opts['repository-url']))
-  .pipe(t.renderFileTree("#{dest}/toc.js", verbose: verbose))
   .pipe(vfs.dest(dest))
+  .pipe(t.renderFileTree("#{dest}/toc.js", verbose: verbose))
   .pipe(map (file, cb) ->
     # #### Log process duration
     log file.relative, duration(file.timingStart) if verbose
