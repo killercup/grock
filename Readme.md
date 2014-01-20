@@ -4,6 +4,20 @@
 
 To see how it works, just have a look at [the documentation rendered from this repository](http://killercup.github.io/grock/).
 
+## Install
+
+Install globally using `npm install --global grock` and invoke anywhere using `grock --glob 'your/*.files'`.
+
+Or use it as a (dev-)dependency in ypur project and use the `package.json` script section to run it, e.g. with `"scripts": {"docs": "grock"}` and using `npm run docs`.
+
+## Usage
+
+```sh
+$ grock --help
+```
+
+You can specify all the command line options in a `.groc.json` file (that is compaible to [groc]). This will automatically be loaded. This way you just need to save that file in your project directoy and can use grock without arguments from now on.
+
 ## Inspiration
 
 - [Literate programming](http://en.wikipedia.org/wiki/Literate_programming) (the programming methodology coined by [Donald Knuth](http://en.wikipedia.org/wiki/Donald_Knuth))
@@ -13,7 +27,7 @@ To see how it works, just have a look at [the documentation rendered from this r
 
 ### What makes grock different?
 
-In contrast to other node-based documentation generators like [docco], [docker], and [groc], groc has the following advantages:
+In contrast to other node-based documentation generators like [docco], [groc], and [docker], grock has the following advantages:
 
 - It doesn't need pygments.
 - Therefore it doesn't need python.
