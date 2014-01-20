@@ -6,3 +6,4 @@ module.exports =
   markdownComments: require('./markdownComments')
   renderTemplates: require('./renderTemplates')
   renderFileTree: require('./renderFileTree')
+  indexFile: require('./indexFile')

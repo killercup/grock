@@ -28,7 +28,7 @@ copyStyleAssets = (style, dest) ->
   copy(dest: dest)
 
 # ## The Glorious Generator
-module.exports = ({src, style, dest, verbose, start}) ->
+module.exports = ({src, style, dest, verbose, start, index}) ->
   verbose or= false
   start or= START
 
@@ -51,9 +51,10 @@ module.exports = ({src, style, dest, verbose, start}) ->
   .pipe(t.highlight())
   .pipe(t.renderDocTags())
   .pipe(t.markdownComments())
+  .pipe(t.indexFile(index))
   .pipe(t.renderTemplates(style: style))
-  .pipe(vfs.dest('docs/'))
   .pipe(t.renderFileTree("docs/toc.js", verbose: verbose))
+  .pipe(vfs.dest('docs/'))
   .pipe(map (file, cb) ->
     # #### Log process duration
     log file.relative, duration(file.timingStart) if verbose

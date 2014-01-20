@@ -18,6 +18,9 @@ var optimist = require('optimist')
   .default('verbose', false)
   .alias('v', 'verbose')
   .describe('verbose', 'Show more log output')
+  .default('index', 'Readme.md')
+  .describe('index', 'File to be used as index')
+  .alias('i', 'index')
   ;
 
 if (optimist.argv.h) {
