@@ -1,6 +1,6 @@
 {
   "name": "grock",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Convert commented code to awesome side-by-side documentation.",
   "main": "index.js",
   "bin": "./bin/grock",
