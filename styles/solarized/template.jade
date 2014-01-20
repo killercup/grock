@@ -14,11 +14,7 @@ html(lang="en")
   body
     #file-area
       #meta
-        //- - if (project.githubURL)
-        //-   code.file-path
-        //-     a(href=project.githubURL + '/blob/master/' + projectPath)= projectPath
-        //- - else
-        //-   code.file-path= projectPath
+        code.file-path= targetPath
       #document
         - for (var i in segments)
           .segment
