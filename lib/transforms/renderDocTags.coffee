@@ -8,8 +8,6 @@ map = require 'map-stream'
 render = require '../utils/processDocTags'
 
 module.exports = (options) ->
-  # Annotate an array of segments by running their comments through
-  # [marked](https://github.com/chjj/marked).
   modifyFile = (file, cb) ->
     cb(null, file) unless file.segments?.length
 

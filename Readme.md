@@ -7,8 +7,9 @@ Grock converts your nicely commented code into a gorgeous documentation where co
 - [Literate programming](http://en.wikipedia.org/wiki/Literate_programming) (the programming methodology coined by [Donald Knuth](http://en.wikipedia.org/wiki/Donald_Knuth))
 - [Jeremy Ashkenas](https://github.com/jashkenas)' [docco](http://jashkenas.github.com/docco/)
 - The [groc](http://nevir.github.com/groc/) project -- this implementation is heavily based on this, but uses node.js streams
+- [Gulp.js](http://gulpjs.com/), a build system that uses streams to transform files
 
-## Uses
+## Based on
 
 - [vinyl-fs](https://github.com/wearefractal/vinyl-fs) for abstracting files
 - [Solarized](http://ethanschoonover.com/solarized)
@@ -25,5 +26,6 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [x] Generate TOC as JSON file
 - [x] Render doc tags (like jsdoc)
 - [ ] CLI docs, `.groc.json` config support
+- [ ] Correctly parse relative roots
 - [ ] Tests. Test for everything.
 - [ ] Add another style.

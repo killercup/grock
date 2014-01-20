@@ -4,6 +4,9 @@
 var START = process.hrtime();
 
 require('coffee-script');
+var path = require('path');
+var fs = require('fs');
+var  _ = require('lodash');
 
 var optimist = require('optimist')
   .usage('Usage: $0 --src [string]')
@@ -17,12 +20,23 @@ var optimist = require('optimist')
   .describe('verbose', 'Show more log output')
   ;
 
-var argv = optimist.argv;
-
-if (argv.h) {
+if (optimist.argv.h) {
   optimist.showHelp();
   process.exit(2);
 }
+
+var projectConfig;
+var projectConfigPath = path.resolve('.groc.json');
+
+try {
+  projectConfig = JSON.parse(fs.readFileSync(projectConfigPath));
+} catch (e) {
+  projectConfig = {};
+}
+
+var argv = _.defaults({
+  src: projectConfig.glob || projectConfig.src
+}, optimist.argv);
 
 var generator = require('../lib/generator');
 

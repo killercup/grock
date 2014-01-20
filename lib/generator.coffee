@@ -1,3 +1,4 @@
+debugger
 ###
 # # Documetation Generator
 ###
@@ -31,7 +32,7 @@ module.exports = ({src, style, dest, verbose, start}) ->
   verbose or= false
   start or= START
 
-  log 'Beginning to process', src, duration(start)
+  log 'Beginning to process', (verbose and src or ''), duration(start)
 
   # Create output directory
   dest or= 'docs/'
@@ -39,7 +40,7 @@ module.exports = ({src, style, dest, verbose, start}) ->
     fs.mkdirSync dest
 
   # ### Processing Pipeline
-  vfs.src(src)
+  vfs.src(src, base: '.')
   .pipe(map (file, cb) ->
     # Save start time
     file.timingStart = process.hrtime()
