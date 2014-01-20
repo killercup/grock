@@ -4,7 +4,6 @@
     "lib/**/*.coffee",
     "styles/**/*.coffee",
     "styles/**/*.md",
-    "styles/**/*.jade",
     "bin/*.js"
   ],
   "index": "Readme.md",

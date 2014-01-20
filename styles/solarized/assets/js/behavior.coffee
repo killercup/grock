@@ -44,7 +44,10 @@ listToTree = (list) ->
 
     for pathSegment, depth in path
       if (depth is fileDepth-1) and file.originalName.match /index\.(js|coffee)/
-        cur[pathSegment] = file
+        cur[pathSegment].path = file.path
+        cur[pathSegment].originalName = file.originalName
+        cur[pathSegment].originalPath = file.originalPath
+        cur[pathSegment].name = file.name
         cur[pathSegment].title = pathSegment
         cur[pathSegment].type = 'file'
         cur[pathSegment].children or= {}
@@ -120,7 +123,6 @@ buildFileTree = (tree, ul, metaInfo) ->
 buildHeadlinesTree = (tree, ul, metaInfo) ->
   ul = $(ul)
   unless tree?.length
-    console.warn 'no tree', tree
     return ul
 
   $.each tree, (index, node) ->
