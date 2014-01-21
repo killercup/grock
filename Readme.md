@@ -8,7 +8,7 @@ To see how it works, just have a look at [the documentation rendered from this r
 
 Install globally using `npm install --global grock` and invoke anywhere using `grock --glob 'your/*.files'`.
 
-Or use it as a (dev-)dependency in ypur project and use the `package.json` script section to run it, e.g. with `"scripts": {"docs": "grock"}` and using `npm run docs`.
+Or use it as a (dev-)dependency in your project and use the `package.json` script section to run it, e.g. with `"scripts": {"docs": "grock"}` and using `npm run docs`.
 
 ## Usage
 
@@ -16,7 +16,9 @@ Or use it as a (dev-)dependency in ypur project and use the `package.json` scrip
 $ grock --help
 ```
 
-You can specify all the command line options in a `.groc.json` file (that is compaible to [groc]). This will automatically be loaded. This way you just need to save that file in your project directoy and can use grock without arguments from now on.
+You can specify all the command line options in a `.groc.json` file (that is compaible to [groc]). This will automatically be loaded. This way you just need to save that file in your project directory and can use grock without arguments from now on.
+
+For a list of supported languages, see the `lib/languages.coffee` file.
 
 ## Inspiration
 
