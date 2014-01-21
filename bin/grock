@@ -11,7 +11,7 @@ var  _ = require('lodash');
 var optimist = require('optimist')
   .usage(
     "Usage: grock [options]\n\n"+
-    "You can also use a configuration file named .groc.json to specify"+
+    "You can also use a configuration file named .groc.json to specify "+
     "these options."
   )
 
