@@ -186,7 +186,14 @@ createMenuToggle = ($container, $nav) ->
 
   $button.on 'click', (event) ->
     event.preventDefault()
-    $nav.toggleClass 'open'
+    $nav.toggleClass('open')
+
+  # $('#file-area').on 'click', (event) ->
+  #   return if $(event.target).hasClass('toggle-menu')
+  #   if $nav.hasClass('open')
+  #     event.preventDefault()
+  #     $nav.removeClass('open')
+  #   return
 
   $container.prepend $button
 

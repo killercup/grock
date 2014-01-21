@@ -80,10 +80,10 @@ body {
   @include display(flex);
 
   #side-menu nav {}
-  
+
   #file-area {
     @include display(flex);
-    
+
     @include flex(1);
     @include flex-direction(column);
 
@@ -97,11 +97,11 @@ body {
   width: $nav-width;
   overflow-x: auto;
   background: darken($body-background, 2%);
-  
+
   + nav {
     margin-top: 1em;
   }
-  
+
   ul, ol {
     list-style: none;
     padding: 0;
@@ -111,21 +111,21 @@ body {
   .tree {
     padding-bottom: 0.5em;
   }
-  
+
   li {
     padding: 0 0.5em;
   }
-  
+
   a {
     display: block;
     padding: 0.1em 0;
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
   }
-  
+
   .tools {
     padding-top: 0.5em;
     margin-bottom: 1em;
@@ -145,15 +145,15 @@ body {
       cursor: pointer;
     }
   }
-  
+
   a.selected {
     color: $color-selected;
   }
-  
+
   ol.searching {
     a {
       display: none;
-      
+
       &.matched {
         display: block;
       }
@@ -173,19 +173,19 @@ body {
   }
 }
 
-.segment {    
+.segment {
   clear: both;
   box-sizing: border-box;
   padding: 0.5em 0 0.5em $left-width;
-  
+
   white-space: nowrap;
-  
+
   .comments,
   .code {
     display: inline-block;
     vertical-align: top;
   }
-  
+
   .comments {
     padding: 0 $side-padding;
     width: $left-width - (2 * $side-padding);
@@ -212,7 +212,7 @@ body {
         opacity: 1;
       }
     }
-    
+
     pre {
       word-break: normal;
       @extend %code-font;
@@ -224,12 +224,12 @@ body {
       }
     }
   }
-  
+
   .code {
     white-space: pre;
     padding-top: 0.5em;
     margin-left: $side-padding;
-    
+
     @extend %code-font;
     @include highlightjs-solarized-dark();
     @include pygments-solarized-dark;
@@ -237,6 +237,21 @@ body {
 }
 
 // ## Responsive
+
+// ### Really Tiny
+// Not even wide enough to show the side menu.
+@media screen and (max-width: $nav-width) {
+  $nav-width-mobile: 90%;
+  #side-menu {
+    width: $nav-width-mobile !important;
+
+    &.open {
+      + #file-area {
+        left: $nav-width-mobile !important;
+      }
+    }
+  }
+}
 
 // ### One Column
 $col-2: 2 * $left-width; // in em
@@ -251,45 +266,59 @@ $col-2: 2 * $left-width; // in em
       margin-left: 0;
       width: auto;
     }
-    
+
     .wrapper {
       @include scroll-box;
     }
   }
-
-  // #side-menu {
-  //   display: none;
-
-  //   + #file-area {
-  //     position: relative;
-  //     left: 0;
-  //   }
-
-  //   &.open {
-  //     display: block;
-
-  //     + #file-area {
-  //       left: $nav-width;
-  //     }
-  //   }
-  // }
 }
 
 // ### Two Columns
 $col-3: $nav-width + 2 * $left-width; // in em
 
 @media screen and (max-width: $col-3) {
+  $nav-width-mobile: $nav-width;
+  html {
+    height: 100%;
+  }
+
+  body {
+    display: block;
+    min-height: 100%;
+  }
+
   #side-menu {
-    visibility: hidden;
-    width: 0;
-    overflow-x: hidden;
-    transition: width 0.3s ease-in-out; 
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: $nav-width-mobile;
+    max-height: 100%;
+    overflow-y: auto;
+
+    nav {
+      width: 100%;
+    }
 
     &.open {
-      visibility: visible;
-      width: $nav-width;
-      overflow-x: auto;
+      + #file-area {
+        left: $nav-width-mobile;
+      }
     }
+  }
+
+  body #file-area, #meta, #document {
+    min-height: 101%;
+    width: 100%;
+    display: block;
+  }
+
+  #file-area {
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    transition: left 0.4s ease-in-out;
   }
 }
 
@@ -302,9 +331,10 @@ $col-3: $nav-width + 2 * $left-width; // in em
 }
 
 // ## Color
-body {
+body,
+#file-area {
   background: $body-background;
-  color: white;
+  color: $solarized-light;
 }
 
 a {
@@ -329,11 +359,11 @@ a {
     $body-background 100%,
     $fallback: $body-background
   );
-  
+
   .comments {
     color: $text-color;
   }
-  
+
   @media screen and (max-width: 2 * $left-width) {
     background: $text-background;
   }
