@@ -237,26 +237,42 @@ body {
 }
 
 // ## Responsive
+$col-1: $left-width; // in em
+$col-2: 2 * $left-width; // in em
+$col-3: $nav-width + 2 * $left-width; // in em
 
-// ### Really Tiny
-// Not even wide enough to show the side menu.
-@media screen and (max-width: $nav-width) {
-  $nav-width-mobile: 90%;
+// ### One Column
+
+@media screen and (max-width: $col-1) {
+  $nav-width-mobile: $nav-width;
+
+  body {
+    display: block;
+  }
+
   #side-menu {
-    width: $nav-width-mobile !important;
+    display: none;
+
+    &, nav {
+      width: 100%;
+    }
 
     &.open {
-      + #file-area {
-        left: $nav-width-mobile !important;
-      }
+      display: block;
     }
   }
 }
 
-// ### One Column
-$col-2: 2 * $left-width; // in em
+// ### Two Columns
+
+@media screen and (min-width: $col-1) {
+  #meta .toggle-menu {
+    display: none;
+  }
+}
 
 @media screen and (max-width: $col-2) {
+
   .segment {
     padding: 0.5em;
 
@@ -270,63 +286,6 @@ $col-2: 2 * $left-width; // in em
     .wrapper {
       @include scroll-box;
     }
-  }
-}
-
-// ### Two Columns
-$col-3: $nav-width + 2 * $left-width; // in em
-
-@media screen and (max-width: $col-3) {
-  $nav-width-mobile: $nav-width;
-  html {
-    height: 100%;
-  }
-
-  body {
-    display: block;
-    min-height: 100%;
-  }
-
-  #side-menu {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: $nav-width-mobile;
-    max-height: 100%;
-    overflow-y: auto;
-
-    nav {
-      width: 100%;
-    }
-
-    &.open {
-      + #file-area {
-        left: $nav-width-mobile;
-      }
-    }
-  }
-
-  body #file-area, #meta, #document {
-    min-height: 101%;
-    width: 100%;
-    display: block;
-  }
-
-  #file-area {
-    position: relative;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    transition: left 0.4s ease-in-out;
-  }
-}
-
-// ### Three Columns
-
-@media screen and (min-width: $col-3 + 0.1em) {
-  #meta .toggle-menu {
-    display: none;
   }
 }
 
