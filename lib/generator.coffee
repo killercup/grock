@@ -7,7 +7,7 @@ fs = require 'fs'
 vfs = require 'vinyl-fs'
 map = require 'map-stream'
 prettyTime = require 'pretty-hrtime'
-gutil = require 'gulp-util'
+colors = require 'chalk'
 
 # ## Local Modules
 t = require './transforms'
@@ -19,7 +19,7 @@ log = require './utils/log'
 START = process.hrtime()
 
 duration = (start) ->
-  gutil.colors.magenta(prettyTime(process.hrtime(start)))
+  colors.magenta(prettyTime(process.hrtime(start)))
 
 # ## The Glorious Generator
 module.exports = (opts) ->
@@ -65,7 +65,8 @@ module.exports = (opts) ->
     style.copy(dest: dest)
     .then ->
       log "Style copied", duration(assetsTiming) if verbose
-      log "Done.", gutil.colors.magenta("Generated in"), duration(start)
-    .then null, ->
-      log gutil.colors.red("It exploded!")
+      log "Done.", colors.magenta("Generated in"), duration(start)
+    .then null, (err) ->
+      log colors.red("It exploded!")
+      console.log(err) if verbose
       process.exit(1)

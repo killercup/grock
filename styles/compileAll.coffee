@@ -4,10 +4,11 @@ map = require 'map-stream'
 
 prettyTime = require 'pretty-hrtime'
 gutil = require 'gulp-util'
+colors = require 'chalk'
 log = require '../lib/utils/log'
 
 duration = (start) ->
-  gutil.colors.magenta(prettyTime(process.hrtime(start)))
+  colors.magenta(prettyTime(process.hrtime(start)))
 
 indexToStyleName = (filePath) ->
   path.dirname(filePath).split('/').pop()

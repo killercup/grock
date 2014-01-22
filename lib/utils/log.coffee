@@ -1,4 +1,4 @@
-colors = require("gulp-util").colors
+colors = require 'chalk'
 
 module.exports = ->
   sig = "[" + colors.green("grock") + "]"

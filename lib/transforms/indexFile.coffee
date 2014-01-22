@@ -7,7 +7,7 @@ map = require 'map-stream'
 
 module.exports = (indexFile) ->
   modifyFile = (file, cb) ->
-    if file.relative is indexFile
+    if file.originalRelative is indexFile
       file.path = path.join(file.cwd, 'index.html')
     
     cb(null, file)

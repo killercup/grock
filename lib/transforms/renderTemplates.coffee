@@ -6,7 +6,6 @@
 
 fs = require 'fs'
 path = require 'path'
-gutil = require 'gulp-util'
 map = require 'map-stream'
 Buffer = require('buffer').Buffer
 
@@ -22,11 +21,11 @@ module.exports = ({style, repositoryUrl}) ->
 
     file.originalPath = file.path
     file.originalRelative = file.relative
-    file.path = gutil.replaceExtension(file.path, ".html")
+    file.path = file.path + ".html"
 
     # ## Variables accessable in template
     templateContext =
-      pageTitle: path.basename file.path
+      pageTitle: path.basename file.originalRelative
       segments: file.segments
       targetPath: file.originalRelative
       repositoryUrl: repositoryUrl

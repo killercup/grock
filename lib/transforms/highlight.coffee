@@ -5,7 +5,6 @@
 path = require 'path'
 hljs = require 'highlight.js'
 
-gutil = require 'gulp-util'
 map = require 'map-stream'
 Buffer = require('buffer').Buffer
 
@@ -34,7 +33,7 @@ module.exports = (options) ->
       else
         str = file.contents.toString('utf8')
         file.contents = new Buffer highlightSegment(str, hlLang)
-        file.path = gutil.replaceExtension(file.path, ".html")
+        file.path = file.path + ".html"
     catch e
       return cb(new Error("highlight: Error highlighting stuff #{e}"))
 
