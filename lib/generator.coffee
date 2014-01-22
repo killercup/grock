@@ -50,8 +50,8 @@ module.exports = (opts) ->
   .pipe(t.highlight())
   .pipe(t.renderDocTags())
   .pipe(t.markdownComments())
-  .pipe(t.indexFile(index))
   .pipe(t.renderTemplates(style: style, repositoryUrl: opts['repository-url']))
+  .pipe(t.indexFile(index))
   .pipe(vfs.dest(dest))
   .pipe(t.renderFileTree("#{dest}/toc.js", verbose: verbose))
   .pipe(map (file, cb) ->
