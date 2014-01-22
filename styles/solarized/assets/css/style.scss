@@ -116,6 +116,10 @@ body {
     padding: 0 0.5em;
   }
 
+  .folder {
+    color: darken($text-link-color, 10%);
+  }
+
   a {
     display: block;
     padding: 0.1em 0;

@@ -13,3 +13,5 @@ All Styles should contain an index files exporting these properties:
   - Takes an Object with options
   - Compiles all style assets into a directory, so that they can be easily copied later on when generatign the documentation (preventing the user to have to install `node-sass`, e.g.)
   - Returns promise that resolves when the compilation is done
+
+After changing style assets, you need to execute the compile function. To recompile all styles, use `npm run compile-styles`.

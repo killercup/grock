@@ -99,9 +99,9 @@ buildFileTree = (tree, ul, metaInfo) ->
     $node = $("""<li class="#{node.type}"/>""")
     if node.type is 'file'
       currentFile = node is metaInfo.currentFile
-      $node.append """<a class="label#{if currentFile then ' selected' else ''}" href="#{metaInfo.relativeRoot}#{node.path}" title="#{node.originalName or node.name}"><span class="text">#{node.title or node.originalName or node.name}</span></a>"""
-    else
-      $node.append """<a class="label"><span class="text">#{node.name}</span></a>"""
+      $node.append """<a class="file#{if currentFile then ' selected' else ''}" href="#{metaInfo.relativeRoot}#{node.path}" title="#{node.originalName or node.name}">#{node.title or node.originalName or node.name}</a>"""
+    else # folder
+      $node.append """<span class="folder">#{node.name}</span>"""
 
     if node.children?
       $children = $('<ol class="children"/>')
