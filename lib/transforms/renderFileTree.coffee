@@ -5,6 +5,7 @@
 fs = require 'fs'
 path = require 'path'
 through = require 'through2'
+_ = require 'lodash'
 
 log = require '../utils/log'
 
@@ -26,7 +27,7 @@ module.exports = (fileName, opts={}) ->
       originalPath: file.originalRelative
       name: path.basename file.path
       lang: file.extra?.lang?.highlightJS or file.extra?.lang?.pygmentsLexer
-      title: file.extra?.toc?[0]?.title
+      title: _.find(file.extra?.toc, level: 1)?.title
       toc: file.extra?.toc
     }, false, 2)
     first = false
