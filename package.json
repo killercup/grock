@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "NODE_ENV=test coffeelint lib/**/*.coffee && mocha",
-    "compile-styles": "coffee ./styles/compileAll.coffee"
+    "compile-styles": "coffee ./styles/compileAll.coffee",
+    "travis": "npm test && ./scripts/deploy_docs_from_travis.sh"
   },
   "keywords": [
     "documentation"

@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - '0.10'
+script: 'npm run travis'
+env:
+  global:
+    - GH_REF: 'github.com/killercup/grock.git'
+    - secure: 'VpmToJzuKEC9CqkBxBd7ZoH2h56rlNo0TW4s9kdbc1MeHela0UhERFlDPGSVv+ByQ0ALeN7OeueSlrOOBymVXSI5Z4sQ0WwppDCXfYNPOO97kyFLrJ8NRM5vtPIcIDCR8LLpkAG+UKSXpDsBwASioxqXikouhA8XS0cCkz+sb2g='
