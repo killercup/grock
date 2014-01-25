@@ -5,34 +5,24 @@
 # @license MIT
 ###
 
-###
-# ## Table of Contents
-#
-# Schema:
-# ```javascript
-# var File, Folder, Headline, index;
-# Headline = {
-#   level: Number,
-#   title: String,
-#   slug: String,
-# };
-# File = {
-#   path: String,
-#   originalName: String,
-#   originalPath: String,
-#   name: String,
-#   lang: String,
-#   toc: [Headline]
-# };
-# files = [File];
-# ```
-###
 $ = Zepto or jQuery
 
 ###
 # ## Convert List of Files to File Tree
 # @param {Array} list Files in flat list
 # @return {Object} Files in tree (by folders)
+#
+# @example
+# ```javascript
+# Schema(list) == [{
+#   path: String,
+#   originalName: String,
+#   originalPath: String,
+#   name: String,
+#   lang: String,
+#   toc: [Headline]
+# }]
+# ```
 ###
 listToTree = (list) ->
   tree = {}
@@ -42,22 +32,22 @@ listToTree = (list) ->
     fileDepth = path.length - 1
     cur = tree
 
-    for pathSegment, depth in path
-      if (depth is fileDepth-1) and file.originalName.match /index\.(js|coffee)/
-        cur[pathSegment].path = file.path
-        cur[pathSegment].originalName = file.originalName
-        cur[pathSegment].originalPath = file.originalPath
-        cur[pathSegment].name = file.name
-        cur[pathSegment].title = pathSegment
-        cur[pathSegment].type = 'file'
-        cur[pathSegment].children or= {}
+    for part, depth in path
+      if (cur[part]?.type isnt 'file') and (depth is fileDepth-1) and file.originalName.match(/index\.(js|coffee)/)
+        cur[part].path = file.path
+        cur[part].originalName = file.originalName
+        cur[part].originalPath = file.originalPath
+        cur[part].name = file.name
+        cur[part].title = part
+        cur[part].type = 'file'
+        cur[part].children or= {}
         break
       if depth is fileDepth
-        cur[pathSegment] = file
-        cur[pathSegment].type = 'file'
+        cur[part] = file
+        cur[part].type = 'file'
       else
-        cur[pathSegment] or= name: pathSegment, type: 'folder'
-        cur = cur[pathSegment].children or= {}
+        cur[part] or= name: part, type: 'folder'
+        cur = cur[part].children or= {}
 
   return tree
 
@@ -65,6 +55,15 @@ listToTree = (list) ->
 # ## Convert TOC to Headline Tree
 # @param {Array} toc List of Headlines
 # @return {Array} Tree of Headlines
+#
+# @example
+# ```javascript
+# Schema(toc) == [{
+#   level: Number,
+#   title: String,
+#   slug: String,
+# }]
+# ```
 ###
 tocToTree = (toc) ->
   headlines = []
