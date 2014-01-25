@@ -3,6 +3,7 @@
 ###
 
 # ## NPM Modules
+path = require 'path'
 fs = require 'fs'
 vfs = require 'vinyl-fs'
 map = require 'map-stream'
@@ -55,7 +56,7 @@ module.exports = (opts) ->
   .pipe(t.renderTemplates(style: style, repositoryUrl: opts['repository-url']))
   .pipe(t.indexFile(index))
   .pipe(vfs.dest(dest))
-  .pipe(t.renderFileTree("#{dest}/toc.js", verbose: verbose))
+  .pipe(t.renderFileTree(path.join(dest, "toc.js"), verbose: verbose))
   .pipe(map (file, cb) ->
     # #### Log process duration
     log file.relative, duration(file.timingStart) if verbose

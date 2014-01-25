@@ -16,12 +16,12 @@ module.exports = (fileName, opts={}) ->
   filePrefix = opts.filePrefix or "window.#{opts.varName or 'files'} = [\n"
   fileSuffix = opts.fileSuffix or "\n];"
 
-  output = fs.createWriteStream(fileName)
-  output.write filePrefix
+  output = []
+  output.push filePrefix
   first = true
 
   bufferContents = (file, enc, cb) ->
-    output.write (if first then '' else ',\n') + JSON.stringify({
+    output.push (if first then '' else ',\n') + JSON.stringify({
       path: file.relative
       originalName: path.basename file.originalPath
       originalPath: file.originalRelative
@@ -35,9 +35,11 @@ module.exports = (fileName, opts={}) ->
     cb null, file
 
   endStream = (cb) ->
-    output.write fileSuffix
-    if opts.verbose
-      log "File tree written to #{path.basename fileName}"
-    cb()
+    output.push fileSuffix
+    fs.writeFile fileName, output.join(''), (err) ->
+      return cb(err) if err
+      if opts.verbose
+        log "File tree written to #{path.basename fileName}"
+      cb(null)
 
   through.obj bufferContents, endStream
