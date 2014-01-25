@@ -182,63 +182,66 @@ body {
   clear: both;
   box-sizing: border-box;
   padding: 0.5em 0 0.5em $left-width;
-
   white-space: nowrap;
+}
 
-  .comments,
-  .code {
-    display: inline-block;
-    vertical-align: top;
-  }
+.comments,
+.code {
+  display: inline-block;
+  vertical-align: top;
+}
 
-  .comments {
-    padding: 0 $side-padding;
-    width: $left-width - (2 * $side-padding);
-    margin-left: -1 * $left-width;
-    white-space: normal;
-    word-break: break-word;
+.comments {
+  padding: 0 $side-padding;
+  width: $left-width - (2 * $side-padding);
+  margin-left: -1 * $left-width;
+  white-space: normal;
+  word-break: break-word;
 
-    :target {
-      a.anchor {
-        color: $color-selected;
-      }
-    }
-
+  :target {
     a.anchor {
-      opacity: 0.2;
-
-      &:before {
-        content: "#";
-        display: inline-block;
-        padding-right: 0.2em;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    pre {
-      word-break: normal;
-      @extend %code-font;
-      @include highlightjs-solarized-light('code');
-      @include pygments-solarized-light;
-
-      code {
-        @include scroll-box;
-      }
+      color: $color-selected;
     }
   }
 
-  .code {
-    white-space: pre;
-    padding-top: 0.5em;
-    margin-left: $side-padding;
+  a.anchor {
+    opacity: 0.2;
 
+    &:before {
+      content: "#";
+      display: inline-block;
+      padding-right: 0.2em;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre {
+    word-break: normal;
     @extend %code-font;
-    @include highlightjs-solarized-dark();
-    @include pygments-solarized-dark;
+    @include highlightjs-solarized-light('code');
+    @include pygments-solarized-light;
+
+    code {
+      @include scroll-box;
+    }
   }
+}
+
+.code {
+  white-space: pre;
+  padding-top: 0.5em;
+  margin-left: $side-padding;
+
+  @extend %code-font;
+  @include highlightjs-solarized-dark();
+  @include pygments-solarized-dark;
 }
 
 // ## Responsive
