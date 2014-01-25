@@ -155,7 +155,7 @@ body {
   }
 
   ol.searching {
-    a {
+    a, span {
       display: none;
 
       &.matched {
