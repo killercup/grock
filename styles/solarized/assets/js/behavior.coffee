@@ -90,10 +90,10 @@ tocToTree = (toc) ->
 # @return {jQuery} The ul element
 ###
 buildFileTree = (tree, ul, metaInfo) ->
-  ul = $(ul)
+  $ul = $(ul)
   unless tree?
     console.warn 'No File Tree!'
-    return ul
+    return $ul
 
   $.each tree, (fileName, node) ->
     $node = $("""<li class="#{node.type}"/>""")
@@ -107,10 +107,14 @@ buildFileTree = (tree, ul, metaInfo) ->
       $children = $('<ol class="children"/>')
       $node.append buildFileTree node.children, $children, metaInfo
 
-    ul.append $node
+    if node.originalName?.match /^readme\.(md|txt|rst)/i
+      position = 'prepend'
+    else
+      position = 'append'
+    $ul[position] $node
     return
 
-  return ul
+  return $ul
 
 
 ###
