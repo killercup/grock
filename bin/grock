@@ -57,23 +57,53 @@ var optimist = require('optimist')
   .string('root')
   .default('root', projectConfig.root || '.')
   .describe('root', "The project's root directory")
+
+  .boolean('github')
+  .default('github', projectConfig.github || false)
+  .describe('github', "Push generated docs to gh-pages branch")
   ;
 
 if (optimist.argv.help) {
   optimist.showHelp();
-  process.exit(2);
+  return process.exit(2);
 }
 
 if (optimist.argv.version) {
   var pkg = JSON.parse(fs.readFileSync(__dirname+"/../package.json"));
   console.log("Version", pkg.version);
-  process.exit(0);
+  return process.exit(0);
 }
 
 var argv = _.defaults(optimist.argv, projectConfig);
+argv.start = START;
 
 var generator = require('../lib/generator');
 
-argv.start = START;
+if (argv.github) {
+  argv.out = path.resolve(path.join('.git', 'groc-tmp'));
 
-generator(argv);
+  generator(argv)
+  .then(function () {
+    var gitPublishScript = path.resolve(__dirname, '..', 'scripts', 'publish_git_pages.sh');
+    var publishing = require('child_process').spawn(gitPublishScript);
+    publishing.stdout.on('data', function (data) { console.log(data.toString().trim()); });
+    publishing.stderr.on('data', function (data) { console.warn(data.toString().trim()); });
+    publishing.on('exit', function (code) {
+      if (code) {
+        console.log("Publishing to Github Pages failed with code", code);
+      }
+      process.exit(code);
+    });
+  }, function () {
+    process.exit(1);
+  });
+
+} else {
+  return generator(argv)
+  .then(function () {
+    process.exit(0);
+  }, function (err) {
+    process.exit(1);
+  })
+  ;
+}

@@ -8,6 +8,7 @@ vfs = require 'vinyl-fs'
 map = require 'map-stream'
 prettyTime = require 'pretty-hrtime'
 colors = require 'chalk'
+Q = require 'q'
 
 # ## Local Modules
 t = require './transforms'
@@ -28,6 +29,7 @@ module.exports = (opts) ->
   start or= START
 
   log 'Beginning to process', (if verbose then glob else ''), duration(start)
+  deferred = Q.defer()
 
   # Load Style
   style = require "../styles/#{style}"
@@ -59,6 +61,7 @@ module.exports = (opts) ->
     log file.relative, duration(file.timingStart) if verbose
     cb(null, file)
   )
+  .on('error', deferred.reject)
   .on 'end', ->
     # ### Process Style
     assetsTiming = process.hrtime()
@@ -66,7 +69,10 @@ module.exports = (opts) ->
     .then ->
       log "Style copied", duration(assetsTiming) if verbose
       log "Done.", colors.magenta("Generated in"), duration(start)
+      deferred.resolve()
     .then null, (err) ->
       log colors.red("It exploded!")
       console.log(err) if verbose
-      process.exit(1)
+      deferred.reject()
+
+  return deferred.promise
