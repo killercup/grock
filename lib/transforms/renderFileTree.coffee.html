@@ -13,12 +13,12 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../u
   filePrefix = opts.filePrefix <span class="hljs-keyword">or</span> <span class="hljs-string">"window.<span class="hljs-subst">#{opts.varName <span class="hljs-keyword">or</span> <span class="hljs-string">'files'</span>}</span> = [\n"</span>
   fileSuffix = opts.fileSuffix <span class="hljs-keyword">or</span> <span class="hljs-string">"\n];"</span>
 
-  output = fs.createWriteStream(fileName)
-  output.write filePrefix
+  output = []
+  output.push filePrefix
   first = <span class="hljs-literal">true</span>
 
   <span class="hljs-function"><span class="hljs-title">bufferContents</span> = <span class="hljs-params">(file, enc, cb)</span> -&gt;</span>
-    output.write (<span class="hljs-keyword">if</span> first <span class="hljs-keyword">then</span> <span class="hljs-string">''</span> <span class="hljs-keyword">else</span> <span class="hljs-string">',\n'</span>) + JSON.stringify({
+    output.push (<span class="hljs-keyword">if</span> first <span class="hljs-keyword">then</span> <span class="hljs-string">''</span> <span class="hljs-keyword">else</span> <span class="hljs-string">',\n'</span>) + JSON.stringify({
       <span class="hljs-attribute">path</span>: file.relative
       <span class="hljs-attribute">originalName</span>: path.basename file.originalPath
       <span class="hljs-attribute">originalPath</span>: file.originalRelative
@@ -32,10 +32,12 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../u
     cb <span class="hljs-literal">null</span>, file
 
   <span class="hljs-function"><span class="hljs-title">endStream</span> = <span class="hljs-params">(cb)</span> -&gt;</span>
-    output.write fileSuffix
-    <span class="hljs-keyword">if</span> opts.verbose
-      log <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
-    cb()
+    output.push fileSuffix
+    fs.writeFile fileName, output.join<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">''</span>)</span>, <span class="hljs-params">(err)</span> -&gt;</span>
+      <span class="hljs-keyword">return</span> cb(err) <span class="hljs-keyword">if</span> err
+      <span class="hljs-keyword">if</span> opts.verbose
+        log <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
+      cb(<span class="hljs-literal">null</span>)
 
   through.obj bufferContents, endStream
 </div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>
