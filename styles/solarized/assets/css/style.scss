@@ -1,9 +1,16 @@
+// # Grock Solarized Stylesheet
+
 @import "helpers";
 @import "flex-box";
 @import "highlight-solarized-dark";
 @import "highlight-solarized-light";
 @import "pygments-solarized-dark";
 @import "pygments-solarized-light";
+
+// ## Normalize
+header, footer, nav, section, article, aside, summary, details {
+  display: block;
+}
 
 // ## Fonts
 @import url(http://fonts.googleapis.com/css?family=PT+Mono);
@@ -56,7 +63,7 @@ $side-padding: 1em;
 // ## Layout
 
 @mixin scroll-box {
-  box-sizing: border-box;
+  @include box-sizing(border-box);
   max-width: 100%;
   display: block;
   overflow-x: auto;
@@ -139,6 +146,8 @@ body {
   .search {
     input {
       width: 100%;
+      @include box-sizing(border-box);
+      display: block;
     }
   }
 
@@ -180,7 +189,7 @@ body {
 
 .segment {
   clear: both;
-  box-sizing: border-box;
+  @include box-sizing(border-box);
   padding: 0.5em 0 0.5em $left-width;
   white-space: nowrap;
 }
