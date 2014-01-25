@@ -1,7 +1,11 @@
 ###
 # # Humanize Strings
 #
-# Code from <https://github.com/nevir/groc/blob/b626e45ebf/lib/utils/humanize.coffee>
+# Code from [`groc/lib/utils/humanize`][1]
+#
+# @copyright Ian MacLeod and groc contributors
+#
+# [1]: https://github.com/nevir/groc/blob/b626e45ebf/lib/utils/humanize.coffee
 ###
 
 module.exports = humanize =

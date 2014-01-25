@@ -1,4 +1,12 @@
+###
 # # Supported Languages
+#
+# Code from [`groc/lib/languages`][1]
+#
+# @copyright Ian MacLeod and groc contributors
+#
+# [1]: https://github.com/nevir/groc/blob/b626e45ebf/lib/languages.coffee
+###
 
 module.exports = LANGUAGES =
   Markdown:

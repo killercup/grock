@@ -1,5 +1,12 @@
+###
 # # Known Doc Tags
-# Code from <https://github.com/nevir/groc/blob/b626e45ebf/lib/doc_tags.coffee>
+#
+# Code from [`groc/lib/doc_tags`][1]
+#
+# @copyright Ian MacLeod and groc contributors
+#
+# [1]: https://github.com/nevir/groc/blob/b626e45ebf/lib/doc_tags.coffee
+###
 
 humanize = require './utils/humanize'
 

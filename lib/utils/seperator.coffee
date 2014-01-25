@@ -1,7 +1,11 @@
 ###
 # # Seperate Code and Comments into Segments
 #
-# Code from <https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee>
+# Code from [`groc/lib/utils`][1]
+#
+# @copyright Ian MacLeod and groc contributors
+#
+# [1]: https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee
 ###
 
 _ = require 'lodash'
