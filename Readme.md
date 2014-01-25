@@ -4,6 +4,8 @@
 
 To see how it works, just have a look at [the documentation rendered from this repository](http://killercup.github.io/grock/).
 
+![dependency version](https://david-dm.org/killercup/grock.png)
+
 ## Install
 
 Install globally using `npm install --global grock` and invoke anywhere using `grock --glob 'your/*.files'`.
