@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="en"><head><title>indexFile.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/transforms/indexFile.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/transforms/indexFile.coffee">lib/transforms/indexFile.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="rename-index-file"><a href="#rename-index-file" class="anchor"></a>Rename Index File</h1></div></div><div class="code"><div class="wrapper">
+path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(indexFile)</span> -&gt;</span>
+  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> file.originalRelative <span class="hljs-keyword">is</span> indexFile
+      file.path = path.join(file.cwd, <span class="hljs-string">'index.html'</span>)
+    
+    cb(<span class="hljs-literal">null</span>, file)
+
+  <span class="hljs-keyword">return</span> map(modifyFile)
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

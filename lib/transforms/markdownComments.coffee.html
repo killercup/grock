@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><title>markdownComments.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/transforms/markdownComments.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/transforms/markdownComments.coffee">lib/transforms/markdownComments.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="render-markdown-comments"><a href="#render-markdown-comments" class="anchor"></a>Render Markdown Comments</h1><p>This will render a file&#39;s segment&#39;s comments using markdown and add a list of
+headlines to <code>file.exta.toc</code>.</p>
+</div></div><div class="code"><div class="wrapper">
+Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
+map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
+
+hljs = <span class="hljs-built_in">require</span> <span class="hljs-string">'highlight.js'</span>
+marked = <span class="hljs-built_in">require</span> <span class="hljs-string">'marked'</span>
+
+marked.setOptions</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Highlight code in comments, e.g. examples</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">highlight</span>: <span class="hljs-function"><span class="hljs-params">(code, lang)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> lang
+      <span class="hljs-keyword">try</span>
+        <span class="hljs-keyword">return</span> hljs.highlight(lang, code, <span class="hljs-literal">true</span>).value
+      <span class="hljs-keyword">catch</span> e
+        <span class="hljs-keyword">return</span> code
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-keyword">try</span>
+        <span class="hljs-keyword">return</span> hljs.highlightAuto(code).value
+      <span class="hljs-keyword">catch</span> e
+        <span class="hljs-keyword">return</span> code
+      
+    <span class="hljs-keyword">return</span> code
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Instantiate custom renderer, will be used to collect headlines for TOC</p>
+</div></div><div class="code"><div class="wrapper">renderer = <span class="hljs-keyword">new</span> marked.Renderer()
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Add support for checkbox list items</p>
+</div></div><div class="code"><div class="wrapper">renderer.<span class="hljs-function"><span class="hljs-title">listitem</span> = <span class="hljs-params">(text)</span> -&gt;</span>
+  text = text.replace <span class="hljs-regexp">/^\[x\] /</span>, <span class="hljs-string">'&lt;input type="checkbox" checked disabled/&gt; '</span>
+  text = text.replace <span class="hljs-regexp">/^\[ \] /</span>, <span class="hljs-string">'&lt;input type="checkbox" disabled/&gt; '</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">"&lt;li&gt;<span class="hljs-subst">#{text}</span>&lt;/li&gt;\n"</span>
+</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Set Heading Renderer</code></span></p>
+<p>Parameters:</p>
+<ul>
+<li><p><strong><code>renderer</code> must be a marked.Renderer.</strong></p>
+</li>
+<li><p><strong><code>toc</code> must be an Array.</strong><br/>(Array of headlines, for table of contents)</p>
+</li>
+</ul>
+<p><strong>Returns a String</strong><br/>(The rendered headline)</p>
+</div></div><div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">setHeadingRenderer</span> = <span class="hljs-params">(renderer, toc)</span> -&gt;</span>
+  renderer.<span class="hljs-function"><span class="hljs-title">heading</span> = <span class="hljs-params">(text, level)</span> -&gt;</span>
+    slug = text.toLowerCase().replace(<span class="hljs-regexp">/[^\w]+/g</span>, <span class="hljs-string">'-'</span>)
+    toc.push <span class="hljs-attribute">level</span>: level, <span class="hljs-attribute">slug</span>: slug, <span class="hljs-attribute">title</span>: text
+
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"""&lt;h<span class="hljs-subst">#{level}</span> id="<span class="hljs-subst">#{slug}</span>"&gt;&lt;a href="#<span class="hljs-subst">#{slug}</span>" class="anchor"&gt;&lt;/a&gt;<span class="hljs-subst">#{text}</span>&lt;/h<span class="hljs-subst">#{level}</span>&gt;"""</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments by running their comments through
+<a href="https://github.com/chjj/marked">marked</a>.</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+    file.extra <span class="hljs-keyword">or</span>= {}
+    toc = file.extra.toc <span class="hljs-keyword">or</span>= []
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>No comment(s)</p>
+</div></div><div class="code"><div class="wrapper">    cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
+
+    <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> file.segments
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> s.comments?.length
+
+      setHeadingRenderer(renderer, toc)
+      s.comments = marked s.comments.join(<span class="hljs-string">'\n'</span>), <span class="hljs-attribute">renderer</span>: renderer
+
+    cb(<span class="hljs-literal">null</span>, file)
+    <span class="hljs-keyword">return</span>
+
+  <span class="hljs-keyword">return</span> map(modifyFile)
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

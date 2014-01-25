@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><title>processDocTags.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/utils/processDocTags.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/utils/processDocTags.coffee">lib/utils/processDocTags.coffee</a></code></div><div id="document"><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> copyright Ian MacLeod and groc contributors</p>
+<h1 id="process-doc-tags"><a href="#process-doc-tags" class="anchor"></a>Process Doc Tags</h1><p>Code from <a href="https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee&lt;/span"><code>groc/lib/utils</code></a></p>
+</div></div><div class="code"><div class="wrapper">
+Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
+
+DOC_TAGS = <span class="hljs-built_in">require</span> <span class="hljs-string">'../docTags'</span>
+humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">'./humanize'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> =</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Parse Doc Tags</code></span></p>
+<p>Parses comments of segment for doc tags. Adds <code>tags</code> and
+  <code>tagSections</code> to each segment.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong><code>segments</code> must be an Array.</strong><br/>(<code>[{code, comments}]</code>)</li>
+</ul>
+<p><strong>Returns a Promise</strong><br/>(Resolves when segment comments have been processed)</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">parseDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+    TAG_REGEX = <span class="hljs-regexp">/(?:^|\s)@(\w+)(?:\s+(.*))?/</span>
+    TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/</span>
+
+    deferred = Q.defer()
+
+    <span class="hljs-keyword">try</span>
+      <span class="hljs-keyword">for</span> segment, segmentIndex <span class="hljs-keyword">in</span> segments <span class="hljs-keyword">when</span> TAG_REGEX.test segment.comments.join(<span class="hljs-string">'\n'</span>)
+        tags = []
+        currTag = {
+          <span class="hljs-attribute">name</span>: <span class="hljs-string">'description'</span>
+          <span class="hljs-attribute">value</span>: <span class="hljs-string">''</span>
+        }
+        tags.push currTag
+        tagSections = {}
+
+        <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> segment.comments <span class="hljs-keyword">when</span> line?
+          <span class="hljs-keyword">if</span> (match = line.match TAG_REGEX)?
+            currTag = {
+              <span class="hljs-attribute">name</span>: match[<span class="hljs-number">1</span>]
+              <span class="hljs-attribute">value</span>: match[<span class="hljs-number">2</span>] || <span class="hljs-string">''</span>
+            }
+            tags.push currTag
+          <span class="hljs-keyword">else</span>
+            currTag.value += <span class="hljs-string">"\n<span class="hljs-subst">#{line}</span>"</span>
+
+        <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> tags
+          tag.value = tag.value.replace <span class="hljs-regexp">/^\n|\n$/g</span>, <span class="hljs-string">''</span>
+
+          tagDefinition = DOC_TAGS[tag.name]
+
+          <span class="hljs-keyword">unless</span> tagDefinition?
+            <span class="hljs-keyword">if</span> tag.value.length == <span class="hljs-number">0</span>
+              tagDefinition = <span class="hljs-string">'defaultNoValue'</span>
+            <span class="hljs-keyword">else</span>
+              tagDefinition = <span class="hljs-string">'defaultHasValue'</span>
+
+          <span class="hljs-keyword">if</span> <span class="hljs-string">'string'</span> == <span class="hljs-keyword">typeof</span> tagDefinition
+            tagDefinition = DOC_TAGS[tagDefinition]
+
+          tag.definition = tagDefinition
+          tag.section = tagDefinition.section
+
+          <span class="hljs-keyword">if</span> tagDefinition.valuePrefix?
+            tag.value = tag.value.replace <span class="hljs-regexp">///<span class="hljs-subst">#{tagDefinition.valuePrefix?}</span>\s+///</span>, <span class="hljs-string">''</span>
+
+          <span class="hljs-keyword">if</span> tagDefinition.parseValue?
+            tag.value = tagDefinition.parseValue tag.value
+          <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-regexp">/\n/</span>.test tag.value
+            tag.value = tag.value.match(TAG_VALUE_REGEX)[<span class="hljs-number">1.</span>.].join(<span class="hljs-string">''</span>)
+
+          tagSections[tag.section] = [] <span class="hljs-keyword">unless</span> tagSections[tag.section]?
+          tagSections[tag.section].push tag
+
+        segment.tags = tags
+        segment.tagSections = tagSections
+
+    <span class="hljs-keyword">catch</span> error
+      deferred.reject(error)
+
+    deferred.resolve(segments)
+    <span class="hljs-keyword">return</span> deferred.promise
+</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Markdown Doc Tags</code></span></p>
+<p>Transform each doc tag entry to markdown</p>
+<p>Parameters:</p>
+<ul>
+<li><strong><code>segments</code> must be an Array.</strong><br/>(<code>[{code, comments, tags}]</code>)</li>
+</ul>
+<p><strong>Returns a Promise</strong><br/>(Resolves when all tags have been processed)</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">markdownDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+    deferred = Q.defer()
+
+    <span class="hljs-keyword">try</span>
+      <span class="hljs-keyword">for</span> segment, segmentIndex <span class="hljs-keyword">in</span> segments <span class="hljs-keyword">when</span> segment.tags?
+
+        <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> segment.tags
+          <span class="hljs-keyword">if</span> tag.definition.markdown?
+            <span class="hljs-keyword">if</span> <span class="hljs-string">'string'</span> == <span class="hljs-keyword">typeof</span> tag.definition.markdown
+              tag.markdown = tag.definition.markdown.replace <span class="hljs-regexp">/\{value\}/g</span>, tag.value
+            <span class="hljs-keyword">else</span>
+              tag.markdown = tag.definition.markdown(tag.value)
+          <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">if</span> tag.value.length &gt; <span class="hljs-number">0</span>
+              tag.markdown = <span class="hljs-string">"<span class="hljs-subst">#{tag.name}</span> <span class="hljs-subst">#{tag.value}</span>"</span>
+            <span class="hljs-keyword">else</span>
+              tag.markdown = tag.name
+
+    <span class="hljs-keyword">catch</span> error
+      deferred.reject(error)
+
+    deferred.resolve(segments)
+    <span class="hljs-keyword">return</span> deferred.promise
+</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Render Doc Tags</code></span></p>
+<p>Combine Array of doc tags to HTML string</p>
+<p>Parameters:</p>
+<ul>
+<li><strong><code>segments</code> must be an Array.</strong><br/>(<code>[{code, comments, tags, tagSections}]</code>)</li>
+</ul>
+<p><strong>Returns a Promise</strong><br/>(Resolves when all segments have been processed)</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">renderDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+    deferred = Q.defer()
+
+    <span class="hljs-keyword">for</span> segment, segmentIndex <span class="hljs-keyword">in</span> segments <span class="hljs-keyword">when</span> segment.tagSections?
+
+      sections = segment.tagSections
+      output = <span class="hljs-string">''</span>
+      metaOutput = <span class="hljs-string">''</span>
+      accessClasses = <span class="hljs-string">'doc-section'</span>
+
+      accessClasses += <span class="hljs-string">" doc-section-<span class="hljs-subst">#{tag.name}</span>"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.access <span class="hljs-keyword">if</span> sections.access?
+
+      segment.accessClasses = accessClasses
+
+      firstPart = []
+      firstPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.access <span class="hljs-keyword">if</span> sections.access?
+      firstPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.special <span class="hljs-keyword">if</span> sections.special?
+      firstPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.type <span class="hljs-keyword">if</span> sections.type?
+
+      metaOutput += <span class="hljs-string">"<span class="hljs-subst">#{humanize.capitalize firstPart.join(<span class="hljs-string">' '</span>)}</span>"</span>
+      <span class="hljs-keyword">if</span> sections.flags? <span class="hljs-keyword">or</span> sections.metadata?
+        secondPart = []
+        secondPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.flags <span class="hljs-keyword">if</span> sections.flags?
+        secondPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.metadata <span class="hljs-keyword">if</span> sections.metadata?
+        metaOutput += <span class="hljs-string">" <span class="hljs-subst">#{humanize.joinSentence secondPart}</span>"</span>
+
+      output += <span class="hljs-string">"&lt;span class='doc-section-header'&gt;<span class="hljs-subst">#{metaOutput}</span>&lt;/span&gt;\n\n"</span> <span class="hljs-keyword">if</span> metaOutput <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
+
+      output += <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>\n\n"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.description <span class="hljs-keyword">if</span> sections.description?
+
+      output += <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>\n\n"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.todo <span class="hljs-keyword">if</span> sections.todo?
+
+      <span class="hljs-keyword">if</span> sections.params?
+        output += <span class="hljs-string">'Parameters:\n\n'</span>
+        output += <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>\n\n"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.params
+
+      <span class="hljs-keyword">if</span> sections.returns?
+        output += (humanize.capitalize(tag.markdown) <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.returns <span class="hljs-keyword">if</span> sections.returns?).join(<span class="hljs-string">'&lt;br/&gt;**and** '</span>)
+
+      <span class="hljs-keyword">if</span> sections.howto?
+        output += <span class="hljs-string">"\n\nHow-To:\n\n<span class="hljs-subst">#{humanize.gutterify tag.markdown, <span class="hljs-number">0</span>}</span>"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.howto
+
+      <span class="hljs-keyword">if</span> sections.example?
+        output += <span class="hljs-string">"\n\nExample:\n\n<span class="hljs-subst">#{humanize.gutterify tag.markdown, <span class="hljs-number">4</span>}</span>"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.example
+
+      segment.comments = output.split <span class="hljs-string">'\n'</span>
+
+    deferred.resolve(segments)
+    <span class="hljs-keyword">return</span> deferred.promise
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><title>regexpEscape.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/utils/regexpEscape.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/utils/regexpEscape.coffee">lib/utils/regexpEscape.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="regex-escape"><a href="#regex-escape" class="anchor"></a>Regex Escape</h1></div></div><div class="code"><div class="wrapper">
+_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Code from <a href="http://zetafleet.com/">http://zetafleet.com/</a>
+via <a href="http://blog.simonwillison.net/post/57956816139/escape">http://blog.simonwillison.net/post/57956816139/escape</a></p>
+</div></div><div class="code"><div class="wrapper">regexpEscapePattern = <span class="hljs-regexp">/[-[\]{}()*+?.,\\^$|#\s]/g</span>
+regexpEscapeReplace = <span class="hljs-string">'\\$&amp;'</span>
+</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Regex Escape</code></span></p>
+<p>Escape regular expression characters in a String, an Array of
+Strings or any Object having a proper toString-method.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong><code>obj</code> can be an Array or a String.</strong><br/>((List of) strings to escape for regex)</li>
+</ul>
+<p><strong>Returns an Array or a String</strong><br/>(Escaped (list of) regex)</p>
+</div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-function"><span class="hljs-title">regexpEscape</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> _.isArray obj
+    _.invoke(obj, <span class="hljs-string">'replace'</span>, regexpEscapePattern, regexpEscapeReplace)
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> _.isString obj
+    obj.replace(regexpEscapePattern, regexpEscapeReplace)
+  <span class="hljs-keyword">else</span>
+    regexpEscape <span class="hljs-string">"<span class="hljs-subst">#{obj}</span>"</span>
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

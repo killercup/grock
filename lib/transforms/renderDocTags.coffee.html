@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><title>renderDocTags.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/transforms/renderDocTags.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/transforms/renderDocTags.coffee">lib/transforms/renderDocTags.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="render-doc-tags-to-markdown"><a href="#render-doc-tags-to-markdown" class="anchor"></a>Render Doc Tags to Markdown</h1></div></div><div class="code"><div class="wrapper">
+Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
+map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
+
+render = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/processDocTags'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span>
+  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+    cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
+
+    render.parseDocTags(file.segments)
+    .<span class="hljs-keyword">then</span>(render.markdownDocTags)
+    .<span class="hljs-keyword">then</span>(render.renderDocTags)
+    .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
+      cb(<span class="hljs-literal">null</span>, file)
+    .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, cb
+
+    <span class="hljs-keyword">return</span>
+
+  <span class="hljs-keyword">return</span> map(modifyFile)
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

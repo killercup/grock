@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><title>renderFileTree.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/transforms/renderFileTree.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/transforms/renderFileTree.coffee">lib/transforms/renderFileTree.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="write-json-file-tree"><a href="#write-json-file-tree" class="anchor"></a>Write JSON File Tree</h1></div></div><div class="code"><div class="wrapper">
+fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+through = <span class="hljs-built_in">require</span> <span class="hljs-string">'through2'</span>
+_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+
+log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/log'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(fileName, opts={})</span> -&gt;</span>
+  <span class="hljs-keyword">unless</span> fileName
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> PluginError(<span class="hljs-string">"Render File Tree"</span>, <span class="hljs-string">"Missing fileName option"</span>)
+
+  filePrefix = opts.filePrefix <span class="hljs-keyword">or</span> <span class="hljs-string">"window.<span class="hljs-subst">#{opts.varName <span class="hljs-keyword">or</span> <span class="hljs-string">'files'</span>}</span> = [\n"</span>
+  fileSuffix = opts.fileSuffix <span class="hljs-keyword">or</span> <span class="hljs-string">"\n];"</span>
+
+  output = fs.createWriteStream(fileName)
+  output.write filePrefix
+  first = <span class="hljs-literal">true</span>
+
+  <span class="hljs-function"><span class="hljs-title">bufferContents</span> = <span class="hljs-params">(file, enc, cb)</span> -&gt;</span>
+    output.write (<span class="hljs-keyword">if</span> first <span class="hljs-keyword">then</span> <span class="hljs-string">''</span> <span class="hljs-keyword">else</span> <span class="hljs-string">',\n'</span>) + JSON.stringify({
+      <span class="hljs-attribute">path</span>: file.relative
+      <span class="hljs-attribute">originalName</span>: path.basename file.originalPath
+      <span class="hljs-attribute">originalPath</span>: file.originalRelative
+      <span class="hljs-attribute">name</span>: path.basename file.path
+      <span class="hljs-attribute">lang</span>: file.extra?.lang?.highlightJS <span class="hljs-keyword">or</span> file.extra?.lang?.pygmentsLexer
+      <span class="hljs-attribute">title</span>: _.find(file.extra?.toc, <span class="hljs-attribute">level</span>: <span class="hljs-number">1</span>)?.title
+      <span class="hljs-attribute">toc</span>: file.extra?.toc
+    }, <span class="hljs-literal">false</span>, <span class="hljs-number">2</span>)
+    first = <span class="hljs-literal">false</span>
+
+    cb <span class="hljs-literal">null</span>, file
+
+  <span class="hljs-function"><span class="hljs-title">endStream</span> = <span class="hljs-params">(cb)</span> -&gt;</span>
+    output.write fileSuffix
+    <span class="hljs-keyword">if</span> opts.verbose
+      log <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
+    cb()
+
+  through.obj bufferContents, endStream
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

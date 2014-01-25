@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="en"><head><title>seperator.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/utils/seperator.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/utils/seperator.coffee">lib/utils/seperator.coffee</a></code></div><div id="document"><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> copyright Ian MacLeod and groc contributors</p>
+<h1 id="seperate-code-and-comments-into-segments"><a href="#seperate-code-and-comments-into-segments" class="anchor"></a>Seperate Code and Comments into Segments</h1><p>Code from <a href="https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee&lt;/span"><code>groc/lib/utils</code></a></p>
+</div></div><div class="code"><div class="wrapper">
+_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+
+regexpEscape = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./regexpEscape'</span>)
+
+<span class="hljs-function"><span class="hljs-title">Segment</span> = <span class="hljs-params">(code=[], comments=[], foldMarker=<span class="hljs-string">''</span>)</span> -&gt;</span>
+  {
+    <span class="hljs-attribute">code</span>: code,
+    <span class="hljs-attribute">comments</span>: comments
+    <span class="hljs-attribute">foldMarker</span>: foldMarker
+  }
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Split source code into segments (comment + code pairs)</p>
+</div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(data, language, options={})</span> -&gt;</span>
+  lines = data.split <span class="hljs-regexp">/\r?\n/</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Always strip shebangs - but don&#39;t shift it off the array to
+avoid the perf hit of walking the array to update indices.</p>
+</div></div><div class="code"><div class="wrapper">  lines[<span class="hljs-number">0</span>] = <span class="hljs-string">''</span> <span class="hljs-keyword">if</span> lines[<span class="hljs-number">0</span>][<span class="hljs-number">0.</span><span class="hljs-number">.1</span>] <span class="hljs-keyword">is</span> <span class="hljs-string">'#!'</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Special case: If the language is comments-only, we can skip pygments</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-keyword">return</span> [Segment [], lines] <span class="hljs-keyword">if</span> language.commentsOnly
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Special case: If the language is code-only, we can shorten the process</p>
+</div></div><div class="code"><div class="wrapper">  <span class="hljs-keyword">return</span> [Segment lines, []] <span class="hljs-keyword">if</span> language.codeOnly
+
+  segments = []
+  currSegment = Segment()
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Enforced whitespace after the comment token</p>
+</div></div><div class="code"><div class="wrapper">  whitespaceMatch = <span class="hljs-keyword">if</span> options.requireWhitespaceAfterToken <span class="hljs-keyword">then</span> <span class="hljs-string">'\\s'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'\\s?'</span>
+
+  <span class="hljs-keyword">if</span> language.singleLineComment?
+    singleLines = regexpEscape(language.singleLineComment).join <span class="hljs-string">'|'</span>
+    aSingleLine = <span class="hljs-regexp">///
+      ^\s*                        <span class="hljs-comment"># Start a line and skip all indention.</span>
+      (?:<span class="hljs-subst">#{singleLines}</span>)          <span class="hljs-comment"># Match the single-line start but don't capture this group.</span>
+      (?:                         <span class="hljs-comment"># Also don't capture this group …</span></span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>{whitespaceMatch}        # … possibly starting with a whitespace, but</p>
+</div></div><div class="code"><div class="wrapper">        (.*)                      <span class="hljs-comment"># … capture anything else in this …</span>
+      )?                          <span class="hljs-comment"># … optional group …</span>
+      $                           <span class="hljs-comment"># … up to the EOL.</span>
+    <span class="hljs-regexp">///
+
+
+  if language.multiLineComment?
+    mlc = language.multiLineComment
+
+    unless (mlc.length % 3) is 0
+      throw new Error('Multi-line block-comment definitions must be a list of 3-tuples')
+
+    blockStarts = _.select mlc, (v, i) -&gt; i % 3 == 0
+    blockLines  = _.select mlc, (v, i) -&gt; i % 3 == 1
+    blockEnds   = _.select mlc, (v, i) -&gt; i % 3 == 2
+</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This flag indicates if the end-mark of block-comments (the <code>blockEnds</code>
+list above) must correspond to the initial block-mark (the <code>blockStarts</code>
+above).  If this flag is missing it defaults to <code>true</code>.  The main idea
+is to embed sample block-comments with syntax A in another block-comment
+with syntax B. This useful in handlebar&#39;s mixed syntax or other language
+combinations like html+php, which are supported by <code>pygmentize</code>.</p>
+</div></div><div class="code"><div class="wrapper">    strictMultiLineEnd = language.strictMultiLineEnd ? <span class="hljs-literal">true</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This map is used to lookup corresponding line- and end-marks.</p>
+</div></div><div class="code"><div class="wrapper">    blockComments = {}
+    <span class="hljs-keyword">for</span> v, i <span class="hljs-keyword">in</span> blockStarts
+      blockComments[v] =
+        <span class="hljs-attribute">linemark</span>: blockLines[i]
+        endmark : blockEnds[i]
+
+    blockStarts = regexpEscape(blockStarts).join <span class="hljs-string">'|'</span>
+    blockLines  = regexpEscape(blockLines).join <span class="hljs-string">'|'</span>
+    blockEnds   = regexpEscape(blockEnds).join <span class="hljs-string">'|'</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>No need to match for any particular real content in <code>aBlockStart</code>, as
+either <code>aBlockLine</code>, <code>aBlockEnd</code> or the <code>inBlock</code> catch-all fallback
+handles the real content, in the implementation below.</p>
+</div></div><div class="code"><div class="wrapper">    aBlockStart = <span class="hljs-regexp">///
+      ^(\s*)                      <span class="hljs-comment"># Start a line and capture indention, used to reverse indent catch-all fallback lines.</span>
+      (<span class="hljs-subst">#{blockStarts}</span>)            <span class="hljs-comment"># Capture the start-mark, to check the if line- and end-marks correspond, …</span>
+      (<span class="hljs-subst">#{blockLines}</span>)?            <span class="hljs-comment"># … possibly followed by a line, captured to check if its corresponding to the start,</span>
+      (?:<span class="hljs-subst">#{whitespaceMatch}</span>|$)    <span class="hljs-comment"># … and finished by whitespace OR the EOL.</span>
+    ///</span>
+
+    aBlockLine = <span class="hljs-regexp">///
+      ^\s*                        <span class="hljs-comment"># Start a line and skip all indention.</span>
+      (<span class="hljs-subst">#{blockLines}</span>)             <span class="hljs-comment"># Capture the line-mark to check if it corresponds to the start-mark, …</span>
+      (<span class="hljs-subst">#{whitespaceMatch}</span>)        <span class="hljs-comment"># … possibly followed by whitespace,</span>
+      (.*)$                       <span class="hljs-comment"># … and collect all up to the line end.</span>
+    ///</span>
+
+    aBlockEnd = <span class="hljs-regexp">///
+      (<span class="hljs-subst">#{blockEnds}</span>)              <span class="hljs-comment"># Capture the end-mark to check if it corresponds to the line start,</span>
+      (.*)?$                      <span class="hljs-comment"># … and collect all up to the line end.</span>
+    ///</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>A special case used to capture empty block-comment lines, like the one
+below this line …</p>
+<p>… and above this line.</p>
+</div></div><div class="code"><div class="wrapper">    aEmptyLine = <span class="hljs-regexp">///^\s*(?:<span class="hljs-subst">#{blockLines}</span>)$///</span>
+
+  <span class="hljs-keyword">if</span> language.ignorePrefix?
+    {ignorePrefix} = language
+
+  <span class="hljs-keyword">if</span> language.foldPrefix?
+    {foldPrefix} = language
+
+  <span class="hljs-keyword">if</span> (ignorePrefix? <span class="hljs-keyword">or</span> foldPrefix?) <span class="hljs-keyword">and</span> (singleLines? <span class="hljs-keyword">or</span> blockStarts?)
+    stripMarks = []
+    stripMarks.push ignorePrefix <span class="hljs-keyword">if</span> ignorePrefix?
+    stripMarks.push foldPrefix <span class="hljs-keyword">if</span> foldPrefix?
+    stripMarks = regexpEscape(stripMarks).join <span class="hljs-string">'|'</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>A dirty lap-dance performed here …</p>
+</div></div><div class="code"><div class="wrapper">    singleStrip = <span class="hljs-regexp">///
+      (                           <span class="hljs-comment"># Capture this group:</span>
+        (?:<span class="hljs-subst">#{singleLines}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span></span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>{whitespaceMatch}        #   … plus whitespace</p>
+</div></div><div class="code"><div class="wrapper">      )
+      (?:<span class="hljs-comment">#{stripMarks})           # The marker(s) to strip from result</span>
+    <span class="hljs-regexp">/// if singleLines?
+</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>… and the corresponding gang-bang here. 8-)</p>
+</div></div><div class="code"><div class="wrapper">    blockStrip = <span class="hljs-regexp">///
+      (                           <span class="hljs-comment"># Capture this group:</span>
+        (?:<span class="hljs-subst">#{blockStarts}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span>
+        (?:<span class="hljs-subst">#{blockLines}</span>)?        <span class="hljs-comment">#   … optionally plus one more mark</span></span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>{whitespaceMatch}        #   … plus whitespace</p>
+</div></div><div class="code"><div class="wrapper">      )
+      (?:<span class="hljs-comment">#{stripMarks})           # The marker(s) to strip from result</span>
+    <span class="hljs-regexp">/// if blockStarts?
+
+  inBlock   = false
+  inFolded  = false
+  inIgnored = false
+</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Variables used in temporary assignments have been collected here for
+documentation purposes only.</p>
+</div></div><div class="code"><div class="wrapper">  blockline = <span class="hljs-literal">null</span>
+  blockmark = <span class="hljs-literal">null</span>
+  linemark  = <span class="hljs-literal">null</span>
+  space     = <span class="hljs-literal">null</span>
+  endmark   = <span class="hljs-literal">null</span>
+  indention = <span class="hljs-literal">null</span>
+  comment   = <span class="hljs-literal">null</span>
+  code      = <span class="hljs-literal">null</span>
+
+  <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Match that line to the language&#39;s block-comment syntax, if it exists</p>
+</div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> aBlockStart? <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> inBlock <span class="hljs-keyword">and</span> (match = line.match aBlockStart)?
+      inBlock = <span class="hljs-literal">true</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Reusing <code>match</code> as a placeholder.</p>
+</div></div><div class="code"><div class="wrapper">      [match, indention, blockmark, linemark] = match
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Strip the block-comments start, preserving any inline stuff.
+We don&#39;t touch the <code>line</code> itself, as we still need it.</p>
+</div></div><div class="code"><div class="wrapper">      blockline = line.replace aBlockStart, <span class="hljs-string">''</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If we found a <code>linemark</code>, prepend it (back) to the <code>blockline</code>, if it
+does not correspond to the initial <code>blockmark</code>.</p>
+</div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> linemark? <span class="hljs-keyword">and</span> blockComments[blockmark].linemark <span class="hljs-keyword">isnt</span> linemark
+        blockline = <span class="hljs-string">"<span class="hljs-subst">#{linemark}</span><span class="hljs-subst">#{blockline}</span>"</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Check if this block-comment is collapsible.</p>
+</div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> foldPrefix? <span class="hljs-keyword">and</span> blockline.indexOf(foldPrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We always start a new segment if the current one is not empty or
+already folded.</p>
+</div></div><div class="code"><div class="wrapper">        <span class="hljs-keyword">if</span> inFolded <span class="hljs-keyword">or</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+          segments.push currSegment
+          currSegment   = Segment()
+</div></div></div><div class="segment"><div class="code"><div class="wrapper">        <span class="hljs-comment">###  collapsing block-comments:
+        # In block-comments only `aBlockStart` may initiate the collapsing.
+        # This comment utilizes this syntax, by starting the comment with `^`.
+        ###</span>
+        inFolded  = <span class="hljs-literal">true</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Let&#39;s strip the “^” character from our original line, for later use.</p>
+</div></div><div class="code"><div class="wrapper">        line = line.replace blockStrip, <span class="hljs-string">'$1'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Also strip it from our <code>blockline</code>.</p>
+</div></div><div class="code"><div class="wrapper">        blockline = blockline[foldPrefix.length...]
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Check if this block-comment stays embedded in the code.</p>
+</div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ignorePrefix? <span class="hljs-keyword">and</span> blockline.indexOf(ignorePrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        <span class="hljs-comment">###  embedded block-comments:
+        # In block-comments only `aBlockStart` may initiate the embedding.
+        # This comment utilizes this syntax, by starting the comment with `}`.
+        ###</span>
+        inIgnored = <span class="hljs-literal">true</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Let&#39;s strip the “}” character from our original line, for later use.</p>
+</div></div><div class="code"><div class="wrapper">        line = line.replace blockStrip, <span class="hljs-string">'$1'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Also strip it from our <code>blockline</code>.</p>
+</div></div><div class="code"><div class="wrapper">        blockline = blockline[ignorePrefix.length...]
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Block-comments are an important tool to structure code into larger
+segments, therefore we always start a new segment if the current one
+is not empty.</p>
+</div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+        segments.push currSegment
+        currSegment   = Segment()
+        inFolded      = <span class="hljs-literal">false</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This flag is triggered above.</p>
+</div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> inBlock
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Catch all lines, unless there is a <code>blockline</code> from above.</p>
+</div></div><div class="code"><div class="wrapper">      blockline = line <span class="hljs-keyword">unless</span> blockline?
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Match a block-comment&#39;s end, even when <code>inFolded or inIgnored</code> flags
+are true …</p>
+</div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> (match = blockline.match aBlockEnd)?
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Reusing <code>match</code> as a placeholder.</p>
+</div></div><div class="code"><div class="wrapper">        [match, endmark, code] = match
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>The <code>endmark</code> must correspond to the <code>blockmark</code>&#39;s.</p>
+</div></div><div class="code"><div class="wrapper">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> strictMultiLineEnd <span class="hljs-keyword">or</span> blockComments[blockmark].endmark <span class="hljs-keyword">is</span> endmark
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Ensure to leave the block-comment, especially single-lines like this one.</p>
+</div></div><div class="code"><div class="wrapper">          inBlock = <span class="hljs-literal">false</span>
+
+          blockline = blockline.replace aBlockEnd, <span class="hljs-string">''</span> <span class="hljs-keyword">unless</span> (inFolded <span class="hljs-keyword">or</span> inIgnored)
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Match a block-comment&#39;s line, when <code>inFolded or inIgnored</code> are false.</p>
+</div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (inFolded <span class="hljs-keyword">or</span> inIgnored) <span class="hljs-keyword">and</span> (match = blockline.match aBlockLine)?
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Reusing <code>match</code> as a placeholder.</p>
+</div></div><div class="code"><div class="wrapper">        [match, linemark, space, comment] = match
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If we found a <code>linemark</code>, prepend it (back) to the <code>comment</code>,
+if it does not correspond to the initial <code>blockmark</code>.</p>
+</div></div><div class="code"><div class="wrapper">        <span class="hljs-keyword">if</span> linemark? <span class="hljs-keyword">and</span> blockComments[blockmark].linemark <span class="hljs-keyword">isnt</span> linemark
+          comment = <span class="hljs-string">"<span class="hljs-subst">#{linemark}</span><span class="hljs-subst">#{space ? <span class="hljs-string">''</span>}</span><span class="hljs-subst">#{comment}</span>"</span>
+
+        blockline = comment
+
+      <span class="hljs-keyword">if</span> inIgnored
+        currSegment.code.push line
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Make sure that the next cycle starts fresh,
+if we are going to leave the block.</p>
+</div></div><div class="code"><div class="wrapper">        inIgnored = <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> inBlock
+
+      <span class="hljs-keyword">else</span>
+
+        <span class="hljs-keyword">if</span> inFolded
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If the foldMarker is empty assign <code>blockline</code> to <code>foldMarker</code> …</p>
+</div></div><div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.foldMarker <span class="hljs-keyword">is</span> <span class="hljs-string">''</span>
+            currSegment.foldMarker = line
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>… and collect the <code>blockline</code> as code.</p>
+</div></div><div class="code"><div class="wrapper">          currSegment.code.push line
+
+        <span class="hljs-keyword">else</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>The previous cycle contained code, so lets start a new segment.</p>
+</div></div><div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+            segments.push currSegment
+            currSegment = Segment()
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>A special case as described in the initialization of <code>aEmptyLine</code>.</p>
+</div></div><div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> aEmptyLine.test line
+            currSegment.comments.push <span class="hljs-string">""</span>
+
+          <span class="hljs-keyword">else</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Collect all but empty start- and end-block-comment lines, hence
+single-line block-comments simultaneous matching <code>aBlockStart</code>
+and <code>aBlockEnd</code> have a false <code>inBlock</code> flag at this point, are
+included.</p>
+</div></div><div class="code"><div class="wrapper">            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-regexp">/^\s*$/</span>.test(blockline) <span class="hljs-keyword">or</span> (inBlock <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> aBlockStart.test line)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Strip leading <code>indention</code> from block-comment like the one above
+to align their content with the initial blockmark.</p>
+</div></div><div class="code"><div class="wrapper">              <span class="hljs-keyword">if</span> indention? <span class="hljs-keyword">and</span> indention <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> aBlockLine.test line
+                blockline = blockline.replace <span class="hljs-regexp">///^<span class="hljs-subst">#{indention}</span>///</span>, <span class="hljs-string">''</span>
+
+              currSegment.comments.push blockline
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>The <code>code</code> may occure immediatly after a block-comment end.</p>
+</div></div><div class="code"><div class="wrapper">            <span class="hljs-keyword">if</span> code?
+              currSegment.code.push code <span class="hljs-keyword">unless</span> inBlock <span class="hljs-comment"># fool-proof ?</span>
+              code = <span class="hljs-literal">null</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Make sure the next cycle starts fresh.</p>
+</div></div><div class="code"><div class="wrapper">      blockline = <span class="hljs-literal">null</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Match that line to the language&#39;s single line comment syntax.
+However, we treat all comments beginning with } as inline code commentary
+and comments starting with ^ cause that comment and the following code
+block to start folded.</p>
+</div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (match = line.match aSingleLine)?
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Uses <code>match</code> as a placeholder.</p>
+</div></div><div class="code"><div class="wrapper">      [match, comment] = match
+
+      <span class="hljs-keyword">if</span> comment? <span class="hljs-keyword">and</span> comment <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
+
+        <span class="hljs-comment">#  For example, this comment should be treated as part of our code.</span>
+        <span class="hljs-comment">#  Achieved by prefixing the comment's content with “}”</span>
+        <span class="hljs-keyword">if</span> ignorePrefix? <span class="hljs-keyword">and</span> comment.indexOf(ignorePrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+
+          <span class="hljs-comment">#  Hint: never start a new segment here, these comments are code !</span>
+          <span class="hljs-comment">#  If we would do so the segments look visually not so appealing in</span>
+          <span class="hljs-comment">#  the narrowed single-column-view, and we can not embed a series</span>
+          <span class="hljs-comment">#  of comments like these here.</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Let&#39;s strip the “}” character from our documentation</p>
+</div></div><div class="code"><div class="wrapper">          currSegment.code.push line.replace singleStrip, <span class="hljs-string">'$1'</span>
+
+        <span class="hljs-keyword">else</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>The previous cycle contained code, so lets start a new segment
+and stop any folding.</p>
+</div></div><div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+            segments.push currSegment
+            currSegment   = Segment()
+            inFolded      = <span class="hljs-literal">false</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>It&#39;s always a good idea to put a comment before folded content
+like this one here, because folded comments always have their
+own code-segment in their current implementation (see above).
+Without a leading comment, the folded code&#39;s segment would just
+follow the above&#39;s code segment, which looks visually not so
+appealing in the narrowed single-column-view.
+TODO: <em>Alternative (a)</em>: Improve folded comments to not start a new segment, like embedded comments from above. <em>(preferred solution)</em>
+TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in single-column view. <em>(easy solution)</em></p>
+</div></div><div class="code"><div class="wrapper">          <span class="hljs-comment">#  … if we start this comment with “^” instead of “}” it and all</span>
+          <span class="hljs-comment">#  code up to the next segment's first comment starts folded</span>
+          <span class="hljs-keyword">if</span> foldPrefix? <span class="hljs-keyword">and</span> comment.indexOf(foldPrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+
+            <span class="hljs-comment">#  … so folding stops below, as this is a new segment !</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Let&#39;s strip the “^” character from our documentation</p>
+</div></div><div class="code"><div class="wrapper">            currSegment.foldMarker = line.replace singleStrip, <span class="hljs-string">'$1'</span>
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>And collect it as code.</p>
+</div></div><div class="code"><div class="wrapper">            currSegment.code.push currSegment.foldMarker
+          <span class="hljs-keyword">else</span>
+            currSegment.comments.push comment
+</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We surely (should) have raw code at this point.</p>
+</div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">else</span>
+      currSegment.code.push line
+
+  segments.push currSegment
+
+  segments
+
+</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>

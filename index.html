@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><title>Readme.md</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="Readme.md"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/Readme.md">Readme.md</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="grock"><a href="#grock" class="anchor"></a>grock</h1><p><a href="http://killercup.github.io/grock/">Grock</a> converts your nicely commented code into a gorgeous documentation where comments and code live happily next to each other.</p>
+<p>To see how it works, just have a look at <a href="http://killercup.github.io/grock/">the documentation rendered from this repository</a>.</p>
+<p><img src="https://david-dm.org/killercup/grock.png" alt="dependency version"></p>
+<h2 id="install"><a href="#install" class="anchor"></a>Install</h2><p>Install globally using <code>npm install --global grock</code> and invoke anywhere using <code>grock --glob &#39;your/*.files&#39;</code>.</p>
+<p>Or use it as a (dev-)dependency in your project and use the <code>package.json</code> script section to run it, e.g. with <code>&quot;scripts&quot;: {&quot;docs&quot;: &quot;grock&quot;}</code> and using <code>npm run docs</code>.</p>
+<h2 id="usage"><a href="#usage" class="anchor"></a>Usage</h2><pre><code class="lang-sh">$ grock --help
+</code></pre>
+<p>You can specify all the command line options in a <code>.groc.json</code> file (that is compaible to <a href="http://nevir.github.com/groc/">groc</a>). This will automatically be loaded. This way you just need to save that file in your project directory and can use grock without arguments from now on.</p>
+<p>For a list of supported languages, see the <code>lib/languages.coffee</code> file.</p>
+<h2 id="inspiration"><a href="#inspiration" class="anchor"></a>Inspiration</h2><ul>
+<li><a href="http://en.wikipedia.org/wiki/Literate_programming">Literate programming</a> (the programming methodology coined by <a href="http://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>)</li>
+<li><a href="https://github.com/jashkenas">Jeremy Ashkenas</a>&#39; <a href="http://jashkenas.github.com/docco/">docco</a></li>
+<li>The <a href="http://nevir.github.com/groc/">groc</a> project -- this implementation is heavily based on this, but uses node.js streams</li>
+<li><a href="http://gulpjs.com/">Gulp.js</a>, a build system that uses streams to transform files</li>
+</ul>
+<h3 id="what-makes-grock-different-"><a href="#what-makes-grock-different-" class="anchor"></a>What makes grock different?</h3><p>In contrast to other node-based documentation generators like <a href="http://jashkenas.github.com/docco/">docco</a>, <a href="http://nevir.github.com/groc/">groc</a>, and <a href="https://github.com/jbt/docker">docker</a>, grock has the following advantages:</p>
+<ul>
+<li>It doesn&#39;t need pygments.</li>
+<li>Therefore it doesn&#39;t need python.</li>
+<li>Therefore it&#39;s faster than those other tools that need pygments.</li>
+<li>It renders a file tree and also a headline tree for each document.</li>
+<li>The default style (based on solarized) is responsive and looks actually quite good on a phone.</li>
+<li>It&#39;s based on streams. I&#39;ve heard all the cool kids are using streams now.</li>
+</ul>
+<h2 id="based-on"><a href="#based-on" class="anchor"></a>Based on</h2><ul>
+<li><a href="https://github.com/wearefractal/vinyl-fs">vinyl-fs</a> for abstracting files</li>
+<li><a href="http://ethanschoonover.com/solarized">Solarized</a></li>
+<li><a href="https://github.com/chjj/marked">marked</a></li>
+<li><a href="http://highlightjs.org/">highlight.js</a></li>
+</ul>
+<p>Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is actually code from <a href="http://nevir.github.com/groc/">groc</a>!</p>
+<h2 id="roadmap"><a href="#roadmap" class="anchor"></a>Roadmap</h2><ul>
+<li><input type="checkbox" checked disabled/> Be awesome with streams</li>
+<li><input type="checkbox" checked disabled/> Split code and comments</li>
+<li><input type="checkbox" checked disabled/> Highlight code</li>
+<li><input type="checkbox" checked disabled/> Generate TOC as JSON file</li>
+<li><input type="checkbox" checked disabled/> Render doc tags (like jsdoc)</li>
+<li><input type="checkbox" checked disabled/> CLI docs, <code>.groc.json</code> config support</li>
+<li><input type="checkbox" disabled/> Correctly parse relative roots</li>
+<li><input type="checkbox" disabled/> Tests. Test for everything.</li>
+<li><input type="checkbox" disabled/> Add another style.</li>
+<li><input type="checkbox" disabled/> Find a streaming code highlighter with hooks for comment segments</li>
+</ul>
+</div></div></div></div></div><script type="text/javascript" src="toc.js"></script><script type="text/javascript" src="assets/libs.js"></script><script type="text/javascript" src="assets/behavior.js"></script></body></html>
