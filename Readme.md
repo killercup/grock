@@ -4,7 +4,8 @@
 
 To see how it works, just have a look at [the documentation rendered from this repository](http://killercup.github.io/grock/).
 
-![dependency version](https://david-dm.org/killercup/grock.png)
+[![build status](https://travis-ci.org/killercup/grock.png?branch=master)](https://travis-ci.org/killercup/grock)
+[![dependency version](https://david-dm.org/killercup/grock.png)](https://david-dm.org/killercup/grock)
 
 ## Install
 
