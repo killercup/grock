@@ -313,4 +313,150 @@ window.files = [
       "title": "Regex Escape"
     }
   ]
+},
+{
+  "path": "lib/utils/seperator.coffee.html",
+  "originalName": "seperator.coffee",
+  "originalPath": "lib/utils/seperator.coffee",
+  "name": "seperator.coffee.html",
+  "lang": "coffeescript",
+  "title": "Seperate Code and Comments into Segments",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "seperate-code-and-comments-into-segments",
+      "title": "Seperate Code and Comments into Segments"
+    }
+  ]
+},
+{
+  "path": "styles/compileAll.coffee.html",
+  "originalName": "compileAll.coffee",
+  "originalPath": "styles/compileAll.coffee",
+  "name": "compileAll.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/compile.coffee.html",
+  "originalName": "compile.coffee",
+  "originalPath": "styles/solarized/compile.coffee",
+  "name": "compile.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/copy.coffee.html",
+  "originalName": "copy.coffee",
+  "originalPath": "styles/solarized/copy.coffee",
+  "name": "copy.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/index.coffee.html",
+  "originalName": "index.coffee",
+  "originalPath": "styles/solarized/index.coffee",
+  "name": "index.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/assets/js/behavior.coffee.html",
+  "originalName": "behavior.coffee",
+  "originalPath": "styles/solarized/assets/js/behavior.coffee",
+  "name": "behavior.coffee.html",
+  "lang": "coffeescript",
+  "title": "Grock Solarized Side Menu",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "grock-solarized-side-menu",
+      "title": "Grock Solarized Side Menu"
+    },
+    {
+      "level": 2,
+      "slug": "convert-list-of-files-to-file-tree",
+      "title": "Convert List of Files to File Tree"
+    },
+    {
+      "level": 2,
+      "slug": "convert-toc-to-headline-tree",
+      "title": "Convert TOC to Headline Tree"
+    },
+    {
+      "level": 2,
+      "slug": "build-file-tree-recursively",
+      "title": "Build File Tree Recursively"
+    },
+    {
+      "level": 2,
+      "slug": "build-headlines-tree-recursively",
+      "title": "Build Headlines Tree Recursively"
+    },
+    {
+      "level": 2,
+      "slug": "create-navigation-element",
+      "title": "Create Navigation Element"
+    },
+    {
+      "level": 2,
+      "slug": "add-button-to-toggle-side-menu-visibility",
+      "title": "Add Button to Toggle Side Menu Visibility"
+    },
+    {
+      "level": 2,
+      "slug": "search-tree",
+      "title": "Search Tree"
+    },
+    {
+      "level": 2,
+      "slug": "build-navigation",
+      "title": "Build Navigation"
+    }
+  ]
+},
+{
+  "path": "styles/Readme.md.html",
+  "originalName": "Readme.md",
+  "originalPath": "styles/Readme.md",
+  "name": "Readme.md.html",
+  "title": "Grock Styles",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "grock-styles",
+      "title": "Grock Styles"
+    },
+    {
+      "level": 2,
+      "slug": "contributing",
+      "title": "Contributing"
+    }
+  ]
+},
+{
+  "path": "styles/solarized/Readme.md.html",
+  "originalName": "Readme.md",
+  "originalPath": "styles/solarized/Readme.md",
+  "name": "Readme.md.html",
+  "title": "Solarized Style",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "solarized-style",
+      "title": "Solarized Style"
+    },
+    {
+      "level": 2,
+      "slug": "screenshots",
+      "title": "Screenshots"
+    },
+    {
+      "level": 2,
+      "slug": "features",
+      "title": "Features"
+    }
+  ]
 }
+];
