@@ -17,7 +17,7 @@ git config user.name "Travis-CI"
 git config user.email "travis@pascalhertleif.de"
 
 git add -A
-git commit -m "Generated documentation for $CURRENT_COMMIT" || exit 1
+git commit --allow-empty -m "Generated documentation for $CURRENT_COMMIT" || exit 1
 git push origin gh-pages > /dev/null 2>&1 || exit 1
 
 echo "Pushed new documentation successfully."
