@@ -3,7 +3,6 @@ vfs = require 'vinyl-fs'
 map = require 'map-stream'
 
 prettyTime = require 'pretty-hrtime'
-gutil = require 'gulp-util'
 colors = require 'chalk'
 log = require '../lib/utils/log'
 

@@ -1,3 +1,2 @@
---compilers coffee:coffee-script
 -R spec
-test/**/*.coffee
+test/index.js

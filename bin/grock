@@ -3,7 +3,6 @@
 
 var START = process.hrtime();
 
-require('coffee-script');
 var path = require('path');
 var fs = require('fs');
 var  _ = require('lodash');
@@ -80,6 +79,7 @@ if (optimist.argv.version) {
 var argv = _.defaults(optimist.argv, projectConfig);
 argv.start = START;
 
+require('coffee-script/register');
 var generator = require('../lib/generator');
 
 if (argv.github) {

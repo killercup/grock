@@ -21,7 +21,7 @@ log = require './utils/log'
 START = process.hrtime()
 
 duration = (start) ->
-  colors.magenta(prettyTime(process.hrtime(start)))
+  colors.magenta prettyTime process.hrtime(start)
 
 # ## The Glorious Generator
 module.exports = (opts) ->
@@ -42,27 +42,25 @@ module.exports = (opts) ->
     fs.mkdirSync dest
 
   # ### Processing Pipeline
-  vfs.src(glob, base: root)
-  .pipe(map (file, cb) ->
+  vfs.src glob, base: root
+  .pipe map (file, cb) ->
     # Save start time
     file.timingStart = process.hrtime()
     cb(null, file)
-  )
-  .pipe(t.getLanguage())
-  .pipe(t.splitCodeAndComments())
-  .pipe(t.highlight())
-  .pipe(t.renderDocTags())
-  .pipe(t.markdownComments())
-  .pipe(t.renderTemplates(style: style, repositoryUrl: opts['repository-url']))
-  .pipe(t.indexFile(index))
-  .pipe(vfs.dest(dest))
-  .pipe(t.renderFileTree(path.join(dest, "toc.js"), verbose: verbose))
-  .pipe(map (file, cb) ->
-    # #### Log process duration
+  .pipe t.getLanguage()
+  .pipe t.splitCodeAndComments()
+  .pipe t.highlight()
+  .pipe t.renderDocTags()
+  .pipe t.markdownComments()
+  .pipe t.renderTemplates(style: style, repositoryUrl: opts['repository-url'])
+  .pipe t.indexFile(index)
+  .pipe vfs.dest(dest)
+  .pipe t.renderFileTree(path.join(dest, "toc.js"), verbose: verbose)
+  .pipe map (file, cb) ->
+    # Log process duration
     log file.relative, duration(file.timingStart) if verbose
     cb(null, file)
-  )
-  .on('error', deferred.reject)
+  .on 'error', deferred.reject
   .on 'end', ->
     # ### Process Style
     assetsTiming = process.hrtime()
