@@ -102,11 +102,6 @@ window.files = [
       "title": "Processing Pipeline"
     },
     {
-      "level": 4,
-      "slug": "log-process-duration",
-      "title": "Log process duration"
-    },
-    {
       "level": 3,
       "slug": "process-style",
       "title": "Process Style"
