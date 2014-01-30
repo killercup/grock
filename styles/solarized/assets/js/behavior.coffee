@@ -34,6 +34,7 @@ listToTree = (list) ->
 
     for part, depth in path
       if (cur[part]?.type isnt 'file') and (depth is fileDepth-1) and file.originalName.match(/index\.(js|coffee)/)
+        cur[part] or= {}
         cur[part].path = file.path
         cur[part].originalName = file.originalName
         cur[part].originalPath = file.originalPath
