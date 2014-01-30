@@ -22,6 +22,16 @@ window.files = [
       "title": "Usage"
     },
     {
+      "level": 3,
+      "slug": "config-file",
+      "title": "Config File"
+    },
+    {
+      "level": 3,
+      "slug": "auto-publish-documentation-to-github-pages",
+      "title": "Auto Publish Documentation to Github Pages"
+    },
+    {
       "level": 2,
       "slug": "inspiration",
       "title": "Inspiration"
