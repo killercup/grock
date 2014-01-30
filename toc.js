@@ -59,6 +59,50 @@ window.files = [
   ]
 },
 {
+  "path": "bin/grock.html",
+  "originalName": "grock",
+  "originalPath": "bin/grock",
+  "name": "grock.html",
+  "title": "grock CLI",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "grock-cli",
+      "title": "grock CLI"
+    },
+    {
+      "level": 2,
+      "slug": "load-project-config",
+      "title": "Load Project Config"
+    },
+    {
+      "level": 2,
+      "slug": "cli-arguments",
+      "title": "CLI Arguments"
+    },
+    {
+      "level": 3,
+      "slug": "display-help",
+      "title": "Display Help"
+    },
+    {
+      "level": 3,
+      "slug": "display-version",
+      "title": "Display Version"
+    },
+    {
+      "level": 2,
+      "slug": "write-to-github-pages-branch",
+      "title": "Write to Github Pages Branch"
+    },
+    {
+      "level": 2,
+      "slug": "write-regularly",
+      "title": "Write Regularly"
+    }
+  ]
+},
+{
   "path": "lib/docTags.coffee.html",
   "originalName": "docTags.coffee",
   "originalPath": "lib/docTags.coffee",
