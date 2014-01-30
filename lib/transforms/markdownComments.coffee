@@ -56,6 +56,9 @@ module.exports = (options) ->
     file.extra or= {}
     toc = file.extra.toc or= []
 
+    lang = file.extra?.lang or {}
+    return cb(null, file) if lang.codeOnly
+
     # No comment(s)
     cb(null, file) unless file.segments?.length
 

@@ -24,6 +24,8 @@ highlightSegment = (code, lang='AUTO') ->
 module.exports = (options) ->
   modifyFile = (file, cb) ->
     lang = file.extra?.lang or {}
+    return cb(null, file) if lang.commentsOnly
+
     hlLang = lang.highlightJS or lang.pygmentsLexer
 
     try
