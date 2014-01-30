@@ -9,6 +9,12 @@ _ = require 'lodash'
 
 log = require '../utils/log'
 
+getTitle = (file) ->
+  title = _.find(file.extra?.toc, level: 1)?.title
+  if title and title isnt ''
+    return title
+  return
+
 module.exports = (fileName, opts={}) ->
   unless fileName
     throw new PluginError("Render File Tree", "Missing fileName option")
@@ -27,7 +33,7 @@ module.exports = (fileName, opts={}) ->
       originalPath: file.originalRelative
       name: path.basename file.path
       lang: file.extra?.lang?.highlightJS or file.extra?.lang?.pygmentsLexer
-      title: _.find(file.extra?.toc, level: 1)?.title
+      title: getTitle(file)
       toc: file.extra?.toc
     }, false, 2)
     first = false

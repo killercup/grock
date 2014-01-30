@@ -9,7 +9,7 @@ render = require '../utils/processDocTags'
 
 module.exports = (options) ->
   modifyFile = (file, cb) ->
-    cb(null, file) unless file.segments?.length
+    return cb(null, file) unless file.segments?.length
 
     render.parseDocTags(file.segments)
     .then(render.markdownDocTags)
