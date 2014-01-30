@@ -1,7 +1,8 @@
 ###
 # # Highlight Code
+#
+# Uses [`highlight.js`](http://highlightjs.org/).
 ###
-
 path = require 'path'
 hljs = require 'highlight.js'
 
@@ -24,6 +25,8 @@ highlightSegment = (code, lang='AUTO') ->
 module.exports = (options) ->
   modifyFile = (file, cb) ->
     lang = file.extra?.lang or {}
+
+    # Skip unnecessary highlighting (e.g. for Markdown files)
     return cb(null, file) if lang.commentsOnly
 
     hlLang = lang.highlightJS or lang.pygmentsLexer
@@ -33,6 +36,7 @@ module.exports = (options) ->
         for segment in file.segments
           segment.code = highlightSegment(segment.code.join('\n'), hlLang)
       else
+        # Highlight complete file content when file is not split into segments
         str = file.contents.toString('utf8')
         file.contents = new Buffer highlightSegment(str, hlLang)
         file.path = file.path + ".html"

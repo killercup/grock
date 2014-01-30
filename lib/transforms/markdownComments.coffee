@@ -1,6 +1,8 @@
 ###
 # # Render Markdown Comments
 #
+# Uses [`marked`](https://github.com/chjj/marked).
+#
 # This will render a file's segment's comments using markdown and add a list of
 # headlines to `file.exta.toc`.
 ###
@@ -11,26 +13,34 @@ map = require 'map-stream'
 hljs = require 'highlight.js'
 marked = require 'marked'
 
+###
+# ## Options
+#
+# Highlight code in comments, e.g. examples
+###
 marked.setOptions
-  # Highlight code in comments, e.g. examples
   highlight: (code, lang) ->
     if lang
       try
-        return hljs.highlight(lang, code, true).value
+        code = hljs.highlight(lang, code, true).value
       catch e
-        return code
     else
       try
-        return hljs.highlightAuto(code).value
+        code = hljs.highlightAuto(code).value
       catch e
-        return code
       
     return code
 
-# Instantiate custom renderer, will be used to collect headlines for TOC
+###
+# ## Custom Renderer
+###
 renderer = new marked.Renderer()
 
-# Add support for checkbox list items
+###
+# @method Render TODO Lists
+# @param {String} text The input text of the list item
+# @return {String} List item (possibly with checkboxes)
+###
 renderer.listitem = (text) ->
   text = text.replace /^\[x\] /, '<input type="checkbox" checked disabled/> '
   text = text.replace /^\[ \] /, '<input type="checkbox" disabled/> '
@@ -56,7 +66,8 @@ module.exports = (options) ->
     file.extra or= {}
     toc = file.extra.toc or= []
 
-    lang = file.extra?.lang or {}
+    # Skip unnecessary Markdown rendering (e.g. for JSON files)
+    lang = file.extra.lang or {}
     return cb(null, file) if lang.codeOnly
 
     # No comment(s)
