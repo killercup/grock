@@ -1,0 +1,10 @@
+node_modules/
+bower_components/
+docs/
+
+test/
+
+.travis.json
+.groc.json
+coffeelint.json
+scripts/deploy_docs_from_travis.sh
