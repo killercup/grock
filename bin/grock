@@ -130,7 +130,12 @@ if (argv.github) {
   .then(function () {
     process.exit(0);
   }, function (err) {
-    console.log(err);
+    console.log("Failed to compile documentation.");
+    if (argv.verbose) {
+      console.log(err.stack || err);
+    } else {
+      console.log("Run with `--verbose` for more information.");
+    }
     process.exit(1);
   })
   ;
