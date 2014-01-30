@@ -68,7 +68,9 @@ module.exports =
             tag.value = tag.value.replace ///#{tagDefinition.valuePrefix?}\s+///, ''
 
           if tagDefinition.parseValue?
-            tag.value = tagDefinition.parseValue tag.value
+            try
+              tag.value = tagDefinition.parseValue tag.value
+            catch e
           else if not /\n/.test tag.value
             tag.value = tag.value.match(TAG_VALUE_REGEX)[1..].join('')
 
@@ -101,7 +103,10 @@ module.exports =
             if 'string' == typeof tag.definition.markdown
               tag.markdown = tag.definition.markdown.replace /\{value\}/g, tag.value
             else
-              tag.markdown = tag.definition.markdown(tag.value)
+              try
+                tag.markdown = tag.definition.markdown(tag.value)
+              catch e
+                tag.markdown = tag.value
           else
             if tag.value.length > 0
               tag.markdown = "#{tag.name} #{tag.value}"

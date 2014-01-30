@@ -9,9 +9,8 @@ seperator = require '../utils/seperator'
 
 module.exports = (options) ->
   modifyFile = (file, cb) ->
-    str = file.contents.toString('utf8')
-
     try
+      str = file.contents.toString('utf8')
       file.segments = seperator str, file.extra.lang
     catch e
       return cb(new Error("seperator: Error seperating code and comments #{e}"))
