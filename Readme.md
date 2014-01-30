@@ -66,3 +66,21 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [ ] Tests. Test for everything.
 - [ ] Add another style.
 - [ ] Find a streaming code highlighter with hooks for comment segments
+
+## Contributing
+
+Just fork the repo, implement some awesome feature or fix a bug and send a pull request.
+
+### Code Style and Guideline
+
+- Document your code.
+- Write code in [CoffeeScript](http://coffeescript.org/) when possible and make sure [`coffeelint`](http://www.coffeelint.org/) doesn't throw any warning or errors.
+- Make use of streams and promises. Those are good techniques.
+- Split the code into as many independent, loosely coupled modules as possible and try to reuse existing ones.
+- On the other hand, try to minimize (NPM) dependencies. Since this is a CLI tool, the startup time gets worse with every `require`.
+- Run `npm test` before committing. (Currently, this runs `coffeelint` and `mocha`).
+
+### Contributing to Styles
+
+When adding a new style or editing an existing one, make sure you follow the guidelines in `styles/Readme.md` (e.g. adding an index file exporting copy, compile and template functions).
+
