@@ -34,15 +34,15 @@ __p += '\n      <div class="segment">\n      ';
  if (segment.comments != '') { ;
 __p += '\n        <div class="comments ' +
 __e( segment.accessClasses ) +
-'">\n          <div class="wrapper">\n            ' +
+'">\n          <div class="wrapper">' +
 ((__t = ( segment.comments )) == null ? '' : __t) +
-'\n          </div>\n        </div>\n      ';
+'</div>\n        </div>\n      ';
  } ;
 __p += '\n      ';
  if (segment.code != '') { ;
-__p += '\n        <div class="code">\n          <div class="wrapper">\n            ' +
+__p += '\n        <div class="code">\n          <div class="wrapper">' +
 ((__t = ( segment.code )) == null ? '' : __t) +
-'\n          </div>\n        </div>\n      ';
+'</div>\n        </div>\n      ';
  } ;
 __p += '\n      </div>\n    ';
  }) ;

@@ -20,7 +20,7 @@ module.exports = (options={}) ->
   deferTemplates = Q.defer()
 
   # Jade
-  templateFile = fs.readFileSync path.join(__dirname, 'template.html')
+  templateFile = fs.readFileSync path.join(__dirname, 'assets', 'template.html')
   render = _.template templateFile, null, variable: 'data'
 
   fs.writeFile path.join(finalDest, 'template.js'),

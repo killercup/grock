@@ -29,16 +29,12 @@
       <div class="segment">
       <% if (segment.comments != '') { %>
         <div class="comments <%- segment.accessClasses %>">
-          <div class="wrapper">
-            <%= segment.comments %>
-          </div>
+          <div class="wrapper"><%= segment.comments %></div>
         </div>
       <% } %>
       <% if (segment.code != '') { %>
         <div class="code">
-          <div class="wrapper">
-            <%= segment.code %>
-          </div>
+          <div class="wrapper"><%= segment.code %></div>
         </div>
       <% } %>
       </div>
