@@ -40,6 +40,21 @@ window.files = [
       "level": 2,
       "slug": "roadmap",
       "title": "Roadmap"
+    },
+    {
+      "level": 2,
+      "slug": "contributing",
+      "title": "Contributing"
+    },
+    {
+      "level": 3,
+      "slug": "code-style-and-guideline",
+      "title": "Code Style and Guideline"
+    },
+    {
+      "level": 3,
+      "slug": "contributing-to-styles",
+      "title": "Contributing to Styles"
     }
   ]
 },
@@ -188,6 +203,16 @@ window.files = [
       "level": 1,
       "slug": "render-markdown-comments",
       "title": "Render Markdown Comments"
+    },
+    {
+      "level": 2,
+      "slug": "options",
+      "title": "Options"
+    },
+    {
+      "level": 2,
+      "slug": "custom-renderer",
+      "title": "Custom Renderer"
     }
   ]
 },
@@ -338,7 +363,14 @@ window.files = [
   "originalPath": "styles/solarized/compile.coffee",
   "name": "compile.coffee.html",
   "lang": "coffeescript",
-  "toc": []
+  "title": "Compile Solarized Assets",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "compile-solarized-assets",
+      "title": "Compile Solarized Assets"
+    }
+  ]
 },
 {
   "path": "styles/solarized/copy.coffee.html",
@@ -416,12 +448,12 @@ window.files = [
   "originalName": "Readme.md",
   "originalPath": "styles/Readme.md",
   "name": "Readme.md.html",
-  "title": "Grock Styles",
+  "title": "About Grock Styles",
   "toc": [
     {
       "level": 1,
-      "slug": "grock-styles",
-      "title": "Grock Styles"
+      "slug": "about-grock-styles",
+      "title": "About Grock Styles"
     },
     {
       "level": 2,

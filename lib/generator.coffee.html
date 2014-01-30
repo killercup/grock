@@ -1,33 +1,176 @@
-<!DOCTYPE html><html lang="en"><head><title>generator.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="lib/generator.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/generator.coffee">lib/generator.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="documetation-generator"><a href="#documetation-generator" class="anchor"></a>Documetation Generator</h1></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="npm-modules"><a href="#npm-modules" class="anchor"></a>NPM Modules</h2></div></div><div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>generator.coffee</title>
+
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../"/>
+  <meta name="groc-document-path" content="lib/generator.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/generator.coffee">lib/generator.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="documetation-generator"><a href="#documetation-generator" class="anchor"></a>Documetation Generator</h1></div>
+        </div>
+      
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h2 id="npm-modules"><a href="#npm-modules" class="anchor"></a>NPM Modules</h2></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
 map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
 prettyTime = <span class="hljs-built_in">require</span> <span class="hljs-string">'pretty-hrtime'</span>
 colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'chalk'</span>
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="local-modules"><a href="#local-modules" class="anchor"></a>Local Modules</h2></div></div><div class="code"><div class="wrapper">t = <span class="hljs-built_in">require</span> <span class="hljs-string">'./transforms'</span>
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h2 id="local-modules"><a href="#local-modules" class="anchor"></a>Local Modules</h2></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">t = <span class="hljs-built_in">require</span> <span class="hljs-string">'./transforms'</span>
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/log'</span>
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="helpers"><a href="#helpers" class="anchor"></a>Helpers</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="calculate-runtime"><a href="#calculate-runtime" class="anchor"></a>Calculate Runtime</h3></div></div><div class="code"><div class="wrapper">START = process.hrtime()
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h2 id="helpers"><a href="#helpers" class="anchor"></a>Helpers</h2></div>
+        </div>
+      
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h3 id="calculate-runtime"><a href="#calculate-runtime" class="anchor"></a>Calculate Runtime</h3></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">START = process.hrtime()
 
 <span class="hljs-function"><span class="hljs-title">duration</span> = <span class="hljs-params">(start)</span> -&gt;</span>
   colors.magenta prettyTime process.hrtime(start)
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="the-glorious-generator"><a href="#the-glorious-generator" class="anchor"></a>The Glorious Generator</h2></div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(opts)</span> -&gt;</span>
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h2 id="the-glorious-generator"><a href="#the-glorious-generator" class="anchor"></a>The Glorious Generator</h2></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(opts)</span> -&gt;</span>
   {glob, style, out, verbose, start, index, root} = opts
   verbose <span class="hljs-keyword">or</span>= <span class="hljs-literal">false</span>
   start <span class="hljs-keyword">or</span>= START
 
   log <span class="hljs-string">'Beginning to process'</span>, (<span class="hljs-keyword">if</span> verbose <span class="hljs-keyword">then</span> glob <span class="hljs-keyword">else</span> <span class="hljs-string">''</span>), duration(start)
   deferred = Q.defer()
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Load Style</p>
-</div></div><div class="code"><div class="wrapper">  style = <span class="hljs-built_in">require</span> <span class="hljs-string">"../styles/<span class="hljs-subst">#{style}</span>"</span>
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Create output directory</p>
-</div></div><div class="code"><div class="wrapper">  dest = out <span class="hljs-keyword">or</span> <span class="hljs-string">'docs/'</span>
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Load Style</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  style = <span class="hljs-built_in">require</span> <span class="hljs-string">"../styles/<span class="hljs-subst">#{style}</span>"</span>
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Create output directory</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  dest = out <span class="hljs-keyword">or</span> <span class="hljs-string">'docs/'</span>
   log <span class="hljs-string">'Writing to'</span>, dest
   <span class="hljs-keyword">unless</span> fs.existsSync dest
     fs.mkdirSync dest
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="processing-pipeline"><a href="#processing-pipeline" class="anchor"></a>Processing Pipeline</h3></div></div><div class="code"><div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Save start time</p>
-</div></div><div class="code"><div class="wrapper">    file.timingStart = process.hrtime()
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h3 id="processing-pipeline"><a href="#processing-pipeline" class="anchor"></a>Processing Pipeline</h3></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
+  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Save start time</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">    file.timingStart = process.hrtime()
     cb(<span class="hljs-literal">null</span>, file)
   .pipe t.getLanguage()
   .pipe t.splitCodeAndComments()
@@ -38,11 +181,37 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
   .pipe t.indexFile(index)
   .pipe vfs.dest(dest)
   .pipe t.renderFileTree(path.join(dest, <span class="hljs-string">"toc.js"</span>), <span class="hljs-attribute">verbose</span>: verbose)
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Log process duration</p>
-</div></div><div class="code"><div class="wrapper">    log file.relative, duration(file.timingStart) <span class="hljs-keyword">if</span> verbose
+  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Log process duration</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">    log file.relative, duration(file.timingStart) <span class="hljs-keyword">if</span> verbose
     cb(<span class="hljs-literal">null</span>, file)
   .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferred.reject
-  .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>,<span class="hljs-function"> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="process-style"><a href="#process-style" class="anchor"></a>Process Style</h3></div></div><div class="code"><div class="wrapper">    assetsTiming = process.hrtime()
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>,<span class="hljs-function"> -&gt;</span></div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h3 id="process-style"><a href="#process-style" class="anchor"></a>Process Style</h3></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">    assetsTiming = process.hrtime()
     style.copy(<span class="hljs-attribute">dest</span>: dest)
     .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
       log <span class="hljs-string">"Style copied"</span>, duration(assetsTiming) <span class="hljs-keyword">if</span> verbose
@@ -53,4 +222,16 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
       <span class="hljs-built_in">console</span>.log(err) <span class="hljs-keyword">if</span> verbose
       deferred.reject()
 
-  <span class="hljs-keyword">return</span> deferred.promise</div></div></div></div></div><script type="text/javascript" src="../toc.js"></script><script type="text/javascript" src="../assets/libs.js"></script><script type="text/javascript" src="../assets/behavior.js"></script></body></html>
+  <span class="hljs-keyword">return</span> deferred.promise</div>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../toc.js"></script>
+  <script src="../assets/libs.js"></script>
+  <script src="../assets/behavior.js"></script>
+</body>
+</html>

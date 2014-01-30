@@ -1,13 +1,50 @@
-<!DOCTYPE html><html lang="en"><head><title>Readme.md</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="styles/Readme.md"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/styles/Readme.md">styles/Readme.md</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="grock-styles"><a href="#grock-styles" class="anchor"></a>Grock Styles</h1><h2 id="contributing"><a href="#contributing" class="anchor"></a>Contributing</h2><p>All Styles should contain an index files exporting these properties:</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Readme.md</title>
+
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../"/>
+  <meta name="groc-document-path" content="styles/Readme.md"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/styles/Readme.md">styles/Readme.md</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="about-grock-styles"><a href="#about-grock-styles" class="anchor"></a>About Grock Styles</h1><h2 id="contributing"><a href="#contributing" class="anchor"></a>Contributing</h2><p>All Styles should contain an index files exporting these properties:</p>
 <ul>
-<li><code>template</code> (String): The path to a Jade template from which the output will be generated</li>
-<li><code>copy(opts)</code>: a copy method<ul>
+<li><code>String getTemplate(Object context)</code>: Return a render function<ul>
+<li>A function returning a render function that<ul>
+<li>takes an <code>templateContext</code> Object (created in <code>libs/tranforms/renderTemplates</code>)</li>
+<li>returns the string representation of the rendered HTML document.</li>
+</ul>
+</li>
+<li>(This can also be the compiled version of a template, using <code>lodash</code>, <code>jade</code> or similar libraries.)</li>
+</ul>
+</li>
+<li><code>Promise copy(Object opts)</code>: a copy method<ul>
 <li>Takes an Object of options, containing a <code>dest</code> property</li>
 <li>Copies all assets needed for this style to <code>dest</code></li>
 <li>Returns a promise that resolves when copy is done</li>
 </ul>
 </li>
-<li><code>compile(opts)</code>: a compile method; will be called before publishing a new grock version<ul>
+<li><code>Promise compile(Object opts)</code>: a compile method; will be called before publishing a new grock version<ul>
 <li>Takes an Object of options</li>
 <li>Compiles all style assets into a directory, so that they can be easily copied later on when generating the documentation (preventing the user to have to install <code>node-sass</code>, e.g.)</li>
 <li>Returns a promise that resolves when the compilation is done</li>
@@ -15,4 +52,17 @@
 </li>
 </ul>
 <p>After changing style assets, you need to execute the compile function. To recompile all styles, use <code>npm run compile-styles</code>.</p>
-</div></div></div></div></div><script type="text/javascript" src="../toc.js"></script><script type="text/javascript" src="../assets/libs.js"></script><script type="text/javascript" src="../assets/behavior.js"></script></body></html>
+</div>
+        </div>
+      
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../toc.js"></script>
+  <script src="../assets/libs.js"></script>
+  <script src="../assets/behavior.js"></script>
+</body>
+</html>

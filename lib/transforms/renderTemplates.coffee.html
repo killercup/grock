@@ -1,16 +1,47 @@
-<!DOCTYPE html><html lang="en"><head><title>renderTemplates.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/transforms/renderTemplates.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/transforms/renderTemplates.coffee">lib/transforms/renderTemplates.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="render-templates"><a href="#render-templates" class="anchor"></a>Render Templates</h1><p>Expects a Jade template file as <code>template.jade</code> in the style&#39;s directory.</p>
-</div></div><div class="code"><div class="wrapper">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>renderTemplates.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/transforms/renderTemplates.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/transforms/renderTemplates.coffee">lib/transforms/renderTemplates.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="render-templates"><a href="#render-templates" class="anchor"></a>Render Templates</h1><p>Renders HTML files by using the style&#39;s render function (using
+<code>style.getTemplate()</code>).</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">
 fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
 Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
 
-jade = <span class="hljs-built_in">require</span> <span class="hljs-string">'jade'</span>
-
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">({style, repositoryUrl})</span> -&gt;</span>
-  templateFile = fs.readFileSync style.template
-
-  render = jade.compile(templateFile)
+  render = style.getTemplate()
 
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
@@ -18,7 +49,20 @@ jade = <span class="hljs-built_in">require</span> <span class="hljs-string">'jad
     file.originalPath = file.path
     file.originalRelative = file.relative
     file.path = file.path + <span class="hljs-string">".html"</span>
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="variables-accessable-in-template"><a href="#variables-accessable-in-template" class="anchor"></a>Variables accessable in template</h2></div></div><div class="code"><div class="wrapper">    templateContext =
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h2 id="variables-accessable-in-template"><a href="#variables-accessable-in-template" class="anchor"></a>Variables accessable in template</h2></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">    templateContext =
       <span class="hljs-attribute">pageTitle</span>: path.basename file.originalRelative
       <span class="hljs-attribute">segments</span>: file.segments
       <span class="hljs-attribute">targetPath</span>: file.originalRelative
@@ -30,10 +74,27 @@ jade = <span class="hljs-built_in">require</span> <span class="hljs-string">'jad
     <span class="hljs-keyword">else</span>
       templateContext.relativeRoot = <span class="hljs-string">"<span class="hljs-subst">#{pathChunks.map(-&gt; <span class="hljs-string">'..'</span>).join <span class="hljs-string">'/'</span>}</span>/"</span>
 
-    file.contents = <span class="hljs-keyword">new</span> Buffer render(templateContext)
+    <span class="hljs-keyword">try</span>
+      rendered = render(templateContext)
+    <span class="hljs-keyword">catch</span> e
+      <span class="hljs-keyword">return</span> cb(e)
+
+    file.contents = <span class="hljs-keyword">new</span> Buffer rendered
 
     cb(<span class="hljs-literal">null</span>, file)
     <span class="hljs-keyword">return</span>
 
   <span class="hljs-keyword">return</span> map(modifyFile)
-</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>
+</div>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>

@@ -1,4 +1,33 @@
-<!DOCTYPE html><html lang="en"><head><title>Readme.md</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="Readme.md"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/Readme.md">Readme.md</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="grock"><a href="#grock" class="anchor"></a>grock</h1><p><a href="http://killercup.github.io/grock/">Grock</a> converts your nicely commented code into a gorgeous documentation where comments and code live happily next to each other.</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Readme.md</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content=""/>
+  <meta name="groc-document-path" content="Readme.md"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/Readme.md">Readme.md</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="grock"><a href="#grock" class="anchor"></a>grock</h1><p><a href="http://killercup.github.io/grock/">Grock</a> converts your nicely commented code into a gorgeous documentation where comments and code live happily next to each other.</p>
 <p>To see how it works, just have a look at <a href="http://killercup.github.io/grock/">the documentation rendered from this repository</a>.</p>
 <p><a href="https://travis-ci.org/killercup/grock"><img src="https://travis-ci.org/killercup/grock.png?branch=master" alt="build status"></a>
 <a href="https://david-dm.org/killercup/grock"><img src="https://david-dm.org/killercup/grock.png" alt="dependency version"></a></p>
@@ -42,4 +71,27 @@
 <li><input type="checkbox" disabled/> Add another style.</li>
 <li><input type="checkbox" disabled/> Find a streaming code highlighter with hooks for comment segments</li>
 </ul>
-</div></div></div></div></div><script type="text/javascript" src="toc.js"></script><script type="text/javascript" src="assets/libs.js"></script><script type="text/javascript" src="assets/behavior.js"></script></body></html>
+<h2 id="contributing"><a href="#contributing" class="anchor"></a>Contributing</h2><p>Just fork the repo, implement some awesome feature or fix a bug and send a pull request.</p>
+<h3 id="code-style-and-guideline"><a href="#code-style-and-guideline" class="anchor"></a>Code Style and Guideline</h3><ul>
+<li>Document your code.</li>
+<li>Write code in <a href="http://coffeescript.org/">CoffeeScript</a> when possible and make sure <a href="http://www.coffeelint.org/"><code>coffeelint</code></a> doesn&#39;t throw any warning or errors.</li>
+<li>Make use of streams and promises. Those are good techniques.</li>
+<li>Split the code into as many independent, loosely coupled modules as possible and try to reuse existing ones.</li>
+<li>On the other hand, try to minimize (NPM) dependencies. Since this is a CLI tool, the startup time gets worse with every <code>require</code>.</li>
+<li>Run <code>npm test</code> before committing. (Currently, this runs <code>coffeelint</code> and <code>mocha</code>).</li>
+</ul>
+<h3 id="contributing-to-styles"><a href="#contributing-to-styles" class="anchor"></a>Contributing to Styles</h3><p>When adding a new style or editing an existing one, make sure you follow the guidelines in <code>styles/Readme.md</code> (e.g. adding an index file exporting copy, compile and template functions).</p>
+</div>
+        </div>
+      
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="toc.js"></script>
+  <script src="assets/libs.js"></script>
+  <script src="assets/behavior.js"></script>
+</body>
+</html>

@@ -1,12 +1,54 @@
-<!DOCTYPE html><html lang="en"><head><title>processDocTags.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/utils/processDocTags.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/utils/processDocTags.coffee">lib/utils/processDocTags.coffee</a></code></div><div id="document"><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> copyright Ian MacLeod and groc contributors</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>processDocTags.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/utils/processDocTags.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/utils/processDocTags.coffee">lib/utils/processDocTags.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'> copyright Ian MacLeod and groc contributors</p>
 <h1 id="process-doc-tags"><a href="#process-doc-tags" class="anchor"></a>Process Doc Tags</h1><p>Code from <a href="https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee&lt;/span"><code>groc/lib/utils</code></a></p>
-</div></div><div class="code"><div class="wrapper">
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
 
 DOC_TAGS = <span class="hljs-built_in">require</span> <span class="hljs-string">'../docTags'</span>
 humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">'./humanize'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> =</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Parse Doc Tags</code></span></p>
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> =</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>Method: <code>Parse Doc Tags</code></span></p>
 <p>Parses comments of segment for doc tags. Adds <code>tags</code> and
   <code>tagSections</code> to each segment.</p>
 <p>Parameters:</p>
@@ -14,7 +56,12 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
 <li><strong><code>segments</code> must be an Array.</strong><br/>(<code>[{code, comments}]</code>)</li>
 </ul>
 <p><strong>Returns a Promise</strong><br/>(Resolves when segment comments have been processed)</p>
-</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">parseDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  <span class="hljs-attribute">parseDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
     TAG_REGEX = <span class="hljs-regexp">/(?:^|\s)@(\w+)(?:\s+(.*))?/</span>
     TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/</span>
 
@@ -76,14 +123,27 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
     deferred.resolve(segments)
     <span class="hljs-keyword">return</span> deferred.promise
-</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Markdown Doc Tags</code></span></p>
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>Method: <code>Markdown Doc Tags</code></span></p>
 <p>Transform each doc tag entry to markdown</p>
 <p>Parameters:</p>
 <ul>
 <li><strong><code>segments</code> must be an Array.</strong><br/>(<code>[{code, comments, tags}]</code>)</li>
 </ul>
 <p><strong>Returns a Promise</strong><br/>(Resolves when all tags have been processed)</p>
-</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">markdownDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  <span class="hljs-attribute">markdownDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
     deferred = Q.defer()
 
     <span class="hljs-keyword">try</span>
@@ -106,14 +166,27 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
     deferred.resolve(segments)
     <span class="hljs-keyword">return</span> deferred.promise
-</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method: <code>Render Doc Tags</code></span></p>
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>Method: <code>Render Doc Tags</code></span></p>
 <p>Combine Array of doc tags to HTML string</p>
 <p>Parameters:</p>
 <ul>
 <li><strong><code>segments</code> must be an Array.</strong><br/>(<code>[{code, comments, tags, tagSections}]</code>)</li>
 </ul>
 <p><strong>Returns a Promise</strong><br/>(Resolves when all segments have been processed)</p>
-</div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">renderDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  <span class="hljs-attribute">renderDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
     deferred = Q.defer()
 
     <span class="hljs-keyword">for</span> segment, segmentIndex <span class="hljs-keyword">in</span> segments <span class="hljs-keyword">when</span> segment.tagSections?
@@ -162,4 +235,16 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
     deferred.resolve(segments)
     <span class="hljs-keyword">return</span> deferred.promise
-</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>
+</div>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>

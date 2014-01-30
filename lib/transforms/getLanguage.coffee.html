@@ -1,4 +1,38 @@
-<!DOCTYPE html><html lang="en"><head><title>getLanguage.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/transforms/getLanguage.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/transforms/getLanguage.coffee">lib/transforms/getLanguage.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="get-file-language"><a href="#get-file-language" class="anchor"></a>Get File Language</h1></div></div><div class="code"><div class="wrapper">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>getLanguage.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/transforms/getLanguage.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/transforms/getLanguage.coffee">lib/transforms/getLanguage.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="get-file-language"><a href="#get-file-language" class="anchor"></a>Get File Language</h1></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">
 path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
 map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
@@ -13,9 +47,22 @@ _languageDetectionCache = []
   <span class="hljs-keyword">for</span> name, language <span class="hljs-keyword">of</span> LANGUAGES
     language.name = name
 
-    <span class="hljs-keyword">for</span> matcher <span class="hljs-keyword">in</span> language.nameMatchers</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If the matcher is a string, we assume that it&#39;s a file extension.
+    <span class="hljs-keyword">for</span> matcher <span class="hljs-keyword">in</span> language.nameMatchers</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>If the matcher is a string, we assume that it&#39;s a file extension.
 Stick it in a regex:</p>
-</div></div><div class="code"><div class="wrapper">      matcher = <span class="hljs-regexp">///<span class="hljs-subst">#{regexpEscape matcher}</span>$///</span> <span class="hljs-keyword">if</span> _.isString matcher
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">      matcher = <span class="hljs-regexp">///<span class="hljs-subst">#{regexpEscape matcher}</span>$///</span> <span class="hljs-keyword">if</span> _.isString matcher
 
       _languageDetectionCache.push [matcher, language]
 
@@ -34,4 +81,16 @@ Stick it in a regex:</p>
     <span class="hljs-keyword">return</span>
 
   <span class="hljs-keyword">return</span> map(modifyFile)
-</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>
+</div>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>

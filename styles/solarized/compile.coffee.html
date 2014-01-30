@@ -1,7 +1,43 @@
-<!DOCTYPE html><html lang="en"><head><title>compile.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/solarized/compile.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/styles/solarized/compile.coffee">styles/solarized/compile.coffee</a></code></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
-vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>compile.coffee</title>
 
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="styles/solarized/compile.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/styles/solarized/compile.coffee">styles/solarized/compile.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="compile-solarized-assets"><a href="#compile-solarized-assets" class="anchor"></a>Compile Solarized Assets</h1></div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">
+path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
+_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
 ee = <span class="hljs-built_in">require</span> <span class="hljs-string">'streamee'</span>
 coffee = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-coffee'</span>
 concat = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-concat'</span>
@@ -9,13 +45,47 @@ uglify = <span class="hljs-built_in">require</span> <span class="hljs-string">'g
 scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-sass'</span>
 
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options={})</span> -&gt;</span>
-  finalDest = options.dest <span class="hljs-keyword">or</span> <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/compiled"</span>
+  finalDest = options.dest <span class="hljs-keyword">or</span> path.join(__dirname, <span class="hljs-string">'compiled'</span>)
 
   deferLibs = Q.defer()
   deferScripts = Q.defer()
   deferStyles = Q.defer()
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>JS</p>
-</div></div><div class="code"><div class="wrapper">  jsLibsPath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/js/libs"</span>
+  deferTemplates = Q.defer()
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Jade</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  templateFile = fs.readFileSync path.join(__dirname, <span class="hljs-string">'assets'</span>, <span class="hljs-string">'template.html'</span>)
+  render = _.template templateFile, <span class="hljs-literal">null</span>, <span class="hljs-attribute">variable</span>: <span class="hljs-string">'data'</span>
+
+  fs.writeFile path.join(finalDest, <span class="hljs-string">'template.js'</span>),
+    <span class="hljs-string">"var _ = require('lodash');\nmodule.exports = <span class="hljs-subst">#{render.source}</span>;"</span>,
+    deferTemplates.makeNodeResolver()
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>JS</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  jsLibsPath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/js/libs"</span>
   jsPath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/js"</span>
 
   vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{jsLibsPath}</span>/**/*.js"</span>)
@@ -31,8 +101,21 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   .pipe(uglify(<span class="hljs-attribute">output</span>: {<span class="hljs-attribute">comments</span>: <span class="hljs-regexp">/^!|@preserve|@license|@cc_on/i</span>}))
   .pipe(vfs.dest(finalDest))
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferScripts.resolve
-</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>SCSS</p>
-</div></div><div class="code"><div class="wrapper">  vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/css/style.scss"</span>)
+</div>
+        </div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>SCSS</p>
+</div>
+        </div>
+      
+      
+        <div class="code">
+          <div class="wrapper">  vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/css/style.scss"</span>)
   .pipe(scss
     <span class="hljs-attribute">includePaths</span>: [<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/css"</span>]
     <span class="hljs-attribute">outputStyle</span>: <span class="hljs-string">'compressed'</span>
@@ -44,6 +127,19 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   <span class="hljs-keyword">return</span> Q.allSettled [
     deferLibs.promise
     deferScripts.promise
-    deferStyles.promise
+    deferStyles.promise,
+    deferTemplates.promise
   ]
-</div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>
+</div>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>

@@ -1,8 +1,50 @@
-<!DOCTYPE html><html lang="en"><head><title>log.coffee</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="lib/utils/log.coffee"><meta name="groc-repository-url" content="https://github.com/killercup/grock"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"></head><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/killercup/grock/blob/master/lib/utils/log.coffee">lib/utils/log.coffee</a></code></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'chalk'</span>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>log.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/utils/log.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/utils/log.coffee">lib/utils/log.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+      
+        <div class="code">
+          <div class="wrapper">colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'chalk'</span>
 
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = -&gt;</span>
   sig = <span class="hljs-string">"["</span> + colors.green(<span class="hljs-string">"grock"</span>) + <span class="hljs-string">"]"</span>
   args = <span class="hljs-attribute">Array</span>::slice.call(arguments)
   args.unshift sig
   <span class="hljs-built_in">console</span>.log.apply <span class="hljs-built_in">console</span>, args
-  <span class="hljs-keyword">this</span></div></div></div></div></div><script type="text/javascript" src="../../toc.js"></script><script type="text/javascript" src="../../assets/libs.js"></script><script type="text/javascript" src="../../assets/behavior.js"></script></body></html>
+  <span class="hljs-keyword">this</span></div>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>
