@@ -54,8 +54,12 @@ renderer.listitem = (text) ->
 ###
 setHeadingRenderer = (renderer, toc) ->
   renderer.heading = (text, level) ->
-    slug = text.toLowerCase().replace(/[^\w]+/g, '-')
-    toc.push level: level, slug: slug, title: text
+    # Trim HTML Tags from heading
+    heading = text.replace(/<(?:.|\n)*?>/gm, '')
+    # Remove spaces to form slug
+    slug = heading.toLowerCase().replace(/[^\w]+/g, '-')
+
+    toc.push level: level, slug: slug, title: heading
 
     return """<h#{level} id="#{slug}"><a href="##{slug}" class="anchor"></a>#{text}</h#{level}>"""
 
