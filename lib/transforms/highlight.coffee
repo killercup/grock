@@ -18,9 +18,10 @@ Buffer = require('buffer').Buffer
 ###
 highlightSegment = (code, lang='AUTO') ->
   if lang isnt 'AUTO'
-    hljs.highlight(lang, code, true).value
+    value = hljs.highlight(lang, code, true).value
   else
-    hljs.highlightAuto(code).value
+    value = hljs.highlightAuto(code).value
+  value = value.replace /^[\n]+/, ''
 
 module.exports = (options) ->
   modifyFile = (file, cb) ->
