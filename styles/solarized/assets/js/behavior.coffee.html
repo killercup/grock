@@ -32,11 +32,8 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-$ = Zepto <span class="hljs-keyword">or</span> jQuery
-</div>
-        </div>
+        <div class="code"><div class="wrapper">$ = Zepto <span class="hljs-keyword">or</span> jQuery
+</div></div>
       
       </div>
     
@@ -62,8 +59,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">listToTree</span> = <span class="hljs-params">(list)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">listToTree</span> = <span class="hljs-params">(list)</span> -&gt;</span>
   tree = {}
 
   <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> list
@@ -90,8 +86,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         cur = cur[part].children <span class="hljs-keyword">or</span>= {}
 
   <span class="hljs-keyword">return</span> tree
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -114,8 +109,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">tocToTree</span> = <span class="hljs-params">(toc)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">tocToTree</span> = <span class="hljs-params">(toc)</span> -&gt;</span>
   headlines = []
   last = {}
 
@@ -130,8 +124,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
 
   <span class="hljs-keyword">return</span> headlines
 
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -152,8 +145,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildFileTree</span> = <span class="hljs-params">(tree, ul, metaInfo)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildFileTree</span> = <span class="hljs-params">(tree, ul, metaInfo)</span> -&gt;</span>
   $ul = $(ul)
   <span class="hljs-keyword">unless</span> tree?
     <span class="hljs-built_in">console</span>.warn <span class="hljs-string">'No File Tree!'</span>
@@ -180,8 +172,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
 
   <span class="hljs-keyword">return</span> $ul
 
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -202,8 +193,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildHeadlinesTree</span> = <span class="hljs-params">(tree, ul, metaInfo)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildHeadlinesTree</span> = <span class="hljs-params">(tree, ul, metaInfo)</span> -&gt;</span>
   ul = $(ul)
   <span class="hljs-keyword">unless</span> tree?.length
     <span class="hljs-keyword">return</span> ul
@@ -220,8 +210,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
     <span class="hljs-keyword">return</span>
 
   <span class="hljs-keyword">return</span> ul
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -237,8 +226,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">createNav</span> = <span class="hljs-params">(metaInfo)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">createNav</span> = <span class="hljs-params">(metaInfo)</span> -&gt;</span>
   $nav = $ <span class="hljs-string">"""
     &lt;aside id="side-menu"&gt;
       &lt;nav id="headlines"&gt;
@@ -267,8 +255,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
   """</span>
 
   <span class="hljs-keyword">return</span> $nav
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -287,8 +274,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">createMenuToggle</span> = <span class="hljs-params">($container, $nav)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">createMenuToggle</span> = <span class="hljs-params">($container, $nav)</span> -&gt;</span>
   $button = $ <span class="hljs-string">"""&lt;button type="button" class="toggle-menu"&gt;
     Menu
   &lt;/button&gt;"""</span>
@@ -296,8 +282,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
   $button.<span class="hljs-literal">on</span> <span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
     event.preventDefault()
     $nav.toggleClass(<span class="hljs-string">'open'</span>)
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -314,13 +299,10 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-  $container.prepend $button
+        <div class="code"><div class="wrapper">  $container.prepend $button
 
   <span class="hljs-keyword">return</span> $container
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -338,9 +320,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">searchTree</span> = <span class="hljs-params">($tree, $search)</span> -&gt;</span></div>
-        </div>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">searchTree</span> = <span class="hljs-params">($tree, $search)</span> -&gt;</span></div></div>
       
       </div>
     
@@ -359,8 +339,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  throttle = <span class="hljs-keyword">do</span><span class="hljs-function"> -&gt;</span>
+        <div class="code"><div class="wrapper">  throttle = <span class="hljs-keyword">do</span><span class="hljs-function"> -&gt;</span>
     <span class="hljs-attribute">timer</span>: <span class="hljs-literal">null</span>
     <span class="hljs-function"><span class="hljs-params">(fn, timeout=<span class="hljs-number">100</span>)</span> -&gt;</span>
       <span class="hljs-built_in">window</span>.clearTimeout timer <span class="hljs-keyword">if</span> timer
@@ -368,8 +347,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         timer = <span class="hljs-literal">null</span>
         fn?()
       ), timeout
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -388,8 +366,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  <span class="hljs-function"><span class="hljs-title">search</span> = <span class="hljs-params">($tree, value)</span> -&gt;</span>
+        <div class="code"><div class="wrapper">  <span class="hljs-function"><span class="hljs-title">search</span> = <span class="hljs-params">($tree, value)</span> -&gt;</span>
     value = value.trim().toLowerCase()
     $tree.find(<span class="hljs-string">'.matched'</span>).removeClass <span class="hljs-string">'matched'</span>
 
@@ -402,8 +379,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
     $tree.find<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'a'</span>)</span>.<span class="hljs-title">each</span> <span class="hljs-params">(index, item)</span> -&gt;</span>
       $item = $(item)
       <span class="hljs-keyword">if</span> $item.text().toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span> <span class="hljs-keyword">or</span> $item.attr(<span class="hljs-string">'href'</span>).toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>
-        $item.addClass <span class="hljs-string">'matched'</span></div>
-        </div>
+        $item.addClass <span class="hljs-string">'matched'</span></div></div>
       
       </div>
     
@@ -415,8 +391,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        $item.parents(<span class="hljs-string">'li'</span>).children(<span class="hljs-string">'.label'</span>).addClass <span class="hljs-string">'matched'</span>
+        <div class="code"><div class="wrapper">        $item.parents(<span class="hljs-string">'li'</span>).children(<span class="hljs-string">'.label'</span>).addClass <span class="hljs-string">'matched'</span>
       <span class="hljs-keyword">return</span>
 
   value = <span class="hljs-literal">null</span>
@@ -427,8 +402,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
     value = newVal
     throttle<span class="hljs-function"> -&gt;</span>
       search($tree, value)
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -440,15 +414,13 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  $search.<span class="hljs-literal">on</span> <span class="hljs-string">'keydown'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
+        <div class="code"><div class="wrapper">  $search.<span class="hljs-literal">on</span> <span class="hljs-string">'keydown'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> event.keyCode == <span class="hljs-number">27</span> <span class="hljs-comment"># Esc</span>
       <span class="hljs-keyword">if</span> $search.val().trim() <span class="hljs-keyword">is</span> <span class="hljs-string">''</span>
         $search.blur()
       <span class="hljs-keyword">else</span>
         $search.val <span class="hljs-string">''</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -467,12 +439,10 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildNav</span> = <span class="hljs-params">(files, metaInfo)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildNav</span> = <span class="hljs-params">(files, metaInfo)</span> -&gt;</span>
   <span class="hljs-keyword">return</span> $(<span class="hljs-string">''</span>) <span class="hljs-keyword">unless</span> files
   $nav = createNav(metaInfo)
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -484,13 +454,11 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files
     <span class="hljs-keyword">if</span> file.originalPath <span class="hljs-keyword">is</span> metaInfo.documentPath
       metaInfo.currentFile = file
       <span class="hljs-keyword">break</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -502,12 +470,10 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  fileTree = listToTree(files)
+        <div class="code"><div class="wrapper">  fileTree = listToTree(files)
   buildFileTree(fileTree, $nav.find(<span class="hljs-string">'#file-tree'</span>), metaInfo)
   searchTree($nav.find(<span class="hljs-string">'#file-tree'</span>), $nav.find(<span class="hljs-string">'#search-files'</span>))
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -519,8 +485,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  <span class="hljs-keyword">if</span> metaInfo.currentFile
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">if</span> metaInfo.currentFile
     headlineTree = tocToTree(metaInfo.currentFile.toc <span class="hljs-keyword">or</span> [])
 
     buildHeadlinesTree(headlineTree, $nav.find(<span class="hljs-string">'#headline-tree'</span>), metaInfo)
@@ -544,8 +509,7 @@ $<span class="hljs-function"> -&gt;</span>
   <span class="hljs-built_in">window</span>.tocToTree = tocToTree
 
 
-</div>
-        </div>
+</div></div>
       
       </div>
     

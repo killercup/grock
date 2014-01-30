@@ -40,16 +40,14 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+        <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
 map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
 prettyTime = <span class="hljs-built_in">require</span> <span class="hljs-string">'pretty-hrtime'</span>
 colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'chalk'</span>
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -60,11 +58,9 @@ Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</sp
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">t = <span class="hljs-built_in">require</span> <span class="hljs-string">'./transforms'</span>
+        <div class="code"><div class="wrapper">t = <span class="hljs-built_in">require</span> <span class="hljs-string">'./transforms'</span>
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/log'</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -84,13 +80,11 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">START = process.hrtime()
+        <div class="code"><div class="wrapper">START = process.hrtime()
 
 <span class="hljs-function"><span class="hljs-title">duration</span> = <span class="hljs-params">(start)</span> -&gt;</span>
   colors.magenta prettyTime process.hrtime(start)
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -101,16 +95,14 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(opts)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(opts)</span> -&gt;</span>
   {glob, style, out, verbose, start, index, root} = opts
   verbose <span class="hljs-keyword">or</span>= <span class="hljs-literal">false</span>
   start <span class="hljs-keyword">or</span>= START
 
   log <span class="hljs-string">'Beginning to process'</span>, (<span class="hljs-keyword">if</span> verbose <span class="hljs-keyword">then</span> glob <span class="hljs-keyword">else</span> <span class="hljs-string">''</span>), duration(start)
   deferred = Q.defer()
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -122,10 +114,8 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  style = <span class="hljs-built_in">require</span> <span class="hljs-string">"../styles/<span class="hljs-subst">#{style}</span>"</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">  style = <span class="hljs-built_in">require</span> <span class="hljs-string">"../styles/<span class="hljs-subst">#{style}</span>"</span>
+</div></div>
       
       </div>
     
@@ -137,13 +127,11 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  dest = out <span class="hljs-keyword">or</span> <span class="hljs-string">'docs/'</span>
+        <div class="code"><div class="wrapper">  dest = out <span class="hljs-keyword">or</span> <span class="hljs-string">'docs/'</span>
   log <span class="hljs-string">'Writing to'</span>, dest
   <span class="hljs-keyword">unless</span> fs.existsSync dest
     fs.mkdirSync dest
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -154,12 +142,10 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
+        <div class="code"><div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
   .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> file.stat.isFile() <span class="hljs-keyword">then</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">else</span> cb()
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div>
-        </div>
+  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div>
       
       </div>
     
@@ -171,8 +157,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    file.timingStart = process.hrtime()
+        <div class="code"><div class="wrapper">    file.timingStart = process.hrtime()
     cb(<span class="hljs-literal">null</span>, file)
   .pipe t.getLanguage()
   .pipe t.splitCodeAndComments()
@@ -183,8 +168,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
   .pipe t.indexFile(index)
   .pipe vfs.dest(dest)
   .pipe t.renderFileTree(path.join(dest, <span class="hljs-string">"toc.js"</span>), <span class="hljs-attribute">verbose</span>: verbose)
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div>
-        </div>
+  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div>
       
       </div>
     
@@ -196,12 +180,10 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    log file.relative, duration(file.timingStart) <span class="hljs-keyword">if</span> verbose
+        <div class="code"><div class="wrapper">    log file.relative, duration(file.timingStart) <span class="hljs-keyword">if</span> verbose
     cb(<span class="hljs-literal">null</span>, file)
   .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferred.reject
-  .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>,<span class="hljs-function"> -&gt;</span></div>
-        </div>
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>,<span class="hljs-function"> -&gt;</span></div></div>
       
       </div>
     
@@ -212,8 +194,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    assetsTiming = process.hrtime()
+        <div class="code"><div class="wrapper">    assetsTiming = process.hrtime()
     style.copy(<span class="hljs-attribute">dest</span>: dest)
     .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
       log <span class="hljs-string">"Style copied"</span>, duration(assetsTiming) <span class="hljs-keyword">if</span> verbose
@@ -224,8 +205,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
       <span class="hljs-built_in">console</span>.log(err) <span class="hljs-keyword">if</span> verbose
       deferred.reject()
 
-  <span class="hljs-keyword">return</span> deferred.promise</div>
-        </div>
+  <span class="hljs-keyword">return</span> deferred.promise</div></div>
       
       </div>
     

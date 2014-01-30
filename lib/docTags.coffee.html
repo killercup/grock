@@ -33,11 +33,8 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/humanize'</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/humanize'</span>
+</div></div>
       
       </div>
     
@@ -55,11 +52,9 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-function"><span class="hljs-title">collapse_space</span> = <span class="hljs-params">(value)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">collapse_space</span> = <span class="hljs-params">(value)</span> -&gt;</span>
   value.replace <span class="hljs-regexp">/\s+/g</span>, <span class="hljs-string">' '</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -72,8 +67,7 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = DOC_TAGS =
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = DOC_TAGS =
   <span class="hljs-attribute">description</span>:
     <span class="hljs-attribute">section</span>:     <span class="hljs-string">'description'</span>
     <span class="hljs-attribute">markdown</span>:    <span class="hljs-string">'{value}'</span>
@@ -158,8 +152,7 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
   <span class="hljs-attribute">howto</span>:
     <span class="hljs-attribute">section</span>:     <span class="hljs-string">'howto'</span>
     <span class="hljs-attribute">markdown</span>:    <span class="hljs-string">'{value}'</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -171,14 +164,12 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  <span class="hljs-attribute">note</span>:
+        <div class="code"><div class="wrapper">  <span class="hljs-attribute">note</span>:
     <span class="hljs-attribute">section</span>:     <span class="hljs-string">'discard'</span>
   <span class="hljs-attribute">notes</span>:         <span class="hljs-string">'note'</span>
 
   <span class="hljs-attribute">param</span>:
-    <span class="hljs-attribute">section</span>:     <span class="hljs-string">'params'</span></div>
-        </div>
+    <span class="hljs-attribute">section</span>:     <span class="hljs-string">'params'</span></div></div>
       
       </div>
     
@@ -196,8 +187,7 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    <span class="hljs-attribute">parseValue</span>:  <span class="hljs-function"><span class="hljs-params">(value)</span> -&gt;</span>
+        <div class="code"><div class="wrapper">    <span class="hljs-attribute">parseValue</span>:  <span class="hljs-function"><span class="hljs-params">(value)</span> -&gt;</span>
       parts = collapse_space(value).match <span class="hljs-regexp">/^\{([^\}]+)\}\s+(\[?)([\w\.\$]+)(?:=([^\s\]]+))?(\]?)\s*(.*)$/</span>
       <span class="hljs-attribute">types</span>:        (parts[<span class="hljs-number">1</span>]?.split <span class="hljs-regexp">/\|{1,2}/g</span>)
       <span class="hljs-attribute">isOptional</span>:   (parts[<span class="hljs-number">2</span>] == <span class="hljs-string">'['</span> <span class="hljs-keyword">and</span> parts[<span class="hljs-number">5</span>] == <span class="hljs-string">']'</span>)
@@ -205,8 +195,7 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
       <span class="hljs-attribute">isSubParam</span>:   <span class="hljs-regexp">/\./</span>.test parts[<span class="hljs-number">3</span>]
       <span class="hljs-attribute">defaultValue</span>: parts[<span class="hljs-number">4</span>]
       <span class="hljs-attribute">description</span>:  parts[<span class="hljs-number">6</span>]
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -239,8 +228,7 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    <span class="hljs-attribute">markdown</span>:    <span class="hljs-function"><span class="hljs-params">(value)</span> -&gt;</span>
+        <div class="code"><div class="wrapper">    <span class="hljs-attribute">markdown</span>:    <span class="hljs-function"><span class="hljs-params">(value)</span> -&gt;</span>
       types = (
         <span class="hljs-keyword">for</span> type <span class="hljs-keyword">in</span> value.types
           <span class="hljs-keyword">if</span> type.match <span class="hljs-regexp">/^\.\.\.|\.\.\.$/</span>
@@ -299,8 +287,7 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
   <span class="hljs-attribute">defaultNoValue</span>:
     <span class="hljs-attribute">section</span>:     <span class="hljs-string">'flag'</span>
   <span class="hljs-attribute">defaultHasValue</span>:
-    <span class="hljs-attribute">section</span>:     <span class="hljs-string">'metadata'</span></div>
-        </div>
+    <span class="hljs-attribute">section</span>:     <span class="hljs-string">'metadata'</span></div></div>
       
       </div>
     

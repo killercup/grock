@@ -33,9 +33,7 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+        <div class="code"><div class="wrapper">fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
 Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
@@ -49,8 +47,7 @@ Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'b
     file.originalPath = file.path
     file.originalRelative = file.relative
     file.path = file.path + <span class="hljs-string">".html"</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -61,8 +58,7 @@ Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'b
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    templateContext =
+        <div class="code"><div class="wrapper">    templateContext =
       <span class="hljs-attribute">pageTitle</span>: path.basename file.originalRelative
       <span class="hljs-attribute">segments</span>: file.segments
       <span class="hljs-attribute">targetPath</span>: file.originalRelative
@@ -85,8 +81,7 @@ Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'b
     <span class="hljs-keyword">return</span>
 
   <span class="hljs-keyword">return</span> map(modifyFile)
-</div>
-        </div>
+</div></div>
       
       </div>
     

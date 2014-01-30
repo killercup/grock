@@ -31,11 +31,8 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+</div></div>
       
       </div>
     
@@ -48,11 +45,9 @@ via <a href="http://blog.simonwillison.net/post/57956816139/escape">http://blog.
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">regexpEscapePattern = <span class="hljs-regexp">/[-[\]{}()*+?.,\\^$|#\s]/g</span>
+        <div class="code"><div class="wrapper">regexpEscapePattern = <span class="hljs-regexp">/[-[\]{}()*+?.,\\^$|#\s]/g</span>
 regexpEscapeReplace = <span class="hljs-string">'\\$&amp;'</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -71,16 +66,14 @@ Strings or any Object having a proper toString-method.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-function"><span class="hljs-title">regexpEscape</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-function"><span class="hljs-title">regexpEscape</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
   <span class="hljs-keyword">if</span> _.isArray obj
     _.invoke(obj, <span class="hljs-string">'replace'</span>, regexpEscapePattern, regexpEscapeReplace)
   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> _.isString obj
     obj.replace(regexpEscapePattern, regexpEscapeReplace)
   <span class="hljs-keyword">else</span>
     regexpEscape <span class="hljs-string">"<span class="hljs-subst">#{obj}</span>"</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     

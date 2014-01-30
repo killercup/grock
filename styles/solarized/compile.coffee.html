@@ -31,9 +31,7 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+        <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
@@ -51,8 +49,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   deferScripts = Q.defer()
   deferStyles = Q.defer()
   deferTemplates = Q.defer()
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -64,15 +61,13 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  templateFile = fs.readFileSync path.join(__dirname, <span class="hljs-string">'assets'</span>, <span class="hljs-string">'template.html'</span>)
+        <div class="code"><div class="wrapper">  templateFile = fs.readFileSync path.join(__dirname, <span class="hljs-string">'assets'</span>, <span class="hljs-string">'template.html'</span>)
   render = _.template templateFile, <span class="hljs-literal">null</span>, <span class="hljs-attribute">variable</span>: <span class="hljs-string">'data'</span>
 
   fs.writeFile path.join(finalDest, <span class="hljs-string">'template.js'</span>),
     <span class="hljs-string">"var _ = require('lodash');\nmodule.exports = <span class="hljs-subst">#{render.source}</span>;"</span>,
     deferTemplates.makeNodeResolver()
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -84,8 +79,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  jsLibsPath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/js/libs"</span>
+        <div class="code"><div class="wrapper">  jsLibsPath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/js/libs"</span>
   jsPath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/js"</span>
 
   vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{jsLibsPath}</span>/**/*.js"</span>)
@@ -101,8 +95,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   .pipe(uglify(<span class="hljs-attribute">output</span>: {<span class="hljs-attribute">comments</span>: <span class="hljs-regexp">/^!|@preserve|@license|@cc_on/i</span>}))
   .pipe(vfs.dest(finalDest))
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferScripts.resolve
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -114,8 +107,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/css/style.scss"</span>)
+        <div class="code"><div class="wrapper">  vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/css/style.scss"</span>)
   .pipe(scss
     <span class="hljs-attribute">includePaths</span>: [<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/assets/css"</span>]
     <span class="hljs-attribute">outputStyle</span>: <span class="hljs-string">'compressed'</span>
@@ -130,8 +122,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
     deferStyles.promise,
     deferTemplates.promise
   ]
-</div>
-        </div>
+</div></div>
       
       </div>
     

@@ -33,9 +33,7 @@
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">
-_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+        <div class="code"><div class="wrapper">_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
 
 regexpEscape = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./regexpEscape'</span>)
 languages = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../languages'</span>)
@@ -46,8 +44,7 @@ languages = <span class="hljs-built_in">require</span>(<span class="hljs-string"
     <span class="hljs-attribute">comments</span>: comments
     <span class="hljs-attribute">foldMarker</span>: foldMarker
   }
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -59,11 +56,9 @@ languages = <span class="hljs-built_in">require</span>(<span class="hljs-string"
         </div>
       
       
-        <div class="code">
-          <div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(data=<span class="hljs-string">''</span>, language=languages.JavaScript, options={})</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(data=<span class="hljs-string">''</span>, language=languages.JavaScript, options={})</span> -&gt;</span>
   lines = data.split <span class="hljs-regexp">/\r?\n/</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -76,10 +71,8 @@ avoid the perf hit of walking the array to update indices.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  lines[<span class="hljs-number">0</span>] = <span class="hljs-string">''</span> <span class="hljs-keyword">if</span> lines[<span class="hljs-number">0</span>][<span class="hljs-number">0.</span><span class="hljs-number">.1</span>] <span class="hljs-keyword">is</span> <span class="hljs-string">'#!'</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">  lines[<span class="hljs-number">0</span>] = <span class="hljs-string">''</span> <span class="hljs-keyword">if</span> lines[<span class="hljs-number">0</span>][<span class="hljs-number">0.</span><span class="hljs-number">.1</span>] <span class="hljs-keyword">is</span> <span class="hljs-string">'#!'</span>
+</div></div>
       
       </div>
     
@@ -91,10 +84,8 @@ avoid the perf hit of walking the array to update indices.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  <span class="hljs-keyword">return</span> [Segment [], lines] <span class="hljs-keyword">if</span> language.commentsOnly
-</div>
-        </div>
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">return</span> [Segment [], lines] <span class="hljs-keyword">if</span> language.commentsOnly
+</div></div>
       
       </div>
     
@@ -106,13 +97,11 @@ avoid the perf hit of walking the array to update indices.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  <span class="hljs-keyword">return</span> [Segment lines, []] <span class="hljs-keyword">if</span> language.codeOnly
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">return</span> [Segment lines, []] <span class="hljs-keyword">if</span> language.codeOnly
 
   segments = []
   currSegment = Segment()
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -124,16 +113,14 @@ avoid the perf hit of walking the array to update indices.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  whitespaceMatch = <span class="hljs-keyword">if</span> options.requireWhitespaceAfterToken <span class="hljs-keyword">then</span> <span class="hljs-string">'\\s'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'\\s?'</span>
+        <div class="code"><div class="wrapper">  whitespaceMatch = <span class="hljs-keyword">if</span> options.requireWhitespaceAfterToken <span class="hljs-keyword">then</span> <span class="hljs-string">'\\s'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'\\s?'</span>
 
   <span class="hljs-keyword">if</span> language.singleLineComment?
     singleLines = regexpEscape(language.singleLineComment).join <span class="hljs-string">'|'</span>
     aSingleLine = <span class="hljs-regexp">///
       ^\s*                        <span class="hljs-comment"># Start a line and skip all indention.</span>
       (?:<span class="hljs-subst">#{singleLines}</span>)          <span class="hljs-comment"># Match the single-line start but don't capture this group.</span>
-      (?:                         <span class="hljs-comment"># Also don't capture this group …</span></span></div>
-        </div>
+      (?:                         <span class="hljs-comment"># Also don't capture this group …</span></span></div></div>
       
       </div>
     
@@ -145,8 +132,7 @@ avoid the perf hit of walking the array to update indices.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        (.*)                      <span class="hljs-comment"># … capture anything else in this …</span>
+        <div class="code"><div class="wrapper">        (.*)                      <span class="hljs-comment"># … capture anything else in this …</span>
       )?                          <span class="hljs-comment"># … optional group …</span>
       $                           <span class="hljs-comment"># … up to the EOL.</span>
     <span class="hljs-regexp">///
@@ -161,8 +147,7 @@ avoid the perf hit of walking the array to update indices.</p>
     blockStarts = _.select mlc, (v, i) -&gt; i % 3 == 0
     blockLines  = _.select mlc, (v, i) -&gt; i % 3 == 1
     blockEnds   = _.select mlc, (v, i) -&gt; i % 3 == 2
-</span></div>
-        </div>
+</span></div></div>
       
       </div>
     
@@ -179,10 +164,8 @@ combinations like html+php, which are supported by <code>pygmentize</code>.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    strictMultiLineEnd = language.strictMultiLineEnd ? <span class="hljs-literal">true</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">    strictMultiLineEnd = language.strictMultiLineEnd ? <span class="hljs-literal">true</span>
+</div></div>
       
       </div>
     
@@ -194,8 +177,7 @@ combinations like html+php, which are supported by <code>pygmentize</code>.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    blockComments = {}
+        <div class="code"><div class="wrapper">    blockComments = {}
     <span class="hljs-keyword">for</span> v, i <span class="hljs-keyword">in</span> blockStarts
       blockComments[v] =
         <span class="hljs-attribute">linemark</span>: blockLines[i]
@@ -204,8 +186,7 @@ combinations like html+php, which are supported by <code>pygmentize</code>.</p>
     blockStarts = regexpEscape(blockStarts).join <span class="hljs-string">'|'</span>
     blockLines  = regexpEscape(blockLines).join <span class="hljs-string">'|'</span>
     blockEnds   = regexpEscape(blockEnds).join <span class="hljs-string">'|'</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -219,8 +200,7 @@ handles the real content, in the implementation below.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    aBlockStart = <span class="hljs-regexp">///
+        <div class="code"><div class="wrapper">    aBlockStart = <span class="hljs-regexp">///
       ^(\s*)                      <span class="hljs-comment"># Start a line and capture indention, used to reverse indent catch-all fallback lines.</span>
       (<span class="hljs-subst">#{blockStarts}</span>)            <span class="hljs-comment"># Capture the start-mark, to check the if line- and end-marks correspond, …</span>
       (<span class="hljs-subst">#{blockLines}</span>)?            <span class="hljs-comment"># … possibly followed by a line, captured to check if its corresponding to the start,</span>
@@ -238,8 +218,7 @@ handles the real content, in the implementation below.</p>
       (<span class="hljs-subst">#{blockEnds}</span>)              <span class="hljs-comment"># Capture the end-mark to check if it corresponds to the line start,</span>
       (.*)?$                      <span class="hljs-comment"># … and collect all up to the line end.</span>
     ///</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -253,8 +232,7 @@ below this line …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    aEmptyLine = <span class="hljs-regexp">///^\s*(?:<span class="hljs-subst">#{blockLines}</span>)$///</span>
+        <div class="code"><div class="wrapper">    aEmptyLine = <span class="hljs-regexp">///^\s*(?:<span class="hljs-subst">#{blockLines}</span>)$///</span>
 
   <span class="hljs-keyword">if</span> language.ignorePrefix?
     {ignorePrefix} = language
@@ -267,8 +245,7 @@ below this line …</p>
     stripMarks.push ignorePrefix <span class="hljs-keyword">if</span> ignorePrefix?
     stripMarks.push foldPrefix <span class="hljs-keyword">if</span> foldPrefix?
     stripMarks = regexpEscape(stripMarks).join <span class="hljs-string">'|'</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -280,11 +257,9 @@ below this line …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    singleStrip = <span class="hljs-regexp">///
+        <div class="code"><div class="wrapper">    singleStrip = <span class="hljs-regexp">///
       (                           <span class="hljs-comment"># Capture this group:</span>
-        (?:<span class="hljs-subst">#{singleLines}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span></span></div>
-        </div>
+        (?:<span class="hljs-subst">#{singleLines}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span></span></div></div>
       
       </div>
     
@@ -296,12 +271,10 @@ below this line …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      )
+        <div class="code"><div class="wrapper">      )
       (?:<span class="hljs-comment">#{stripMarks})           # The marker(s) to strip from result</span>
     <span class="hljs-regexp">/// if singleLines?
-</span></div>
-        </div>
+</span></div></div>
       
       </div>
     
@@ -313,12 +286,10 @@ below this line …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    blockStrip = <span class="hljs-regexp">///
+        <div class="code"><div class="wrapper">    blockStrip = <span class="hljs-regexp">///
       (                           <span class="hljs-comment"># Capture this group:</span>
         (?:<span class="hljs-subst">#{blockStarts}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span>
-        (?:<span class="hljs-subst">#{blockLines}</span>)?        <span class="hljs-comment">#   … optionally plus one more mark</span></span></div>
-        </div>
+        (?:<span class="hljs-subst">#{blockLines}</span>)?        <span class="hljs-comment">#   … optionally plus one more mark</span></span></div></div>
       
       </div>
     
@@ -330,16 +301,14 @@ below this line …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      )
+        <div class="code"><div class="wrapper">      )
       (?:<span class="hljs-comment">#{stripMarks})           # The marker(s) to strip from result</span>
     <span class="hljs-regexp">/// if blockStarts?
 
   inBlock   = false
   inFolded  = false
   inIgnored = false
-</span></div>
-        </div>
+</span></div></div>
       
       </div>
     
@@ -352,8 +321,7 @@ documentation purposes only.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">  blockline = <span class="hljs-literal">null</span>
+        <div class="code"><div class="wrapper">  blockline = <span class="hljs-literal">null</span>
   blockmark = <span class="hljs-literal">null</span>
   linemark  = <span class="hljs-literal">null</span>
   space     = <span class="hljs-literal">null</span>
@@ -363,8 +331,7 @@ documentation purposes only.</p>
   code      = <span class="hljs-literal">null</span>
 
   <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -376,11 +343,9 @@ documentation purposes only.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    <span class="hljs-keyword">if</span> aBlockStart? <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> inBlock <span class="hljs-keyword">and</span> (match = line.match aBlockStart)?
+        <div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> aBlockStart? <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> inBlock <span class="hljs-keyword">and</span> (match = line.match aBlockStart)?
       inBlock = <span class="hljs-literal">true</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -392,10 +357,8 @@ documentation purposes only.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      [match, indention, blockmark, linemark] = match
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      [match, indention, blockmark, linemark] = match
+</div></div>
       
       </div>
     
@@ -408,10 +371,8 @@ We don&#39;t touch the <code>line</code> itself, as we still need it.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      blockline = line.replace aBlockStart, <span class="hljs-string">''</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      blockline = line.replace aBlockStart, <span class="hljs-string">''</span>
+</div></div>
       
       </div>
     
@@ -424,11 +385,9 @@ does not correspond to the initial <code>blockmark</code>.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      <span class="hljs-keyword">if</span> linemark? <span class="hljs-keyword">and</span> blockComments[blockmark].linemark <span class="hljs-keyword">isnt</span> linemark
+        <div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> linemark? <span class="hljs-keyword">and</span> blockComments[blockmark].linemark <span class="hljs-keyword">isnt</span> linemark
         blockline = <span class="hljs-string">"<span class="hljs-subst">#{linemark}</span><span class="hljs-subst">#{blockline}</span>"</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -440,10 +399,8 @@ does not correspond to the initial <code>blockmark</code>.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      <span class="hljs-keyword">if</span> foldPrefix? <span class="hljs-keyword">and</span> blockline.indexOf(foldPrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> foldPrefix? <span class="hljs-keyword">and</span> blockline.indexOf(foldPrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+</div></div>
       
       </div>
     
@@ -456,26 +413,22 @@ already folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        <span class="hljs-keyword">if</span> inFolded <span class="hljs-keyword">or</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+        <div class="code"><div class="wrapper">        <span class="hljs-keyword">if</span> inFolded <span class="hljs-keyword">or</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
           segments.push currSegment
           currSegment   = Segment()
-</div>
-        </div>
+</div></div>
       
       </div>
     
       <div class="segment">
       
       
-        <div class="code">
-          <div class="wrapper">        <span class="hljs-comment">###  collapsing block-comments:
+        <div class="code"><div class="wrapper">        <span class="hljs-comment">###  collapsing block-comments:
         # In block-comments only `aBlockStart` may initiate the collapsing.
         # This comment utilizes this syntax, by starting the comment with `^`.
         ###</span>
         inFolded  = <span class="hljs-literal">true</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -487,9 +440,7 @@ already folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        line = line.replace blockStrip, <span class="hljs-string">'$1'</span></div>
-        </div>
+        <div class="code"><div class="wrapper">        line = line.replace blockStrip, <span class="hljs-string">'$1'</span></div></div>
       
       </div>
     
@@ -501,10 +452,8 @@ already folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        blockline = blockline[foldPrefix.length...]
-</div>
-        </div>
+        <div class="code"><div class="wrapper">        blockline = blockline[foldPrefix.length...]
+</div></div>
       
       </div>
     
@@ -516,15 +465,13 @@ already folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ignorePrefix? <span class="hljs-keyword">and</span> blockline.indexOf(ignorePrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        <div class="code"><div class="wrapper">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ignorePrefix? <span class="hljs-keyword">and</span> blockline.indexOf(ignorePrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
         <span class="hljs-comment">###  embedded block-comments:
         # In block-comments only `aBlockStart` may initiate the embedding.
         # This comment utilizes this syntax, by starting the comment with `}`.
         ###</span>
         inIgnored = <span class="hljs-literal">true</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -536,9 +483,7 @@ already folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        line = line.replace blockStrip, <span class="hljs-string">'$1'</span></div>
-        </div>
+        <div class="code"><div class="wrapper">        line = line.replace blockStrip, <span class="hljs-string">'$1'</span></div></div>
       
       </div>
     
@@ -550,10 +495,8 @@ already folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        blockline = blockline[ignorePrefix.length...]
-</div>
-        </div>
+        <div class="code"><div class="wrapper">        blockline = blockline[ignorePrefix.length...]
+</div></div>
       
       </div>
     
@@ -567,13 +510,11 @@ is not empty.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+        <div class="code"><div class="wrapper">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
         segments.push currSegment
         currSegment   = Segment()
         inFolded      = <span class="hljs-literal">false</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -585,10 +526,8 @@ is not empty.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    <span class="hljs-keyword">if</span> inBlock
-</div>
-        </div>
+        <div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> inBlock
+</div></div>
       
       </div>
     
@@ -600,10 +539,8 @@ is not empty.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      blockline = line <span class="hljs-keyword">unless</span> blockline?
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      blockline = line <span class="hljs-keyword">unless</span> blockline?
+</div></div>
       
       </div>
     
@@ -616,10 +553,8 @@ are true …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      <span class="hljs-keyword">if</span> (match = blockline.match aBlockEnd)?
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> (match = blockline.match aBlockEnd)?
+</div></div>
       
       </div>
     
@@ -631,10 +566,8 @@ are true …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        [match, endmark, code] = match
-</div>
-        </div>
+        <div class="code"><div class="wrapper">        [match, endmark, code] = match
+</div></div>
       
       </div>
     
@@ -646,10 +579,8 @@ are true …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> strictMultiLineEnd <span class="hljs-keyword">or</span> blockComments[blockmark].endmark <span class="hljs-keyword">is</span> endmark
-</div>
-        </div>
+        <div class="code"><div class="wrapper">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> strictMultiLineEnd <span class="hljs-keyword">or</span> blockComments[blockmark].endmark <span class="hljs-keyword">is</span> endmark
+</div></div>
       
       </div>
     
@@ -661,12 +592,10 @@ are true …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          inBlock = <span class="hljs-literal">false</span>
+        <div class="code"><div class="wrapper">          inBlock = <span class="hljs-literal">false</span>
 
           blockline = blockline.replace aBlockEnd, <span class="hljs-string">''</span> <span class="hljs-keyword">unless</span> (inFolded <span class="hljs-keyword">or</span> inIgnored)
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -678,10 +607,8 @@ are true …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (inFolded <span class="hljs-keyword">or</span> inIgnored) <span class="hljs-keyword">and</span> (match = blockline.match aBlockLine)?
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (inFolded <span class="hljs-keyword">or</span> inIgnored) <span class="hljs-keyword">and</span> (match = blockline.match aBlockLine)?
+</div></div>
       
       </div>
     
@@ -693,10 +620,8 @@ are true …</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        [match, linemark, space, comment] = match
-</div>
-        </div>
+        <div class="code"><div class="wrapper">        [match, linemark, space, comment] = match
+</div></div>
       
       </div>
     
@@ -709,16 +634,14 @@ if it does not correspond to the initial <code>blockmark</code>.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        <span class="hljs-keyword">if</span> linemark? <span class="hljs-keyword">and</span> blockComments[blockmark].linemark <span class="hljs-keyword">isnt</span> linemark
+        <div class="code"><div class="wrapper">        <span class="hljs-keyword">if</span> linemark? <span class="hljs-keyword">and</span> blockComments[blockmark].linemark <span class="hljs-keyword">isnt</span> linemark
           comment = <span class="hljs-string">"<span class="hljs-subst">#{linemark}</span><span class="hljs-subst">#{space ? <span class="hljs-string">''</span>}</span><span class="hljs-subst">#{comment}</span>"</span>
 
         blockline = comment
 
       <span class="hljs-keyword">if</span> inIgnored
         currSegment.code.push line
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -731,14 +654,12 @@ if we are going to leave the block.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">        inIgnored = <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> inBlock
+        <div class="code"><div class="wrapper">        inIgnored = <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> inBlock
 
       <span class="hljs-keyword">else</span>
 
         <span class="hljs-keyword">if</span> inFolded
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -750,11 +671,9 @@ if we are going to leave the block.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.foldMarker <span class="hljs-keyword">is</span> <span class="hljs-string">''</span>
+        <div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.foldMarker <span class="hljs-keyword">is</span> <span class="hljs-string">''</span>
             currSegment.foldMarker = line
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -766,12 +685,10 @@ if we are going to leave the block.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          currSegment.code.push line
+        <div class="code"><div class="wrapper">          currSegment.code.push line
 
         <span class="hljs-keyword">else</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -783,12 +700,10 @@ if we are going to leave the block.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+        <div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
             segments.push currSegment
             currSegment = Segment()
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -800,12 +715,10 @@ if we are going to leave the block.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          <span class="hljs-keyword">if</span> aEmptyLine.test line
+        <div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> aEmptyLine.test line
             currSegment.comments.push <span class="hljs-string">""</span>
 
-          <span class="hljs-keyword">else</span></div>
-        </div>
+          <span class="hljs-keyword">else</span></div></div>
       
       </div>
     
@@ -820,9 +733,7 @@ included.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-regexp">/^\s*$/</span>.test(blockline) <span class="hljs-keyword">or</span> (inBlock <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> aBlockStart.test line)</div>
-        </div>
+        <div class="code"><div class="wrapper">            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-regexp">/^\s*$/</span>.test(blockline) <span class="hljs-keyword">or</span> (inBlock <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> aBlockStart.test line)</div></div>
       
       </div>
     
@@ -835,13 +746,11 @@ to align their content with the initial blockmark.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">              <span class="hljs-keyword">if</span> indention? <span class="hljs-keyword">and</span> indention <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> aBlockLine.test line
+        <div class="code"><div class="wrapper">              <span class="hljs-keyword">if</span> indention? <span class="hljs-keyword">and</span> indention <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> aBlockLine.test line
                 blockline = blockline.replace <span class="hljs-regexp">///^<span class="hljs-subst">#{indention}</span>///</span>, <span class="hljs-string">''</span>
 
               currSegment.comments.push blockline
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -853,12 +762,10 @@ to align their content with the initial blockmark.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">            <span class="hljs-keyword">if</span> code?
+        <div class="code"><div class="wrapper">            <span class="hljs-keyword">if</span> code?
               currSegment.code.push code <span class="hljs-keyword">unless</span> inBlock <span class="hljs-comment"># fool-proof ?</span>
               code = <span class="hljs-literal">null</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -870,10 +777,8 @@ to align their content with the initial blockmark.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      blockline = <span class="hljs-literal">null</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">      blockline = <span class="hljs-literal">null</span>
+</div></div>
       
       </div>
     
@@ -888,10 +793,8 @@ block to start folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (match = line.match aSingleLine)?
-</div>
-        </div>
+        <div class="code"><div class="wrapper">    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (match = line.match aSingleLine)?
+</div></div>
       
       </div>
     
@@ -903,8 +806,7 @@ block to start folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">      [match, comment] = match
+        <div class="code"><div class="wrapper">      [match, comment] = match
 
       <span class="hljs-keyword">if</span> comment? <span class="hljs-keyword">and</span> comment <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
 
@@ -916,8 +818,7 @@ block to start folded.</p>
           <span class="hljs-comment">#  If we would do so the segments look visually not so appealing in</span>
           <span class="hljs-comment">#  the narrowed single-column-view, and we can not embed a series</span>
           <span class="hljs-comment">#  of comments like these here.</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -929,12 +830,10 @@ block to start folded.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          currSegment.code.push line.replace singleStrip, <span class="hljs-string">'$1'</span>
+        <div class="code"><div class="wrapper">          currSegment.code.push line.replace singleStrip, <span class="hljs-string">'$1'</span>
 
         <span class="hljs-keyword">else</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -947,13 +846,11 @@ and stop any folding.</p>
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
+        <div class="code"><div class="wrapper">          <span class="hljs-keyword">if</span> currSegment.code.length &gt; <span class="hljs-number">0</span>
             segments.push currSegment
             currSegment   = Segment()
             inFolded      = <span class="hljs-literal">false</span>
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -972,13 +869,11 @@ TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in sin
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">          <span class="hljs-comment">#  … if we start this comment with “^” instead of “}” it and all</span>
+        <div class="code"><div class="wrapper">          <span class="hljs-comment">#  … if we start this comment with “^” instead of “}” it and all</span>
           <span class="hljs-comment">#  code up to the next segment's first comment starts folded</span>
           <span class="hljs-keyword">if</span> foldPrefix? <span class="hljs-keyword">and</span> comment.indexOf(foldPrefix) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
 
-            <span class="hljs-comment">#  … so folding stops below, as this is a new segment !</span></div>
-        </div>
+            <span class="hljs-comment">#  … so folding stops below, as this is a new segment !</span></div></div>
       
       </div>
     
@@ -990,10 +885,8 @@ TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in sin
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">            currSegment.foldMarker = line.replace singleStrip, <span class="hljs-string">'$1'</span>
-</div>
-        </div>
+        <div class="code"><div class="wrapper">            currSegment.foldMarker = line.replace singleStrip, <span class="hljs-string">'$1'</span>
+</div></div>
       
       </div>
     
@@ -1005,12 +898,10 @@ TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in sin
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">            currSegment.code.push currSegment.foldMarker
+        <div class="code"><div class="wrapper">            currSegment.code.push currSegment.foldMarker
           <span class="hljs-keyword">else</span>
             currSegment.comments.push comment
-</div>
-        </div>
+</div></div>
       
       </div>
     
@@ -1022,16 +913,14 @@ TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in sin
         </div>
       
       
-        <div class="code">
-          <div class="wrapper">    <span class="hljs-keyword">else</span>
+        <div class="code"><div class="wrapper">    <span class="hljs-keyword">else</span>
       currSegment.code.push line
 
   segments.push currSegment
 
   segments
 
-</div>
-        </div>
+</div></div>
       
       </div>
     
