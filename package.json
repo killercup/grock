@@ -42,9 +42,7 @@
     "map-stream": "~0.1.0",
     "lodash": "~2.4.1",
     "marked": "~0.3.0",
-    "jade": "~1.1.5",
     "pretty-hrtime": "~0.2.0",
-    "JSONStream": "~0.7.1",
     "q": "~1.0.0",
     "chalk": "~0.4.0"
   },

@@ -1,7 +1,10 @@
-path = require 'path'
-vfs = require 'vinyl-fs'
+# # Compile Solarized Assets
 
+path = require 'path'
+fs = require 'fs'
+vfs = require 'vinyl-fs'
 Q = require 'q'
+_ = require 'lodash'
 ee = require 'streamee'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
@@ -9,11 +12,20 @@ uglify = require 'gulp-uglify'
 scss = require 'gulp-sass'
 
 module.exports = (options={}) ->
-  finalDest = options.dest or "#{__dirname}/compiled"
+  finalDest = options.dest or path.join(__dirname, 'compiled')
 
   deferLibs = Q.defer()
   deferScripts = Q.defer()
   deferStyles = Q.defer()
+  deferTemplates = Q.defer()
+
+  # Jade
+  templateFile = fs.readFileSync path.join(__dirname, 'template.html')
+  render = _.template templateFile, null, variable: 'data'
+
+  fs.writeFile path.join(finalDest, 'template.js'),
+    "var _ = require('lodash');\nmodule.exports = #{render.source};",
+    deferTemplates.makeNodeResolver()
 
   # JS
   jsLibsPath = "#{__dirname}/assets/js/libs"
@@ -46,5 +58,6 @@ module.exports = (options={}) ->
   return Q.allSettled [
     deferLibs.promise
     deferScripts.promise
-    deferStyles.promise
+    deferStyles.promise,
+    deferTemplates.promise
   ]

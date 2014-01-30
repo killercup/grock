@@ -1,7 +1,8 @@
 ###
 # # Render Templates
 #
-# Expects a Jade template file as `template.jade` in the style's directory.
+# Renders HTML files by using the style's render function (using
+# `style.getTemplate()`).
 ###
 
 fs = require 'fs'
@@ -9,12 +10,8 @@ path = require 'path'
 map = require 'map-stream'
 Buffer = require('buffer').Buffer
 
-jade = require 'jade'
-
 module.exports = ({style, repositoryUrl}) ->
-  templateFile = fs.readFileSync style.template
-
-  render = jade.compile(templateFile)
+  render = style.getTemplate()
 
   modifyFile = (file, cb) ->
     cb(null, file) unless file.segments?.length
@@ -36,7 +33,12 @@ module.exports = ({style, repositoryUrl}) ->
     else
       templateContext.relativeRoot = "#{pathChunks.map(-> '..').join '/'}/"
 
-    file.contents = new Buffer render(templateContext)
+    try
+      rendered = render(templateContext)
+    catch e
+      return cb(e)
+
+    file.contents = new Buffer rendered
 
     cb(null, file)
     return
