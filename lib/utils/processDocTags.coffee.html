@@ -108,7 +108,9 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
             tag.value = tag.value.replace <span class="hljs-regexp">///<span class="hljs-subst">#{tagDefinition.valuePrefix?}</span>\s+///</span>, <span class="hljs-string">''</span>
 
           <span class="hljs-keyword">if</span> tagDefinition.parseValue?
-            tag.value = tagDefinition.parseValue tag.value
+            <span class="hljs-keyword">try</span>
+              tag.value = tagDefinition.parseValue tag.value
+            <span class="hljs-keyword">catch</span> e
           <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-regexp">/\n/</span>.test tag.value
             tag.value = tag.value.match(TAG_VALUE_REGEX)[<span class="hljs-number">1.</span>.].join(<span class="hljs-string">''</span>)
 
@@ -154,7 +156,10 @@ humanize = <span class="hljs-built_in">require</span> <span class="hljs-string">
             <span class="hljs-keyword">if</span> <span class="hljs-string">'string'</span> == <span class="hljs-keyword">typeof</span> tag.definition.markdown
               tag.markdown = tag.definition.markdown.replace <span class="hljs-regexp">/\{value\}/g</span>, tag.value
             <span class="hljs-keyword">else</span>
-              tag.markdown = tag.definition.markdown(tag.value)
+              <span class="hljs-keyword">try</span>
+                tag.markdown = tag.definition.markdown(tag.value)
+              <span class="hljs-keyword">catch</span> e
+                tag.markdown = tag.value
           <span class="hljs-keyword">else</span>
             <span class="hljs-keyword">if</span> tag.value.length &gt; <span class="hljs-number">0</span>
               tag.markdown = <span class="hljs-string">"<span class="hljs-subst">#{tag.name}</span> <span class="hljs-subst">#{tag.value}</span>"</span>

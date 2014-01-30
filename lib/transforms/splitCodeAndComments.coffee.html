@@ -40,9 +40,8 @@ seperator = <span class="hljs-built_in">require</span> <span class="hljs-string"
 
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span>
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
-    str = file.contents.toString(<span class="hljs-string">'utf8'</span>)
-
     <span class="hljs-keyword">try</span>
+      str = file.contents.toString(<span class="hljs-string">'utf8'</span>)
       file.segments = seperator str, file.extra.lang
     <span class="hljs-keyword">catch</span> e
       <span class="hljs-keyword">return</span> cb(<span class="hljs-keyword">new</span> Error(<span class="hljs-string">"seperator: Error seperating code and comments <span class="hljs-subst">#{e}</span>"</span>))

@@ -40,6 +40,12 @@ _ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash
 
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/log'</span>
 
+<span class="hljs-function"><span class="hljs-title">getTitle</span> = <span class="hljs-params">(file)</span> -&gt;</span>
+  title = _.find(file.extra?.toc, <span class="hljs-attribute">level</span>: <span class="hljs-number">1</span>)?.title
+  <span class="hljs-keyword">if</span> title <span class="hljs-keyword">and</span> title <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
+    <span class="hljs-keyword">return</span> title
+  <span class="hljs-keyword">return</span>
+
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(fileName, opts={})</span> -&gt;</span>
   <span class="hljs-keyword">unless</span> fileName
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> PluginError(<span class="hljs-string">"Render File Tree"</span>, <span class="hljs-string">"Missing fileName option"</span>)
@@ -58,7 +64,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../u
       <span class="hljs-attribute">originalPath</span>: file.originalRelative
       <span class="hljs-attribute">name</span>: path.basename file.path
       <span class="hljs-attribute">lang</span>: file.extra?.lang?.highlightJS <span class="hljs-keyword">or</span> file.extra?.lang?.pygmentsLexer
-      <span class="hljs-attribute">title</span>: _.find(file.extra?.toc, <span class="hljs-attribute">level</span>: <span class="hljs-number">1</span>)?.title
+      <span class="hljs-attribute">title</span>: getTitle(file)
       <span class="hljs-attribute">toc</span>: file.extra?.toc
     }, <span class="hljs-literal">false</span>, <span class="hljs-number">2</span>)
     first = <span class="hljs-literal">false</span>

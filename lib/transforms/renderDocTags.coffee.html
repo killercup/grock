@@ -40,7 +40,7 @@ render = <span class="hljs-built_in">require</span> <span class="hljs-string">'.
 
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span>
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
-    cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
+    <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
 
     render.parseDocTags(file.segments)
     .<span class="hljs-keyword">then</span>(render.markdownDocTags)

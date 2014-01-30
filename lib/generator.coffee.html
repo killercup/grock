@@ -156,6 +156,8 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
       
         <div class="code">
           <div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
+  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> file.stat.isFile() <span class="hljs-keyword">then</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">else</span> cb()
   .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div>
         </div>
       

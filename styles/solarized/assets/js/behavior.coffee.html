@@ -73,6 +73,7 @@ $ = Zepto <span class="hljs-keyword">or</span> jQuery
 
     <span class="hljs-keyword">for</span> part, depth <span class="hljs-keyword">in</span> path
       <span class="hljs-keyword">if</span> (cur[part]?.type <span class="hljs-keyword">isnt</span> <span class="hljs-string">'file'</span>) <span class="hljs-keyword">and</span> (depth <span class="hljs-keyword">is</span> fileDepth-<span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> file.originalName.match(<span class="hljs-regexp">/index\.(js|coffee)/</span>)
+        cur[part] <span class="hljs-keyword">or</span>= {}
         cur[part].path = file.path
         cur[part].originalName = file.originalName
         cur[part].originalPath = file.originalPath
