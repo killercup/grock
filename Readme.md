@@ -74,6 +74,7 @@ In contrast to other node-based documentation generators like [docco], [groc], a
 - Therefore it's faster than those other tools that need pygments.
 - It renders a file tree and also a headline tree for each document.
 - The default style (based on solarized) is responsive and looks actually quite good on a phone.
+- It doesn't crash on malformed doc tags.
 - It's based on streams. I've heard all the cool kids are using streams now.
 
 [docco]: http://jashkenas.github.com/docco/
