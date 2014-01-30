@@ -11,6 +11,7 @@
 _ = require 'lodash'
 
 regexpEscape = require('./regexpEscape')
+languages = require('../languages')
 
 Segment = (code=[], comments=[], foldMarker='') ->
   {
@@ -20,7 +21,7 @@ Segment = (code=[], comments=[], foldMarker='') ->
   }
 
 # Split source code into segments (comment + code pairs)
-module.exports = (data, language, options={}) ->
+module.exports = (data='', language=languages.JavaScript, options={}) ->
   lines = data.split /\r?\n/
 
   # Always strip shebangs - but don't shift it off the array to

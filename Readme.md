@@ -66,6 +66,7 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [ ] Tests. Test for everything.
 - [ ] Add another style.
 - [ ] Find a streaming code highlighter with hooks for comment segments
+- [x] Parse files without extension
 
 ## Contributing
 

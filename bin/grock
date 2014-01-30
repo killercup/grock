@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/**
+ * # grock CLI
+ */
 'use strict';
 
 var START = process.hrtime();
@@ -7,7 +10,9 @@ var path = require('path');
 var fs = require('fs');
 var  _ = require('lodash');
 
-
+/**
+ * ## Load Project Config
+ */
 var projectConfig;
 var projectConfigPath = path.resolve('.groc.json');
 try {
@@ -16,6 +21,9 @@ try {
   projectConfig = {};
 }
 
+/**
+ * ## CLI Arguments
+ */
 var optimist = require('optimist')
   .usage(
     "Usage: grock [options]\n\n"+
@@ -65,27 +73,38 @@ var optimist = require('optimist')
   .describe('git-remote', "Overwrite the remote for --github")
   ;
 
+/**
+ * ### Display Help
+ */
 if (optimist.argv.help) {
   optimist.showHelp();
   return process.exit(2);
 }
 
+/**
+ * ### Display Version
+ */
 if (optimist.argv.version) {
   var pkg = JSON.parse(fs.readFileSync(__dirname+"/../package.json"));
   console.log("Version", pkg.version);
   return process.exit(0);
 }
 
+// Overwrite defaults/project config with CLI arguments
 var argv = _.defaults(optimist.argv, projectConfig);
 argv.start = START;
 
+// Load Generator
 require('coffee-script/register');
 var generator = require('../lib/generator');
 
 if (argv.github) {
+  /**
+   * ## Write to Github Pages Branch
+   */
   argv.out = path.resolve(path.join('.git', 'groc-tmp'));
 
-  generator(argv)
+  return generator(argv)
   .then(function () {
     var gitPublishScript = path.resolve(__dirname, '..', 'scripts', 'publish_git_pages.sh');
     var opts = argv['git-remote'] ? [argv['git-remote']] : void(0);
@@ -103,12 +122,15 @@ if (argv.github) {
   }, function () {
     process.exit(1);
   });
-
 } else {
+  /**
+   * ## Write Regularly
+   */
   return generator(argv)
   .then(function () {
     process.exit(0);
   }, function (err) {
+    console.log(err);
     process.exit(1);
   })
   ;
