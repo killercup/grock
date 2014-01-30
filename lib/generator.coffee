@@ -44,6 +44,8 @@ module.exports = (opts) ->
   # ### Processing Pipeline
   vfs.src glob, base: root
   .pipe map (file, cb) ->
+    if file.stat.isFile() then cb(null, file) else cb()
+  .pipe map (file, cb) ->
     # Save start time
     file.timingStart = process.hrtime()
     cb(null, file)
