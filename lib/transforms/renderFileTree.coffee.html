@@ -33,8 +33,9 @@
       
         <div class="code"><div class="wrapper">fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
-through = <span class="hljs-built_in">require</span> <span class="hljs-string">'through2'</span>
 _ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+
+through = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).through
 
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/log'</span>
 
@@ -67,17 +68,17 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../u
     }, <span class="hljs-literal">false</span>, <span class="hljs-number">2</span>)
     first = <span class="hljs-literal">false</span>
 
-    cb <span class="hljs-literal">null</span>, file
+    <span class="hljs-property">@emit</span>(<span class="hljs-string">'data'</span>, file)
 
   <span class="hljs-function"><span class="hljs-title">endStream</span> = <span class="hljs-params">(cb)</span> -&gt;</span>
     output.push fileSuffix
-    fs.writeFile fileName, output.join<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">''</span>)</span>, <span class="hljs-params">(err)</span> -&gt;</span>
+    fs.writeFile fileName, output.join<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">''</span>)</span>, <span class="hljs-params">(err)</span> =&gt;</span>
       <span class="hljs-keyword">return</span> cb(err) <span class="hljs-keyword">if</span> err
       <span class="hljs-keyword">if</span> opts.verbose
         log <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
-      cb(<span class="hljs-literal">null</span>)
+      <span class="hljs-property">@emit</span>(<span class="hljs-string">'end'</span>)
 
-  through.obj bufferContents, endStream
+  through bufferContents, endStream
 </div></div>
       
       </div>

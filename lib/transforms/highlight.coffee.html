@@ -35,8 +35,8 @@
         <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 hljs = <span class="hljs-built_in">require</span> <span class="hljs-string">'highlight.js'</span>
 
-map = <span class="hljs-built_in">require</span> <span class="hljs-string">'map-stream'</span>
 Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
+map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).map
 </div></div>
       
       </div>
@@ -58,7 +58,7 @@ Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'b
       
       
         <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">highlightSegment</span> = <span class="hljs-params">(code, lang=<span class="hljs-string">'AUTO'</span>)</span> -&gt;</span>
-  <span class="hljs-keyword">if</span> lang <span class="hljs-keyword">isnt</span> <span class="hljs-string">'AUTO'</span>
+  <span class="hljs-keyword">if</span> lang <span class="hljs-keyword">and</span> (lang <span class="hljs-keyword">isnt</span> <span class="hljs-string">'AUTO'</span>)
     value = hljs.highlight(lang, code, <span class="hljs-literal">true</span>).value
   <span class="hljs-keyword">else</span>
     value = hljs.highlightAuto(code).value

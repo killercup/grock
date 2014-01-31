@@ -36,7 +36,9 @@ fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</
 vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
 _ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
-ee = <span class="hljs-built_in">require</span> <span class="hljs-string">'streamee'</span>
+
+es = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>)
+
 coffee = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-coffee'</span>
 concat = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-concat'</span>
 uglify = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-uglify'</span>
@@ -87,10 +89,10 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   .pipe(vfs.dest(finalDest))
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferLibs.resolve
 
-  ee.interleave([
+  es.merge(
     vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{jsPath}</span>/*.js"</span>)
     vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{jsPath}</span>/*.coffee"</span>).pipe(coffee())
-  ])
+  )
   .pipe(concat(<span class="hljs-string">'behavior.js'</span>))
   .pipe(uglify(<span class="hljs-attribute">output</span>: {<span class="hljs-attribute">comments</span>: <span class="hljs-regexp">/^!|@preserve|@license|@cc_on/i</span>}))
   .pipe(vfs.dest(finalDest))
