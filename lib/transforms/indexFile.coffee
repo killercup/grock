@@ -5,10 +5,14 @@
 path = require 'path'
 map = require 'map-stream'
 
-module.exports = (indexFile) ->
+module.exports = (indexFile='') ->
+  # Process only one index file
+  found = false
+
   modifyFile = (file, cb) ->
-    if file.originalRelative is indexFile
+    if not found and (file.originalRelative is indexFile)
       file.path = path.join(file.cwd, 'index.html')
+      found = true
     
     cb(null, file)
 
