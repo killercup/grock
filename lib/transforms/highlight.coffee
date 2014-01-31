@@ -6,8 +6,8 @@
 path = require 'path'
 hljs = require 'highlight.js'
 
-map = require 'map-stream'
 Buffer = require('buffer').Buffer
+map = require('event-stream').map
 
 ###
 # @method Highlight a Segment of Code

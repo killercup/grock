@@ -8,7 +8,7 @@
 ###
 
 Buffer = require('buffer').Buffer
-map = require 'map-stream'
+map = require('event-stream').map
 
 hljs = require 'highlight.js'
 marked = require 'marked'

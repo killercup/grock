@@ -3,7 +3,7 @@
 ###
 
 Buffer = require('buffer').Buffer
-map = require 'map-stream'
+map = require('event-stream').map
 
 render = require '../utils/processDocTags'
 

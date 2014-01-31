@@ -3,7 +3,7 @@
 ###
 
 path = require 'path'
-map = require 'map-stream'
+map = require('event-stream').map
 
 module.exports = (indexFile='') ->
   # Process only one index file

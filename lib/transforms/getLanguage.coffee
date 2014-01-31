@@ -3,10 +3,10 @@
 ###
 
 path = require 'path'
-Buffer = require('buffer').Buffer
-map = require 'map-stream'
-
 _ = require 'lodash'
+
+Buffer = require('buffer').Buffer
+map = require('event-stream').map
 
 regexpEscape = require('../utils/regexpEscape')
 LANGUAGES = require '../languages'

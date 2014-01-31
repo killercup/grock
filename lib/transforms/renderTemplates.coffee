@@ -7,8 +7,9 @@
 
 fs = require 'fs'
 path = require 'path'
-map = require 'map-stream'
+
 Buffer = require('buffer').Buffer
+map = require('event-stream').map
 
 module.exports = ({style, repositoryUrl}) ->
   render = style.getTemplate()

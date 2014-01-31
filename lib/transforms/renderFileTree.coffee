@@ -4,8 +4,9 @@
 
 fs = require 'fs'
 path = require 'path'
-through = require 'through2'
 _ = require 'lodash'
+
+through = require('event-stream').through
 
 log = require '../utils/log'
 
@@ -38,14 +39,14 @@ module.exports = (fileName, opts={}) ->
     }, false, 2)
     first = false
 
-    cb null, file
+    @emit('data', file)
 
   endStream = (cb) ->
     output.push fileSuffix
-    fs.writeFile fileName, output.join(''), (err) ->
+    fs.writeFile fileName, output.join(''), (err) =>
       return cb(err) if err
       if opts.verbose
         log "File tree written to #{path.basename fileName}"
-      cb(null)
+      @emit('end')
 
-  through.obj bufferContents, endStream
+  through bufferContents, endStream

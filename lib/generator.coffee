@@ -6,7 +6,7 @@
 path = require 'path'
 fs = require 'fs'
 vfs = require 'vinyl-fs'
-map = require 'map-stream'
+map = require('event-stream').map
 prettyTime = require 'pretty-hrtime'
 colors = require 'chalk'
 Q = require 'q'

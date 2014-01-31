@@ -2,8 +2,8 @@
 # # Split Code and Comments
 ###
 
-map = require 'map-stream'
 Buffer = require('buffer').Buffer
+map = require('event-stream').map
 
 seperator = require '../utils/seperator'
 

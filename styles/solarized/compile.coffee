@@ -5,7 +5,9 @@ fs = require 'fs'
 vfs = require 'vinyl-fs'
 Q = require 'q'
 _ = require 'lodash'
-ee = require 'streamee'
+
+es = require('event-stream')
+
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
 uglify = require 'gulp-uglify'
@@ -36,10 +38,10 @@ module.exports = (options={}) ->
   .pipe(vfs.dest(finalDest))
   .on 'end', deferLibs.resolve
 
-  ee.interleave([
+  es.merge(
     vfs.src("#{jsPath}/*.js")
     vfs.src("#{jsPath}/*.coffee").pipe(coffee())
-  ])
+  )
   .pipe(concat('behavior.js'))
   .pipe(uglify(output: {comments: /^!|@preserve|@license|@cc_on/i}))
   .pipe(vfs.dest(finalDest))
