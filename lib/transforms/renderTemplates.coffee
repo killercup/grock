@@ -14,7 +14,7 @@ module.exports = ({style, repositoryUrl}) ->
   render = style.getTemplate()
 
   modifyFile = (file, cb) ->
-    cb(null, file) unless file.segments?.length
+    return cb(null, file) unless file.segments?.length
 
     file.originalPath = file.path
     file.originalRelative = file.relative

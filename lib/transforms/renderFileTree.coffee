@@ -17,7 +17,7 @@ getTitle = (file) ->
 
 module.exports = (fileName, opts={}) ->
   unless fileName
-    throw new PluginError("Render File Tree", "Missing fileName option")
+    throw new Error("Render File Tree: Missing fileName option")
 
   filePrefix = opts.filePrefix or "window.#{opts.varName or 'files'} = [\n"
   fileSuffix = opts.fileSuffix or "\n];"

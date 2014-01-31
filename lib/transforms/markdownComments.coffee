@@ -75,7 +75,7 @@ module.exports = (options) ->
     return cb(null, file) if lang.codeOnly
 
     # No comment(s)
-    cb(null, file) unless file.segments?.length
+    return cb(null, file) unless file.segments?.length
 
     for s in file.segments
       continue unless s.comments?.length
@@ -84,6 +84,5 @@ module.exports = (options) ->
       s.comments = marked s.comments.join('\n'), renderer: renderer
 
     cb(null, file)
-    return
 
   return map(modifyFile)
