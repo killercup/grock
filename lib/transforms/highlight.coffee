@@ -17,7 +17,7 @@ map = require('event-stream').map
 # @return {String} Highlighted code (HTML)
 ###
 highlightSegment = (code, lang='AUTO') ->
-  if lang isnt 'AUTO'
+  if lang and (lang isnt 'AUTO')
     value = hljs.highlight(lang, code, true).value
   else
     value = hljs.highlightAuto(code).value

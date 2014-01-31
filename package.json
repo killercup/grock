@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "NODE_ENV=test coffeelint lib/**/*.coffee && mocha",
+    "mocha": "mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee",
     "travis": "npm test && ./scripts/deploy_docs_from_travis.sh"
   },
@@ -51,6 +52,7 @@
     "gulp-concat": "~2.1.7",
     "gulp-sass": "~0.6.0",
     "gulp-uglify": "~0.2.0",
+    "gulp-util": "~2.2.13",
     "chai": "~1.9.0",
     "mocha": "~1.17.0"
   }

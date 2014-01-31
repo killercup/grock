@@ -28,6 +28,7 @@ fileextToLanguage = (filePath='') ->
 
   for pair in _languageDetectionCache
     return pair[1] if baseName.match pair[0]
+  return null
 
 module.exports = (options) ->
   modifyFile = (file, cb) ->
