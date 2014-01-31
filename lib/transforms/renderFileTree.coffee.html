@@ -46,7 +46,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../u
 
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(fileName, opts={})</span> -&gt;</span>
   <span class="hljs-keyword">unless</span> fileName
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> PluginError(<span class="hljs-string">"Render File Tree"</span>, <span class="hljs-string">"Missing fileName option"</span>)
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"Render File Tree: Missing fileName option"</span>)
 
   filePrefix = opts.filePrefix <span class="hljs-keyword">or</span> <span class="hljs-string">"window.<span class="hljs-subst">#{opts.varName <span class="hljs-keyword">or</span> <span class="hljs-string">'files'</span>}</span> = [\n"</span>
   fileSuffix = opts.fileSuffix <span class="hljs-keyword">or</span> <span class="hljs-string">"\n];"</span>

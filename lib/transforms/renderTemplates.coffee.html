@@ -42,7 +42,7 @@ Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'b
   render = style.getTemplate()
 
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
-    cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
+    <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
 
     file.originalPath = file.path
     file.originalRelative = file.relative
