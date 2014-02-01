@@ -11,8 +11,9 @@ docTagsValid = code: """
 # @description Parses comments of segment for doc tags. Adds `tags` and
 #   `tagSections` to each segment.
 # @param {Array} segments `[{code, comments}]`
+# @param {String} segments.code
 # @return {Promise} Resolves when segment comments have been processed
-""".trim(), tagCount: 4 + 1, keys: ['description', 'params', 'returns']
+""".trim(), tagCount: 5 + 1, keys: ['description', 'params', 'returns']
 
 docTagsInvalid = code: """
 # ## Parse Doc Tags
