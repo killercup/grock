@@ -130,8 +130,8 @@ buildHeadlinesTree = (tree, ul, metaInfo) ->
     return ul
 
   $.each tree, (index, node) ->
-    $node = $("""<li class="#{node.type}"/>""")
-    $node.append """<a class="label" href="##{node.slug}"><span class="text">#{node.title}</span></a>"""
+    $node = $("""<li class="headline"/>""")
+    $node.append """<a class="label" href="##{node.slug}">#{node.title}</a>"""
 
     if node.children?.length > 0
       $children = $('<ol class="children"/>')
@@ -224,9 +224,9 @@ searchTree = ($tree, $search) ->
       ), timeout
 
   ###
-  @method search
-  @param {jQuery} tree
-  @param {String} value Search query
+  # @method search
+  # @param {jQuery} tree
+  # @param {String} value Search query
   ###
   search = ($tree, value) ->
     value = value.trim().toLowerCase()
@@ -240,7 +240,7 @@ searchTree = ($tree, $search) ->
     $tree.addClass 'searching'
     $tree.find('a').each (index, item) ->
       $item = $(item)
-      if $item.text().toLowerCase().indexOf(value) > -1 or $item.attr('href').toLowerCase().indexOf(value) > -1
+      if ($item.text().toLowerCase().indexOf(value) > -1) or ($item.attr('href').toLowerCase().indexOf(value) > -1)
         $item.addClass 'matched'
         # show folders above matched item
         $item.parents('li').children('.label').addClass 'matched'
@@ -254,6 +254,7 @@ searchTree = ($tree, $search) ->
     value = newVal
     throttle ->
       search($tree, value)
+    return
 
   # ESC
   $search.on 'keydown', (event) ->
