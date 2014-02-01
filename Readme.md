@@ -114,6 +114,7 @@ Just fork the repo, implement some awesome feature or fix a bug and send a pull 
 - Write code in [CoffeeScript](http://coffeescript.org/) when possible and make sure [`coffeelint`](http://www.coffeelint.org/) doesn't throw any warning or errors.
 - Make use of streams and promises. Those are good techniques.
 - Split the code into as many independent, loosely coupled modules as possible and try to reuse existing ones.
+- Write tests for those small modules.
 - On the other hand, try to minimize (NPM) dependencies. Since this is a CLI tool, the startup time gets worse with every `require`.
 - Run `npm test` before committing. (Currently, this runs `coffeelint` and `mocha`).
 
