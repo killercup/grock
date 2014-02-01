@@ -49,7 +49,8 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
         <div class="code"><div class="wrapper">  found = <span class="hljs-literal">false</span>
 
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> found <span class="hljs-keyword">and</span> (file.originalRelative <span class="hljs-keyword">is</span> indexFile)
+    filePath = file.originalRelative <span class="hljs-keyword">or</span> file.relative
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> found <span class="hljs-keyword">and</span> (filePath <span class="hljs-keyword">is</span> indexFile)
       file.path = path.join(file.cwd, <span class="hljs-string">'index.html'</span>)
       found = <span class="hljs-literal">true</span>
     

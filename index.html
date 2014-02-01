@@ -102,6 +102,7 @@ Options:
 <li>Write code in <a href="http://coffeescript.org/">CoffeeScript</a> when possible and make sure <a href="http://www.coffeelint.org/"><code>coffeelint</code></a> doesn&#39;t throw any warning or errors.</li>
 <li>Make use of streams and promises. Those are good techniques.</li>
 <li>Split the code into as many independent, loosely coupled modules as possible and try to reuse existing ones.</li>
+<li>Write tests for those small modules.</li>
 <li>On the other hand, try to minimize (NPM) dependencies. Since this is a CLI tool, the startup time gets worse with every <code>require</code>.</li>
 <li>Run <code>npm test</code> before committing. (Currently, this runs <code>coffeelint</code> and <code>mocha</code>).</li>
 </ul>

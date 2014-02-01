@@ -370,6 +370,26 @@ window.files = [
       "level": 1,
       "slug": "process-doc-tags",
       "title": "Process Doc Tags"
+    },
+    {
+      "level": 2,
+      "slug": "parse-doc-tags",
+      "title": "Parse Doc Tags"
+    },
+    {
+      "level": 2,
+      "slug": "markdown-doc-tags",
+      "title": "Markdown Doc Tags"
+    },
+    {
+      "level": 2,
+      "slug": "render-doc-tags",
+      "title": "Render Doc Tags"
+    },
+    {
+      "level": 2,
+      "slug": "export-methods-for-segment-arrays",
+      "title": "Export Methods for Segment Arrays"
     }
   ]
 },
