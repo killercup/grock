@@ -193,8 +193,8 @@
     <span class="hljs-keyword">return</span> ul
 
   $.each tree, <span class="hljs-function"><span class="hljs-params">(index, node)</span> -&gt;</span>
-    $node = $(<span class="hljs-string">"""&lt;li class="<span class="hljs-subst">#{node.type}</span>"/&gt;"""</span>)
-    $node.append <span class="hljs-string">"""&lt;a class="label" href="#<span class="hljs-subst">#{node.slug}</span>"&gt;&lt;span class="text"&gt;<span class="hljs-subst">#{node.title}</span>&lt;/span&gt;&lt;/a&gt;"""</span>
+    $node = $(<span class="hljs-string">"""&lt;li class="headline"/&gt;"""</span>)
+    $node.append <span class="hljs-string">"""&lt;a class="label" href="#<span class="hljs-subst">#{node.slug}</span>"&gt;<span class="hljs-subst">#{node.title}</span>&lt;/a&gt;"""</span>
 
     <span class="hljs-keyword">if</span> node.children?.length &gt; <span class="hljs-number">0</span>
       $children = $(<span class="hljs-string">'&lt;ol class="children"/&gt;'</span>)
@@ -364,7 +364,7 @@
     $tree.addClass <span class="hljs-string">'searching'</span>
     $tree.find<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'a'</span>)</span>.<span class="hljs-title">each</span> <span class="hljs-params">(index, item)</span> -&gt;</span>
       $item = $(item)
-      <span class="hljs-keyword">if</span> $item.text().toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span> <span class="hljs-keyword">or</span> $item.attr(<span class="hljs-string">'href'</span>).toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>
+      <span class="hljs-keyword">if</span> ($item.text().toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> ($item.attr(<span class="hljs-string">'href'</span>).toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>)
         $item.addClass <span class="hljs-string">'matched'</span></div></div>
       
       </div>
@@ -388,6 +388,7 @@
     value = newVal
     throttle<span class="hljs-function"> -&gt;</span>
       search($tree, value)
+    <span class="hljs-keyword">return</span>
 </div></div>
       
       </div>
