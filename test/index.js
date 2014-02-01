@@ -9,4 +9,6 @@ describe("Transforms", function () {
   require('./transforms/indexFile_spec');
 });
 
+require('./utils/processDocTags_spec');
+
 require('./styles_spec');
