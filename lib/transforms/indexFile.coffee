@@ -10,7 +10,8 @@ module.exports = (indexFile='') ->
   found = false
 
   modifyFile = (file, cb) ->
-    if not found and (file.originalRelative is indexFile)
+    filePath = file.originalRelative or file.relative
+    if not found and (filePath is indexFile)
       file.path = path.join(file.cwd, 'index.html')
       found = true
     
