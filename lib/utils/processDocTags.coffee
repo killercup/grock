@@ -53,12 +53,12 @@ module.exports =
           tagDefinition = DOC_TAGS[tag.name]
 
           unless tagDefinition?
-            if tag.value.length == 0
+            if tag.value.length is 0
               tagDefinition = 'defaultNoValue'
             else
               tagDefinition = 'defaultHasValue'
 
-          if 'string' == typeof tagDefinition
+          if typeof tagDefinition is 'string'
             tagDefinition = DOC_TAGS[tagDefinition]
 
           tag.definition = tagDefinition
@@ -131,7 +131,7 @@ module.exports =
     for segment, segmentIndex in segments when segment.tagSections?
 
       sections = segment.tagSections
-      output = ''
+      output = []
       metaOutput = ''
       accessClasses = 'doc-section'
 
@@ -151,26 +151,31 @@ module.exports =
         secondPart.push tag.markdown for tag in sections.metadata if sections.metadata?
         metaOutput += " #{humanize.joinSentence secondPart}"
 
-      output += "<span class='doc-section-header'>#{metaOutput}</span>\n\n" if metaOutput isnt ''
+      output.push "<span class='doc-section-header'>#{metaOutput}</span>", "", "" if metaOutput isnt ''
 
-      output += "#{tag.markdown}\n\n" for tag in sections.description if sections.description?
+      output.push "#{tag.markdown}", "", "" for tag in sections.description if sections.description?
 
-      output += "#{tag.markdown}\n\n" for tag in sections.todo if sections.todo?
+      output.push "#{tag.markdown}", "", "" for tag in sections.todo if sections.todo?
 
       if sections.params?
-        output += 'Parameters:\n\n'
-        output += "#{tag.markdown}\n\n" for tag in sections.params
+        output.push 'Parameters:', "", ""
+        output.push "#{tag.markdown}", "", "" for tag in sections.params
 
       if sections.returns?
-        output += (humanize.capitalize(tag.markdown) for tag in sections.returns if sections.returns?).join('<br/>**and** ')
+        returns = for tag in sections.returns
+          humanize.capitalize(tag.markdown)
+
+        output.push returns.join('<br/>**and** ')
 
       if sections.howto?
-        output += "\n\nHow-To:\n\n#{humanize.gutterify tag.markdown, 0}" for tag in sections.howto
+        for tag in sections.howto
+          output.push "", "", "How-To:", "", "", humanize.gutterify(tag.markdown, 0)
 
       if sections.example?
-        output += "\n\nExample:\n\n#{humanize.gutterify tag.markdown, 4}" for tag in sections.example
+        for tag in sections.example
+          output.push "", "", "Example:", "", "", humanize.gutterify(tag.markdown, 4)
 
-      segment.comments = output.split '\n'
+      segment.comments = output
 
     deferred.resolve(segments)
     return deferred.promise
