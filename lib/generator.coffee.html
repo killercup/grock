@@ -60,6 +60,7 @@ Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</sp
       
         <div class="code"><div class="wrapper">t = <span class="hljs-built_in">require</span> <span class="hljs-string">'./transforms'</span>
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/log'</span>
+plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/plumber'</span>
 </div></div>
       
       </div>
@@ -98,6 +99,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(opts)</span> -&gt;</span>
   {glob, style, out, verbose, start, index, root} = opts
   verbose <span class="hljs-keyword">or</span>= <span class="hljs-literal">false</span>
+  log.setVerbose(verbose)
   start <span class="hljs-keyword">or</span>= START
 
   log <span class="hljs-string">'Beginning to process'</span>, (<span class="hljs-keyword">if</span> verbose <span class="hljs-keyword">then</span> glob <span class="hljs-keyword">else</span> <span class="hljs-string">''</span>), duration(start)
@@ -143,6 +145,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
       
       
         <div class="code"><div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
+  .pipe plumber()
   .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> file.stat.isFile() <span class="hljs-keyword">then</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">else</span> cb()
   .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div>
@@ -167,7 +170,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
   .pipe t.renderTemplates(<span class="hljs-attribute">style</span>: style, <span class="hljs-attribute">repositoryUrl</span>: opts[<span class="hljs-string">'repository-url'</span>])
   .pipe t.indexFile(index)
   .pipe vfs.dest(dest)
-  .pipe t.renderFileTree(path.join(dest, <span class="hljs-string">"toc.js"</span>), <span class="hljs-attribute">verbose</span>: verbose)
+  .pipe t.renderFileTree(path.join(dest, <span class="hljs-string">"toc.js"</span>))
   .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div>
       
       </div>
@@ -180,9 +183,11 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         </div>
       
       
-        <div class="code"><div class="wrapper">    log file.relative, duration(file.timingStart) <span class="hljs-keyword">if</span> verbose
+        <div class="code"><div class="wrapper">    log.verbose file.relative, duration(file.timingStart)
     cb(<span class="hljs-literal">null</span>, file)
-  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferred.reject
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
+    log err
+    deferred.reject(err)
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>,<span class="hljs-function"> -&gt;</span></div></div>
       
       </div>
@@ -197,12 +202,12 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ut
         <div class="code"><div class="wrapper">    assetsTiming = process.hrtime()
     style.copy(<span class="hljs-attribute">dest</span>: dest)
     .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
-      log <span class="hljs-string">"Style copied"</span>, duration(assetsTiming) <span class="hljs-keyword">if</span> verbose
+      log.verbose <span class="hljs-string">"Style copied"</span>, duration(assetsTiming)
       log <span class="hljs-string">"Done."</span>, colors.magenta(<span class="hljs-string">"Generated in"</span>), duration(start)
       deferred.resolve()
     .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
       log colors.red(<span class="hljs-string">"It exploded!"</span>)
-      <span class="hljs-built_in">console</span>.log(err) <span class="hljs-keyword">if</span> verbose
+      log.verbose err.stack <span class="hljs-keyword">or</span> err
       deferred.reject()
 
   <span class="hljs-keyword">return</span> deferred.promise</div></div>

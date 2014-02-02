@@ -74,8 +74,7 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../u
     output.push fileSuffix
     fs.writeFile fileName, output.join<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">''</span>)</span>, <span class="hljs-params">(err)</span> =&gt;</span>
       <span class="hljs-keyword">return</span> cb(err) <span class="hljs-keyword">if</span> err
-      <span class="hljs-keyword">if</span> opts.verbose
-        log <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
+      log.verbose <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
       <span class="hljs-property">@emit</span>(<span class="hljs-string">'end'</span>)
 
   through bufferContents, endStream

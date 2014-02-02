@@ -253,15 +253,16 @@ TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/<
 
     <span class="hljs-keyword">try</span>
       segments
-      .filter<span class="hljs-function"><span class="hljs-params">((segment) -&gt; TAG_REGEX.test segment.comments.join(<span class="hljs-string">'\n'</span>))</span>
-      .<span class="hljs-title">forEach</span><span class="hljs-params">(parseDocTagsForSegment)</span>
+      .filter <span class="hljs-function"><span class="hljs-params">(segment)</span> -&gt;</span>
+        TAG_REGEX.test segment.comments.join(<span class="hljs-string">'\n'</span>)
+      .forEach(parseDocTagsForSegment)
 
-      <span class="hljs-title">deferred</span>.<span class="hljs-title">resolve</span><span class="hljs-params">(segments)</span>
-    <span class="hljs-title">catch</span> <span class="hljs-title">error</span>
-      <span class="hljs-title">deferred</span>.<span class="hljs-title">reject</span><span class="hljs-params">(error)</span>
+      deferred.resolve(segments)
+    <span class="hljs-keyword">catch</span> error
+      deferred.reject(error)
 
-    <span class="hljs-title">return</span> <span class="hljs-title">deferred</span>.<span class="hljs-title">promise</span>
-</span></div></div>
+    <span class="hljs-keyword">return</span> deferred.promise
+</div></div>
       
       </div>
     
