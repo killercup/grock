@@ -8,7 +8,7 @@
     "grock": "./bin/grock"
   },
   "scripts": {
-    "test": "NODE_ENV=test coffeelint lib/**/*.coffee && mocha",
+    "test": "NODE_ENV=test coffeelint {lib,styles,test}/**/*.coffee && mocha",
     "mocha": "mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee",
     "travis": "npm test && ./scripts/deploy_docs_from_travis.sh"
@@ -54,6 +54,8 @@
     "gulp-uglify": "~0.2.0",
     "gulp-util": "~2.2.13",
     "chai": "~1.9.0",
-    "mocha": "~1.17.0"
+    "mocha": "~1.17.0",
+    "coffeelint-variable-scope": "0.0.1",
+    "coffeelint-newline-at-eof": "~0.3.2"
   }
 }

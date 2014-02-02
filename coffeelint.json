@@ -110,5 +110,14 @@
   "non_empty_constructor_needs_parens": {
     "name": "non_empty_constructor_needs_parens",
     "level": "ignore"
+  },
+  "variable_scope": {
+    "module": "coffeelint-variable-scope",
+    "scopeDiff": 2
+  },
+  "newline_at_eof": {
+    "module": "coffeelint-newline-at-eof",
+    "level": "warn",
+    "behaviour": "require"
   }
 }
