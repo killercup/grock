@@ -1,4 +1,5 @@
 expect = require('chai').expect
+Buffer = require('buffer').Buffer
 path = require('path')
 fs = require('fs')
 es = require('event-stream')
@@ -33,7 +34,7 @@ describe "Syntax Highlighting", ->
     highlight
     .once 'data', (file) ->
       expect(file.isBuffer()).to.be.true
-      expect(file.contents).to.be.an('object')
+      expect(file.contents).to.be.an.instanceof(Buffer)
       expect(file.path).to.match /\.html$/
       done()
     .on 'error', done

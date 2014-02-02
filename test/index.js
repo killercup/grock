@@ -1,5 +1,7 @@
 require('coffee-script/register');
 
+require('chai').Assertion.includeStack = true;
+
 require('./demo');
 
 describe("Transforms", function () {

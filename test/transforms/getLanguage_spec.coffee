@@ -1,4 +1,5 @@
 expect = require('chai').expect
+Buffer = require('buffer').Buffer
 es = require('event-stream')
 gutil = require('gulp-util')
 

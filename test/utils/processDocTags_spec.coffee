@@ -1,4 +1,5 @@
 expect = require('chai').expect
+Buffer = require('buffer').Buffer
 
 process = require '../../lib/utils/processDocTags'
 

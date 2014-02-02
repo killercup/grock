@@ -1,4 +1,5 @@
 expect = require('chai').expect
+Buffer = require('buffer').Buffer
 path = require('path')
 fs = require('fs')
 es = require('event-stream')
