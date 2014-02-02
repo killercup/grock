@@ -45,8 +45,7 @@ module.exports = (fileName, opts={}) ->
     output.push fileSuffix
     fs.writeFile fileName, output.join(''), (err) =>
       return cb(err) if err
-      if opts.verbose
-        log "File tree written to #{path.basename fileName}"
+      log.verbose "File tree written to #{path.basename fileName}"
       @emit('end')
 
   through bufferContents, endStream

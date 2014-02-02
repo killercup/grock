@@ -174,7 +174,8 @@ module.exports =
 
     try
       segments
-      .filter((segment) -> TAG_REGEX.test segment.comments.join('\n'))
+      .filter (segment) ->
+        TAG_REGEX.test segment.comments.join('\n')
       .forEach(parseDocTagsForSegment)
 
       deferred.resolve(segments)

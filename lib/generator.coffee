@@ -14,6 +14,7 @@ Q = require 'q'
 # ## Local Modules
 t = require './transforms'
 log = require './utils/log'
+plumber = require './utils/plumber'
 
 # ## Helpers
 
@@ -27,6 +28,7 @@ duration = (start) ->
 module.exports = (opts) ->
   {glob, style, out, verbose, start, index, root} = opts
   verbose or= false
+  log.setVerbose(verbose)
   start or= START
 
   log 'Beginning to process', (if verbose then glob else ''), duration(start)
@@ -43,6 +45,7 @@ module.exports = (opts) ->
 
   # ### Processing Pipeline
   vfs.src glob, base: root
+  .pipe plumber()
   .pipe map (file, cb) ->
     if file.stat.isFile() then cb(null, file) else cb()
   .pipe map (file, cb) ->
@@ -57,23 +60,25 @@ module.exports = (opts) ->
   .pipe t.renderTemplates(style: style, repositoryUrl: opts['repository-url'])
   .pipe t.indexFile(index)
   .pipe vfs.dest(dest)
-  .pipe t.renderFileTree(path.join(dest, "toc.js"), verbose: verbose)
+  .pipe t.renderFileTree(path.join(dest, "toc.js"))
   .pipe map (file, cb) ->
     # Log process duration
-    log file.relative, duration(file.timingStart) if verbose
+    log.verbose file.relative, duration(file.timingStart)
     cb(null, file)
-  .on 'error', deferred.reject
+  .on 'error', (err) ->
+    log err
+    deferred.reject(err)
   .on 'end', ->
     # ### Process Style
     assetsTiming = process.hrtime()
     style.copy(dest: dest)
     .then ->
-      log "Style copied", duration(assetsTiming) if verbose
+      log.verbose "Style copied", duration(assetsTiming)
       log "Done.", colors.magenta("Generated in"), duration(start)
       deferred.resolve()
     .then null, (err) ->
       log colors.red("It exploded!")
-      console.log(err) if verbose
+      log.verbose err.stack or err
       deferred.reject()
 
   return deferred.promise
