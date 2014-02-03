@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>renderDocTags.coffee</title>
+  <title>Render Doc Tags to Markdown - renderDocTags.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
 
@@ -45,7 +45,9 @@ render = <span class="hljs-built_in">require</span> <span class="hljs-string">'.
     .<span class="hljs-keyword">then</span>(render.renderDocTags)
     .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
       cb(<span class="hljs-literal">null</span>, file)
-    .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, cb
+    .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
+      err.file = file.relative
+      cb(err)
 
     <span class="hljs-keyword">return</span>
 

@@ -336,6 +336,14 @@ window.files = [
   ]
 },
 {
+  "path": "lib/utils/getTitleFromToc.coffee.html",
+  "originalName": "getTitleFromToc.coffee",
+  "originalPath": "lib/utils/getTitleFromToc.coffee",
+  "name": "getTitleFromToc.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
   "path": "lib/utils/humanize.coffee.html",
   "originalName": "humanize.coffee",
   "originalPath": "lib/utils/humanize.coffee",

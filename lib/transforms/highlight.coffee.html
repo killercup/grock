@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>highlight.coffee</title>
+  <title>Highlight Code - highlight.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
 
@@ -101,7 +101,9 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
         file.contents = <span class="hljs-keyword">new</span> Buffer highlightSegment(str, hlLang)
         file.path = file.path + <span class="hljs-string">".html"</span>
     <span class="hljs-keyword">catch</span> e
-      <span class="hljs-keyword">return</span> cb(<span class="hljs-keyword">new</span> Error(<span class="hljs-string">"highlight: Error highlighting stuff <span class="hljs-subst">#{e}</span>"</span>))
+      err = <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"highlight: Error highlighting stuff <span class="hljs-subst">#{e}</span>"</span>)
+      err.file = file.relative
+      <span class="hljs-keyword">return</span> cb(err)
 
     <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, file)
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>renderTemplates.coffee</title>
+  <title>Render Templates - renderTemplates.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
 
@@ -39,6 +39,8 @@ path = <span class="hljs-built_in">require</span> <span class="hljs-string">'pat
 Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'buffer'</span>).Buffer
 map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).map
 
+getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/getTitleFromToc'</span>
+
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">({style, repositoryUrl})</span> -&gt;</span>
   render = style.getTemplate()
 
@@ -61,6 +63,7 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
       
         <div class="code"><div class="wrapper">    templateContext =
       <span class="hljs-attribute">pageTitle</span>: path.basename file.originalRelative
+      <span class="hljs-attribute">pageHeadline</span>: file.extra?.title <span class="hljs-keyword">or</span>= getTitle(file)
       <span class="hljs-attribute">segments</span>: file.segments
       <span class="hljs-attribute">targetPath</span>: file.originalRelative
       <span class="hljs-attribute">repositoryUrl</span>: repositoryUrl
@@ -73,8 +76,9 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
 
     <span class="hljs-keyword">try</span>
       rendered = render(templateContext)
-    <span class="hljs-keyword">catch</span> e
-      <span class="hljs-keyword">return</span> cb(e)
+    <span class="hljs-keyword">catch</span> err
+      err.file = file.relative
+      <span class="hljs-keyword">return</span> cb(err)
 
     file.contents = <span class="hljs-keyword">new</span> Buffer rendered
 

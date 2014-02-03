@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>splitCodeAndComments.coffee</title>
+  <title>Split Code and Comments - splitCodeAndComments.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
 
@@ -42,7 +42,9 @@ seperator = <span class="hljs-built_in">require</span> <span class="hljs-string"
       str = file.contents.toString(<span class="hljs-string">'utf8'</span>)
       file.segments = seperator str, file.extra?.lang
     <span class="hljs-keyword">catch</span> e
-      <span class="hljs-keyword">return</span> cb(<span class="hljs-keyword">new</span> Error(<span class="hljs-string">"seperator: Error seperating code and comments <span class="hljs-subst">#{e}</span>"</span>))
+      err = <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"seperator: Error seperating code and comments <span class="hljs-subst">#{e}</span>"</span>)
+      err.file = file.relative
+      <span class="hljs-keyword">return</span> cb(err)
 
     <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, file)
 

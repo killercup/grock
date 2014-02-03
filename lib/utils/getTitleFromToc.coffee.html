@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> - getTitleFromToc.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/utils/getTitleFromToc.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/utils/getTitleFromToc.coffee">lib/utils/getTitleFromToc.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+      
+        <div class="code"><div class="wrapper">_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(file)</span> -&gt;</span>
+  title = _.find(file.extra?.toc, <span class="hljs-attribute">level</span>: <span class="hljs-number">1</span>)?.title
+  <span class="hljs-keyword">if</span> title <span class="hljs-keyword">and</span> title <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
+    <span class="hljs-keyword">return</span> title
+  <span class="hljs-keyword">return</span>
+</div></div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>
