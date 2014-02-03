@@ -14,7 +14,10 @@
     "travis": "npm test && ./scripts/deploy_docs_from_travis.sh"
   },
   "keywords": [
-    "documentation"
+    "documentation",
+    "docs",
+    "generator",
+    "cli"
   ],
   "author": {
     "name": "Pascal Hertleif",
