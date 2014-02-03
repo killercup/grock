@@ -4,17 +4,11 @@
 
 fs = require 'fs'
 path = require 'path'
-_ = require 'lodash'
 
 through = require('event-stream').through
 
 log = require '../utils/log'
-
-getTitle = (file) ->
-  title = _.find(file.extra?.toc, level: 1)?.title
-  if title and title isnt ''
-    return title
-  return
+getTitle = require '../utils/getTitleFromToc'
 
 module.exports = (fileName, opts={}) ->
   unless fileName
@@ -34,7 +28,7 @@ module.exports = (fileName, opts={}) ->
       originalPath: file.originalRelative
       name: path.basename file.path
       lang: file.extra?.lang?.highlightJS or file.extra?.lang?.pygmentsLexer
-      title: getTitle(file)
+      title: file.extra?.title or= getTitle(file)
       toc: file.extra?.toc
     }, false, 2)
     first = false

@@ -11,6 +11,8 @@ path = require 'path'
 Buffer = require('buffer').Buffer
 map = require('event-stream').map
 
+getTitle = require '../utils/getTitleFromToc'
+
 module.exports = ({style, repositoryUrl}) ->
   render = style.getTemplate()
 
@@ -24,6 +26,7 @@ module.exports = ({style, repositoryUrl}) ->
     # ## Variables accessable in template
     templateContext =
       pageTitle: path.basename file.originalRelative
+      pageHeadline: file.extra?.title or= getTitle(file)
       segments: file.segments
       targetPath: file.originalRelative
       repositoryUrl: repositoryUrl

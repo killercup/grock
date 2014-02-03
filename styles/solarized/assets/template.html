@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%- data.pageTitle %></title>
+  <title><%= data.pageHeadline %> - <%- data.pageTitle %></title>
 
   <link rel="stylesheet" href="<%- data.relativeRoot %>assets/style.css">
 
@@ -20,7 +20,7 @@
       <% if (data.repositoryUrl) { %>
         <a href="<%- data.repositoryUrl %>/blob/master/<%- data.targetPath %>"><%= data.targetPath %></a>
       <% } else { %>
-        targetPath
+        <%= data.targetPath %>
       <% } %>
       </code>
     </div>

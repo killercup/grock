@@ -3,6 +3,8 @@ module.exports = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 __p += '<!doctype html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>' +
+((__t = ( data.pageHeadline )) == null ? '' : __t) +
+' - ' +
 __e( data.pageTitle ) +
 '</title>\n\n  <link rel="stylesheet" href="' +
 __e( data.relativeRoot ) +
@@ -26,7 +28,9 @@ __e( data.targetPath ) +
 ((__t = ( data.targetPath )) == null ? '' : __t) +
 '</a>\n      ';
  } else { ;
-__p += '\n        targetPath\n      ';
+__p += '\n        ' +
+((__t = ( data.targetPath )) == null ? '' : __t) +
+'\n      ';
  } ;
 __p += '\n      </code>\n    </div>\n    <div id="document">\n    ';
  data.segments.forEach(function(segment) { ;
