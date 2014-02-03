@@ -13,7 +13,9 @@ module.exports = (options) ->
       str = file.contents.toString('utf8')
       file.segments = seperator str, file.extra?.lang
     catch e
-      return cb(new Error("seperator: Error seperating code and comments #{e}"))
+      err = new Error("seperator: Error seperating code and comments #{e}")
+      err.file = file.relative
+      return cb(err)
 
     return cb(null, file)
 

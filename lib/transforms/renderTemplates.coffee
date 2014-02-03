@@ -36,8 +36,9 @@ module.exports = ({style, repositoryUrl}) ->
 
     try
       rendered = render(templateContext)
-    catch e
-      return cb(e)
+    catch err
+      err.file = file.relative
+      return cb(err)
 
     file.contents = new Buffer rendered
 

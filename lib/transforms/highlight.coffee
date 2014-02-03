@@ -42,7 +42,9 @@ module.exports = (options) ->
         file.contents = new Buffer highlightSegment(str, hlLang)
         file.path = file.path + ".html"
     catch e
-      return cb(new Error("highlight: Error highlighting stuff #{e}"))
+      err = new Error("highlight: Error highlighting stuff #{e}")
+      err.file = file.relative
+      return cb(err)
 
     return cb(null, file)
 

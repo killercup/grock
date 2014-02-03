@@ -16,7 +16,9 @@ module.exports = (options) ->
     .then(render.renderDocTags)
     .then ->
       cb(null, file)
-    .then null, cb
+    .then null, (err) ->
+      err.file = file.relative
+      cb(err)
 
     return
 
