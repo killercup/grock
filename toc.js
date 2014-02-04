@@ -65,6 +65,11 @@ window.files = [
       "level": 3,
       "slug": "contributing-to-styles",
       "title": "Contributing to Styles"
+    },
+    {
+      "level": 2,
+      "slug": "license",
+      "title": "License"
     }
   ]
 },
