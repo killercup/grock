@@ -122,3 +122,6 @@ Just fork the repo, implement some awesome feature or fix a bug and send a pull 
 
 When adding a new style or editing an existing one, make sure you follow the guidelines in `styles/Readme.md` (e.g. adding an index file exporting copy, compile and template functions).
 
+## License
+
+MIT
