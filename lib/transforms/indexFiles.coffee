@@ -6,14 +6,10 @@ path = require 'path'
 map = require('event-stream').map
 
 module.exports = (indexFile) ->
-  # Process only one index file
-  found = false
-
   modifyFile = (file, cb) ->
-    filePath = file.originalRelative or file.relative
-    if not found and (filePath is indexFile)
+    fileName = path.basename(file.originalRelative or file.relative)
+    if fileName is indexFile
       file.path = path.join(path.dirname(file.path), 'index.html')
-      found = true
     
     cb(null, file)
 

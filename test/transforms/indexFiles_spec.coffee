@@ -1,14 +1,16 @@
 expect = require('chai').expect
 Buffer = require('buffer').Buffer
+path = require('path')
 es = require('event-stream')
 gutil = require('gulp-util')
 
 t = require('../../lib/transforms')
 
 describe "Rename Index File", ->
-  indexPath = "index.coffee"
+  indexName = "index.coffee"
   indexFile = null
   fakeIndexFile = null
+  fakeIndexSubFile = null
   fakeFile = null
 
   beforeEach ->
@@ -21,10 +23,16 @@ describe "Rename Index File", ->
     fakeIndexFile = new gutil.File
       cwd: ".",
       base: "",
-      path: indexPath
+      path: indexName
       contents: new Buffer("test = 123")
 
-    indexFile = t.indexFile(indexPath)
+    fakeIndexSubFile = new gutil.File
+      cwd: "/",
+      base: "/test/",
+      path: "/test/#{indexName}"
+      contents: new Buffer("test = 123")
+
+    indexFile = t.indexFiles(indexName)
 
   it "should export a function", ->
     expect(t.indexFile).to.be.a('function')
@@ -33,16 +41,26 @@ describe "Rename Index File", ->
     indexFile
     .once 'data', (file) ->
       expect(file.isBuffer()).to.be.true
-      expect(file.path).to.eql 'index.html'
+      expect(path.basename file.path).to.eql 'index.html'
       done()
     .on 'error', done
 
     indexFile.write(fakeIndexFile)
 
+  it "should rename index file in sub directories", (done) ->
+    indexFile
+    .once 'data', (file) ->
+      expect(file.isBuffer()).to.be.true
+      expect(path.basename file.path).to.eql 'index.html'
+      done()
+    .on 'error', done
+
+    indexFile.write(fakeIndexSubFile)
+
   it "should ignore other files", (done) ->
     indexFile
     .once 'data', (file) ->
-      expect(file.path).to.not.eql 'index.html'
+      expect(path.basename file.path).to.not.eql 'index.html'
       done()
     .on 'error', done
 

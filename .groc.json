@@ -8,6 +8,7 @@
     "bin/*.js"
   ],
   "index": "Readme.md",
+  "indexes": "Readme.md",
   "github": false,
   "repository-url": "https://github.com/killercup/grock"
 }

@@ -26,7 +26,7 @@ duration = (start) ->
 
 # ## The Glorious Generator
 module.exports = (opts) ->
-  {glob, style, out, verbose, start, index, root} = opts
+  {glob, style, out, verbose, start, index, indexes, root} = opts
   verbose or= false
   log.setVerbose(verbose)
   start or= START
@@ -59,6 +59,7 @@ module.exports = (opts) ->
   .pipe t.markdownComments()
   .pipe t.renderTemplates(style: style, repositoryUrl: opts['repository-url'])
   .pipe t.indexFile(index)
+  .pipe t.indexFiles(indexes)
   .pipe vfs.dest(dest)
   .pipe t.renderFileTree(path.join(dest, "toc.js"))
   .pipe map (file, cb) ->

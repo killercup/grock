@@ -10,6 +10,7 @@ describe("Transforms", function () {
   require('./transforms/highlight_spec');
   require('./transforms/renderDocTags_spec');
   require('./transforms/indexFile_spec');
+  require('./transforms/indexFiles_spec');
 });
 
 require('./utils/processDocTags_spec');

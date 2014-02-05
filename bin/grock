@@ -8,7 +8,6 @@ var START = process.hrtime();
 
 var path = require('path');
 var fs = require('fs');
-var  _ = require('lodash');
 
 /**
  * ## Load Project Config
@@ -28,7 +27,8 @@ var optimist = require('optimist')
   .usage(
     "Usage: grock [options]\n\n"+
     "You can also use a configuration file named .groc.json to specify "+
-    "these options."
+    "these options.\n"+
+    "The defaults below show the values of the .groc.json file when possible."
   )
 
   .boolean('help')
@@ -58,8 +58,13 @@ var optimist = require('optimist')
 
   .string('index')
   .default('index', projectConfig.index || 'Readme.md')
-  .describe('index', 'File to be used as index')
+  .describe('index', 'File to be used as root index')
   .alias('i', 'index')
+
+  .string('indexes')
+  .default('indexes', projectConfig.indexes || 'Readme.md')
+  .describe('indexes', 'Files to be used as indexes in sub directories')
+  .alias('i', 'indexes')
 
   .string('root')
   .default('root', projectConfig.root || '.')
@@ -90,12 +95,17 @@ if (optimist.argv.version) {
   return process.exit(0);
 }
 
+/**
+ * ## Start Generator
+ */
+require('coffee-script/register');
+var  _ = require('lodash');
+
 // Overwrite defaults/project config with CLI arguments
 var argv = _.defaults(optimist.argv, projectConfig);
 argv.start = START;
 
 // Load Generator
-require('coffee-script/register');
 var generator = require('../lib/generator');
 
 if (argv.github) {

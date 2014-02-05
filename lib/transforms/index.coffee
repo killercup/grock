@@ -7,3 +7,4 @@ module.exports =
   renderTemplates: require('./renderTemplates')
   renderFileTree: require('./renderFileTree')
   indexFile: require('./indexFile')
+  indexFiles: require('./indexFiles')
