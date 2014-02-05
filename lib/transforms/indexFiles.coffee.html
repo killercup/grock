@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rename Index File - indexFile.coffee</title>
+  <title>Rename Index File - indexFiles.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
-  <meta name="groc-document-path" content="lib/transforms/indexFile.coffee"/>
+  <meta name="groc-document-path" content="lib/transforms/indexFiles.coffee"/>
   
   <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
   
@@ -18,7 +18,7 @@
     <div id="meta">
       <code class="file-path">
       
-        <a href="https://github.com/killercup/grock/blob/master/lib/transforms/indexFile.coffee">lib/transforms/indexFile.coffee</a>
+        <a href="https://github.com/killercup/grock/blob/master/lib/transforms/indexFiles.coffee">lib/transforms/indexFiles.coffee</a>
       
       </code>
     </div>
@@ -34,25 +34,11 @@
         <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).map
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(indexFile)</span> -&gt;</span></div></div>
-      
-      </div>
-    
-      <div class="segment">
-      
-        <div class="comments ">
-          <div class="wrapper"><p>Process only one index file</p>
-</div>
-        </div>
-      
-      
-        <div class="code"><div class="wrapper">  found = <span class="hljs-literal">false</span>
-
+<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(indexFile)</span> -&gt;</span>
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
-    filePath = file.originalRelative <span class="hljs-keyword">or</span> file.relative
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> found <span class="hljs-keyword">and</span> (filePath <span class="hljs-keyword">is</span> indexFile)
+    fileName = path.basename(file.originalRelative <span class="hljs-keyword">or</span> file.relative)
+    <span class="hljs-keyword">if</span> fileName <span class="hljs-keyword">is</span> indexFile
       file.path = path.join(path.dirname(file.path), <span class="hljs-string">'index.html'</span>)
-      found = <span class="hljs-literal">true</span>
     
     cb(<span class="hljs-literal">null</span>, file)
 </div></div>

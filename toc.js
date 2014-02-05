@@ -107,6 +107,11 @@ window.files = [
     },
     {
       "level": 2,
+      "slug": "start-generator",
+      "title": "Start Generator"
+    },
+    {
+      "level": 2,
       "slug": "write-to-github-pages-branch",
       "title": "Write to Github Pages Branch"
     },
@@ -240,6 +245,21 @@ window.files = [
   "originalName": "indexFile.coffee",
   "originalPath": "lib/transforms/indexFile.coffee",
   "name": "indexFile.coffee.html",
+  "lang": "coffeescript",
+  "title": "Rename Index File",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "rename-index-file",
+      "title": "Rename Index File"
+    }
+  ]
+},
+{
+  "path": "lib/transforms/indexFiles.coffee.html",
+  "originalName": "indexFiles.coffee",
+  "originalPath": "lib/transforms/indexFiles.coffee",
+  "name": "indexFiles.coffee.html",
   "lang": "coffeescript",
   "title": "Rename Index File",
   "toc": [
@@ -531,10 +551,10 @@ window.files = [
   ]
 },
 {
-  "path": "styles/Readme.md.html",
+  "path": "styles/index.html",
   "originalName": "Readme.md",
   "originalPath": "styles/Readme.md",
-  "name": "Readme.md.html",
+  "name": "index.html",
   "title": "About Grock Styles",
   "toc": [
     {
@@ -550,10 +570,10 @@ window.files = [
   ]
 },
 {
-  "path": "styles/solarized/Readme.md.html",
+  "path": "styles/solarized/index.html",
   "originalName": "Readme.md",
   "originalPath": "styles/solarized/Readme.md",
-  "name": "Readme.md.html",
+  "name": "index.html",
   "title": "Solarized Style",
   "toc": [
     {
