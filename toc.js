@@ -68,6 +68,11 @@ window.files = [
     },
     {
       "level": 2,
+      "slug": "changelog",
+      "title": "Changelog"
+    },
+    {
+      "level": 2,
       "slug": "license",
       "title": "License"
     }
