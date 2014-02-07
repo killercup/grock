@@ -129,7 +129,7 @@ renderDocTagsForSegment = (segment) ->
     secondPart.push tag.markdown for tag in sections.metadata if sections.metadata?
     metaOutput += " #{humanize.joinSentence secondPart}"
 
-  output.push "<span class='doc-section-header'>#{metaOutput}</span>", "" if metaOutput isnt ''
+  output.push "<span class='doc-section-header'>\n#{metaOutput}\n</span>", "" if metaOutput isnt ''
 
   output.push "#{tag.markdown}", "" for tag in sections.description if sections.description?
 

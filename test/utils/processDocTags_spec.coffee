@@ -1,6 +1,8 @@
 expect = require('chai').expect
 Buffer = require('buffer').Buffer
 
+marked = require('marked')
+
 process = require '../../lib/utils/processDocTags'
 
 # ## Fake data
@@ -97,3 +99,24 @@ describe "Documentation Tags", ->
       .then -> done()
       .then null, done
 
+  describe "Issues", ->
+    it "DocTag order shouldn't destroy URLs (#7)", (done) ->
+      crazyMarkdown = """
+      # Seperate Code and Comments into Segments
+
+      Code from [`groc/lib/utils`][1]
+
+      @copyright Ian MacLeod and groc contributors
+
+      [1]: https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee
+      """.trim()
+
+      process
+      .parseDocTags [{code: "", comments: crazyMarkdown.split('\n')}]
+      .then process.markdownDocTags
+      .then process.renderDocTags
+      .then ([segment]) ->
+        comments = segment.comments.join('\n')
+        expect(marked comments).to.not.contain '<a href="https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee&lt;/span">'
+      .then -> done()
+      .then null, done
