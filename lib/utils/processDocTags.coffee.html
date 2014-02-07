@@ -27,8 +27,10 @@
       <div class="segment">
       
         <div class="comments doc-section">
-          <div class="wrapper"><p><span class='doc-section-header'> copyright Ian MacLeod and groc contributors</p>
-<h1 id="process-doc-tags"><a href="#process-doc-tags" class="anchor"></a>Process Doc Tags</h1><p>Code from <a href="https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee&lt;/span"><code>groc/lib/utils</code></a></p>
+          <div class="wrapper"><p><span class='doc-section-header'>
+ copyright Ian MacLeod and groc contributors</p>
+<p></span></p>
+<h1 id="process-doc-tags"><a href="#process-doc-tags" class="anchor"></a>Process Doc Tags</h1><p>Code from <a href="https://github.com/nevir/groc/blob/b626e45ebf/lib/utils.coffee"><code>groc/lib/utils</code></a></p>
 </div>
         </div>
       
@@ -190,7 +192,7 @@ TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/<
     secondPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.metadata <span class="hljs-keyword">if</span> sections.metadata?
     metaOutput += <span class="hljs-string">" <span class="hljs-subst">#{humanize.joinSentence secondPart}</span>"</span>
 
-  output.push <span class="hljs-string">"&lt;span class='doc-section-header'&gt;<span class="hljs-subst">#{metaOutput}</span>&lt;/span&gt;"</span>, <span class="hljs-string">""</span> <span class="hljs-keyword">if</span> metaOutput <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
+  output.push <span class="hljs-string">"&lt;span class='doc-section-header'&gt;\n<span class="hljs-subst">#{metaOutput}</span>\n&lt;/span&gt;"</span>, <span class="hljs-string">""</span> <span class="hljs-keyword">if</span> metaOutput <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
 
   output.push <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>"</span>, <span class="hljs-string">""</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.description <span class="hljs-keyword">if</span> sections.description?
 
@@ -236,7 +238,9 @@ TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/<
       <div class="segment">
       
         <div class="comments doc-section">
-          <div class="wrapper"><p><span class='doc-section-header'>Method: <code>Parse Doc Tags</code></span></p>
+          <div class="wrapper"><p><span class='doc-section-header'>
+Method: <code>Parse Doc Tags</code>
+</span></p>
 <p>Parses comments of segment for doc tags. Adds <code>tags</code> and
   <code>tagSections</code> to each segment.</p>
 <p>Parameters:</p>
@@ -269,7 +273,9 @@ TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/<
       <div class="segment">
       
         <div class="comments doc-section">
-          <div class="wrapper"><p><span class='doc-section-header'>Method: <code>Markdown Doc Tags</code></span></p>
+          <div class="wrapper"><p><span class='doc-section-header'>
+Method: <code>Markdown Doc Tags</code>
+</span></p>
 <p>Transform each doc tag entry to markdown</p>
 <p>Parameters:</p>
 <ul>
@@ -300,7 +306,9 @@ TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/<
       <div class="segment">
       
         <div class="comments doc-section">
-          <div class="wrapper"><p><span class='doc-section-header'>Method: <code>Render Doc Tags</code></span></p>
+          <div class="wrapper"><p><span class='doc-section-header'>
+Method: <code>Render Doc Tags</code>
+</span></p>
 <p>Combine Array of doc tags to HTML string</p>
 <p>Parameters:</p>
 <ul>
