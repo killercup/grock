@@ -14,5 +14,6 @@ describe("Transforms", function () {
 });
 
 require('./utils/processDocTags_spec');
+require('./utils/seperator_spec');
 
 require('./styles_spec');
