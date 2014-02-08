@@ -12,12 +12,19 @@ var fs = require('fs');
 /**
  * ## Load Project Config
  */
-var projectConfig;
+var projectConfig = {};
 var projectConfigPath = path.resolve('.groc.json');
 try {
   projectConfig = JSON.parse(fs.readFileSync(projectConfigPath));
-} catch (e) {
-  projectConfig = {};
+} catch (e) {}
+
+// Fetch repository URL from `package.json` if necessary
+if (!projectConfig['repository-url']) {
+  var packageJSONPath = path.resolve('package.json');
+  try {
+    var packageJSON = JSON.parse(fs.readFileSync(packageJSONPath));
+    projectConfig['repository-url'] = (packageJSON.repository || {}).url;
+  } catch (e) {}
 }
 
 /**
@@ -69,6 +76,10 @@ var optimist = require('optimist')
   .string('root')
   .default('root', projectConfig.root || '.')
   .describe('root', "The project's root directory")
+
+  .string('repository-url')
+  .default('repository-url', projectConfig['repository-url'] || false)
+  .describe('repository-url', "URL to link to source files")
 
   .boolean('github')
   .default('github', projectConfig.github || false)
