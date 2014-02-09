@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= data.pageHeadline %> - <%- data.pageTitle %></title>
+
+  <link rel="stylesheet" href="<%- data.relativeRoot %>assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="<%- data.relativeRoot %>"/>
+  <meta name="groc-document-path" content="<%- data.targetPath %>"/>
+  <% if (data.repositoryUrl) { %>
+  <meta name="groc-repository-url" content="<%- data.repositoryUrl %>"/>
+  <% } %>
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      <% if (data.repositoryUrl) { %>
+        <a href="<%- data.repositoryUrl %>/blob/master/<%- data.targetPath %>"><%= data.targetPath %></a>
+      <% } else { %>
+        <%= data.targetPath %>
+      <% } %>
+      </code>
+    </div>
+    <div id="document">
+    <% data.segments.forEach(function(segment) { %>
+      <div class="segment">
+      <% if (segment.comments != '') { %>
+        <div class="comments <%- segment.accessClasses %>">
+          <div class="wrapper"><%= segment.comments %></div>
+        </div>
+      <% } %>
+      <% if (segment.code != '') { %>
+        <div class="code"><pre class="wrapper"><%= segment.code %></pre></div>
+      <% } %>
+      </div>
+    <% }) %>
+    </div>
+  </div>
+
+  <script src="<%- data.relativeRoot %>toc.js"></script>
+  <script src="<%- data.relativeRoot %>assets/libs.js"></script>
+  <script src="<%- data.relativeRoot %>assets/behavior.js"></script>
+</body>
+</html>

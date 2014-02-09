@@ -1,0 +1,379 @@
+// # Grock Solarized Stylesheet
+
+@import "helpers";
+@import "flex-box";
+@import "highlight-tomorrow";
+
+// ## Normalize
+header, footer, nav, section, article, aside, summary, details {
+  display: block;
+}
+
+// ## Fonts
+@import url('http://fonts.googleapis.com/css?family=Source+Code+Pro:300,500');
+@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic');
+
+%font {
+  font-size: 16px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+%code-font {
+  font-size: 14px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 300;
+  line-height: 1.4 * 16px;
+}
+
+%bold {
+  font-weight: 400;
+}
+
+%heading {
+  font-weight: 300;
+}
+
+%italic {
+  font-weight: 300;
+}
+
+body {
+  @extend %font;
+}
+
+strong, b {
+  @extend %bold;
+}
+
+em, i {
+  @extend %italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend %heading;
+}
+
+code, pre {
+  @extend %code-font;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.doc-section-header {
+  @extend %heading;
+  &, code {
+    font-size: 1.5 * 16px;
+  }
+}
+
+// ## Vars
+$color-dark:  #002b36;
+$color-light: #fff;
+$color-text: #4d4d4c;
+$color-light-bg: #f0f0f0;
+$color-accent: #3e999f;
+$color-accent2: #f5871f;
+
+$body-background: $color-light;
+$text-background: $color-light-bg;
+$text-color: $color-text;
+$text-link-color: $color-accent;
+$color-selected: $color-accent2;
+
+$nav-width: 14em;
+$left-width: 30em;
+$side-padding: 1em;
+
+// ## Layout
+
+@mixin scroll-box {
+  @include box-sizing(border-box);
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  clear: both;
+}
+
+ul, ol {
+  margin: 0 0.5em;
+  padding: 0 0 0 1em;
+}
+
+// ### flex
+body {
+  @include display(flex);
+
+  #file-area {
+    @include display(flex);
+
+    @include flex(1);
+    @include flex-direction(column);
+
+    #document {
+      @include flex-grow(1);
+    }
+  }
+}
+
+#side-menu nav {
+  width: $nav-width;
+  overflow-x: auto;
+  background: darken($body-background, 2%);
+
+  + nav {
+    margin-top: 1em;
+  }
+
+  ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tree {
+    padding-bottom: 0.5em;
+  }
+
+  li {
+    line-height: 1.2;
+    padding: 0 0.5em;
+  }
+
+  .folder {
+    color: darken($text-link-color, 10%);
+  }
+
+  a {
+    display: block;
+    padding: 0.3em 0;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .tools {
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  .search {
+    input {
+      @include box-sizing(border-box);
+      width: 100%;
+      display: block;
+    }
+  }
+
+  summary {
+    text-align: center;
+    padding: 0.5em 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  a.selected {
+    color: $color-selected;
+  }
+
+  ol.searching {
+    a, span {
+      display: none;
+
+      &.matched {
+        display: block;
+      }
+    }
+  }
+}
+
+#meta {
+  padding: 0.5em;
+
+  .toggle-menu {
+    @extend %font;
+    padding: 0.2em 1em;
+    border: 0;
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+}
+
+.segment {
+  clear: both;
+  @include box-sizing(border-box);
+  padding: 0.5em 0 0.5em $left-width;
+  white-space: nowrap;
+}
+
+.comments,
+.code {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.comments {
+  padding: 0 $side-padding;
+  width: $left-width - (2 * $side-padding);
+  margin-left: -1 * $left-width;
+  white-space: normal;
+  word-break: break-word;
+
+  :target {
+    a.anchor {
+      color: $color-selected;
+    }
+  }
+
+  a.anchor {
+    opacity: 0.2;
+
+    &:before {
+      content: "#";
+      display: inline-block;
+      padding-right: 0.2em;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre {
+    word-break: normal;
+    @extend %code-font;
+    @include highlightjs-tomorrow('code');
+    background: $color-light-bg;
+
+    code {
+      @include scroll-box;
+    }
+  }
+}
+
+.code {
+  white-space: pre;
+  padding-top: 0.5em;
+  margin-left: $side-padding;
+
+  @extend %code-font;
+  @include highlightjs-tomorrow();
+  background: $color-light;
+}
+
+// ## Responsive
+$col-1: $left-width; // in em
+$col-2: 2 * $left-width; // in em
+$col-3: $nav-width + 2 * $left-width; // in em
+
+// ### One Column
+
+@media screen and (max-width: $col-1) {
+  $nav-width-mobile: $nav-width;
+
+  body {
+    display: block;
+  }
+
+  #side-menu {
+    display: none;
+
+    &, nav {
+      width: 100%;
+    }
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+// ### Two Columns
+
+@media screen and (min-width: $col-1) {
+  #meta .toggle-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $col-2) {
+
+  .segment {
+    padding: 0.5em;
+
+    .code, .comments {
+      display: block;
+      padding: 0.5em;
+      margin-left: 0;
+      width: auto;
+    }
+
+    .wrapper {
+      @include scroll-box;
+    }
+  }
+}
+
+// ## Color
+body,
+#file-area {
+  background: $body-background;
+  color: $color-text;
+}
+
+a {
+  color: $text-link-color;
+}
+
+#meta {
+  word-wrap: break-word;
+
+  .toggle-menu {
+    background: $text-background;
+    color: $body-background;
+  }
+}
+
+#document {
+  @include linear-gradient(
+    90deg,
+    $text-background 0%,
+    $text-background $left-width,
+    $body-background $left-width,
+    $body-background 100%,
+    $fallback: $body-background
+  );
+
+  .comments {
+    color: $text-color;
+  }
+
+  @media screen and (max-width: 2 * $left-width) {
+    background: $text-background;
+  }
+}
