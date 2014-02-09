@@ -3,6 +3,7 @@
     "Readme.md",
     "bin/*",
     "lib/**/*.coffee",
+    "lib/**/*.js",
     "styles/**/*.coffee",
     "styles/**/*.md",
     "bin/*.js"
