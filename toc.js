@@ -462,6 +462,21 @@ window.files = [
   ]
 },
 {
+  "path": "lib/utils/plumber.js.html",
+  "originalName": "plumber.js",
+  "originalPath": "lib/utils/plumber.js",
+  "name": "plumber.js.html",
+  "lang": "javascript",
+  "title": "Plumber",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "plumber",
+      "title": "Plumber"
+    }
+  ]
+},
+{
   "path": "styles/compileAll.coffee.html",
   "originalName": "compileAll.coffee",
   "originalPath": "styles/compileAll.coffee",
@@ -501,9 +516,95 @@ window.files = [
   "toc": []
 },
 {
+  "path": "styles/thin/compile.coffee.html",
+  "originalName": "compile.coffee",
+  "originalPath": "styles/thin/compile.coffee",
+  "name": "compile.coffee.html",
+  "lang": "coffeescript",
+  "title": "Compile Solarized Assets",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "compile-solarized-assets",
+      "title": "Compile Solarized Assets"
+    }
+  ]
+},
+{
+  "path": "styles/thin/copy.coffee.html",
+  "originalName": "copy.coffee",
+  "originalPath": "styles/thin/copy.coffee",
+  "name": "copy.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/thin/index.coffee.html",
+  "originalName": "index.coffee",
+  "originalPath": "styles/thin/index.coffee",
+  "name": "index.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
   "path": "styles/solarized/assets/js/behavior.coffee.html",
   "originalName": "behavior.coffee",
   "originalPath": "styles/solarized/assets/js/behavior.coffee",
+  "name": "behavior.coffee.html",
+  "lang": "coffeescript",
+  "title": "Grock Solarized Side Menu",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "grock-solarized-side-menu",
+      "title": "Grock Solarized Side Menu"
+    },
+    {
+      "level": 2,
+      "slug": "convert-list-of-files-to-file-tree",
+      "title": "Convert List of Files to File Tree"
+    },
+    {
+      "level": 2,
+      "slug": "convert-toc-to-headline-tree",
+      "title": "Convert TOC to Headline Tree"
+    },
+    {
+      "level": 2,
+      "slug": "build-file-tree-recursively",
+      "title": "Build File Tree Recursively"
+    },
+    {
+      "level": 2,
+      "slug": "build-headlines-tree-recursively",
+      "title": "Build Headlines Tree Recursively"
+    },
+    {
+      "level": 2,
+      "slug": "create-navigation-element",
+      "title": "Create Navigation Element"
+    },
+    {
+      "level": 2,
+      "slug": "add-button-to-toggle-side-menu-visibility",
+      "title": "Add Button to Toggle Side Menu Visibility"
+    },
+    {
+      "level": 2,
+      "slug": "search-tree",
+      "title": "Search Tree"
+    },
+    {
+      "level": 2,
+      "slug": "build-navigation",
+      "title": "Build Navigation"
+    }
+  ]
+},
+{
+  "path": "styles/thin/assets/js/behavior.coffee.html",
+  "originalName": "behavior.coffee",
+  "originalPath": "styles/thin/assets/js/behavior.coffee",
   "name": "behavior.coffee.html",
   "lang": "coffeescript",
   "title": "Grock Solarized Side Menu",
@@ -590,6 +691,40 @@ window.files = [
       "level": 2,
       "slug": "screenshots",
       "title": "Screenshots"
+    },
+    {
+      "level": 2,
+      "slug": "uses",
+      "title": "Uses"
+    },
+    {
+      "level": 2,
+      "slug": "features",
+      "title": "Features"
+    }
+  ]
+},
+{
+  "path": "styles/thin/index.html",
+  "originalName": "Readme.md",
+  "originalPath": "styles/thin/Readme.md",
+  "name": "index.html",
+  "title": "Thin Style",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "thin-style",
+      "title": "Thin Style"
+    },
+    {
+      "level": 2,
+      "slug": "screenshots",
+      "title": "Screenshots"
+    },
+    {
+      "level": 2,
+      "slug": "uses",
+      "title": "Uses"
     },
     {
       "level": 2,

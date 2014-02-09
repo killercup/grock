@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plumber - plumber.js</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/utils/plumber.js"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/utils/plumber.js">lib/utils/plumber.js</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>
+ copyright Vsevolod Strukchinsky <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x66;&#108;&#111;&#x61;&#116;&#100;&#x72;&#111;&#112;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#x66;&#108;&#111;&#x61;&#116;&#100;&#x72;&#111;&#112;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#111;&#109;</a></p>
+<p></span></p>
+<h1 id="plumber"><a href="#plumber" class="anchor"></a>Plumber</h1><p>Code from <a href="https://github.com/floatdrop/gulp-plumber/blob/f1c10cb6f4e0a6b957514a64500a9c8c48aff546/index.js"><code>gulp-plumber</code></a></p>
+</div>
+        </div>
+      
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>globals module, require</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> EE = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter;
+<span class="hljs-keyword">var</span> Through = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).through;
+<span class="hljs-keyword">var</span> colors = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chalk'</span>);
+
+<span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./log'</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeDefaultHandler</span><span class="hljs-params">(stream, event)</span> {</span>
+  <span class="hljs-keyword">var</span> found = <span class="hljs-literal">false</span>;
+  stream.listeners(event).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> {</span>
+    <span class="hljs-keyword">if</span> (item.name === <span class="hljs-string">'on'</span> + event) {
+      found = item;
+      <span class="hljs-keyword">this</span>.removeListener(event, item);
+    }
+  }, stream);
+  <span class="hljs-keyword">return</span> found;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapPanicOnErrorHandler</span><span class="hljs-params">(stream)</span> {</span>
+  <span class="hljs-keyword">var</span> oldHandler = removeDefaultHandler(stream, <span class="hljs-string">'error'</span>);
+  <span class="hljs-keyword">if</span> (oldHandler) {
+    stream.on(<span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onerror2</span><span class="hljs-params">(er)</span> {</span>
+      <span class="hljs-keyword">if</span> (EE.listenerCount(stream, <span class="hljs-string">'error'</span>) === <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">this</span>.removeListener(<span class="hljs-string">'error'</span>, onerror2);
+        oldHandler.call(stream, er);
+      }
+    });
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defaultErrorHandler</span><span class="hljs-params">(error)</span> {</span></div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>onerror2 and this handler</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">if</span> (EE.listenerCount(<span class="hljs-keyword">this</span>, <span class="hljs-string">'error'</span>) &lt; <span class="hljs-number">3</span>) {
+    log(
+      colors.red(<span class="hljs-string">'Failed!'</span>),
+      error.toString().trim().replace(<span class="hljs-regexp">/^Error: /</span>, <span class="hljs-string">''</span>) +
+      (error.file ? <span class="hljs-string">' '</span>+ colors.magenta(error.file) : <span class="hljs-string">''</span>)
+    );
+
+    <span class="hljs-keyword">if</span> (error.stack)
+      log.verbose(colors.red(<span class="hljs-string">'Stack:'</span>), error.stack);
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">plumber</span><span class="hljs-params">(opts)</span> {</span>
+  opts = opts || {};
+
+  <span class="hljs-keyword">var</span> through = <span class="hljs-keyword">new</span> Through(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(file)</span> {</span> <span class="hljs-keyword">this</span>.queue(file); });
+  through._plumber = <span class="hljs-literal">true</span>;
+
+  <span class="hljs-keyword">if</span> (opts.errorHandler !== <span class="hljs-literal">false</span>) {
+    through.errorHandler = (<span class="hljs-keyword">typeof</span> opts.errorHandler === <span class="hljs-string">'function'</span>) ?
+      opts.errorHandler :
+      defaultErrorHandler;
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">patchPipe</span><span class="hljs-params">(stream)</span> {</span>
+    <span class="hljs-keyword">if</span> (stream.pipe2) {
+      wrapPanicOnErrorHandler(stream);
+      stream._pipe = stream._pipe || stream.pipe;
+      stream.pipe = stream.pipe2;
+      stream.once(<span class="hljs-string">'readable'</span>, patchPipe.bind(<span class="hljs-literal">null</span>, stream));
+      stream._plumbed = <span class="hljs-literal">true</span>;
+    }
+  }
+
+  through.pipe2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pipe2</span><span class="hljs-params">(dest)</span> {</span>
+
+    <span class="hljs-keyword">if</span> (!dest) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Can\'t pipe to undefined'</span>); }
+
+    <span class="hljs-keyword">this</span>._pipe.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
+    removeDefaultHandler(<span class="hljs-keyword">this</span>, <span class="hljs-string">'error'</span>);
+
+    <span class="hljs-keyword">if</span> (dest._plumber) { <span class="hljs-keyword">return</span> dest; }
+
+    dest.pipe2 = pipe2;
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Patching pipe method</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> (opts.inherit !== <span class="hljs-literal">false</span>) {
+      patchPipe(dest);
+    }
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Placing custom on error handler</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.errorHandler) {
+      dest.errorHandler = <span class="hljs-keyword">this</span>.errorHandler;
+      dest.on(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">this</span>.errorHandler.bind(dest));
+    }
+
+    dest._plumbed = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">return</span> dest;
+  };
+
+  patchPipe(through);
+
+  <span class="hljs-keyword">return</span> through;
+}
+
+module.exports = plumber;
+</div></div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>

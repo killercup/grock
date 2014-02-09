@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grock Solarized Side Menu - behavior.coffee</title>
+
+  <link rel="stylesheet" href="../../../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../../../"/>
+  <meta name="groc-document-path" content="styles/thin/assets/js/behavior.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/styles/thin/assets/js/behavior.coffee">styles/thin/assets/js/behavior.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>
+ copyright 2014 Pascal Hertleif and license MIT
+</span></p>
+<h1 id="grock-solarized-side-menu"><a href="#grock-solarized-side-menu" class="anchor"></a>Grock Solarized Side Menu</h1></div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">$ = Zepto <span class="hljs-keyword">or</span> jQuery
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="convert-list-of-files-to-file-tree"><a href="#convert-list-of-files-to-file-tree" class="anchor"></a>Convert List of Files to File Tree</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>list</code> must be an Array.</strong><br/>(Files in flat list)</li>
+</ul>
+<p><strong>Returns an Object</strong><br/>(Files in tree (by folders))</p>
+<p>Example:</p>
+<pre><code class="lang-javascript">Schema(list) == [{
+    path: <span class="hljs-built_in">String</span>,
+    originalName: <span class="hljs-built_in">String</span>,
+    originalPath: <span class="hljs-built_in">String</span>,
+    name: <span class="hljs-built_in">String</span>,
+    lang: <span class="hljs-built_in">String</span>,
+    toc: [Headline]
+}]
+</code></pre>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">listToTree</span> = <span class="hljs-params">(list)</span> -&gt;</span>
+  tree = {}
+
+  <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> list
+    path = file.path.split(<span class="hljs-string">'/'</span>)
+    fileDepth = path.length - <span class="hljs-number">1</span>
+    cur = tree
+
+    <span class="hljs-keyword">for</span> part, depth <span class="hljs-keyword">in</span> path
+      <span class="hljs-keyword">if</span> (cur[part]?.type <span class="hljs-keyword">isnt</span> <span class="hljs-string">'file'</span>) <span class="hljs-keyword">and</span> (depth <span class="hljs-keyword">is</span> fileDepth-<span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> file.originalName.match(<span class="hljs-regexp">/index\.(js|coffee)/</span>)
+        cur[part] <span class="hljs-keyword">or</span>= {}
+        cur[part].path = file.path
+        cur[part].originalName = file.originalName
+        cur[part].originalPath = file.originalPath
+        cur[part].name = file.name
+        cur[part].title = part
+        cur[part].type = <span class="hljs-string">'file'</span>
+        cur[part].children <span class="hljs-keyword">or</span>= {}
+        <span class="hljs-keyword">break</span>
+      <span class="hljs-keyword">if</span> depth <span class="hljs-keyword">is</span> fileDepth
+        cur[part] = file
+        cur[part].type = <span class="hljs-string">'file'</span>
+      <span class="hljs-keyword">else</span>
+        cur[part] <span class="hljs-keyword">or</span>= <span class="hljs-attribute">name</span>: part, <span class="hljs-attribute">type</span>: <span class="hljs-string">'folder'</span>
+        cur = cur[part].children <span class="hljs-keyword">or</span>= {}
+
+  <span class="hljs-keyword">return</span> tree
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="convert-toc-to-headline-tree"><a href="#convert-toc-to-headline-tree" class="anchor"></a>Convert TOC to Headline Tree</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>toc</code> must be an Array.</strong><br/>(List of Headlines)</li>
+</ul>
+<p><strong>Returns an Array</strong><br/>(Tree of Headlines)</p>
+<p>Example:</p>
+<pre><code class="lang-javascript">Schema(toc) == [{
+    level: <span class="hljs-built_in">Number</span>,
+    title: <span class="hljs-built_in">String</span>,
+    slug: <span class="hljs-built_in">String</span>,
+}]
+</code></pre>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">tocToTree</span> = <span class="hljs-params">(toc)</span> -&gt;</span>
+  headlines = []
+  last = {}
+
+  <span class="hljs-keyword">for</span> headline <span class="hljs-keyword">in</span> toc
+    level = headline.level <span class="hljs-keyword">or</span>= <span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> last[level - <span class="hljs-number">1</span>]
+      last[level - <span class="hljs-number">1</span>].children <span class="hljs-keyword">or</span>= []
+      last[level - <span class="hljs-number">1</span>].children.push headline
+    <span class="hljs-keyword">else</span>
+      headlines.push headline
+    last[level] = headline
+
+  <span class="hljs-keyword">return</span> headlines
+
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="build-file-tree-recursively"><a href="#build-file-tree-recursively" class="anchor"></a>Build File Tree Recursively</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>tree</code> must be an Array.</strong><br/>(List of file or folder Objects)</li>
+<li><strong><code>ul</code> must be a jQuery.</strong><br/>(DOM node of list to append this tree to)</li>
+<li><strong><code>metaInfo</code> must be an Object.</strong><br/>(Project information)</li>
+</ul>
+<p><strong>Returns a jQuery</strong><br/>(The ul element)</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildFileTree</span> = <span class="hljs-params">(tree, ul, metaInfo)</span> -&gt;</span>
+  $ul = $(ul)
+  <span class="hljs-keyword">unless</span> tree?
+    <span class="hljs-built_in">console</span>.warn <span class="hljs-string">'No File Tree!'</span>
+    <span class="hljs-keyword">return</span> $ul
+
+  $.each tree, <span class="hljs-function"><span class="hljs-params">(fileName, node)</span> -&gt;</span>
+    $node = $(<span class="hljs-string">"""&lt;li class="<span class="hljs-subst">#{node.type}</span>"/&gt;"""</span>)
+    <span class="hljs-keyword">if</span> node.type <span class="hljs-keyword">is</span> <span class="hljs-string">'file'</span>
+      currentFile = node <span class="hljs-keyword">is</span> metaInfo.currentFile
+      $node.append <span class="hljs-string">"""&lt;a class="file<span class="hljs-subst">#{<span class="hljs-keyword">if</span> currentFile <span class="hljs-keyword">then</span> <span class="hljs-string">' selected'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">''</span>}</span>" href="<span class="hljs-subst">#{metaInfo.relativeRoot}</span><span class="hljs-subst">#{node.path}</span>" title="<span class="hljs-subst">#{node.originalName <span class="hljs-keyword">or</span> node.name}</span>"&gt;<span class="hljs-subst">#{node.title <span class="hljs-keyword">or</span> node.originalName <span class="hljs-keyword">or</span> node.name}</span>&lt;/a&gt;"""</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-comment"># folder</span>
+      $node.append <span class="hljs-string">"""&lt;span class="folder"&gt;<span class="hljs-subst">#{node.name}</span>&lt;/span&gt;"""</span>
+
+    <span class="hljs-keyword">if</span> node.children?
+      $children = $(<span class="hljs-string">'&lt;ol class="children"/&gt;'</span>)
+      $node.append buildFileTree node.children, $children, metaInfo
+
+    <span class="hljs-keyword">if</span> node.originalName?.match <span class="hljs-regexp">/^readme\.(md|txt|rst)/i</span>
+      position = <span class="hljs-string">'prepend'</span>
+    <span class="hljs-keyword">else</span>
+      position = <span class="hljs-string">'append'</span>
+    $ul[position] $node
+    <span class="hljs-keyword">return</span>
+
+  <span class="hljs-keyword">return</span> $ul
+
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="build-headlines-tree-recursively"><a href="#build-headlines-tree-recursively" class="anchor"></a>Build Headlines Tree Recursively</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>tree</code> must be an Object.</strong><br/>(Tree of headlines)</li>
+<li><strong><code>ul</code> must be a jQuery.</strong><br/>(DOM node of list to append this tree to)</li>
+<li><strong><code>metaInfo</code> must be an Object.</strong><br/>(Project information)</li>
+</ul>
+<p><strong>Returns a jQuery</strong><br/>(The ul element)</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildHeadlinesTree</span> = <span class="hljs-params">(tree, ul, metaInfo)</span> -&gt;</span>
+  ul = $(ul)
+  <span class="hljs-keyword">unless</span> tree?.length
+    <span class="hljs-keyword">return</span> ul
+
+  $.each tree, <span class="hljs-function"><span class="hljs-params">(index, node)</span> -&gt;</span>
+    $node = $(<span class="hljs-string">"""&lt;li class="headline"/&gt;"""</span>)
+    $node.append <span class="hljs-string">"""&lt;a class="label" href="#<span class="hljs-subst">#{node.slug}</span>"&gt;<span class="hljs-subst">#{node.title}</span>&lt;/a&gt;"""</span>
+
+    <span class="hljs-keyword">if</span> node.children?.length &gt; <span class="hljs-number">0</span>
+      $children = $(<span class="hljs-string">'&lt;ol class="children"/&gt;'</span>)
+      $node.append buildHeadlinesTree node.children, $children, metaInfo
+
+    ul.append $node
+    <span class="hljs-keyword">return</span>
+
+  <span class="hljs-keyword">return</span> ul
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="create-navigation-element"><a href="#create-navigation-element" class="anchor"></a>Create Navigation Element</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>metaInfo</code> must be an Object.</strong><br/>(Project information)</li>
+</ul>
+<p><strong>Returns a jQuery</strong><br/>(Navigation element)</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">createNav</span> = <span class="hljs-params">(metaInfo)</span> -&gt;</span>
+  $nav = $ <span class="hljs-string">"""
+    &lt;aside id="side-menu"&gt;
+      &lt;nav id="headlines"&gt;
+        &lt;details&gt;
+          &lt;summary&gt;This File&lt;/summary&gt;
+          &lt;ul class="tools"&gt;
+            &lt;li class="search"&gt;
+              &lt;input id="search-headlines" type="search" autocomplete="off" placeholder="Search"/&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ol class="tree" id="headline-tree"&gt;&lt;/ol&gt;
+        &lt;/details&gt;
+      &lt;/nav&gt;
+      &lt;nav id="files"&gt;
+        &lt;details open&gt;
+          &lt;summary&gt;Files&lt;/summary&gt;
+          &lt;ul class="tools"&gt;
+            &lt;li class="search"&gt;
+              &lt;input id="search-files" type="search" autocomplete="off" placeholder="Search"/&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ol class="tree" id="file-tree"&gt;&lt;/ol&gt;
+        &lt;/details&gt;
+      &lt;/nav&gt;
+    &lt;/aside&gt;
+  """</span>
+
+  <span class="hljs-keyword">return</span> $nav
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="add-button-to-toggle-side-menu-visibility"><a href="#add-button-to-toggle-side-menu-visibility" class="anchor"></a>Add Button to Toggle Side Menu Visibility</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>$container</code> must be a jQuery.</strong><br/>(The element the button should be prepended to)</li>
+<li><strong><code>$nav</code> must be a jQuery.</strong><br/>(The navigation element; class &#39;open&#39; will be toggled)</li>
+</ul>
+<p><strong>Returns a jQuery</strong><br/>($container element)</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">createMenuToggle</span> = <span class="hljs-params">($container, $nav)</span> -&gt;</span>
+  $button = $ <span class="hljs-string">"""&lt;button type="button" class="toggle-menu"&gt;
+    Menu
+  &lt;/button&gt;"""</span>
+
+  $button.<span class="hljs-literal">on</span> <span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
+    event.preventDefault()
+    $nav.toggleClass(<span class="hljs-string">'open'</span>)
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>$(&#39;#file-area&#39;).on &#39;click&#39;, (event) -&gt;
+  return if $(event.target).hasClass(&#39;toggle-menu&#39;)
+  if $nav.hasClass(&#39;open&#39;)
+    event.preventDefault()
+    $nav.removeClass(&#39;open&#39;)
+  return</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  $container.prepend $button
+
+  <span class="hljs-keyword">return</span> $container
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="search-tree"><a href="#search-tree" class="anchor"></a>Search Tree</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>$tree</code> must be a jQuery.</strong><br/>(The tree element to be searched)</li>
+<li><strong><code>$search</code> must be a jQuery.</strong><br/>(The search input field)</li>
+</ul>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">searchTree</span> = <span class="hljs-params">($tree, $search)</span> -&gt;</span></div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>
+Method: <code>throttle</code>
+</span></p>
+<p>Parameters:</p>
+<ul>
+<li><strong><code>fn</code> must be a Function.</strong><br/>(Callback)</li>
+<li><strong><code>timeout</code> must be a Number.</strong></li>
+</ul>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  throttle = <span class="hljs-keyword">do</span><span class="hljs-function"> -&gt;</span>
+    <span class="hljs-attribute">timer</span>: <span class="hljs-literal">null</span>
+    <span class="hljs-function"><span class="hljs-params">(fn, timeout=<span class="hljs-number">100</span>)</span> -&gt;</span>
+      <span class="hljs-built_in">window</span>.clearTimeout timer <span class="hljs-keyword">if</span> timer
+      timer = <span class="hljs-built_in">window</span>.setTimeout (<span class="hljs-function">-&gt;</span>
+        timer = <span class="hljs-literal">null</span>
+        fn?()
+      ), timeout
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><p><span class='doc-section-header'>
+Method: <code>search</code>
+</span></p>
+<p>Parameters:</p>
+<ul>
+<li><strong><code>tree</code> must be a jQuery.</strong></li>
+<li><strong><code>value</code> must be a String.</strong><br/>(Search query)</li>
+</ul>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  <span class="hljs-function"><span class="hljs-title">search</span> = <span class="hljs-params">($tree, value)</span> -&gt;</span>
+    value = value.trim().toLowerCase()
+    $tree.find(<span class="hljs-string">'.matched'</span>).removeClass <span class="hljs-string">'matched'</span>
+
+    <span class="hljs-keyword">if</span> value <span class="hljs-keyword">is</span> <span class="hljs-string">""</span>
+      <span class="hljs-built_in">console</span>.log <span class="hljs-string">'stop searching'</span>
+      $tree.removeClass <span class="hljs-string">'searching'</span>
+      <span class="hljs-keyword">return</span>
+
+    $tree.addClass <span class="hljs-string">'searching'</span>
+    $tree.find<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'a'</span>)</span>.<span class="hljs-title">each</span> <span class="hljs-params">(index, item)</span> -&gt;</span>
+      $item = $(item)
+      <span class="hljs-keyword">if</span> ($item.text().toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> ($item.attr(<span class="hljs-string">'href'</span>).toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>)
+        $item.addClass <span class="hljs-string">'matched'</span></div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>show folders above matched item</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">        $item.parents(<span class="hljs-string">'li'</span>).children(<span class="hljs-string">'.label'</span>).addClass <span class="hljs-string">'matched'</span>
+      <span class="hljs-keyword">return</span>
+
+  value = <span class="hljs-literal">null</span>
+  $search.<span class="hljs-literal">on</span> <span class="hljs-string">'keyup search'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
+    newVal = event.target.value
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> newVal <span class="hljs-keyword">is</span> value
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> newVal &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> newVal <span class="hljs-keyword">isnt</span> <span class="hljs-string">""</span>
+    value = newVal
+    throttle<span class="hljs-function"> -&gt;</span>
+      search($tree, value)
+    <span class="hljs-keyword">return</span>
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>ESC</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  $search.<span class="hljs-literal">on</span> <span class="hljs-string">'keydown'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> event.keyCode == <span class="hljs-number">27</span> <span class="hljs-comment"># Esc</span>
+      <span class="hljs-keyword">if</span> $search.val().trim() <span class="hljs-keyword">is</span> <span class="hljs-string">''</span>
+        $search.blur()
+      <span class="hljs-keyword">else</span>
+        $search.val <span class="hljs-string">''</span>
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments doc-section">
+          <div class="wrapper"><h2 id="build-navigation"><a href="#build-navigation" class="anchor"></a>Build Navigation</h2><p>Parameters:</p>
+<ul>
+<li><strong><code>files</code> must be an Array.</strong><br/>(List of Files)</li>
+<li><strong><code>metaInfo</code> must be an Object.</strong><br/>(Project information)</li>
+</ul>
+<p><strong>Returns a jQuery</strong><br/>(The nav element)</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-title">buildNav</span> = <span class="hljs-params">(files, metaInfo)</span> -&gt;</span>
+  <span class="hljs-keyword">return</span> $(<span class="hljs-string">''</span>) <span class="hljs-keyword">unless</span> files
+  $nav = createNav(metaInfo)
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Find current file</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files
+    <span class="hljs-keyword">if</span> file.originalPath <span class="hljs-keyword">is</span> metaInfo.documentPath
+      metaInfo.currentFile = file
+      <span class="hljs-keyword">break</span>
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Build file tree</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  fileTree = listToTree(files)
+  buildFileTree(fileTree, $nav.find(<span class="hljs-string">'#file-tree'</span>), metaInfo)
+  searchTree($nav.find(<span class="hljs-string">'#file-tree'</span>), $nav.find(<span class="hljs-string">'#search-files'</span>))
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>Build headlines tree</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  <span class="hljs-keyword">if</span> metaInfo.currentFile
+    headlineTree = tocToTree(metaInfo.currentFile.toc <span class="hljs-keyword">or</span> [])
+
+    buildHeadlinesTree(headlineTree, $nav.find(<span class="hljs-string">'#headline-tree'</span>), metaInfo)
+    searchTree($nav.find(<span class="hljs-string">'#headline-tree'</span>), $nav.find(<span class="hljs-string">'#search-headlines'</span>))
+
+  <span class="hljs-keyword">return</span> $nav
+
+$<span class="hljs-function"> -&gt;</span>
+  metaInfo =
+    <span class="hljs-attribute">relativeRoot</span>: $(<span class="hljs-string">'meta[name="groc-relative-root"]'</span>).attr(<span class="hljs-string">'content'</span>)
+    <span class="hljs-attribute">githubURL</span>:    $(<span class="hljs-string">'meta[name="groc-github-url"]'</span>).attr(<span class="hljs-string">'content'</span>)
+    <span class="hljs-attribute">documentPath</span>: $(<span class="hljs-string">'meta[name="groc-document-path"]'</span>).attr(<span class="hljs-string">'content'</span>)
+    <span class="hljs-attribute">projectPath</span>:  $(<span class="hljs-string">'meta[name="groc-project-path"]'</span>).attr(<span class="hljs-string">'content'</span>)
+
+  $nav = buildNav <span class="hljs-built_in">window</span>.files, metaInfo
+  $nav.prependTo $(<span class="hljs-string">'body'</span>)
+
+  createMenuToggle $(<span class="hljs-string">'#meta'</span>), $nav
+
+  <span class="hljs-built_in">window</span>.listToTree = listToTree
+  <span class="hljs-built_in">window</span>.tocToTree = tocToTree
+
+
+</div></div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../../../toc.js"></script>
+  <script src="../../../../assets/libs.js"></script>
+  <script src="../../../../assets/behavior.js"></script>
+</body>
+</html>

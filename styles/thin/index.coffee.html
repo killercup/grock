@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> - index.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="styles/thin/index.coffee"/>
+  
+  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/styles/thin/index.coffee">styles/thin/index.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+      
+        <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> =
+  <span class="hljs-attribute">name</span>: <span class="hljs-string">"Thin"</span>
+  <span class="hljs-attribute">getTemplate</span>:<span class="hljs-function"> -&gt;</span>
+    <span class="hljs-built_in">require</span> path.join(__dirname, <span class="hljs-string">'compiled'</span>, <span class="hljs-string">'template.js'</span>)
+  <span class="hljs-attribute">copy</span>: <span class="hljs-function"><span class="hljs-params">(opts)</span> -&gt;</span> <span class="hljs-built_in">require</span>(<span class="hljs-string">'./copy'</span>)(opts)
+  <span class="hljs-attribute">compile</span>: <span class="hljs-function"><span class="hljs-params">(opts)</span> -&gt;</span> <span class="hljs-built_in">require</span>(<span class="hljs-string">'./compile'</span>)(opts)
+</div></div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+</body>
+</html>
