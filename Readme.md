@@ -124,7 +124,7 @@ When adding a new style or editing an existing one, make sure you follow the gui
 
 ## Changelog
 
-See [list of releases on Github](https://github.com/killercup/grock/releases).
+See [list of releases on Github](https://github.com/killercup/grock/releases) or read the `Changelog.md` file.
 
 ## License
 

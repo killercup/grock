@@ -1,6 +1,6 @@
 {
   "glob": [
-    "Readme.md",
+    "*.md",
     "bin/*",
     "lib/**/*.coffee",
     "lib/**/*.js",
