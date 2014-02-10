@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.0 Papeete Polar Bear
+
+Mon Feb 10 2014
+
+- Add _Thin_ style with bright colors and sharp fonts: [Screenshot](https://f.cloud.github.com/assets/20063/2121121/573a2af8-91d4-11e3-956a-a27ffd9a8635.png)
+- Correctly link to latest source files on Github and Bitbucket (git repos)
+- Add copyright and license doc tags
+
 ## v0.2.6 Dave Thesis
 
 Sat Feb 08 2014

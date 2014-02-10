@@ -99,8 +99,8 @@ Oh, and all the heavy lifting (splitting code and comments, parsing doc tags) is
 - [x] Render doc tags (like jsdoc)
 - [x] CLI docs, `.groc.json` config support
 - [ ] Correctly parse relative roots
-- [ ] Tests. Test for everything.
-- [ ] Add another style.
+- [x] Tests. Test for almost everything.
+- [x] Add another style.
 - [ ] Find a streaming code highlighter with hooks for comment segments
 - [x] Parse files without extension
 
