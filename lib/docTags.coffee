@@ -1,7 +1,7 @@
 ###
 # # Known Doc Tags
 #
-# Code from [`groc/lib/doc_tags`][1]
+# Most code from [`groc/lib/doc_tags`][1].
 #
 # @copyright Ian MacLeod and groc contributors
 #
@@ -33,6 +33,14 @@ module.exports = DOC_TAGS =
     section:     'description'
     markdown:    '{value}'
 
+  copyright:
+    section:     'metadata'
+    markdown:    '&copy; {value}'
+  license:
+    valuePrefix: 'under'
+    section:     'metadata'
+    markdown:    'licensed under {value}'
+
   internal:
     section:     'access'
   'private':
@@ -54,10 +62,10 @@ module.exports = DOC_TAGS =
     section:     'type'
   method:
     section:     'type'
-    markdown:    'Method: `{value}`'
+    markdown:    'Method **{value}**'
   module:
     section:     'type'
-    markdown:    'Module: `{value}`'
+    markdown:    'Module **{value}**'
   'package':
     section:     'type'
   property:
