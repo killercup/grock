@@ -17,8 +17,8 @@
   <div id="file-area">
     <div id="meta">
       <code class="file-path">
-      <% if (data.repositoryUrl) { %>
-        <a href="<%- data.repositoryUrl %>/blob/master/<%- data.targetPath %>"><%= data.targetPath %></a>
+      <% if (data.publicURL) { %>
+        <a href="<%- data.publicURL %>"><%= data.targetPath %></a>
       <% } else { %>
         <%= data.targetPath %>
       <% } %>

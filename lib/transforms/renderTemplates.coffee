@@ -12,9 +12,11 @@ Buffer = require('buffer').Buffer
 map = require('event-stream').map
 
 getTitle = require '../utils/getTitleFromToc'
+createPublicURL = require '../utils/createPublicURL'
 
 module.exports = ({style, repositoryUrl}) ->
   render = style.getTemplate()
+  publicURL = createPublicURL(repositoryUrl)
 
   modifyFile = (file, cb) ->
     return cb(null, file) unless file.segments?.length
@@ -29,7 +31,7 @@ module.exports = ({style, repositoryUrl}) ->
       pageHeadline: file.extra?.title or= getTitle(file)
       segments: file.segments
       targetPath: file.originalRelative
-      repositoryUrl: repositoryUrl
+      publicURL: publicURL(file.originalRelative)
 
     pathChunks = path.dirname(file.relative).split(/[\/\\]/)
     if pathChunks.length == 1 && pathChunks[0] == '.'
