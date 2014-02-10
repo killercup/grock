@@ -366,6 +366,21 @@ window.files = [
   ]
 },
 {
+  "path": "lib/utils/createPublicURL.coffee.html",
+  "originalName": "createPublicURL.coffee",
+  "originalPath": "lib/utils/createPublicURL.coffee",
+  "name": "createPublicURL.coffee.html",
+  "lang": "coffeescript",
+  "title": "Create Public URL",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "create-public-url",
+      "title": "Create Public URL"
+    }
+  ]
+},
+{
   "path": "lib/utils/getTitleFromToc.coffee.html",
   "originalName": "getTitleFromToc.coffee",
   "originalPath": "lib/utils/getTitleFromToc.coffee",

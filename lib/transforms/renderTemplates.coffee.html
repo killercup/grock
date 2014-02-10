@@ -10,8 +10,6 @@
   <meta name="groc-relative-root" content="../../"/>
   <meta name="groc-document-path" content="lib/transforms/renderTemplates.coffee"/>
   
-  <meta name="groc-repository-url" content="https://github.com/killercup/grock"/>
-  
 </head>
 <body>
   <div id="file-area">
@@ -40,9 +38,11 @@ Buffer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'b
 map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).map
 
 getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/getTitleFromToc'</span>
+createPublicURL = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/createPublicURL'</span>
 
 <span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">({style, repositoryUrl})</span> -&gt;</span>
   render = style.getTemplate()
+  publicURL = createPublicURL(repositoryUrl)
 
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
@@ -66,7 +66,7 @@ getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">
       <span class="hljs-attribute">pageHeadline</span>: file.extra?.title <span class="hljs-keyword">or</span>= getTitle(file)
       <span class="hljs-attribute">segments</span>: file.segments
       <span class="hljs-attribute">targetPath</span>: file.originalRelative
-      <span class="hljs-attribute">repositoryUrl</span>: repositoryUrl
+      <span class="hljs-attribute">publicURL</span>: publicURL(file.originalRelative)
 
     pathChunks = path.dirname(file.relative).split(<span class="hljs-regexp">/[\/\\]/</span>)
     <span class="hljs-keyword">if</span> pathChunks.length == <span class="hljs-number">1</span> &amp;&amp; pathChunks[<span class="hljs-number">0</span>] == <span class="hljs-string">'.'</span>

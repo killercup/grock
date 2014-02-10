@@ -19,11 +19,9 @@ __e( data.repositoryUrl ) +
 '"/>\n  ';
  } ;
 __p += '\n</head>\n<body>\n  <div id="file-area">\n    <div id="meta">\n      <code class="file-path">\n      ';
- if (data.repositoryUrl) { ;
+ if (data.publicURL) { ;
 __p += '\n        <a href="' +
-__e( data.repositoryUrl ) +
-'/blob/master/' +
-__e( data.targetPath ) +
+__e( data.publicURL ) +
 '">' +
 ((__t = ( data.targetPath )) == null ? '' : __t) +
 '</a>\n      ';
