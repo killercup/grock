@@ -11,7 +11,8 @@
     "test": "NODE_ENV=test coffeelint lib/**/*.coffee styles/**/*.coffee test/**/*.coffee && mocha",
     "mocha": "mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee",
-    "travis": "npm test && ./scripts/deploy_docs_from_travis.sh"
+    "travis": "npm test && ./scripts/deploy_docs_from_travis.sh",
+    "changelog": "releases2changelog --repo killercup/grock"
   },
   "keywords": [
     "documentation",
@@ -59,6 +60,7 @@
     "chai": "~1.9.0",
     "mocha": "~1.17.0",
     "coffeelint-variable-scope": "0.0.1",
-    "coffeelint-newline-at-eof": "~0.3.2"
+    "coffeelint-newline-at-eof": "~0.3.2",
+    "ghReleases2Changelog": "git://github.com/killercup/ghReleases2Changelog#v0.1.0"
   }
 }
