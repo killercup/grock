@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Changelog - Changelog.md</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content=""/>
+  <meta name="groc-document-path" content="Changelog.md"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/Changelog.md">Changelog.md</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><h1 id="changelog"><a href="#changelog" class="anchor"></a>Changelog</h1><h2 id="v0-2-6-dave-thesis"><a href="#v0-2-6-dave-thesis" class="anchor"></a>v0.2.6 Dave Thesis</h2><p>Sat Feb 08 2014</p>
+<ul>
+<li>Add <code>--indexes</code> option to generate subdirectory index files (default: <code>Readme.md</code> gets rendered as <code>index.html</code>)</li>
+<li>Fix doc tags order messing up markdown</li>
+<li>Automatically retrieve repository URL from <code>package.json</code></li>
+</ul>
+<h2 id="v0-2-5-oscar-hera"><a href="#v0-2-5-oscar-hera" class="anchor"></a>v0.2.5 Oscar Hera</h2><p>Mon Feb 03 2014</p>
+<ul>
+<li>Adds nice error messages à la <a href="https://github.com/floatdrop/gulp-plumber">plumber</a><ul>
+<li>incl. file path</li>
+<li>with stack traces on <code>--verbose</code></li>
+</ul>
+</li>
+<li>Add better page titles</li>
+<li>Fixes <code>index.js</code> and thus <code>require(&#39;grock&#39;)</code></li>
+</ul>
+<h2 id="v0-2-4-jefferson-hemera"><a href="#v0-2-4-jefferson-hemera" class="anchor"></a>v0.2.4 Jefferson Hemera</h2><p>Sat Feb 01 2014</p>
+<ul>
+<li>Trim unnecessary newlines from highlighted code</li>
+<li>Fix searching headlines</li>
+<li>Improve tests and hopefully performance</li>
+</ul>
+<h2 id="v0-2-3-steel-eye-demeter"><a href="#v0-2-3-steel-eye-demeter" class="anchor"></a>v0.2.3 Steel-Eye Demeter</h2><p>Thu Jan 30 2014</p>
+<ul>
+<li>Render files without extension (treating them as JS)</li>
+<li>Trim HTML from headlines in TOC</li>
+<li>Always skip processing directories</li>
+<li>Don&#39;t crash on malformed doc tags</li>
+<li>Add more usage information to Readme file</li>
+</ul>
+<h2 id="v0-2-2-happy-erebus"><a href="#v0-2-2-happy-erebus" class="anchor"></a>v0.2.2 Happy Erebus</h2><p>Thu Jan 30 2014</p>
+<ul>
+<li>Precompile Templates<ul>
+<li>Enhances performance</li>
+<li>Styles can use any templating library</li>
+</ul>
+</li>
+<li>Solarized uses <code>lodash</code> templates now (this removes <code>jade</code> dependency)</li>
+<li>CoffeeScript 1.7 makes chained function calls more pretty (e.g. in streams and <code>.pipe</code>s)</li>
+<li>Speed things up a bit by skipping <code>highlight.js</code> and <code>marked</code> for files without code or comments (e.g. <code>.md</code> and <code>.json</code>)</li>
+</ul>
+<h2 id="v0-2-1-louis-hermes"><a href="#v0-2-1-louis-hermes" class="anchor"></a>v0.2.1 Louis Hermes</h2><p>Sun Jan 26 2014</p>
+<ul>
+<li>Script to publish to Github Pages branch</li>
+<li>Optimize writing of table of contents file</li>
+</ul>
+<h2 id="v0-2-0-earl-kaikias"><a href="#v0-2-0-earl-kaikias" class="anchor"></a>v0.2.0 Earl Kaikias</h2><p>Sat Jan 25 2014</p>
+<ul>
+<li>CLI arguments and <code>.groc.json</code> compliment each other</li>
+<li>Remove <code>gulp-util</code> dependency</li>
+<li>Solarized: Better responsive modes</li>
+<li>Solarized: Nicer directory index handling</li>
+<li>Solarized: Fix file title from headline</li>
+<li>Solarized: Readmes are fist files in directories</li>
+</ul>
+<h2 id="v0-1-2-dizzy-demeter"><a href="#v0-1-2-dizzy-demeter" class="anchor"></a>v0.1.2 Dizzy Demeter</h2><p>Mon Jan 20 2014</p>
+<ul>
+<li>Add missing log module</li>
+</ul>
+<h2 id="v0-1-1-dizzy-ares"><a href="#v0-1-1-dizzy-ares" class="anchor"></a>v0.1.1 Dizzy Ares</h2><p>Mon Jan 20 2014</p>
+<ul>
+<li>Add file path above document, link to currnt file in repository</li>
+<li>Add checkbox lists in markdown (using <code>[ ]</code> and <code>[x]</code> syntax)</li>
+<li>Fix some broken words (using CSS&#39; word-break)</li>
+</ul>
+<h2 id="v0-1-0-clark-hades"><a href="#v0-1-0-clark-hades" class="anchor"></a>v0.1.0 Clark Hades</h2><p>Mon Jan 20 2014</p>
+<p><em>Initial release.</em></p>
+<p>Features so far:</p>
+<ul>
+<li>Take code files, output html files</li>
+<li>Split code and comments</li>
+<li>Highlight code (even in comments)</li>
+<li>Generate TOC as JSON file</li>
+<li>Render doc tags (like jsdoc)</li>
+<li>CLI docs, <code>.groc.json</code> config support</li>
+<li>Default output style<ul>
+<li>Based on Solarized</li>
+<li>Searchable file and headline list</li>
+<li>Responsive layout</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="toc.js"></script>
+  <script src="assets/libs.js"></script>
+  <script src="assets/behavior.js"></script>
+</body>
+</html>

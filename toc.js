@@ -1,5 +1,69 @@
 window.files = [
 {
+  "path": "Changelog.md.html",
+  "originalName": "Changelog.md",
+  "originalPath": "Changelog.md",
+  "name": "Changelog.md.html",
+  "title": "Changelog",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "changelog",
+      "title": "Changelog"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-6-dave-thesis",
+      "title": "v0.2.6 Dave Thesis"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-5-oscar-hera",
+      "title": "v0.2.5 Oscar Hera"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-4-jefferson-hemera",
+      "title": "v0.2.4 Jefferson Hemera"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-3-steel-eye-demeter",
+      "title": "v0.2.3 Steel-Eye Demeter"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-2-happy-erebus",
+      "title": "v0.2.2 Happy Erebus"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-1-louis-hermes",
+      "title": "v0.2.1 Louis Hermes"
+    },
+    {
+      "level": 2,
+      "slug": "v0-2-0-earl-kaikias",
+      "title": "v0.2.0 Earl Kaikias"
+    },
+    {
+      "level": 2,
+      "slug": "v0-1-2-dizzy-demeter",
+      "title": "v0.1.2 Dizzy Demeter"
+    },
+    {
+      "level": 2,
+      "slug": "v0-1-1-dizzy-ares",
+      "title": "v0.1.1 Dizzy Ares"
+    },
+    {
+      "level": 2,
+      "slug": "v0-1-0-clark-hades",
+      "title": "v0.1.0 Clark Hades"
+    }
+  ]
+},
+{
   "path": "index.html",
   "originalName": "Readme.md",
   "originalPath": "Readme.md",
