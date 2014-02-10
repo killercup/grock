@@ -13,6 +13,11 @@ window.files = [
     },
     {
       "level": 2,
+      "slug": "v0-3-0-papeete-polar-bear",
+      "title": "v0.3.0 Papeete Polar Bear"
+    },
+    {
+      "level": 2,
       "slug": "v0-2-6-dave-thesis",
       "title": "v0.2.6 Dave Thesis"
     },
