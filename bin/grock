@@ -45,6 +45,7 @@ var optimist = require('optimist')
 
   .boolean('version')
   .describe('version', 'Show grock version')
+  .alias('V', 'version')
 
   .string('glob')
   .default('glob', projectConfig.glob || 'lib/*.coffee')
