@@ -17,6 +17,13 @@ describe "Create Public URL", ->
     expect(pub).to.be.a('function')
     expect(pub 'Readme.md').to.eql 'https://bitbucket.org/killercup/grock/src/master/Readme.md'
 
+  it "should return null for missing url", ->
+    url = false
+    pub = createPublicURL(url)
+
+    expect(pub).to.be.a('function')
+    expect(pub 'Readme.md').to.be.null
+
   it "should return null for unknown hosters", ->
     url = 'https://cvs-service.com/killercup/grock'
     pub = createPublicURL(url)

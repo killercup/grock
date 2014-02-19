@@ -7,6 +7,7 @@
 # @return {Function} Method mapping file path to public URL.
 ###
 module.exports = (repositoryUrl) ->
+  return (-> null) unless typeof repositoryUrl is 'string'
   # Remove trailing slash
   repositoryUrl = repositoryUrl.replace /\/$/, ''
 
