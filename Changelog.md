@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.1 Cotonou Chameleon
+
+Wed Feb 19 2014
+
+- Fix RepositoryURL Fallback
+
 ## v0.3.0 Papeete Polar Bear
 
 Mon Feb 10 2014
