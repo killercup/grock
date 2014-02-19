@@ -13,6 +13,11 @@ window.files = [
     },
     {
       "level": 2,
+      "slug": "v0-3-1-cotonou-chameleon",
+      "title": "v0.3.1 Cotonou Chameleon"
+    },
+    {
+      "level": 2,
       "slug": "v0-3-0-papeete-polar-bear",
       "title": "v0.3.0 Papeete Polar Bear"
     },
