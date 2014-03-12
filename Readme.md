@@ -31,18 +31,19 @@ You can also use a configuration file named .groc.json to specify these options.
 The defaults below show the values of the .groc.json file when possible.
 
 Options:
-  --help            Show this message
-  --version         Show grock version
-  --glob            Set glob to match source files                  [default: ["*.md","bin/*","lib/**/*.coffee","lib/**/*.js","styles/**/*.coffee","styles/**/*.md","bin/*.js"]]
-  --out             Render documentation into here                  [default: "docs/"]
-  --style           Set the output style/theme                      [default: "solarized"]
-  --verbose         Show more log output                            [default: false]
-  --index           File to be used as root index                   [default: "Readme.md"]
-  --indexes         Files to be used as indexes in sub directories  [default: "Readme.md"]
-  --root            The project's root directory                    [default: "."]
-  --repository-url  URL to link to source files                     [default: "https://github.com/killercup/grock"]
-  --github          Push generated docs to gh-pages branch          [default: false]
-  --git-remote      Overwrite the remote for --github
+  --help                    Show this message
+  --version                 Show grock version
+  --glob                    Set glob to match source files                                                  [default: ["*.md","bin/*","lib/**/*.coffee","lib/**/*.js","styles/**/*.coffee","styles/**/*.md","bin/*.js"]]
+  --out                     Render documentation into here                                                  [default: "docs/"]
+  --style                   Set the output style/theme                                                      [default: "solarized"]
+  --verbose                 Show more log output                                                            [default: false]
+  --index                   File to be used as root index                                                   [default: "Readme.md"]
+  --indexes                 Files to be used as indexes in sub directories                                  [default: "Readme.md"]
+  --root                    The project's root directory                                                    [default: "."]
+  --whitespace-after-token  Require whitespace after a comment token for a line to be considered a comment  [default: true]
+  --repository-url          URL to link to source files                                                     [default: "https://github.com/killercup/grock"]
+  --github                  Push generated docs to gh-pages branch                                          [default: false]
+  --git-remote              Overwrite the remote for --github
 ```
 
 For a list of supported languages, see the `lib/languages.coffee` file.

@@ -53,7 +53,7 @@ module.exports = (opts) ->
     file.timingStart = process.hrtime()
     cb(null, file)
   .pipe t.getLanguage()
-  .pipe t.splitCodeAndComments()
+  .pipe t.splitCodeAndComments(requireWhitespaceAfterToken: opts['whitespace-after-token'])
   .pipe t.highlight()
   .pipe t.renderDocTags()
   .pipe t.markdownComments()
