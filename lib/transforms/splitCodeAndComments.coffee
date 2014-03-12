@@ -11,7 +11,7 @@ module.exports = (options) ->
   modifyFile = (file, cb) ->
     try
       str = file.contents.toString('utf8')
-      file.segments = seperator str, file.extra?.lang
+      file.segments = seperator str, file.extra?.lang, options
     catch e
       err = new Error("seperator: Error seperating code and comments #{e}")
       err.file = file.relative
