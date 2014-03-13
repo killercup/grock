@@ -39,18 +39,22 @@
 Usage: grock [options]
 
 You can also use a configuration file named .groc.json to specify these options.
+The defaults below show the values of the .groc.json file when possible.
 
 Options:
-  --help        Show this message
-  --version     Show grock version
-  --glob        Set glob to match source files          [default: &quot;lib/*.coffee&quot;]
-  --out         Render documentation into here          [default: &quot;docs/&quot;]
-  --style       Set the output style/theme              [default: &quot;solarized&quot;]
-  --verbose     Show more log output                    [default: false]
-  --index       File to be used as index                [default: &quot;Readme.md&quot;]
-  --root        The project&#39;s root directory            [default: &quot;.&quot;]
-  --github      Push generated docs to gh-pages branch  [default: false]
-  --git-remote  Overwrite the remote for --github
+  --help                    Show this message
+  --version                 Show grock version
+  --glob                    Set glob to match source files                                                  [default: [&quot;*.md&quot;,&quot;bin/*&quot;,&quot;lib/**/*.coffee&quot;,&quot;lib/**/*.js&quot;,&quot;styles/**/*.coffee&quot;,&quot;styles/**/*.md&quot;,&quot;bin/*.js&quot;]]
+  --out                     Render documentation into here                                                  [default: &quot;docs/&quot;]
+  --style                   Set the output style/theme                                                      [default: &quot;solarized&quot;]
+  --verbose                 Show more log output                                                            [default: false]
+  --index                   File to be used as root index                                                   [default: &quot;Readme.md&quot;]
+  --indexes                 Files to be used as indexes in sub directories                                  [default: &quot;Readme.md&quot;]
+  --root                    The project&#39;s root directory                                                    [default: &quot;.&quot;]
+  --whitespace-after-token  Require whitespace after a comment token for a line to be considered a comment  [default: true]
+  --repository-url          URL to link to source files                                                     [default: &quot;https://github.com/killercup/grock&quot;]
+  --github                  Push generated docs to gh-pages branch                                          [default: false]
+  --git-remote              Overwrite the remote for --github
 </code></pre>
 <p>For a list of supported languages, see the <code>lib/languages.coffee</code> file.</p>
 <h3 id="config-file"><a href="#config-file" class="anchor"></a>Config File</h3><p>You can specify all the command line options in a <code>.groc.json</code> file (that is compatible to <a href="http://nevir.github.com/groc/"><code>groc</code></a>). This will automatically be loaded. This way you just need to save that file in your project directory and can use <code>grock</code> without arguments from now on.</p>

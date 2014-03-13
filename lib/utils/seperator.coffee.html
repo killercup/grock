@@ -120,34 +120,24 @@ avoid the perf hit of walking the array to update indices.</p>
     aSingleLine = <span class="hljs-regexp">///
       ^\s*                        <span class="hljs-comment"># Start a line and skip all indention.</span>
       (?:<span class="hljs-subst">#{singleLines}</span>)          <span class="hljs-comment"># Match the single-line start but don't capture this group.</span>
-      (?:                         <span class="hljs-comment"># Also don't capture this group …</span></span></div></div>
-      
-      </div>
-    
-      <div class="segment">
-      
-        <div class="comments ">
-          <div class="wrapper"><p>{whitespaceMatch}        # … possibly starting with a whitespace, but</p>
-</div>
-        </div>
-      
-      
-        <div class="code"><div class="wrapper">        (.*)                      <span class="hljs-comment"># … capture anything else in this …</span>
+      (?:                         <span class="hljs-comment"># Also don't capture this group …</span>
+        <span class="hljs-subst">#{whitespaceMatch}</span>        <span class="hljs-comment"># … possibly starting with a whitespace, but</span>
+        (.*)                      <span class="hljs-comment"># … capture anything else in this …</span>
       )?                          <span class="hljs-comment"># … optional group …</span>
       $                           <span class="hljs-comment"># … up to the EOL.</span>
-    <span class="hljs-regexp">///
+    ///</span>
 
 
-  if language.multiLineComment?
+  <span class="hljs-keyword">if</span> language.multiLineComment?
     mlc = language.multiLineComment
 
-    unless (mlc.length % 3) is 0
-      throw new Error('Multi-line block-comment definitions must be a list of 3-tuples')
+    <span class="hljs-keyword">unless</span> (mlc.length % <span class="hljs-number">3</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">'Multi-line block-comment definitions must be a list of 3-tuples'</span>)
 
-    blockStarts = _.select mlc, (v, i) -&gt; i % 3 == 0
-    blockLines  = _.select mlc, (v, i) -&gt; i % 3 == 1
-    blockEnds   = _.select mlc, (v, i) -&gt; i % 3 == 2
-</span></div></div>
+    blockStarts = _.select mlc, <span class="hljs-function"><span class="hljs-params">(v, i)</span> -&gt;</span> i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>
+    blockLines  = _.select mlc, <span class="hljs-function"><span class="hljs-params">(v, i)</span> -&gt;</span> i % <span class="hljs-number">3</span> == <span class="hljs-number">1</span>
+    blockEnds   = _.select mlc, <span class="hljs-function"><span class="hljs-params">(v, i)</span> -&gt;</span> i % <span class="hljs-number">3</span> == <span class="hljs-number">2</span>
+</div></div>
       
       </div>
     
@@ -259,22 +249,12 @@ below this line …</p>
       
         <div class="code"><div class="wrapper">    singleStrip = <span class="hljs-regexp">///
       (                           <span class="hljs-comment"># Capture this group:</span>
-        (?:<span class="hljs-subst">#{singleLines}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span></span></div></div>
-      
-      </div>
-    
-      <div class="segment">
-      
-        <div class="comments ">
-          <div class="wrapper"><p>{whitespaceMatch}        #   … plus whitespace</p>
-</div>
-        </div>
-      
-      
-        <div class="code"><div class="wrapper">      )
-      (?:<span class="hljs-comment">#{stripMarks})           # The marker(s) to strip from result</span>
-    <span class="hljs-regexp">/// if singleLines?
-</span></div></div>
+        (?:<span class="hljs-subst">#{singleLines}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span>
+        <span class="hljs-subst">#{whitespaceMatch}</span>        <span class="hljs-comment">#   … plus whitespace</span>
+      )
+      (?:<span class="hljs-subst">#{stripMarks}</span>)           <span class="hljs-comment"># The marker(s) to strip from result</span>
+    ///</span> <span class="hljs-keyword">if</span> singleLines?
+</div></div>
       
       </div>
     
@@ -289,26 +269,16 @@ below this line …</p>
         <div class="code"><div class="wrapper">    blockStrip = <span class="hljs-regexp">///
       (                           <span class="hljs-comment"># Capture this group:</span>
         (?:<span class="hljs-subst">#{blockStarts}</span>)        <span class="hljs-comment">#   The comment marker(s) to keep …</span>
-        (?:<span class="hljs-subst">#{blockLines}</span>)?        <span class="hljs-comment">#   … optionally plus one more mark</span></span></div></div>
-      
-      </div>
-    
-      <div class="segment">
-      
-        <div class="comments ">
-          <div class="wrapper"><p>{whitespaceMatch}        #   … plus whitespace</p>
-</div>
-        </div>
-      
-      
-        <div class="code"><div class="wrapper">      )
-      (?:<span class="hljs-comment">#{stripMarks})           # The marker(s) to strip from result</span>
-    <span class="hljs-regexp">/// if blockStarts?
+        (?:<span class="hljs-subst">#{blockLines}</span>)?        <span class="hljs-comment">#   … optionally plus one more mark</span>
+        <span class="hljs-subst">#{whitespaceMatch}</span>        <span class="hljs-comment">#   … plus whitespace</span>
+      )
+      (?:<span class="hljs-subst">#{stripMarks}</span>)           <span class="hljs-comment"># The marker(s) to strip from result</span>
+    ///</span> <span class="hljs-keyword">if</span> blockStarts?
 
-  inBlock   = false
-  inFolded  = false
-  inIgnored = false
-</span></div></div>
+  inBlock   = <span class="hljs-literal">false</span>
+  inFolded  = <span class="hljs-literal">false</span>
+  inIgnored = <span class="hljs-literal">false</span>
+</div></div>
       
       </div>
     

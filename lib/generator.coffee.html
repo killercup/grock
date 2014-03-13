@@ -161,7 +161,7 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         <div class="code"><div class="wrapper">    file.timingStart = process.hrtime()
     cb(<span class="hljs-literal">null</span>, file)
   .pipe t.getLanguage()
-  .pipe t.splitCodeAndComments()
+  .pipe t.splitCodeAndComments(<span class="hljs-attribute">requireWhitespaceAfterToken</span>: opts[<span class="hljs-string">'whitespace-after-token'</span>])
   .pipe t.highlight()
   .pipe t.renderDocTags()
   .pipe t.markdownComments()

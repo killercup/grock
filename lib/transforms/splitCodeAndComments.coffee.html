@@ -38,7 +38,7 @@ seperator = <span class="hljs-built_in">require</span> <span class="hljs-string"
   <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     <span class="hljs-keyword">try</span>
       str = file.contents.toString(<span class="hljs-string">'utf8'</span>)
-      file.segments = seperator str, file.extra?.lang
+      file.segments = seperator str, file.extra?.lang, options
     <span class="hljs-keyword">catch</span> e
       err = <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"seperator: Error seperating code and comments <span class="hljs-subst">#{e}</span>"</span>)
       err.file = file.relative
