@@ -54,3 +54,14 @@ describe "Seperator for code and comments", ->
     expect(segments.length).to.eql 1
     expect(segments[0].comments.length).to.eql 0
     expect(segments[0].code.length).to.be.above 0
+
+  it "should respect requireWhitespaceAfterToken option", ->
+    segments = seperator(
+      "var foo = 'bar';\n/*jshint unused:false*/\nvar baz = 'thud';",
+      LANGUAGES.JavaScript,
+      requireWhitespaceAfterToken: true
+    )
+    expect(segments).to.be.an('array')
+    expect(segments.length).to.eql 1
+    expect(segments[0].comments.length).to.eql 0
+    expect(segments[0].code.length).to.be.above 0
