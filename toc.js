@@ -7,11 +7,6 @@ window.files = [
   "title": "Changelog",
   "toc": [
     {
-      "level": 1,
-      "slug": "changelog",
-      "title": "Changelog"
-    },
-    {
       "level": 2,
       "slug": "v0-3-1-cotonou-chameleon",
       "title": "v0.3.1 Cotonou Chameleon"
@@ -70,6 +65,16 @@ window.files = [
       "level": 2,
       "slug": "v0-1-0-clark-hades",
       "title": "v0.1.0 Clark Hades"
+    },
+    {
+      "level": 1,
+      "slug": "changelog",
+      "title": "Changelog"
+    },
+    {
+      "level": 2,
+      "slug": "v0-3-2-douglas-dog",
+      "title": "v0.3.2 Douglas Dog"
     }
   ]
 },
