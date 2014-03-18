@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2 Douglas Dog
+
+Wed Mar 18 2014
+
+- Add `whitespace-after-token` option (Thanks, @novemberborn!)
+
 ## v0.3.1 Cotonou Chameleon
 
 Wed Feb 19 2014
