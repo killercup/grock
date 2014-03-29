@@ -8,7 +8,8 @@
     "grock": "./bin/grock"
   },
   "scripts": {
-    "test": "NODE_ENV=test coffeelint lib/**/*.coffee styles/**/*.coffee test/**/*.coffee && mocha",
+    "lint": "coffeelint lib/**/*.coffee styles/**/*.coffee test/**/*.coffee",
+    "test": "NODE_ENV=test npm run lint && mocha",
     "mocha": "mocha",
     "compile-styles": "coffee ./styles/compileAll.coffee",
     "travis": "npm test && ./scripts/deploy_docs_from_travis.sh",
