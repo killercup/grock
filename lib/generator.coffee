@@ -54,7 +54,7 @@ module.exports = (opts) ->
     cb(null, file)
   .pipe t.getLanguage()
   .pipe t.splitCodeAndComments(requireWhitespaceAfterToken: opts['whitespace-after-token'])
-  .pipe t.highlight()
+  # .pipe t.highlight()
   .pipe t.renderDocTags()
   .pipe t.markdownComments()
   .pipe t.renderTemplates(style: style, repositoryUrl: opts['repository-url'])
