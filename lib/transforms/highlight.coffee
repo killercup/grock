@@ -1,14 +1,15 @@
 ###
 # # Highlight Code
 #
-# Uses [`highlight.js`](http://highlightjs.org/).
+# Uses [`highlights`](https://github.com/atom/highlights).
 ###
 path = require 'path'
-hljs = require 'highlight.js'
+Highlights = require 'highlights'
 
 Buffer = require('buffer').Buffer
 map = require('event-stream').map
 
+highlighter = new Highlights()
 ###
 # @method Highlight a Segment of Code
 # @param {String} code String of code to be highlighted
@@ -17,11 +18,9 @@ map = require('event-stream').map
 # @return {String} Highlighted code (HTML)
 ###
 highlightSegment = (code, lang='AUTO') ->
-  if lang and (lang isnt 'AUTO')
-    value = hljs.highlight(lang, code, true).value
-  else
-    value = hljs.highlightAuto(code).value
-  value = value.replace /^[\n]+/, ''
+  highlighter.highlightSync
+    fileContents: code
+    scopeName: "source.#{lang}"
 
 module.exports = (options) ->
   modifyFile = (file, cb) ->
@@ -30,7 +29,7 @@ module.exports = (options) ->
     # Skip unnecessary highlighting (e.g. for Markdown files)
     return cb(null, file) if lang.commentsOnly
 
-    hlLang = lang.highlightJS or lang.pygmentsLexer
+    hlLang = path.extname(file.path).replace(/^\./, '')
 
     try
       if file.segments
