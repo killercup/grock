@@ -13,7 +13,7 @@ $ = Zepto or jQuery
 # @return {Object} Files in tree (by folders)
 #
 # @example
-# ```javascript
+# ```js
 # Schema(list) == [{
 #   path: String,
 #   originalName: String,
@@ -58,7 +58,7 @@ listToTree = (list) ->
 # @return {Array} Tree of Headlines
 #
 # @example
-# ```javascript
+# ```js
 # Schema(toc) == [{
 #   level: Number,
 #   title: String,

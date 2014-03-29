@@ -10,7 +10,9 @@
 Buffer = require('buffer').Buffer
 map = require('event-stream').map
 
-hljs = require 'highlight.js'
+Highlights = require 'highlights'
+highlighter = new Highlights()
+
 marked = require 'marked'
 
 ###
@@ -22,14 +24,15 @@ marked.setOptions
   highlight: (code, lang) ->
     if lang
       try
-        code = hljs.highlight(lang, code, true).value
+        hl = highlighter.highlightSync
+          fileContents: code
+          scopeName: "source.#{lang}"
+        return hl
+          .replace('<pre class="editor editor-colors">', '')
+          .replace(/\<\/pre\>$/, '')
       catch e
     else
-      try
-        code = hljs.highlightAuto(code).value
-      catch e
-      
-    return code
+      return code
 
 ###
 # ## Custom Renderer
