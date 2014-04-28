@@ -8,6 +8,11 @@ window.files = [
   "toc": [
     {
       "level": 2,
+      "slug": "v0-3-2-douglas-dog",
+      "title": "v0.3.2 Douglas Dog"
+    },
+    {
+      "level": 2,
       "slug": "v0-3-1-cotonou-chameleon",
       "title": "v0.3.1 Cotonou Chameleon"
     },
@@ -73,8 +78,8 @@ window.files = [
     },
     {
       "level": 2,
-      "slug": "v0-3-2-douglas-dog",
-      "title": "v0.3.2 Douglas Dog"
+      "slug": "v0-3-3-tirana-turtle",
+      "title": "v0.3.3 Tirana Turtle"
     }
   ]
 },
