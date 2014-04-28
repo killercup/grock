@@ -45,7 +45,7 @@ module.exports = LANGUAGES =
     foldPrefix:        '^'
 
   'CoffeeScript':
-    nameMatchers:      ['.coffee', 'Cakefile']
+    nameMatchers:      ['.coffee', '.cson', 'Cakefile']
     pygmentsLexer:     'coffee-script'
     highlightJS:       'coffeescript'
     # **CoffeScript's multi-line block-comment styles.**
