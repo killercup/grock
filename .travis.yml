@@ -1,7 +1,9 @@
 language: node_js
 node_js:
   - '0.10'
-script: 'npm run travis'
+script:
+  - 'npm test'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./scripts/deploy_docs_from_travis.sh'
 env:
   global:
     - GH_REF: 'github.com/killercup/grock.git'
