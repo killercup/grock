@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.3 Tirana Turtle
+
+Mon Apr 28 2014
+
+- Add support for parsing CSON files (Thanks, @erikmueller!)
+
 ## v0.3.2 Douglas Dog
 
 Wed Mar 18 2014
