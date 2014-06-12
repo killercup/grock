@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.4 Brazzaville Butterfly
+
+Th Jun 12 2014
+
+- Fix Disabling `whitespace-after-token` (Thanks, @despairblue!)
+
 ## v0.3.3 Tirana Turtle
 
 Mon Apr 28 2014
