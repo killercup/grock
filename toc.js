@@ -8,6 +8,11 @@ window.files = [
   "toc": [
     {
       "level": 2,
+      "slug": "v0-3-3-tirana-turtle",
+      "title": "v0.3.3 Tirana Turtle"
+    },
+    {
+      "level": 2,
       "slug": "v0-3-2-douglas-dog",
       "title": "v0.3.2 Douglas Dog"
     },
@@ -78,8 +83,8 @@ window.files = [
     },
     {
       "level": 2,
-      "slug": "v0-3-3-tirana-turtle",
-      "title": "v0.3.3 Tirana Turtle"
+      "slug": "v0-3-4-brazzaville-butterfly",
+      "title": "v0.3.4 Brazzaville Butterfly"
     }
   ]
 },
