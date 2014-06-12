@@ -135,7 +135,7 @@
   .describe(<span class="hljs-string">'root'</span>, <span class="hljs-string">"The project's root directory"</span>)
 
   .boolean(<span class="hljs-string">'whitespace-after-token'</span>)
-  .<span class="hljs-keyword">default</span>(<span class="hljs-string">'whitespace-after-token'</span>, projectConfig[<span class="hljs-string">'whitespace-after-token'</span>] || <span class="hljs-keyword">true</span>)
+  .<span class="hljs-keyword">default</span>(<span class="hljs-string">'whitespace-after-token'</span>, projectConfig[<span class="hljs-string">'whitespace-after-token'</span>] === undefined ? <span class="hljs-keyword">true</span> : projectConfig[<span class="hljs-string">'whitespace-after-token'</span>])
   .describe(<span class="hljs-string">'whitespace-after-token'</span>, <span class="hljs-string">'Require whitespace after a comment token for a line to be considered a comment'</span>)
 
   .<span class="hljs-keyword">string</span>(<span class="hljs-string">'repository-url'</span>)
