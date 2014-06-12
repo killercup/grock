@@ -79,7 +79,7 @@ var optimist = require('optimist')
   .describe('root', "The project's root directory")
 
   .boolean('whitespace-after-token')
-  .default('whitespace-after-token', projectConfig['whitespace-after-token'] || true)
+  .default('whitespace-after-token', projectConfig['whitespace-after-token'] === undefined ? true : projectConfig['whitespace-after-token'])
   .describe('whitespace-after-token', 'Require whitespace after a comment token for a line to be considered a comment')
 
   .string('repository-url')
