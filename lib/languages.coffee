@@ -237,6 +237,14 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
+  'React JSX':
+    nameMatchers:      ['.jsx']
+    pygmentsLexer:     'javascript'
+    multiLineComment:  ['/*', '*', '*/']
+    singleLineComment: ['//']
+    ignorePrefix:      '}'
+    foldPrefix:        '^'
+
   'Ruby':
     nameMatchers:      ['.rb', '.ru', '.gemspec']
     pygmentsLexer:     'ruby'
