@@ -8,6 +8,11 @@ window.files = [
   "toc": [
     {
       "level": 2,
+      "slug": "v0-3-4-brazzaville-butterfly",
+      "title": "v0.3.4 Brazzaville Butterfly"
+    },
+    {
+      "level": 2,
       "slug": "v0-3-3-tirana-turtle",
       "title": "v0.3.3 Tirana Turtle"
     },
@@ -83,8 +88,8 @@ window.files = [
     },
     {
       "level": 2,
-      "slug": "v0-3-4-brazzaville-butterfly",
-      "title": "v0.3.4 Brazzaville Butterfly"
+      "slug": "v0-3-5-bolden-lizard",
+      "title": "v0.3.5 Bolden Lizard"
     }
   ]
 },
