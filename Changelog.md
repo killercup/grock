@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.5 Bolden Lizard
+
+Th Sep 11 2014
+
+- Add rudimentary support for Facebook React JSX files (Thanks, @jdiaz5513!)
+
 ## v0.3.4 Brazzaville Butterfly
 
 Th Jun 12 2014
