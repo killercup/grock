@@ -11,7 +11,7 @@ To see how it works, just have a look at [the documentation rendered from this r
 
 Install globally using `npm install --global grock` and invoke anywhere using `grock --glob 'your/*.files'`.
 
-Or use it as a (dev-)dependency in your project and use the `package.json` script section to run it, e.g. with `"scripts": {"docs": "grock"}` and using `npm run docs` (read more about this [here](task_automation_with_npm_run)).
+Or use it as a (dev-)dependency in your project and use the `package.json` script section to run it, e.g. with `"scripts": {"docs": "grock"}` and using `npm run docs` (read more about this [here](http://substack.net/task_automation_with_npm_run)).
 
 ## Usage
 
