@@ -586,76 +586,6 @@ window.files = [
   ]
 },
 {
-  "path": "styles/compileAll.coffee.html",
-  "originalName": "compileAll.coffee",
-  "originalPath": "styles/compileAll.coffee",
-  "name": "compileAll.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
-  "path": "styles/solarized/compile.coffee.html",
-  "originalName": "compile.coffee",
-  "originalPath": "styles/solarized/compile.coffee",
-  "name": "compile.coffee.html",
-  "lang": "coffeescript",
-  "title": "Compile Solarized Assets",
-  "toc": [
-    {
-      "level": 1,
-      "slug": "compile-solarized-assets",
-      "title": "Compile Solarized Assets"
-    }
-  ]
-},
-{
-  "path": "styles/solarized/copy.coffee.html",
-  "originalName": "copy.coffee",
-  "originalPath": "styles/solarized/copy.coffee",
-  "name": "copy.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
-  "path": "styles/solarized/index.coffee.html",
-  "originalName": "index.coffee",
-  "originalPath": "styles/solarized/index.coffee",
-  "name": "index.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
-  "path": "styles/thin/compile.coffee.html",
-  "originalName": "compile.coffee",
-  "originalPath": "styles/thin/compile.coffee",
-  "name": "compile.coffee.html",
-  "lang": "coffeescript",
-  "title": "Compile Solarized Assets",
-  "toc": [
-    {
-      "level": 1,
-      "slug": "compile-solarized-assets",
-      "title": "Compile Solarized Assets"
-    }
-  ]
-},
-{
-  "path": "styles/thin/copy.coffee.html",
-  "originalName": "copy.coffee",
-  "originalPath": "styles/thin/copy.coffee",
-  "name": "copy.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
-  "path": "styles/thin/index.coffee.html",
-  "originalName": "index.coffee",
-  "originalPath": "styles/thin/index.coffee",
-  "name": "index.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
   "path": "styles/solarized/assets/js/behavior.coffee.html",
   "originalName": "behavior.coffee",
   "originalPath": "styles/solarized/assets/js/behavior.coffee",
@@ -764,6 +694,76 @@ window.files = [
       "title": "Build Navigation"
     }
   ]
+},
+{
+  "path": "styles/compileAll.coffee.html",
+  "originalName": "compileAll.coffee",
+  "originalPath": "styles/compileAll.coffee",
+  "name": "compileAll.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/compile.coffee.html",
+  "originalName": "compile.coffee",
+  "originalPath": "styles/solarized/compile.coffee",
+  "name": "compile.coffee.html",
+  "lang": "coffeescript",
+  "title": "Compile Solarized Assets",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "compile-solarized-assets",
+      "title": "Compile Solarized Assets"
+    }
+  ]
+},
+{
+  "path": "styles/solarized/copy.coffee.html",
+  "originalName": "copy.coffee",
+  "originalPath": "styles/solarized/copy.coffee",
+  "name": "copy.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/index.coffee.html",
+  "originalName": "index.coffee",
+  "originalPath": "styles/solarized/index.coffee",
+  "name": "index.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/thin/compile.coffee.html",
+  "originalName": "compile.coffee",
+  "originalPath": "styles/thin/compile.coffee",
+  "name": "compile.coffee.html",
+  "lang": "coffeescript",
+  "title": "Compile Solarized Assets",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "compile-solarized-assets",
+      "title": "Compile Solarized Assets"
+    }
+  ]
+},
+{
+  "path": "styles/thin/copy.coffee.html",
+  "originalName": "copy.coffee",
+  "originalPath": "styles/thin/copy.coffee",
+  "name": "copy.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/thin/index.coffee.html",
+  "originalName": "index.coffee",
+  "originalPath": "styles/thin/index.coffee",
+  "name": "index.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
 },
 {
   "path": "styles/index.html",
