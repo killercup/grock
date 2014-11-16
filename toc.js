@@ -88,6 +88,11 @@ window.files = [
     },
     {
       "level": 2,
+      "slug": "v0-3-6-stanley-sheep",
+      "title": "v0.3.6 Stanley Sheep"
+    },
+    {
+      "level": 2,
       "slug": "v0-3-5-bolden-lizard",
       "title": "v0.3.5 Bolden Lizard"
     }
