@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.6 Stanley Sheep
+
+Su Nov 16 2014
+
+- Fix Handlebars/Mustache support (@WCPetersen)
+
 ## v0.3.5 Bolden Lizard
 
 Th Sep 11 2014
