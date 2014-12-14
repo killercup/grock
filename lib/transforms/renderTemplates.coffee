@@ -14,7 +14,7 @@ map = require('event-stream').map
 getTitle = require '../utils/getTitleFromToc'
 createPublicURL = require '../utils/createPublicURL'
 
-module.exports = ({style, repositoryUrl}) ->
+module.exports = ({style, repositoryUrl, externals}) ->
   render = style.getTemplate()
   publicURL = createPublicURL(repositoryUrl)
 
@@ -25,6 +25,9 @@ module.exports = ({style, repositoryUrl}) ->
     file.originalRelative = file.relative
     file.path = file.path + ".html"
 
+    externals.scripts or= []
+    externals.styles or= []
+
     # ## Variables accessable in template
     templateContext =
       pageTitle: path.basename file.originalRelative
@@ -32,6 +35,7 @@ module.exports = ({style, repositoryUrl}) ->
       segments: file.segments
       targetPath: file.originalRelative
       publicURL: publicURL(file.originalRelative)
+      externals: externals
 
     pathChunks = path.dirname(file.relative).split(/[\/\\]/)
     if pathChunks.length == 1 && pathChunks[0] == '.'

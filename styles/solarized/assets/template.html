@@ -5,6 +5,13 @@
   <title><%= data.pageHeadline %> - <%- data.pageTitle %></title>
 
   <link rel="stylesheet" href="<%- data.relativeRoot %>assets/style.css">
+  <% if (data.externals && data.externals.styles) { %>
+    <% data.externals.styles.forEach(function(content) { %>
+      <style>
+        <%= content %>
+      </style>
+    <% }) %>
+  <% } %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="<%- data.relativeRoot %>"/>
@@ -43,5 +50,13 @@
   <script src="<%- data.relativeRoot %>toc.js"></script>
   <script src="<%- data.relativeRoot %>assets/libs.js"></script>
   <script src="<%- data.relativeRoot %>assets/behavior.js"></script>
+
+  <% if (data.externals && data.externals.scripts) { %>
+    <% data.externals.scripts.forEach(function(content) { %>
+      <script>
+        <%= content %>
+      </script>
+    <% }) %>
+  <% } %>
 </body>
 </html>

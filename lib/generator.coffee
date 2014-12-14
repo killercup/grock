@@ -37,6 +37,20 @@ module.exports = (opts) ->
   # Load Style
   style = require "../styles/#{style}"
 
+  repositoryUrl = opts['repository-url']
+
+  externals =
+    scripts: []
+    styles: []
+
+  ['scripts', 'styles'].forEach (type) ->
+    (opts["ext-#{type}"] || []).forEach (p) ->
+      p = path.join process.cwd(), p
+      try
+        externals[type].push fs.readFileSync p
+      catch e
+        log colors.red "#{p} could'n be read"
+
   # Create output directory
   dest = out or 'docs/'
   log 'Writing to', dest
@@ -57,7 +71,7 @@ module.exports = (opts) ->
   .pipe t.highlight()
   .pipe t.renderDocTags()
   .pipe t.markdownComments()
-  .pipe t.renderTemplates(style: style, repositoryUrl: opts['repository-url'])
+  .pipe t.renderTemplates(style: style, repositoryUrl: repositoryUrl, externals: externals)
   .pipe t.indexFile(index)
   .pipe t.indexFiles(indexes)
   .pipe vfs.dest(dest)
