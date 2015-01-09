@@ -10,17 +10,17 @@ getExtraContent = require '../../lib/utils/getExtraContent'
 describe "Get extra content", ->
   it "should take an array of existing files paths and return the contents", (done) ->
     paths = [
-      path.join __dirname, '../tmp/test-css-1.css'
-      path.join __dirname, '../tmp/test-css-2.css'
+      path.join __dirname, '../tmp/test-css.css'
+      path.join __dirname, '../tmp/test-js.js'
     ]
 
     getExtraContent(paths).then (content) ->
-      expect(content).to.be.eql(['body{background: red;}', 'body{color: green;}'])
+      expect(content).to.be.eql(['body{background: red;}', 'document.write(123);'])
       done()
 
   it "should be rejected if one of the files couldn`t be read", (done) ->
     paths = [
-      path.join __dirname, '../tmp/test-css-1.css'
+      path.join __dirname, '../tmp/test-css.css'
       path.join __dirname, '../tmp/some-strange-file'
     ]
 
@@ -29,7 +29,7 @@ describe "Get extra content", ->
       done()
 
   it "should works fine when paths is a string in case of single file", (done) ->
-    paths = path.join __dirname, '../tmp/test-css-1.css'
+    paths = path.join __dirname, '../tmp/test-css.css'
 
     getExtraContent(paths).then (content) ->
       expect(content).to.be.eql(['body{background: red;}'])
