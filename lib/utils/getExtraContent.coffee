@@ -1,21 +1,17 @@
 fs = require 'fs'
-async = require 'async'
 Q = require 'q'
+_ = require 'lodash'
+
+readFile = Q.denodeify(fs.readFile)
 
 module.exports = (paths) ->
-  deferred = Q.defer()
-
   paths or= []
-  if typeof paths is typeof ''
+  if _.isString(paths)
     paths = [paths]
 
   if paths.length
-    async.map paths, fs.readFile, (err, contents) ->
-      if err
-        return deferred.reject "file #{err.path} couldn`t be read"
-      deferred.resolve contents.map (item) ->
-        item.toString()
+    return Q.all paths.map (path) -> readFile(path)
+    .then (contents) -> Q.when contents.map (item) -> item.toString()
+    .catch (err) -> Q.reject("file #{err.path} couldn't be read")
   else
-    deferred.resolve([''])
-
-  deferred.promise
+    return Q.when([''])

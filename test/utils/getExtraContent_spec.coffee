@@ -3,7 +3,6 @@ expect = require('chai').expect
 path = require 'path'
 Buffer = require('buffer').Buffer
 _ = require 'lodash'
-async = require 'async'
 
 getExtraContent = require '../../lib/utils/getExtraContent'
 
@@ -18,13 +17,13 @@ describe "Get extra content", ->
       expect(content).to.be.eql(['body{background: red;}', 'document.write(123);'])
       done()
 
-  it "should be rejected if one of the files couldn`t be read", (done) ->
+  it "should be rejected if one of the files couldn't be read", (done) ->
     paths = [
       path.join __dirname, '../tmp/test-css.css'
       path.join __dirname, '../tmp/some-strange-file'
     ]
 
-    getExtraContent(paths).fail (err) ->
+    getExtraContent(paths).catch (err) ->
       expect(err).to.be.a('string')
       done()
 
