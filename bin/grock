@@ -86,6 +86,14 @@ var optimist = require('optimist')
   .default('repository-url', projectConfig['repository-url'] || false)
   .describe('repository-url', "URL to link to source files")
 
+  .string('ext-scripts')
+  .default('ext-scripts', projectConfig['ext-scripts'] || [])
+  .describe('ext-scripts', "An array of external scripts for appending to the template")
+
+  .string('ext-styles')
+  .default('ext-styles', projectConfig['ext-styles'] || [])
+  .describe('ext-styles', "An array of external styles for appending to the template")
+
   .boolean('github')
   .default('github', projectConfig.github || false)
   .describe('github', "Push generated docs to gh-pages branch")

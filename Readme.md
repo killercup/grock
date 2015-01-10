@@ -42,6 +42,8 @@ Options:
   --root                    The project's root directory                                                    [default: "."]
   --whitespace-after-token  Require whitespace after a comment token for a line to be considered a comment  [default: true]
   --repository-url          URL to link to source files                                                     [default: "https://github.com/killercup/grock"]
+  --ext-scripts             An array of external scripts for appending to the template                      [default: []]
+  --ext-styles              An array of external styles for appending to the template                       [default: []]
   --github                  Push generated docs to gh-pages branch                                          [default: false]
   --git-remote              Overwrite the remote for --github
 ```

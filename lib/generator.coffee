@@ -15,6 +15,7 @@ Q = require 'q'
 t = require './transforms'
 log = require './utils/log'
 plumber = require './utils/plumber'
+getExtraContent = require './utils/getExtraContent'
 
 # ## Helpers
 
@@ -37,49 +38,74 @@ module.exports = (opts) ->
   # Load Style
   style = require "../styles/#{style}"
 
-  # Create output directory
-  dest = out or 'docs/'
-  log 'Writing to', dest
-  unless fs.existsSync dest
-    fs.mkdirSync dest
+  repositoryUrl = opts['repository-url']
 
-  # ### Processing Pipeline
-  vfs.src glob, base: root
-  .pipe plumber()
-  .pipe map (file, cb) ->
-    if file.stat.isFile() then cb(null, file) else cb()
-  .pipe map (file, cb) ->
-    # Save start time
-    file.timingStart = process.hrtime()
-    cb(null, file)
-  .pipe t.getLanguage()
-  .pipe t.splitCodeAndComments(requireWhitespaceAfterToken: opts['whitespace-after-token'])
-  .pipe t.highlight()
-  .pipe t.renderDocTags()
-  .pipe t.markdownComments()
-  .pipe t.renderTemplates(style: style, repositoryUrl: opts['repository-url'])
-  .pipe t.indexFile(index)
-  .pipe t.indexFiles(indexes)
-  .pipe vfs.dest(dest)
-  .pipe t.renderFileTree(path.join(dest, "toc.js"))
-  .pipe map (file, cb) ->
-    # Log process duration
-    log.verbose file.relative, duration(file.timingStart)
-    cb(null, file)
-  .on 'error', (err) ->
-    log err
-    deferred.reject(err)
-  .on 'end', ->
-    # ### Process Style
-    assetsTiming = process.hrtime()
-    style.copy(dest: dest)
-    .then ->
-      log.verbose "Style copied", duration(assetsTiming)
-      log "Done.", colors.magenta("Generated in"), duration(start)
-      deferred.resolve()
-    .then null, (err) ->
-      log colors.red("It exploded!")
-      log.verbose err.stack or err
-      deferred.reject()
+  externals =
+    styles: []
+    scripts: []
+
+  # get extra styles first
+  getExtraContent(opts['ext-styles'])
+    .then(
+      (styles) ->
+        externals.styles = styles
+        return getExtraContent(opts['ext-scripts'])
+      (err) ->
+        log colors.red err
+        return getExtraContent(opts['ext-scripts'])
+    )
+    # and extra scripts then
+    .then(
+      (scripts) ->
+        externals.scripts = scripts
+
+        # Create output directory
+        dest = out or 'docs/'
+        log 'Writing to', dest
+        unless fs.existsSync dest
+          fs.mkdirSync dest
+
+        # ### Processing Pipeline
+        vfs.src glob, base: root
+        .pipe plumber()
+        .pipe map (file, cb) ->
+          if file.stat.isFile() then cb(null, file) else cb()
+        .pipe map (file, cb) ->
+          # Save start time
+          file.timingStart = process.hrtime()
+          cb(null, file)
+        .pipe t.getLanguage()
+        .pipe t.splitCodeAndComments(requireWhitespaceAfterToken: opts['whitespace-after-token'])
+        .pipe t.highlight()
+        .pipe t.renderDocTags()
+        .pipe t.markdownComments()
+        .pipe t.renderTemplates(style: style, repositoryUrl: repositoryUrl, externals: externals)
+        .pipe t.indexFile(index)
+        .pipe t.indexFiles(indexes)
+        .pipe vfs.dest(dest)
+        .pipe t.renderFileTree(path.join(dest, "toc.js"))
+        .pipe map (file, cb) ->
+          # Log process duration
+          log.verbose file.relative, duration(file.timingStart)
+          cb(null, file)
+        .on 'error', (err) ->
+          log err
+          deferred.reject(err)
+        .on 'end', ->
+          # ### Process Style
+          assetsTiming = process.hrtime()
+          style.copy(dest: dest)
+          .then ->
+            log.verbose "Style copied", duration(assetsTiming)
+            log "Done.", colors.magenta("Generated in"), duration(start)
+            deferred.resolve()
+          .then null, (err) ->
+            log colors.red("It exploded!")
+            log.verbose err.stack or err
+            deferred.reject()
+
+      (err) ->
+        log colors.red err
+    )
 
   return deferred.promise

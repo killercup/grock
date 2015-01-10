@@ -13,8 +13,11 @@ describe("Transforms", function () {
   require('./transforms/indexFiles_spec');
 });
 
-require('./utils/processDocTags_spec');
-require('./utils/seperator_spec');
-require('./utils/createPublicURL_spec');
+describe("Utils", function () {
+    require('./utils/processDocTags_spec');
+    require('./utils/seperator_spec');
+    require('./utils/createPublicURL_spec');
+    require('./utils/getExtraContent_spec');
+})
 
 require('./styles_spec');
