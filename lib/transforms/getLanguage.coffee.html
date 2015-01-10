@@ -5,6 +5,13 @@
   <title>Get File Language - getLanguage.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -39,7 +46,7 @@ regexpEscape = <span class="hljs-built_in">require</span>(<span class="hljs-stri
 LANGUAGES = <span class="hljs-built_in">require</span> <span class="hljs-string">'../languages'</span>
 
 _languageDetectionCache = []
-<span class="hljs-keyword">do</span><span class="hljs-function"> -&gt;</span>
+<span class="hljs-keyword">do</span> -&gt;
   <span class="hljs-keyword">for</span> name, language <span class="hljs-keyword">of</span> LANGUAGES
     language.name = name
 
@@ -59,16 +66,16 @@ Stick it in a regex:</p>
         <div class="code"><div class="wrapper">      matcher = <span class="hljs-regexp">///<span class="hljs-subst">#{regexpEscape matcher}</span>$///</span> <span class="hljs-keyword">if</span> _.isString matcher
 
       _languageDetectionCache.push [matcher, language]
-
-<span class="hljs-function"><span class="hljs-title">fileextToLanguage</span> = <span class="hljs-params">(filePath=<span class="hljs-string">''</span>)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">fileextToLanguage</span> = <span class="hljs-params">(filePath=<span class="hljs-string">''</span>)</span> -&gt;</span>
   baseName = path.basename filePath
 
   <span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> _languageDetectionCache
     <span class="hljs-keyword">return</span> pair[<span class="hljs-number">1</span>] <span class="hljs-keyword">if</span> baseName.match pair[<span class="hljs-number">0</span>]
   <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span>
-  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
+<span class="hljs-function">  <span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     file.extra <span class="hljs-keyword">or</span>= {}
     file.extra.lang = fileextToLanguage(file.path)
     
@@ -86,5 +93,13 @@ Stick it in a regex:</p>
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

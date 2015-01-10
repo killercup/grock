@@ -5,6 +5,13 @@
   <title>Documetation Generator - generator.coffee</title>
 
   <link rel="stylesheet" href="../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../"/>
@@ -59,6 +66,7 @@ Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</sp
         <div class="code"><div class="wrapper">t = <span class="hljs-built_in">require</span> <span class="hljs-string">'./transforms'</span>
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/log'</span>
 plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/plumber'</span>
+getExtraContent = <span class="hljs-built_in">require</span> <span class="hljs-string">'./utils/getExtraContent'</span>
 </div></div>
       
       </div>
@@ -80,8 +88,8 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
       
       
         <div class="code"><div class="wrapper">START = process.hrtime()
-
-<span class="hljs-function"><span class="hljs-title">duration</span> = <span class="hljs-params">(start)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">duration</span> = <span class="hljs-params">(start)</span> -&gt;</span>
   colors.magenta prettyTime process.hrtime(start)
 </div></div>
       
@@ -94,14 +102,13 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         </div>
       
       
-        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(opts)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(opts)</span> -&gt;</span>
   {glob, style, out, verbose, start, index, indexes, root} = opts
   verbose <span class="hljs-keyword">or</span>= <span class="hljs-literal">false</span>
   log.setVerbose(verbose)
   start <span class="hljs-keyword">or</span>= START
 
   log <span class="hljs-string">'Beginning to process'</span>, (<span class="hljs-keyword">if</span> verbose <span class="hljs-keyword">then</span> glob <span class="hljs-keyword">else</span> <span class="hljs-string">''</span>), duration(start)
-  deferred = Q.defer()
 </div></div>
       
       </div>
@@ -115,6 +122,55 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
       
       
         <div class="code"><div class="wrapper">  style = <span class="hljs-built_in">require</span> <span class="hljs-string">"../styles/<span class="hljs-subst">#{style}</span>"</span>
+
+  repositoryUrl = opts[<span class="hljs-string">'repository-url'</span>]
+
+  externals =
+    <span class="hljs-attribute">styles</span>: []
+    <span class="hljs-attribute">scripts</span>: []
+</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>get extra styles first</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  getExtraContent(opts[<span class="hljs-string">'ext-styles'</span>])
+  .<span class="hljs-keyword">then</span> (styles) -&gt;
+    externals.styles = styles
+    <span class="hljs-keyword">return</span> getExtraContent(opts[<span class="hljs-string">'ext-scripts'</span>])
+  .<span class="hljs-keyword">catch</span> (err) -&gt;</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>failed to get styles, continue with scripts</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">    log colors.red err
+    <span class="hljs-keyword">return</span> getExtraContent(opts[<span class="hljs-string">'ext-scripts'</span>])</div></div>
+      
+      </div>
+    
+      <div class="segment">
+      
+        <div class="comments ">
+          <div class="wrapper"><p>and extra scripts then</p>
+</div>
+        </div>
+      
+      
+        <div class="code"><div class="wrapper">  .<span class="hljs-keyword">then</span> (scripts) -&gt;
+    externals.scripts = scripts
 </div></div>
       
       </div>
@@ -127,10 +183,12 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         </div>
       
       
-        <div class="code"><div class="wrapper">  dest = out <span class="hljs-keyword">or</span> <span class="hljs-string">'docs/'</span>
-  log <span class="hljs-string">'Writing to'</span>, dest
-  <span class="hljs-keyword">unless</span> fs.existsSync dest
-    fs.mkdirSync dest
+        <div class="code"><div class="wrapper">    dest = out <span class="hljs-keyword">or</span> <span class="hljs-string">'docs/'</span>
+    log <span class="hljs-string">'Writing to'</span>, dest
+    <span class="hljs-keyword">unless</span> fs.existsSync dest
+      fs.mkdirSync dest
+
+    deferred = Q.defer()
 </div></div>
       
       </div>
@@ -142,11 +200,11 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         </div>
       
       
-        <div class="code"><div class="wrapper">  vfs.src glob, <span class="hljs-attribute">base</span>: root
-  .pipe plumber()
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> file.stat.isFile() <span class="hljs-keyword">then</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">else</span> cb()
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div>
+        <div class="code"><div class="wrapper">    vfs.src glob, <span class="hljs-attribute">base</span>: root
+    .pipe plumber()
+    .pipe map (file, cb) -&gt;
+      <span class="hljs-keyword">if</span> file.stat.isFile() <span class="hljs-keyword">then</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">else</span> cb()
+    .pipe map (file, cb) -&gt;</div></div>
       
       </div>
     
@@ -158,19 +216,19 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         </div>
       
       
-        <div class="code"><div class="wrapper">    file.timingStart = process.hrtime()
-    cb(<span class="hljs-literal">null</span>, file)
-  .pipe t.getLanguage()
-  .pipe t.splitCodeAndComments(<span class="hljs-attribute">requireWhitespaceAfterToken</span>: opts[<span class="hljs-string">'whitespace-after-token'</span>])
-  .pipe t.highlight()
-  .pipe t.renderDocTags()
-  .pipe t.markdownComments()
-  .pipe t.renderTemplates(<span class="hljs-attribute">style</span>: style, <span class="hljs-attribute">repositoryUrl</span>: opts[<span class="hljs-string">'repository-url'</span>])
-  .pipe t.indexFile(index)
-  .pipe t.indexFiles(indexes)
-  .pipe vfs.dest(dest)
-  .pipe t.renderFileTree(path.join(dest, <span class="hljs-string">"toc.js"</span>))
-  .pipe map <span class="hljs-function"><span class="hljs-params">(file, cb)</span> -&gt;</span></div></div>
+        <div class="code"><div class="wrapper">      file.timingStart = process.hrtime()
+      cb(<span class="hljs-literal">null</span>, file)
+    .pipe t.getLanguage()
+    .pipe t.splitCodeAndComments(<span class="hljs-attribute">requireWhitespaceAfterToken</span>: opts[<span class="hljs-string">'whitespace-after-token'</span>])
+    .pipe t.highlight()
+    .pipe t.renderDocTags()
+    .pipe t.markdownComments()
+    .pipe t.renderTemplates(<span class="hljs-attribute">style</span>: style, <span class="hljs-attribute">repositoryUrl</span>: repositoryUrl, <span class="hljs-attribute">externals</span>: externals)
+    .pipe t.indexFile(index)
+    .pipe t.indexFiles(indexes)
+    .pipe vfs.dest(dest)
+    .pipe t.renderFileTree(path.join(dest, <span class="hljs-string">"toc.js"</span>))
+    .pipe map (file, cb) -&gt;</div></div>
       
       </div>
     
@@ -182,12 +240,10 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         </div>
       
       
-        <div class="code"><div class="wrapper">    log.verbose file.relative, duration(file.timingStart)
-    cb(<span class="hljs-literal">null</span>, file)
-  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
-    log err
-    deferred.reject(err)
-  .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>,<span class="hljs-function"> -&gt;</span></div></div>
+        <div class="code"><div class="wrapper">      log.verbose file.relative, duration(file.timingStart)
+      cb(<span class="hljs-literal">null</span>, file)
+    .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferred.reject
+    .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, <span class="hljs-function">-&gt;</span></div></div>
       
       </div>
     
@@ -198,18 +254,20 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
         </div>
       
       
-        <div class="code"><div class="wrapper">    assetsTiming = process.hrtime()
-    style.copy(<span class="hljs-attribute">dest</span>: dest)
-    .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
-      log.verbose <span class="hljs-string">"Style copied"</span>, duration(assetsTiming)
-      log <span class="hljs-string">"Done."</span>, colors.magenta(<span class="hljs-string">"Generated in"</span>), duration(start)
-      deferred.resolve()
-    .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
-      log colors.red(<span class="hljs-string">"It exploded!"</span>)
-      log.verbose err.stack <span class="hljs-keyword">or</span> err
-      deferred.reject()
+        <div class="code"><div class="wrapper">      assetsTiming = process.hrtime()
+      style.copy(<span class="hljs-attribute">dest</span>: dest)
+      .<span class="hljs-keyword">then</span> -&gt;
+        log.verbose <span class="hljs-string">"Style copied"</span>, duration(assetsTiming)
+        deferred.resolve()
+      .<span class="hljs-keyword">catch</span> deferred.reject
 
-  <span class="hljs-keyword">return</span> deferred.promise</div></div>
+    <span class="hljs-keyword">return</span> deferred.promise
+  .<span class="hljs-keyword">then</span> (result) -&gt;
+    log <span class="hljs-string">"Done."</span>, colors.magenta(<span class="hljs-string">"Generated in"</span>), duration(start)
+  .<span class="hljs-keyword">catch</span> (err) -&gt;
+    log colors.red <span class="hljs-string">"It exploded!"</span>, err.message <span class="hljs-keyword">or</span> <span class="hljs-string">''</span>
+    log.verbose err.stack <span class="hljs-keyword">or</span> err
+</div></div>
       
       </div>
     
@@ -219,5 +277,13 @@ plumber = <span class="hljs-built_in">require</span> <span class="hljs-string">'
   <script src="../toc.js"></script>
   <script src="../assets/libs.js"></script>
   <script src="../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

@@ -5,6 +5,13 @@
   <title>Write JSON File Tree - renderFileTree.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -37,7 +44,7 @@ through = <span class="hljs-built_in">require</span>(<span class="hljs-string">'
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/log'</span>
 getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/getTitleFromToc'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(fileName, opts={})</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(fileName, opts={})</span> -&gt;</span>
   <span class="hljs-keyword">unless</span> fileName
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"Render File Tree: Missing fileName option"</span>)
 
@@ -47,8 +54,8 @@ getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">
   output = []
   output.push filePrefix
   first = <span class="hljs-literal">true</span>
-
-  <span class="hljs-function"><span class="hljs-title">bufferContents</span> = <span class="hljs-params">(file, enc, cb)</span> -&gt;</span>
+<span class="hljs-function">
+  <span class="hljs-title">bufferContents</span> = <span class="hljs-params">(file, enc, cb)</span> -&gt;</span>
     output.push (<span class="hljs-keyword">if</span> first <span class="hljs-keyword">then</span> <span class="hljs-string">''</span> <span class="hljs-keyword">else</span> <span class="hljs-string">',\n'</span>) + JSON.stringify({
       <span class="hljs-attribute">path</span>: file.relative
       <span class="hljs-attribute">originalName</span>: path.basename file.originalPath
@@ -61,10 +68,10 @@ getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">
     first = <span class="hljs-literal">false</span>
 
     <span class="hljs-property">@emit</span>(<span class="hljs-string">'data'</span>, file)
-
-  <span class="hljs-function"><span class="hljs-title">endStream</span> = <span class="hljs-params">(cb)</span> -&gt;</span>
+<span class="hljs-function">
+  <span class="hljs-title">endStream</span> = <span class="hljs-params">(cb)</span> -&gt;</span>
     output.push fileSuffix
-    fs.writeFile fileName, output.join<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">''</span>)</span>, <span class="hljs-params">(err)</span> =&gt;</span>
+    fs.writeFile fileName, output.join(<span class="hljs-string">''</span>), <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
       <span class="hljs-keyword">return</span> cb(err) <span class="hljs-keyword">if</span> err
       log.verbose <span class="hljs-string">"File tree written to <span class="hljs-subst">#{path.basename fileName}</span>"</span>
       <span class="hljs-property">@emit</span>(<span class="hljs-string">'end'</span>)
@@ -80,5 +87,13 @@ getTitle = <span class="hljs-built_in">require</span> <span class="hljs-string">
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

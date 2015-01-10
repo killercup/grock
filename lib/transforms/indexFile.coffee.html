@@ -5,6 +5,13 @@
   <title>Rename Index File - indexFile.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -32,7 +39,7 @@
         <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'event-stream'</span>).map
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(indexFile)</span> -&gt;</span></div></div>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(indexFile)</span> -&gt;</span></div></div>
       
       </div>
     
@@ -45,8 +52,8 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
       
       
         <div class="code"><div class="wrapper">  found = <span class="hljs-literal">false</span>
-
-  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+<span class="hljs-function">
+  <span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     filePath = file.originalRelative <span class="hljs-keyword">or</span> file.relative
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> found <span class="hljs-keyword">and</span> (filePath <span class="hljs-keyword">is</span> indexFile)
       file.path = path.join(path.dirname(file.path), <span class="hljs-string">'index.html'</span>)
@@ -66,7 +73,7 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
       
       
         <div class="code"><div class="wrapper">  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> indexFile) <span class="hljs-keyword">or</span> (indexFile <span class="hljs-keyword">is</span> <span class="hljs-string">''</span>)
-    <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span> cb(<span class="hljs-literal">null</span>, file)
+<span class="hljs-function">    <span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span> cb(<span class="hljs-literal">null</span>, file)
 
   <span class="hljs-keyword">return</span> map(modifyFile)
 </div></div>
@@ -79,5 +86,13 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

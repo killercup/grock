@@ -5,6 +5,13 @@
   <title>Render Doc Tags to Markdown - renderDocTags.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -34,14 +41,14 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
 
 render = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/processDocTags'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span>
-  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
+<span class="hljs-function">  <span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, file) <span class="hljs-keyword">unless</span> file.segments?.length
 
     render.parseDocTags(file.segments)
     .<span class="hljs-keyword">then</span>(render.markdownDocTags)
     .<span class="hljs-keyword">then</span>(render.renderDocTags)
-    .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span>
+    .<span class="hljs-keyword">then</span> -&gt;
       cb(<span class="hljs-literal">null</span>, file)
     .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
       err.file = file.relative
@@ -60,5 +67,13 @@ render = <span class="hljs-built_in">require</span> <span class="hljs-string">'.
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

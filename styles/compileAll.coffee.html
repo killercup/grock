@@ -5,6 +5,13 @@
   <title> - compileAll.coffee</title>
 
   <link rel="stylesheet" href="../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../"/>
@@ -32,34 +39,34 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
 prettyTime = <span class="hljs-built_in">require</span> <span class="hljs-string">'pretty-hrtime'</span>
 colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'chalk'</span>
 log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../lib/utils/log'</span>
-
-<span class="hljs-function"><span class="hljs-title">duration</span> = <span class="hljs-params">(start)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">duration</span> = <span class="hljs-params">(start)</span> -&gt;</span>
   colors.magenta(prettyTime(process.hrtime(start)))
-
-<span class="hljs-function"><span class="hljs-title">indexToStyleName</span> = <span class="hljs-params">(filePath)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">indexToStyleName</span> = <span class="hljs-params">(filePath)</span> -&gt;</span>
   path.dirname(filePath).split(<span class="hljs-string">'/'</span>).pop()
-
-<span class="hljs-function"><span class="hljs-title">callCompile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">callCompile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
   style = <span class="hljs-built_in">require</span> <span class="hljs-string">"./<span class="hljs-subst">#{file.relative}</span>"</span>
 
   style.compile()
-  .<span class="hljs-keyword">then</span><span class="hljs-function"> -&gt;</span> cb(<span class="hljs-literal">null</span>, file)
+  .<span class="hljs-keyword">then</span> -&gt; cb(<span class="hljs-literal">null</span>, file)
   .<span class="hljs-keyword">then</span> <span class="hljs-literal">null</span>, cb
-
-<span class="hljs-function"><span class="hljs-title">compileAll</span> = -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">compileAll</span> = -&gt;</span>
   vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/*/index.{js,coffee}"</span>)
-  .pipe<span class="hljs-function"><span class="hljs-params">(map (file, cb) -&gt;
+  .pipe(map (file, cb) -&gt;
     log <span class="hljs-string">'compiling'</span>, indexToStyleName(file.relative)
     file.timingStart = process.hrtime()
     cb(<span class="hljs-literal">null</span>, file)
-  )</span>
-  .<span class="hljs-title">pipe</span><span class="hljs-params">(map callCompile)</span>
-  .<span class="hljs-title">pipe</span><span class="hljs-params">(map (file, cb) -&gt;
+  )
+  .pipe(map callCompile)
+  .pipe(map (file, cb) -&gt;
     log <span class="hljs-string">"compiled"</span>, indexToStyleName(file.relative), duration(file.timingStart)
     cb(<span class="hljs-literal">null</span>, file)
-  )</span>
+  )
 
-<span class="hljs-title">compileAll</span><span class="hljs-params">()</span></span></div></div>
+compileAll()</div></div>
       
       </div>
     
@@ -69,5 +76,13 @@ log = <span class="hljs-built_in">require</span> <span class="hljs-string">'../l
   <script src="../toc.js"></script>
   <script src="../assets/libs.js"></script>
   <script src="../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

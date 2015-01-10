@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> - getExtraContent.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="lib/utils/getExtraContent.coffee"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/lib/utils/getExtraContent.coffee">lib/utils/getExtraContent.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+      
+        <div class="code"><div class="wrapper">fs = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
+_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
+
+readFile = Q.denodeify(fs.readFile)
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(paths)</span> -&gt;</span>
+  paths <span class="hljs-keyword">or</span>= []
+  <span class="hljs-keyword">if</span> _.isString(paths)
+    paths = [paths]
+
+  <span class="hljs-keyword">if</span> paths.length
+    <span class="hljs-keyword">return</span> Q.all paths.map (path) -&gt; readFile(path)
+    .<span class="hljs-keyword">then</span> (contents) -&gt; Q.<span class="hljs-keyword">when</span> contents.map (item) -&gt; item.toString()
+    .<span class="hljs-keyword">catch</span> (err) -&gt; Q.reject(<span class="hljs-string">"file <span class="hljs-subst">#{err.path}</span> couldn't be read"</span>)
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">return</span> Q.<span class="hljs-keyword">when</span>([<span class="hljs-string">''</span>])
+</div></div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
+</body>
+</html>

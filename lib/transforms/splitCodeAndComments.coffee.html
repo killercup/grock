@@ -5,6 +5,13 @@
   <title>Split Code and Comments - splitCodeAndComments.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -34,8 +41,8 @@ map = <span class="hljs-built_in">require</span>(<span class="hljs-string">'even
 
 seperator = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/seperator'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options)</span> -&gt;</span>
-  <span class="hljs-function"><span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
+<span class="hljs-function">  <span class="hljs-title">modifyFile</span> = <span class="hljs-params">(file, cb)</span> -&gt;</span>
     <span class="hljs-keyword">try</span>
       str = file.contents.toString(<span class="hljs-string">'utf8'</span>)
       file.segments = seperator str, file.extra?.lang, options
@@ -57,5 +64,13 @@ seperator = <span class="hljs-built_in">require</span> <span class="hljs-string"
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

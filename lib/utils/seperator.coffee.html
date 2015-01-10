@@ -5,6 +5,13 @@
   <title>Seperate Code and Comments into Segments - seperator.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -37,8 +44,8 @@
 
 regexpEscape = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./regexpEscape'</span>)
 languages = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../languages'</span>)
-
-<span class="hljs-function"><span class="hljs-title">Segment</span> = <span class="hljs-params">(code=[], comments=[], foldMarker=<span class="hljs-string">''</span>)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">Segment</span> = <span class="hljs-params">(code=[], comments=[], foldMarker=<span class="hljs-string">''</span>)</span> -&gt;</span>
   {
     <span class="hljs-attribute">code</span>: code,
     <span class="hljs-attribute">comments</span>: comments
@@ -56,7 +63,7 @@ languages = <span class="hljs-built_in">require</span>(<span class="hljs-string"
         </div>
       
       
-        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(data=<span class="hljs-string">''</span>, language=languages.JavaScript, options={})</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(data=<span class="hljs-string">''</span>, language=languages.JavaScript, options={})</span> -&gt;</span>
   lines = data.split <span class="hljs-regexp">/\r?\n/</span>
 </div></div>
       
@@ -900,5 +907,13 @@ TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in sin
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

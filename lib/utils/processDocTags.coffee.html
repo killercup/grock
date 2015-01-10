@@ -5,6 +5,13 @@
   <title>Process Doc Tags - processDocTags.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -229,7 +236,7 @@ TAG_VALUE_REGEX = <span class="hljs-regexp">/^(?:"(.*)"|'(.*)'|\{(.*)\}|(.*))$/<
         </div>
       
       
-        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> =</div></div>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports =</div></div>
       
       </div>
     
@@ -255,7 +262,7 @@ Method <strong>Parse Doc Tags</strong>
 
     <span class="hljs-keyword">try</span>
       segments
-      .filter <span class="hljs-function"><span class="hljs-params">(segment)</span> -&gt;</span>
+      .filter (segment) -&gt;
         TAG_REGEX.test segment.comments.join(<span class="hljs-string">'\n'</span>)
       .forEach(parseDocTagsForSegment)
 
@@ -289,15 +296,15 @@ Method <strong>Markdown Doc Tags</strong>
 
     <span class="hljs-keyword">try</span>
       segments
-      .filter<span class="hljs-function"><span class="hljs-params">((segment) -&gt; segment.tags?)</span>
-      .<span class="hljs-title">forEach</span><span class="hljs-params">(markdownDocTagsForSegment)</span>
+      .filter(<span class="hljs-function"><span class="hljs-params">(segment)</span> -&gt;</span> segment.tags?)
+      .forEach(markdownDocTagsForSegment)
 
-      <span class="hljs-title">deferred</span>.<span class="hljs-title">resolve</span><span class="hljs-params">(segments)</span>
-    <span class="hljs-title">catch</span> <span class="hljs-title">error</span>
-      <span class="hljs-title">deferred</span>.<span class="hljs-title">reject</span><span class="hljs-params">(error)</span>
+      deferred.resolve(segments)
+    <span class="hljs-keyword">catch</span> error
+      deferred.reject(error)
 
-    <span class="hljs-title">return</span> <span class="hljs-title">deferred</span>.<span class="hljs-title">promise</span>
-</span></div></div>
+    <span class="hljs-keyword">return</span> deferred.promise
+</div></div>
       
       </div>
     
@@ -322,16 +329,16 @@ Method <strong>Render Doc Tags</strong>
 
     <span class="hljs-keyword">try</span>
       segments
-      .filter<span class="hljs-function"><span class="hljs-params">((segment) -&gt; segment.tagSections?)</span>
-      .<span class="hljs-title">forEach</span><span class="hljs-params">(renderDocTagsForSegment)</span>
+      .filter(<span class="hljs-function"><span class="hljs-params">(segment)</span> -&gt;</span> segment.tagSections?)
+      .forEach(renderDocTagsForSegment)
 
-      <span class="hljs-title">deferred</span>.<span class="hljs-title">resolve</span><span class="hljs-params">(segments)</span>
-    <span class="hljs-title">catch</span> <span class="hljs-title">error</span>
-      <span class="hljs-title">deferred</span>.<span class="hljs-title">reject</span><span class="hljs-params">(error)</span>
+      deferred.resolve(segments)
+    <span class="hljs-keyword">catch</span> error
+      deferred.reject(error)
 
-    <span class="hljs-title">return</span> <span class="hljs-title">deferred</span>.<span class="hljs-title">promise</span>
+    <span class="hljs-keyword">return</span> deferred.promise
 
-</span></div></div>
+</div></div>
       
       </div>
     
@@ -341,5 +348,13 @@ Method <strong>Render Doc Tags</strong>
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

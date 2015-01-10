@@ -5,6 +5,13 @@
   <title>Grock Solarized Side Menu - behavior.coffee</title>
 
   <link rel="stylesheet" href="../../../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../../../"/>
@@ -329,9 +336,9 @@ Method <strong>throttle</strong>
         </div>
       
       
-        <div class="code"><div class="wrapper">  throttle = <span class="hljs-keyword">do</span><span class="hljs-function"> -&gt;</span>
+        <div class="code"><div class="wrapper">  throttle = <span class="hljs-keyword">do</span> -&gt;
     <span class="hljs-attribute">timer</span>: <span class="hljs-literal">null</span>
-    <span class="hljs-function"><span class="hljs-params">(fn, timeout=<span class="hljs-number">100</span>)</span> -&gt;</span>
+    (fn, timeout=<span class="hljs-number">100</span>) -&gt;
       <span class="hljs-built_in">window</span>.clearTimeout timer <span class="hljs-keyword">if</span> timer
       timer = <span class="hljs-built_in">window</span>.setTimeout (<span class="hljs-function">-&gt;</span>
         timer = <span class="hljs-literal">null</span>
@@ -356,7 +363,7 @@ Method <strong>search</strong>
         </div>
       
       
-        <div class="code"><div class="wrapper">  <span class="hljs-function"><span class="hljs-title">search</span> = <span class="hljs-params">($tree, value)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-function">  <span class="hljs-title">search</span> = <span class="hljs-params">($tree, value)</span> -&gt;</span>
     value = value.trim().toLowerCase()
     $tree.find(<span class="hljs-string">'.matched'</span>).removeClass <span class="hljs-string">'matched'</span>
 
@@ -366,7 +373,7 @@ Method <strong>search</strong>
       <span class="hljs-keyword">return</span>
 
     $tree.addClass <span class="hljs-string">'searching'</span>
-    $tree.find<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'a'</span>)</span>.<span class="hljs-title">each</span> <span class="hljs-params">(index, item)</span> -&gt;</span>
+    $tree.find(<span class="hljs-string">'a'</span>).each (index, item) -&gt;
       $item = $(item)
       <span class="hljs-keyword">if</span> ($item.text().toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> ($item.attr(<span class="hljs-string">'href'</span>).toLowerCase().indexOf(value) &gt; -<span class="hljs-number">1</span>)
         $item.addClass <span class="hljs-string">'matched'</span></div></div>
@@ -390,7 +397,7 @@ Method <strong>search</strong>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> newVal <span class="hljs-keyword">is</span> value
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> newVal &lt; <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> newVal <span class="hljs-keyword">isnt</span> <span class="hljs-string">""</span>
     value = newVal
-    throttle<span class="hljs-function"> -&gt;</span>
+    throttle -&gt;
       search($tree, value)
     <span class="hljs-keyword">return</span>
 </div></div>
@@ -482,7 +489,7 @@ Method <strong>search</strong>
 
   <span class="hljs-keyword">return</span> $nav
 
-$<span class="hljs-function"> -&gt;</span>
+$ -&gt;
   metaInfo =
     <span class="hljs-attribute">relativeRoot</span>: $(<span class="hljs-string">'meta[name="groc-relative-root"]'</span>).attr(<span class="hljs-string">'content'</span>)
     <span class="hljs-attribute">githubURL</span>:    $(<span class="hljs-string">'meta[name="groc-github-url"]'</span>).attr(<span class="hljs-string">'content'</span>)
@@ -508,5 +515,13 @@ $<span class="hljs-function"> -&gt;</span>
   <script src="../../../../toc.js"></script>
   <script src="../../../../assets/libs.js"></script>
   <script src="../../../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

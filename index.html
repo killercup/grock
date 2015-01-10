@@ -5,6 +5,13 @@
   <title>grock - Readme.md</title>
 
   <link rel="stylesheet" href="assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content=""/>
@@ -32,7 +39,7 @@
 <h2 id="install"><a href="#install" class="anchor"></a>Install</h2><p>Install globally using <code>npm install --global grock</code> and invoke anywhere using <code>grock --glob &#39;your/*.files&#39;</code>.</p>
 <p>Or use it as a (dev-)dependency in your project and use the <code>package.json</code> script section to run it, e.g. with <code>&quot;scripts&quot;: {&quot;docs&quot;: &quot;grock&quot;}</code> and using <code>npm run docs</code> (read more about this <a href="http://substack.net/task_automation_with_npm_run">here</a>).</p>
 <h2 id="usage"><a href="#usage" class="anchor"></a>Usage</h2><p>Basically:</p>
-<pre><code class="lang-sh">$ grock --glob &#39;lib/**/*.js&#39; --out &#39;docs&#39; --verbose
+<pre><code class="lang-sh">$ grock --glob <span class="hljs-string">'lib/**/*.js'</span> --out <span class="hljs-string">'docs'</span> --verbose
 </code></pre>
 <p>For more information about available options, see <code>bin/grock</code> or run <code>grock --help</code>:</p>
 <pre><code class="lang-md">$ grock --help
@@ -44,15 +51,17 @@ The defaults below show the values of the .groc.json file when possible.
 Options:
   --help                    Show this message
   --version                 Show grock version
-  --glob                    Set glob to match source files                                                  [default: [&quot;*.md&quot;,&quot;bin/*&quot;,&quot;lib/**/*.coffee&quot;,&quot;lib/**/*.js&quot;,&quot;styles/**/*.coffee&quot;,&quot;styles/**/*.md&quot;,&quot;bin/*.js&quot;]]
-  --out                     Render documentation into here                                                  [default: &quot;docs/&quot;]
-  --style                   Set the output style/theme                                                      [default: &quot;solarized&quot;]
+  --glob                    Set glob to match source files                                                  [default: ["<span class="hljs-emphasis">*.md","bin/*</span>","lib/<span class="hljs-strong">**/*.coffee","lib/**</span>/<span class="hljs-emphasis">*.js","styles/*</span><span class="hljs-emphasis">*/*</span>.coffee","styles/<span class="hljs-emphasis">**/*</span>.md","bin/*.js"]]
+  --out                     Render documentation into here                                                  [default: "docs/"]
+  --style                   Set the output style/theme                                                      [default: "solarized"]
   --verbose                 Show more log output                                                            [default: false]
-  --index                   File to be used as root index                                                   [default: &quot;Readme.md&quot;]
-  --indexes                 Files to be used as indexes in sub directories                                  [default: &quot;Readme.md&quot;]
-  --root                    The project&#39;s root directory                                                    [default: &quot;.&quot;]
+  --index                   File to be used as root index                                                   [default: "Readme.md"]
+  --indexes                 Files to be used as indexes in sub directories                                  [default: "Readme.md"]
+  --root                    The project's root directory                                                    [default: "."]
   --whitespace-after-token  Require whitespace after a comment token for a line to be considered a comment  [default: true]
-  --repository-url          URL to link to source files                                                     [default: &quot;https://github.com/killercup/grock&quot;]
+  --repository-url          URL to link to source files                                                     [default: "https://github.com/killercup/grock"]
+  --ext-scripts             An array of external scripts for appending to the template                      [default: []]
+  --ext-styles              An array of external styles for appending to the template                       [default: []]
   --github                  Push generated docs to gh-pages branch                                          [default: false]
   --git-remote              Overwrite the remote for --github
 </code></pre>
@@ -123,5 +132,13 @@ Options:
   <script src="toc.js"></script>
   <script src="assets/libs.js"></script>
   <script src="assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

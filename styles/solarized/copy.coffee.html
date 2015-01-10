@@ -5,6 +5,13 @@
   <title> - copy.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -29,13 +36,14 @@
 vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
 Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">({dest})</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">({dest})</span> -&gt;</span>
   compilePath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/compiled"</span>
   finalDest = path.join(dest, <span class="hljs-string">'assets'</span>)
   deferCopy = Q.defer()
 
   vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{compilePath}</span>/*"</span>)
   .pipe(vfs.dest(finalDest))
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferCopy.reject
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferCopy.resolve
 
   <span class="hljs-keyword">return</span> deferCopy.promise
@@ -49,5 +57,13 @@ Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</sp
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

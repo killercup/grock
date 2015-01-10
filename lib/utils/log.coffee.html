@@ -5,6 +5,13 @@
   <title> - log.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -28,24 +35,24 @@
         <div class="code"><div class="wrapper">colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'chalk'</span>
 
 verbose = <span class="hljs-literal">false</span>
-
-<span class="hljs-function"><span class="hljs-title">setVerbose</span> = <span class="hljs-params">(val=<span class="hljs-literal">true</span>)</span> -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">setVerbose</span> = <span class="hljs-params">(val=<span class="hljs-literal">true</span>)</span> -&gt;</span>
   verbose = !!val
-
-<span class="hljs-function"><span class="hljs-title">log</span> = -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">log</span> = -&gt;</span>
   sig = <span class="hljs-string">"["</span> + colors.green(<span class="hljs-string">"grock"</span>) + <span class="hljs-string">"]"</span>
   args = <span class="hljs-attribute">Array</span>::slice.call(arguments)
   args.unshift sig
   <span class="hljs-built_in">console</span>.log.apply <span class="hljs-built_in">console</span>, args
   <span class="hljs-keyword">this</span>
-
-<span class="hljs-function"><span class="hljs-title">logVerbose</span> = -&gt;</span>
+<span class="hljs-function">
+<span class="hljs-title">logVerbose</span> = -&gt;</span>
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> verbose
   log.apply <span class="hljs-keyword">this</span>, arguments
 
-<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = log
-<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span>.verbose = logVerbose
-<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span>.setVerbose = setVerbose
+<span class="hljs-built_in">module</span>.exports = log
+<span class="hljs-built_in">module</span>.exports.verbose = logVerbose
+<span class="hljs-built_in">module</span>.exports.setVerbose = setVerbose
 </div></div>
       
       </div>
@@ -56,5 +63,13 @@ verbose = <span class="hljs-literal">false</span>
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

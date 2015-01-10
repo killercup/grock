@@ -5,6 +5,13 @@
   <title>Compile Solarized Assets - compile.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -42,7 +49,7 @@ concat = <span class="hljs-built_in">require</span> <span class="hljs-string">'g
 uglify = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-uglify'</span>
 scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gulp-sass'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(options={})</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(options={})</span> -&gt;</span>
   finalDest = options.dest <span class="hljs-keyword">or</span> path.join(__dirname, <span class="hljs-string">'compiled'</span>)
 
   deferLibs = Q.defer()
@@ -85,6 +92,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{jsLibsPath}</span>/**/*.js"</span>)
   .pipe(concat(<span class="hljs-string">'libs.js'</span>))
   .pipe(vfs.dest(finalDest))
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferLibs.reject
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferLibs.resolve
 
   es.merge(
@@ -94,6 +102,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   .pipe(concat(<span class="hljs-string">'behavior.js'</span>))
   .pipe(uglify(<span class="hljs-attribute">output</span>: {<span class="hljs-attribute">comments</span>: <span class="hljs-regexp">/^!|@preserve|@license|@cc_on/i</span>}))
   .pipe(vfs.dest(finalDest))
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferScripts.reject
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferScripts.resolve
 </div></div>
       
@@ -114,6 +123,7 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
     <span class="hljs-attribute">sourceComments</span>: <span class="hljs-string">'none'</span>
   )
   .pipe(vfs.dest(finalDest))
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferStyles.reject
   .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferStyles.resolve
 
   <span class="hljs-keyword">return</span> Q.allSettled [
@@ -132,5 +142,13 @@ scss = <span class="hljs-built_in">require</span> <span class="hljs-string">'gul
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

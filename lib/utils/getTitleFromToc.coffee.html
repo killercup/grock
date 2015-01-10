@@ -5,6 +5,13 @@
   <title> - getTitleFromToc.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -27,7 +34,7 @@
       
         <div class="code"><div class="wrapper">_ = <span class="hljs-built_in">require</span> <span class="hljs-string">'lodash'</span>
 
-<span class="hljs-built_in">module</span>.<span class="hljs-function"><span class="hljs-title">exports</span> = <span class="hljs-params">(file)</span> -&gt;</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">(file)</span> -&gt;</span>
   title = _.find(file.extra?.toc, <span class="hljs-attribute">level</span>: <span class="hljs-number">1</span>)?.title
   <span class="hljs-keyword">if</span> title <span class="hljs-keyword">and</span> title <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
     <span class="hljs-keyword">return</span> title
@@ -42,5 +49,13 @@
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

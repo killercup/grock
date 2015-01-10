@@ -5,6 +5,13 @@
   <title>Regex Escape - regexpEscape.coffee</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -66,7 +73,7 @@ Strings or any Object having a proper toString-method.</p>
         </div>
       
       
-        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-function"><span class="hljs-title">regexpEscape</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+        <div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = regexpEscape = <span class="hljs-function"><span class="hljs-params">(obj)</span> -&gt;</span>
   <span class="hljs-keyword">if</span> _.isArray obj
     _.invoke(obj, <span class="hljs-string">'replace'</span>, regexpEscapePattern, regexpEscapeReplace)
   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> _.isString obj
@@ -83,5 +90,13 @@ Strings or any Object having a proper toString-method.</p>
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

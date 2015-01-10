@@ -5,6 +5,13 @@
   <title>Plumber - plumber.js</title>
 
   <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
   <meta name="groc-relative-root" content="../../"/>
@@ -26,7 +33,7 @@
       
         <div class="comments doc-section">
           <div class="wrapper"><p><span class='doc-section-header'>
- &copy; Vsevolod Strukchinsky <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#102;&#x6c;&#x6f;&#x61;&#x74;&#100;&#x72;&#111;&#112;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;">&#102;&#x6c;&#x6f;&#x61;&#x74;&#100;&#x72;&#111;&#112;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;</a></p>
+ &copy; Vsevolod Strukchinsky <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x66;&#108;&#x6f;&#97;&#116;&#100;&#114;&#x6f;&#112;&#64;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#x66;&#108;&#x6f;&#97;&#116;&#100;&#114;&#x6f;&#112;&#64;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
 <p></span></p>
 <h1 id="plumber"><a href="#plumber" class="anchor"></a>Plumber</h1><p>Code from <a href="https://github.com/floatdrop/gulp-plumber/blob/f1c10cb6f4e0a6b957514a64500a9c8c48aff546/index.js"><code>gulp-plumber</code></a></p>
 </div>
@@ -41,9 +48,9 @@
 
 <span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./log'</span>);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeDefaultHandler</span><span class="hljs-params">(stream, event)</span> {</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeDefaultHandler</span><span class="hljs-params">(stream, event)</span> </span>{
   <span class="hljs-keyword">var</span> found = <span class="hljs-literal">false</span>;
-  stream.listeners(event).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> {</span>
+  stream.listeners(event).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
     <span class="hljs-keyword">if</span> (item.name === <span class="hljs-string">'on'</span> + event) {
       found = item;
       <span class="hljs-keyword">this</span>.removeListener(event, item);
@@ -52,10 +59,10 @@
   <span class="hljs-keyword">return</span> found;
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapPanicOnErrorHandler</span><span class="hljs-params">(stream)</span> {</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapPanicOnErrorHandler</span><span class="hljs-params">(stream)</span> </span>{
   <span class="hljs-keyword">var</span> oldHandler = removeDefaultHandler(stream, <span class="hljs-string">'error'</span>);
   <span class="hljs-keyword">if</span> (oldHandler) {
-    stream.on(<span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onerror2</span><span class="hljs-params">(er)</span> {</span>
+    stream.on(<span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onerror2</span><span class="hljs-params">(er)</span> </span>{
       <span class="hljs-keyword">if</span> (EE.listenerCount(stream, <span class="hljs-string">'error'</span>) === <span class="hljs-number">1</span>) {
         <span class="hljs-keyword">this</span>.removeListener(<span class="hljs-string">'error'</span>, onerror2);
         oldHandler.call(stream, er);
@@ -64,7 +71,7 @@
   }
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defaultErrorHandler</span><span class="hljs-params">(error)</span> {</span></div></div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defaultErrorHandler</span><span class="hljs-params">(error)</span> </span>{</div></div>
       
       </div>
     
@@ -88,10 +95,10 @@
   }
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">plumber</span><span class="hljs-params">(opts)</span> {</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">plumber</span><span class="hljs-params">(opts)</span> </span>{
   opts = opts || {};
 
-  <span class="hljs-keyword">var</span> through = <span class="hljs-keyword">new</span> Through(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(file)</span> {</span> <span class="hljs-keyword">this</span>.queue(file); });
+  <span class="hljs-keyword">var</span> through = <span class="hljs-keyword">new</span> Through(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(file)</span> </span>{ <span class="hljs-keyword">this</span>.queue(file); });
   through._plumber = <span class="hljs-literal">true</span>;
 
   <span class="hljs-keyword">if</span> (opts.errorHandler !== <span class="hljs-literal">false</span>) {
@@ -100,7 +107,7 @@
       defaultErrorHandler;
   }
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">patchPipe</span><span class="hljs-params">(stream)</span> {</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">patchPipe</span><span class="hljs-params">(stream)</span> </span>{
     <span class="hljs-keyword">if</span> (stream.pipe2) {
       wrapPanicOnErrorHandler(stream);
       stream._pipe = stream._pipe || stream.pipe;
@@ -110,7 +117,7 @@
     }
   }
 
-  through.pipe2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pipe2</span><span class="hljs-params">(dest)</span> {</span>
+  through.pipe2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pipe2</span><span class="hljs-params">(dest)</span> </span>{
 
     <span class="hljs-keyword">if</span> (!dest) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Can\'t pipe to undefined'</span>); }
 
@@ -162,7 +169,7 @@
   <span class="hljs-keyword">return</span> through;
 }
 
-module.exports = plumber;
+<span class="hljs-built_in">module</span>.exports = plumber;
 </div></div>
       
       </div>
@@ -173,5 +180,13 @@ module.exports = plumber;
   <script src="../../toc.js"></script>
   <script src="../../assets/libs.js"></script>
   <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
 </body>
 </html>

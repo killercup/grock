@@ -307,6 +307,14 @@ window.files = [
   ]
 },
 {
+  "path": "lib/transforms/getExtraScriptAndStyles.coffee.html",
+  "originalName": "getExtraScriptAndStyles.coffee",
+  "originalPath": "lib/transforms/getExtraScriptAndStyles.coffee",
+  "name": "getExtraScriptAndStyles.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
   "path": "lib/transforms/getLanguage.coffee.html",
   "originalName": "getLanguage.coffee",
   "originalPath": "lib/transforms/getLanguage.coffee",
@@ -478,6 +486,14 @@ window.files = [
       "title": "Create Public URL"
     }
   ]
+},
+{
+  "path": "lib/utils/getExtraContent.coffee.html",
+  "originalName": "getExtraContent.coffee",
+  "originalPath": "lib/utils/getExtraContent.coffee",
+  "name": "getExtraContent.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
 },
 {
   "path": "lib/utils/getTitleFromToc.coffee.html",
