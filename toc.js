@@ -607,9 +607,9 @@ window.files = [
   ]
 },
 {
-  "path": "styles/solarized/assets/js/behavior.coffee.html",
+  "path": "styles/thin/assets/js/behavior.coffee.html",
   "originalName": "behavior.coffee",
-  "originalPath": "styles/solarized/assets/js/behavior.coffee",
+  "originalPath": "styles/thin/assets/js/behavior.coffee",
   "name": "behavior.coffee.html",
   "lang": "coffeescript",
   "title": "Grock Solarized Side Menu",
@@ -662,9 +662,9 @@ window.files = [
   ]
 },
 {
-  "path": "styles/thin/assets/js/behavior.coffee.html",
+  "path": "styles/solarized/assets/js/behavior.coffee.html",
   "originalName": "behavior.coffee",
-  "originalPath": "styles/thin/assets/js/behavior.coffee",
+  "originalPath": "styles/solarized/assets/js/behavior.coffee",
   "name": "behavior.coffee.html",
   "lang": "coffeescript",
   "title": "Grock Solarized Side Menu",
@@ -725,37 +725,6 @@ window.files = [
   "toc": []
 },
 {
-  "path": "styles/solarized/compile.coffee.html",
-  "originalName": "compile.coffee",
-  "originalPath": "styles/solarized/compile.coffee",
-  "name": "compile.coffee.html",
-  "lang": "coffeescript",
-  "title": "Compile Solarized Assets",
-  "toc": [
-    {
-      "level": 1,
-      "slug": "compile-solarized-assets",
-      "title": "Compile Solarized Assets"
-    }
-  ]
-},
-{
-  "path": "styles/solarized/copy.coffee.html",
-  "originalName": "copy.coffee",
-  "originalPath": "styles/solarized/copy.coffee",
-  "name": "copy.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
-  "path": "styles/solarized/index.coffee.html",
-  "originalName": "index.coffee",
-  "originalPath": "styles/solarized/index.coffee",
-  "name": "index.coffee.html",
-  "lang": "coffeescript",
-  "toc": []
-},
-{
   "path": "styles/thin/compile.coffee.html",
   "originalName": "compile.coffee",
   "originalPath": "styles/thin/compile.coffee",
@@ -787,6 +756,37 @@ window.files = [
   "toc": []
 },
 {
+  "path": "styles/solarized/compile.coffee.html",
+  "originalName": "compile.coffee",
+  "originalPath": "styles/solarized/compile.coffee",
+  "name": "compile.coffee.html",
+  "lang": "coffeescript",
+  "title": "Compile Solarized Assets",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "compile-solarized-assets",
+      "title": "Compile Solarized Assets"
+    }
+  ]
+},
+{
+  "path": "styles/solarized/copy.coffee.html",
+  "originalName": "copy.coffee",
+  "originalPath": "styles/solarized/copy.coffee",
+  "name": "copy.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/solarized/index.coffee.html",
+  "originalName": "index.coffee",
+  "originalPath": "styles/solarized/index.coffee",
+  "name": "index.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
   "path": "styles/index.html",
   "originalName": "Readme.md",
   "originalPath": "styles/Readme.md",
@@ -806,16 +806,16 @@ window.files = [
   ]
 },
 {
-  "path": "styles/solarized/index.html",
+  "path": "styles/thin/index.html",
   "originalName": "Readme.md",
-  "originalPath": "styles/solarized/Readme.md",
+  "originalPath": "styles/thin/Readme.md",
   "name": "index.html",
-  "title": "Solarized Style",
+  "title": "Thin Style",
   "toc": [
     {
       "level": 1,
-      "slug": "solarized-style",
-      "title": "Solarized Style"
+      "slug": "thin-style",
+      "title": "Thin Style"
     },
     {
       "level": 2,
@@ -835,16 +835,16 @@ window.files = [
   ]
 },
 {
-  "path": "styles/thin/index.html",
+  "path": "styles/solarized/index.html",
   "originalName": "Readme.md",
-  "originalPath": "styles/thin/Readme.md",
+  "originalPath": "styles/solarized/Readme.md",
   "name": "index.html",
-  "title": "Thin Style",
+  "title": "Solarized Style",
   "toc": [
     {
       "level": 1,
-      "slug": "thin-style",
-      "title": "Thin Style"
+      "slug": "solarized-style",
+      "title": "Solarized Style"
     },
     {
       "level": 2,
