@@ -36,6 +36,7 @@ module.exports = (options={}) ->
   vfs.src("#{jsLibsPath}/**/*.js")
   .pipe(concat('libs.js'))
   .pipe(vfs.dest(finalDest))
+  .on 'error', deferLibs.reject
   .on 'end', deferLibs.resolve
 
   es.merge(
@@ -45,6 +46,7 @@ module.exports = (options={}) ->
   .pipe(concat('behavior.js'))
   .pipe(uglify(output: {comments: /^!|@preserve|@license|@cc_on/i}))
   .pipe(vfs.dest(finalDest))
+  .on 'error', deferScripts.reject
   .on 'end', deferScripts.resolve
 
   # SCSS
@@ -55,6 +57,7 @@ module.exports = (options={}) ->
     sourceComments: 'none'
   )
   .pipe(vfs.dest(finalDest))
+  .on 'error', deferStyles.reject
   .on 'end', deferStyles.resolve
 
   return Q.allSettled [

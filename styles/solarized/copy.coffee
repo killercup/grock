@@ -9,6 +9,7 @@ module.exports = ({dest}) ->
 
   vfs.src("#{compilePath}/*")
   .pipe(vfs.dest(finalDest))
+  .on 'error', deferCopy.reject
   .on 'end', deferCopy.resolve
 
   return deferCopy.promise
