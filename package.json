@@ -39,28 +39,28 @@
     }
   ],
   "dependencies": {
-    "coffee-script": "~1.7.1",
-    "vinyl-fs": "0.0.2",
-    "optimist": "~0.6.0",
-    "highlight.js": "~8.0.0",
-    "lodash": "~2.4.1",
-    "marked": "~0.3.0",
-    "pretty-hrtime": "~0.2.0",
-    "q": "~1.0.0",
-    "chalk": "~0.4.0",
-    "event-stream": "~3.1.0"
+    "coffee-script": "~1.8.0",
+    "vinyl-fs": "~0.3.13",
+    "optimist": "~0.6.1",
+    "highlight.js": "^8.4.0",
+    "lodash": "^2.4.1",
+    "marked": "~0.3.2",
+    "pretty-hrtime": "~1.0.0",
+    "q": "~1.1.2",
+    "chalk": "~0.5.1",
+    "event-stream": "~3.2.1"
   },
   "devDependencies": {
-    "coffeelint": "~1.0.6",
-    "gulp-coffee": "~1.4.0",
-    "gulp-concat": "~2.1.7",
-    "gulp-sass": "~0.6.0",
-    "gulp-uglify": "~0.2.0",
-    "gulp-util": "~2.2.13",
-    "chai": "~1.9.0",
-    "mocha": "~1.17.0",
-    "coffeelint-variable-scope": "0.0.1",
-    "coffeelint-newline-at-eof": "~0.3.2",
+    "coffeelint": "~1.8.1",
+    "gulp-coffee": "~2.2.0",
+    "gulp-concat": "~2.4.3",
+    "gulp-sass": "~1.2.4",
+    "gulp-uglify": "~1.0.2",
+    "gulp-util": "~3.0.2",
+    "chai": "~1.10.0",
+    "mocha": "~2.1.0",
+    "coffeelint-variable-scope": "~0.0.2",
+    "coffeelint-newline-at-eof": "~0.4.1",
     "ghReleases2Changelog": "git://github.com/killercup/ghReleases2Changelog#v0.1.0"
   }
 }

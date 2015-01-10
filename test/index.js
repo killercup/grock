@@ -1,6 +1,6 @@
 require('coffee-script/register');
 
-require('chai').Assertion.includeStack = true;
+require('chai').config.includeStack = true;
 
 require('./demo');
 
