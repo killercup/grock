@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.7 Hanga Roa Horse
+
+Su Jan 11 2015
+
+- Added options for external scripts and styles (@vitkarpov)
+- Update dependencies
+
 ## v0.3.6 Stanley Sheep
 
 Su Nov 16 2014
@@ -141,4 +148,3 @@ Features so far:
   - Based on Solarized
   - Searchable file and headline list
   - Responsive layout
-
