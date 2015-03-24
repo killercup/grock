@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> - copy.coffee</title>
+
+  <link rel="stylesheet" href="../../assets/style.css">
+  
+    
+      <style>
+        
+      </style>
+    
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="groc-relative-root" content="../../"/>
+  <meta name="groc-document-path" content="styles/one/copy.coffee"/>
+  
+</head>
+<body>
+  <div id="file-area">
+    <div id="meta">
+      <code class="file-path">
+      
+        <a href="https://github.com/killercup/grock/blob/master/styles/one/copy.coffee">styles/one/copy.coffee</a>
+      
+      </code>
+    </div>
+    <div id="document">
+    
+      <div class="segment">
+      
+      
+        <div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+vfs = <span class="hljs-built_in">require</span> <span class="hljs-string">'vinyl-fs'</span>
+Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span>
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">({dest})</span> -&gt;</span>
+  compilePath = <span class="hljs-string">"<span class="hljs-subst">#{__dirname}</span>/compiled"</span>
+  finalDest = path.join(dest, <span class="hljs-string">'assets'</span>)
+  deferCopy = Q.defer()
+
+  vfs.src(<span class="hljs-string">"<span class="hljs-subst">#{compilePath}</span>/*"</span>)
+  .pipe(vfs.dest(finalDest))
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, deferCopy.reject
+  .<span class="hljs-literal">on</span> <span class="hljs-string">'end'</span>, deferCopy.resolve
+
+  <span class="hljs-keyword">return</span> deferCopy.promise
+</div></div>
+      
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="../../toc.js"></script>
+  <script src="../../assets/libs.js"></script>
+  <script src="../../assets/behavior.js"></script>
+
+  
+    
+      <script>
+        
+      </script>
+    
+  
+</body>
+</html>

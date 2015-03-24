@@ -730,6 +730,37 @@ window.files = [
   "toc": []
 },
 {
+  "path": "styles/one/compile.coffee.html",
+  "originalName": "compile.coffee",
+  "originalPath": "styles/one/compile.coffee",
+  "name": "compile.coffee.html",
+  "lang": "coffeescript",
+  "title": "Compile Solarized Assets",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "compile-solarized-assets",
+      "title": "Compile Solarized Assets"
+    }
+  ]
+},
+{
+  "path": "styles/one/copy.coffee.html",
+  "originalName": "copy.coffee",
+  "originalPath": "styles/one/copy.coffee",
+  "name": "copy.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
+  "path": "styles/one/index.coffee.html",
+  "originalName": "index.coffee",
+  "originalPath": "styles/one/index.coffee",
+  "name": "index.coffee.html",
+  "lang": "coffeescript",
+  "toc": []
+},
+{
   "path": "styles/solarized/compile.coffee.html",
   "originalName": "compile.coffee",
   "originalPath": "styles/solarized/compile.coffee",
@@ -807,6 +838,30 @@ window.files = [
       "level": 2,
       "slug": "contributing",
       "title": "Contributing"
+    }
+  ]
+},
+{
+  "path": "styles/one/index.html",
+  "originalName": "Readme.md",
+  "originalPath": "styles/one/Readme.md",
+  "name": "index.html",
+  "title": "One Style",
+  "toc": [
+    {
+      "level": 1,
+      "slug": "one-style",
+      "title": "One Style"
+    },
+    {
+      "level": 2,
+      "slug": "uses",
+      "title": "Uses"
+    },
+    {
+      "level": 2,
+      "slug": "features",
+      "title": "Features"
     }
   ]
 },
