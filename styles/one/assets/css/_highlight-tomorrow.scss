@@ -1,0 +1,96 @@
+@mixin highlightjs-tomorrow($wrapper:'.wrapper') {
+  /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+  $prefix: "hljs-";
+
+  .#{$prefix},
+  #{$wrapper} {
+    display: block;
+    // background: #fff;
+    color: #4d4d4c;
+    padding: 0.5em;
+  }
+
+  /* Tomorrow Comment */
+  .#{$prefix}comment,
+  .#{$prefix}title {
+    color: #8e908c;
+  }
+
+  /* Tomorrow Red */
+  .#{$prefix}variable,
+  .#{$prefix}attribute,
+  .#{$prefix}tag,
+  .#{$prefix}regexp,
+  .ruby .#{$prefix}constant,
+  .xml .#{$prefix}tag .#{$prefix}title,
+  .xml .#{$prefix}pi,
+  .xml .#{$prefix}doctype,
+  .html .#{$prefix}doctype,
+  .css .#{$prefix}id,
+  .css .#{$prefix}class,
+  .css .#{$prefix}pseudo {
+    color: #c82829;
+  }
+
+  /* Tomorrow Orange */
+  .#{$prefix}number,
+  .#{$prefix}preprocessor,
+  .#{$prefix}pragma,
+  .#{$prefix}built_in,
+  .#{$prefix}literal,
+  .#{$prefix}params,
+  .#{$prefix}constant {
+    color: #f5871f;
+  }
+
+  /* Tomorrow Yellow */
+  .ruby .#{$prefix}class .#{$prefix}title,
+  .css .#{$prefix}rules .#{$prefix}attribute {
+    color: #eab700;
+  }
+
+  /* Tomorrow Green */
+  .#{$prefix}string,
+  .#{$prefix}value,
+  .#{$prefix}inheritance,
+  .#{$prefix}header,
+  .ruby .#{$prefix}symbol,
+  .xml .#{$prefix}cdata {
+    color: #718c00;
+  }
+
+  /* Tomorrow Aqua */
+  .css .#{$prefix}hexcolor {
+    color: #3e999f;
+  }
+
+  /* Tomorrow Blue */
+  .#{$prefix}function,
+  .python .#{$prefix}decorator,
+  .python .#{$prefix}title,
+  .ruby .#{$prefix}function .#{$prefix}title,
+  .ruby .#{$prefix}title .#{$prefix}keyword,
+  .perl .#{$prefix}sub,
+  .javascript .#{$prefix}title,
+  .coffeescript .#{$prefix}title {
+    color: #4271ae;
+    font-weight: 500;
+  }
+
+  /* Tomorrow Purple */
+  .#{$prefix}keyword,
+  .javascript .#{$prefix}function {
+    color: #8959a8;
+    font-weight: 500;
+  }
+
+  .coffeescript .javascript,
+  .javascript .xml,
+  .tex .#{$prefix}formula,
+  .xml .javascript,
+  .xml .vbscript,
+  .xml .css,
+  .xml .#{$prefix}cdata {
+    opacity: 0.5;
+  }
+}

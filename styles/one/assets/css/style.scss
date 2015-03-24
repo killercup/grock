@@ -1,0 +1,223 @@
+// # Grock Solarized Stylesheet
+
+@import "helpers";
+@import "highlight-tomorrow";
+
+// ## Normalize
+header, footer, nav, section, article, aside, summary, details {
+  display: block;
+}
+
+// ## Fonts
+@import url('http://fonts.googleapis.com/css?family=Source+Code+Pro:300,500');
+@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,500');
+
+%font {
+  font-size: 16px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+%code-font {
+  font-size: 14px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 300;
+  line-height: 1.4 * 16px;
+}
+
+%bold {
+  font-weight: 500;
+}
+
+%heading {
+  font-weight: 400;
+}
+
+%italic {
+  font-weight: 400;
+}
+
+body {
+  @extend %font;
+}
+
+strong, b {
+  @extend %bold;
+}
+
+em, i {
+  @extend %italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend %heading;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.5em; }
+h3, h4 { font-size: 1.2em; }
+
+code, pre {
+  @extend %code-font;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.doc-section-header {
+  @extend %heading;
+  &, code {
+    font-size: 1.4 * 16px;
+  }
+}
+
+// ## Vars
+$color-dark:  #002b36;
+$color-light: #fff;
+$color-text: #4d4d4c;
+$color-light-bg: #f0f0f0;
+$color-accent: #3e999f;
+$color-accent2: #f5871f;
+
+$body-background: $color-light;
+$text-background: $color-light-bg;
+$text-color: $color-text;
+$text-link-color: $color-accent;
+$color-selected: $color-accent2;
+
+$nav-width: 14em;
+$left-width: 30em;
+$side-padding: 1em;
+
+// ## Layout
+
+@mixin scroll-box {
+  @include box-sizing(border-box);
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  clear: both;
+}
+
+ul, ol {
+  margin: 0 0.5em;
+  padding: 0 0 0 1em;
+}
+
+#meta {
+  padding: 0.5em;
+
+  .toggle-menu {
+    @extend %font;
+    padding: 0.2em 1em;
+    border: 0;
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+}
+
+#document {
+  max-width: 40em;
+  @include box-sizing(border-box);
+  margin: 1em auto;
+  padding: 0 1em;
+}
+
+.segment {
+  clear: both;
+  @include box-sizing(border-box);
+  padding: 0 0 1em;
+  white-space: nowrap;
+}
+
+.comments {
+  white-space: normal;
+  word-break: break-word;
+  color: $color-text;
+
+  :target {
+    a.anchor {
+      color: $color-selected;
+    }
+  }
+
+  a.anchor {
+    $ancor-size: 1em;
+
+    opacity: 0.3;
+    min-width: $ancor-size;
+    margin-left: -1 * $ancor-size;
+    display: inline-block;
+
+    &:before {
+      content: "#";
+      display: inline-block;
+      padding-right: 0.2em;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre {
+    word-break: normal;
+    @extend %code-font;
+    @include highlightjs-tomorrow('code');
+    background: $color-light-bg;
+
+    code {
+      @include scroll-box;
+    }
+  }
+}
+
+.code {
+  white-space: pre;
+  border-left: 3px solid $text-background;
+  padding-left: 0.2em;
+
+  @extend %code-font;
+  @include highlightjs-tomorrow();
+  background: $color-light;
+}
+
+// ## Color
+body,
+#file-area {
+  background: $body-background;
+  color: $color-text;
+}
+
+a {
+  color: $text-link-color;
+}
+
+#meta {
+  word-wrap: break-word;
+
+  .toggle-menu {
+    background: $text-background;
+    color: $body-background;
+  }
+}
