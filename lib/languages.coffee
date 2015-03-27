@@ -5,7 +5,7 @@
 #
 # @copyright Ian MacLeod and groc contributors
 #
-# [1]: https://github.com/nevir/groc/blob/b626e45ebf/lib/languages.coffee
+# [1]: https://github.com/nevir/groc/blob/5495be0a25/lib/languages.coffee
 ###
 
 module.exports = LANGUAGES =
