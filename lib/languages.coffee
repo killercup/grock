@@ -10,18 +10,19 @@
 
 module.exports = LANGUAGES =
   Markdown:
-    nameMatchers: ['.md']
+    nameMatchers: ['.md', '.markdown','.mkd', '.mkdn', '.mdown']
     commentsOnly: true
 
-  'C':
+  C:
     nameMatchers:      ['.c', '.h']
     pygmentsLexer:     'c'
     highlightJS:       'cpp'
+    multiLineComment:  ['/*', '*', '*/']
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'CSharp':
+  CSharp:
     nameMatchers:      ['.cs']
     pygmentsLexer:     'csharp'
     highlightJS:       'cs'
@@ -29,23 +30,31 @@ module.exports = LANGUAGES =
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
+    
+  CSS:
+    nameMatchers:      ['.css']
+    pygmentsLexer:     'css'
+    multiLineComment:  ['/*', '*', '*/']
+    ignorePrefix:      '}'
+    foldPrefix:        '^'
 
   'C++':
     nameMatchers:      ['.cpp', '.hpp', '.c++', '.h++', '.cc', '.hh', '.cxx', '.hxx']
     pygmentsLexer:     'cpp'
+    multiLineComment:  ['/*', '*', '*/']
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Clojure':
+  Clojure:
     nameMatchers:      ['.clj', '.cljs']
     pygmentsLexer:     'clojure'
     singleLineComment: [';;']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'CoffeeScript':
-    nameMatchers:      ['.coffee', '.cson', 'Cakefile']
+  CoffeeScript:
+    nameMatchers:      ['.coffee', 'Cakefile']
     pygmentsLexer:     'coffee-script'
     highlightJS:       'coffeescript'
     # **CoffeScript's multi-line block-comment styles.**
@@ -82,11 +91,16 @@ module.exports = LANGUAGES =
     # with `'#'`, because we add unmatched lines to the comments once we are
     # in a multi-line comment-block and until we left them …
     ###
+    #- Variant 4:
+    #   (This definition matches the format used by YUIDoc to parse CoffeeScript
+    #   comments)
     multiLineComment  : [
       # Syntax definition for variant 1.
       '###*',   ' *',   ' ###',
       # Syntax definition for variant 2 and 3.
-      '###' ,   '#' ,   '###'
+      '###' ,   '#' ,   '###',
+      # Syntax definition for variant 4
+      '###*',   '#',    '###'
     ]
     # This flag indicates if the end-mark of block-comments (the third value in
     # the list of 3-tuples above) must correspond to the initial block-mark (the
@@ -98,14 +112,14 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Go':
+  Go:
     nameMatchers:      ['.go']
     pygmentsLexer:     'go'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Handlebars':
+  Handlebars:
     nameMatchers:      ['.handlebars', '.hbs']
     pygmentsLexer:     'html' # TODO: is there a handlebars/mustache lexer? Nope. Lame.
     highlightJS:       'handlebars'
@@ -119,14 +133,21 @@ module.exports = LANGUAGES =
     ignorePrefix:      '#'
     foldPrefix:        '^'
 
-  'Haskell':
+  Haskell:
     nameMatchers:      ['.hs']
     pygmentsLexer:     'haskell'
     singleLineComment: ['--']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Jade':
+  HTML:
+    nameMatchers:      ['.htm', '.html']
+    pygmentsLexer:     'html'
+    multiLineComment:  ['<!--', '', '-->']
+    ignorePrefix:      '}'
+    foldPrefix:        '^'
+    
+  Jade:
     nameMatchers:      ['.jade']
     pygmentsLexer:     'jade'
     # @todo <https://github.com/isagalaev/highlight.js/pull/250>
@@ -135,14 +156,16 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Java':
+  Java:
     nameMatchers:      ['.java']
     pygmentsLexer:     'java'
+    multiLineComment:  ['/*', '*', '*/']
     singleLineComment: ['//']
+    multiLineComment:  ['/*', '*', '*/']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'JavaScript':
+  JavaScript:
     nameMatchers:      ['.js']
     pygmentsLexer:     'javascript'
     multiLineComment:  ['/*', '*', '*/']
@@ -150,19 +173,30 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Jake':
+  Jake:
     nameMatchers:      ['.jake']
     pygmentsLexer:     'javascript'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'JSON':
-    nameMatchers:     ['.json']
-    pygmentsLexer:    'json'
-    codeOnly:         true
+  JSON                :
+    nameMatchers      : ['.json']
+    pygmentsLexer     : 'json'
+    codeOnly          : true
 
-  'LaTeX':
+  JSP:
+    nameMatchers:      ['.jsp']
+    pygmentsLexer:     'jsp'
+    multiLineComment:  [
+      '<!--', '', '-->',
+      '<%--', '', '--%>'
+    ]
+    strictMultiLineEnd:true
+    ignorePrefix:      '#'
+    foldPrefix:        '^'
+
+  LaTeX:
     nameMatchers:      ['.tex', '.latex', '.sty']
     pygmentsLexer:     'latex'
     highlightJS:       'tex'
@@ -170,13 +204,21 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'LESS':
+  LESS:
     nameMatchers:      ['.less']
     pygmentsLexer:     'sass' # TODO: is there a less lexer? No. Maybe in the future.
     highlightJS:       'scss'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
+
+  LiveScript:
+    nameMatchers:       ['.ls', 'Slakefile']
+    pygmentsLexer:      'livescript'
+    multiLineComment:   ['/*', '*', '*/']
+    singleLineComment:  ['#']
+    ignorePrefix:       '}'
+    foldPrefix:         '^'
 
   Lua:
     nameMatchers:      ['.lua']
@@ -185,14 +227,14 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Make':
+  Make:
     nameMatchers:      ['Makefile']
     pygmentsLexer:     'make'
     singleLineComment: ['#']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Mustache':
+  Mustache:
     nameMatchers:      ['.mustache']
     pygmentsLexer:     'html' # TODO: is there a handlebars/mustache lexer? Nope. Lame.
     highlightJS:       'handlebars'
@@ -204,25 +246,26 @@ module.exports = LANGUAGES =
     nameMatchers:      ['.m', '.mm']
     pygmentsLexer:     'objc'
     highlightJS:       'objectivec'
+    multiLineComment:  ['/*', '*', '*/']
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Perl':
+  Perl:
     nameMatchers:      ['.pl', '.pm']
     pygmentsLexer:     'perl'
     singleLineComment: ['#']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'PHP':
+  PHP:
     nameMatchers:      [/\.php\d?$/, '.fbp']
     pygmentsLexer:     'php'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Puppet':
+  Puppet:
     nameMatchers:      ['.pp']
     pygmentsLexer:     'puppet'
     highlightJS:       'AUTO'
@@ -230,7 +273,7 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Python':
+  Python:
     nameMatchers:      ['.py']
     pygmentsLexer:     'python'
     singleLineComment: ['#']
@@ -245,14 +288,14 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Ruby':
+  Ruby:
     nameMatchers:      ['.rb', '.ru', '.gemspec']
     pygmentsLexer:     'ruby'
     singleLineComment: ['#']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Sass':
+  Sass:
     nameMatchers:      ['.sass']
     pygmentsLexer:     'sass'
     highlightJS:       'AUTO'
@@ -260,7 +303,7 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'SCSS':
+  SCSS:
     nameMatchers:      ['.scss']
     pygmentsLexer:     'scss'
     multiLineComment:  ['/*', '*', '*/']
@@ -268,7 +311,7 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'Shell':
+  Shell:
     nameMatchers:      ['.sh']
     pygmentsLexer:     'sh'
     highlightJS:       'bash'
@@ -276,14 +319,31 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'SQL':
+  SQL:
     nameMatchers:      ['.sql']
     pygmentsLexer:     'sql'
     singleLineComment: ['--']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  'YAML':
+  Swift:
+    nameMatchers:      ['.swift']
+    pygmentsLexer:     'swift'
+    highlightJS:       'swift'
+    singleLineComment: ['//']
+    multiLineComment:  ['/*', '*', '*/']
+    ignorePrefix:      '}'
+    foldPrefix:        '^'
+
+  TypeScript:
+    nameMatchers:      ['.ts']
+    pygmentsLexer:     'ts'
+    multiLineComment:  ['/*', '*', '*/']
+    singleLineComment: ['//']
+    ignorePrefix:      '}'
+    foldPrefix:        '^'
+
+  YAML:
     nameMatchers:      ['.yml', '.yaml']
     pygmentsLexer:     'yaml'
     highlightJS:       'AUTO'
