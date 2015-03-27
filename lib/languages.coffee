@@ -94,7 +94,7 @@ module.exports = LANGUAGES =
     #- Variant 4:
     #   (This definition matches the format used by YUIDoc to parse CoffeeScript
     #   comments)
-    multiLineComment  : [
+    multiLineComment:  [
       # Syntax definition for variant 1.
       '###*',   ' *',   ' ###',
       # Syntax definition for variant 2 and 3.
@@ -161,7 +161,6 @@ module.exports = LANGUAGES =
     pygmentsLexer:     'java'
     multiLineComment:  ['/*', '*', '*/']
     singleLineComment: ['//']
-    multiLineComment:  ['/*', '*', '*/']
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
@@ -180,10 +179,10 @@ module.exports = LANGUAGES =
     ignorePrefix:      '}'
     foldPrefix:        '^'
 
-  JSON                :
-    nameMatchers      : ['.json']
-    pygmentsLexer     : 'json'
-    codeOnly          : true
+  JSON:
+    nameMatchers:      ['.json']
+    pygmentsLexer:     'json'
+    codeOnly:          true
 
   JSP:
     nameMatchers:      ['.jsp']
