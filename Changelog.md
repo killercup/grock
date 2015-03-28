@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.8 Toothless Turtle
+
+Sa Mar 28 2015
+
+- Update language definitions from _groc_ (@jonruttan)
+
 ## v0.3.7 Hanga Roa Horse
 
 Su Jan 11 2015
