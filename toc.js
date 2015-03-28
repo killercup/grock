@@ -88,6 +88,11 @@ window.files = [
     },
     {
       "level": 2,
+      "slug": "v0-3-8-toothless-turtle",
+      "title": "v0.3.8 Toothless Turtle"
+    },
+    {
+      "level": 2,
       "slug": "v0-3-7-hanga-roa-horse",
       "title": "v0.3.7 Hanga Roa Horse"
     },
