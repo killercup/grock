@@ -1,5 +1,7 @@
 # grock
 
+[![Join the chat at https://gitter.im/killercup/grock](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/killercup/grock?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [Grock](http://killercup.github.io/grock/) converts your nicely commented code into a gorgeous documentation where comments and code live happily next to each other.
 
 To see how it works, just have a look at [the documentation rendered from this repository](http://killercup.github.io/grock/).
